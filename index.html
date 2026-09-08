@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ตำราสถานะและสกิลกองทัพ | คู่มืออ้างอิง</title>
+<title>Immortal Game Guide | Status &amp; Army Skills Reference</title>
+<link rel="canonical" href="https://immortalGame_Guide-source.github.io/Guide/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -76,6 +77,13 @@
   }
   nav.tabs button.active{color:var(--gold-soft);border-bottom-color:var(--gold);}
   nav.tabs button:hover{color:var(--text);}
+  .language-switcher{
+    margin-left:auto;background:var(--panel-2);border:1px solid var(--border-bright);
+    color:var(--gold-soft);border-radius:var(--radius);padding:6px 12px;cursor:pointer;
+    font:600 12px 'Sarabun',sans-serif;letter-spacing:.04em;white-space:nowrap;
+  }
+  .language-switcher:hover{background:var(--panel);color:var(--text);}
+  .header-row{display:flex;align-items:center;gap:12px;}
 
   main{padding:22px 0 60px;}
   .tab-page{display:none;}
@@ -200,6 +208,8 @@
   footer{border-top:1px solid var(--border);margin-top:20px;padding:20px 0 40px;color:var(--text-muted);font-size:13px;}
 
   @media(max-width:640px){
+    .header-row{align-items:flex-start;}
+    .language-switcher{margin-top:4px;}
     .skill-card__head{flex-direction:column;}
   }
 </style>
@@ -208,6 +218,7 @@
 
 <header class="site-header">
   <div class="wrap">
+    <div class="header-row">
     <div class="brand">
       <svg class="emblem" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <circle cx="32" cy="32" r="29" fill="none" stroke="#CBA135" stroke-width="2"/>
@@ -216,16 +227,18 @@
         <circle cx="32" cy="32" r="7.5" fill="#8B3A2E"/>
       </svg>
       <div>
-        <div class="brand-title">ตำราสถานะและสกิลกองทัพ</div>
-        <div class="brand-sub">คู่มืออ้างอิงฉบับสรุป สำหรับวางแผนจัดทัพและตัวเคาน์เตอร์</div>
+        <div class="brand-title" data-th="ตำราสถานะและสกิลกองทัพ" data-en="Immortal Game Guide">Immortal Game Guide</div>
+        <div class="brand-sub" data-th="คู่มืออ้างอิงฉบับสรุป สำหรับวางแผนจัดทัพและตัวเคาน์เตอร์" data-en="A concise reference for army planning and counters">A concise reference for army planning and counters</div>
       </div>
     </div>
+    <button class="language-switcher" id="languageToggle" type="button" aria-label="Switch language">TH</button>
+    </div>
     <nav class="tabs">
-      <button class="active" data-tab="overview">ภาพรวม</button>
-      <button data-tab="categories">หมวดหมู่สกิล</button>
-      <button data-tab="factions">สังกัด/ฝ่าย</button>
-      <button data-tab="counters">ตาราง Counter</button>
-      <button data-tab="combos">คอมโบ &amp; ทีม</button>
+      <button class="active" data-tab="overview" data-th="ภาพรวม" data-en="Overview">Overview</button>
+      <button data-tab="categories" data-th="หมวดหมู่สกิล" data-en="Skill Categories">Skill Categories</button>
+      <button data-tab="factions" data-th="สังกัด/ฝ่าย" data-en="Factions">Factions</button>
+      <button data-tab="counters" data-th="ตาราง Counter" data-en="Counter Table">Counter Table</button>
+      <button data-tab="combos" data-th="คอมโบ &amp; ทีม" data-en="Combos &amp; Teams">Combos &amp; Teams</button>
     </nav>
   </div>
 </header>
@@ -234,20 +247,20 @@
 
   <!-- ===== OVERVIEW ===== -->
   <section id="tab-overview" class="tab-page active">
-    <h2>ภาพรวมเอกสาร</h2>
-    <p class="lede">เอกสารนี้รวบรวมและแปลข้อมูลสถานะ (Status) และกลไกพิเศษ (Special Mechanics) ทั้งหมด 19 รายการจากภาพหน้าจอที่ให้มา จัดกลุ่มตามลักษณะการใช้งาน แยกตามสังกัดของขุนพลตัวแทน พร้อมตาราง Counter matchup และคอมโบทีมแนะนำ เพื่อใช้อ้างอิงวางแผนจัดทัพได้สะดวก ทั้งบนคอมพิวเตอร์และมือถือ</p>
-    <p class="hint">แตะแท็บด้านบนเพื่อสลับหมวดหลัก และใช้ปุ่ม "ก่อนหน้า / ถัดไป" ภายในหมวดหมู่สกิลและสังกัด เพื่อพลิกดูทีละหน้า</p>
+    <h2 data-th="ภาพรวมเอกสาร" data-en="Document Overview">Document Overview</h2>
+    <p class="lede" data-th="เอกสารนี้รวบรวมและแปลข้อมูลสถานะ (Status) และกลไกพิเศษ (Special Mechanics) ทั้งหมด 19 รายการจากภาพหน้าจอที่ให้มา จัดกลุ่มตามลักษณะการใช้งาน แยกตามสังกัดของขุนพลตัวแทน พร้อมตาราง Counter matchup และคอมโบทีมแนะนำ เพื่อใช้อ้างอิงวางแผนจัดทัพได้สะดวก ทั้งบนคอมพิวเตอร์และมือถือ" data-en="This guide compiles 19 status effects and special mechanics from the provided screenshots. Entries are grouped by use, mapped to representative factions, and paired with counter matchups and recommended team combos for planning on desktop or mobile.">This guide compiles 19 status effects and special mechanics from the provided screenshots. Entries are grouped by use, mapped to representative factions, and paired with counter matchups and recommended team combos for planning on desktop or mobile.</p>
+    <p class="hint" data-th="แตะแท็บด้านบนเพื่อสลับหมวดหลัก และใช้ปุ่ม &quot;ก่อนหน้า / ถัดไป&quot; ภายในหมวดหมู่สกิลและสังกัด เพื่อพลิกดูทีละหน้า" data-en="Use the tabs above to switch sections. The Previous and Next controls inside Skills and Factions move through each page.">Use the tabs above to switch sections. The Previous and Next controls inside Skills and Factions move through each page.</p>
 
     <div class="stat-row">
-      <div class="stat-chip"><strong>19</strong><span>สถานะ/สกิลทั้งหมด</span></div>
-      <div class="stat-chip"><strong>6</strong><span>หมวดหมู่การใช้งาน</span></div>
-      <div class="stat-chip"><strong>4</strong><span>สังกัด/ฝ่าย</span></div>
-      <div class="stat-chip"><strong>34</strong><span>ขุนพลที่ปรากฏ</span></div>
-      <div class="stat-chip"><strong>12</strong><span>คู่ Counter matchup</span></div>
-      <div class="stat-chip"><strong>8</strong><span>คอมโบแนะนำ</span></div>
+      <div class="stat-chip"><strong>19</strong><span data-th="สถานะ/สกิลทั้งหมด" data-en="Total statuses / skills">Total statuses / skills</span></div>
+      <div class="stat-chip"><strong>6</strong><span data-th="หมวดหมู่การใช้งาน" data-en="Use categories">Use categories</span></div>
+      <div class="stat-chip"><strong>4</strong><span data-th="สังกัด/ฝ่าย" data-en="Factions">Factions</span></div>
+      <div class="stat-chip"><strong>34</strong><span data-th="ขุนพลที่ปรากฏ" data-en="Officers listed">Officers listed</span></div>
+      <div class="stat-chip"><strong>12</strong><span data-th="คู่ Counter matchup" data-en="Counter matchups">Counter matchups</span></div>
+      <div class="stat-chip"><strong>8</strong><span data-th="คอมโบแนะนำ" data-en="Recommended combos">Recommended combos</span></div>
     </div>
 
-    <h2>หมวดหมู่สกิล</h2>
+    <h2 data-th="หมวดหมู่สกิล" data-en="Skill Categories">Skill Categories</h2>
     <div class="legend-grid">
       <div>
         <div class="legend-item"><span class="legend-dot" style="background:var(--cat-a)"></span><div><div class="t">บัฟตั้งรับ (เสริมพลังตนเอง)</div><div class="d">เพิ่ม DEF หรือโล่ให้ทัพตัวเอง</div></div></div>
@@ -261,7 +274,7 @@
       </div>
     </div>
 
-    <h2 style="margin-top:26px;">สังกัด/ฝ่าย</h2>
+    <h2 style="margin-top:26px;" data-th="สังกัด/ฝ่าย" data-en="Factions">Factions</h2>
     <div class="legend-grid">
       <div>
         <div class="legend-item"><span class="legend-dot" style="background:var(--wei)"></span><div><div class="t">วุ่ย (Wei)</div><div class="d">8 ขุนพลในเอกสารนี้</div></div></div>
@@ -278,11 +291,11 @@
 
   <!-- ===== CATEGORIES ===== -->
   <section id="tab-categories" class="tab-page">
-    <h2>หมวดหมู่สกิล</h2>
+    <h2 data-th="หมวดหมู่สกิล" data-en="Skill Categories">Skill Categories</h2>
     <div class="pager">
       <div class="pager-btns">
-        <button class="nav-btn" id="catPrev">ก่อนหน้า</button>
-        <button class="nav-btn" id="catNext">ถัดไป</button>
+        <button class="nav-btn" id="catPrev" data-th="ก่อนหน้า" data-en="Previous">Previous</button>
+        <button class="nav-btn" id="catNext" data-th="ถัดไป" data-en="Next">Next</button>
       </div>
       <div class="dots" id="catDots"></div>
       <div class="pager-label" id="catLabel">1 / 6</div>
@@ -511,11 +524,11 @@
 
   <!-- ===== FACTIONS ===== -->
   <section id="tab-factions" class="tab-page">
-    <h2>สังกัด/ฝ่าย</h2>
+    <h2 data-th="สังกัด/ฝ่าย" data-en="Factions">Factions</h2>
     <div class="pager">
       <div class="pager-btns">
-        <button class="nav-btn" id="facPrev">ก่อนหน้า</button>
-        <button class="nav-btn" id="facNext">ถัดไป</button>
+        <button class="nav-btn" id="facPrev" data-th="ก่อนหน้า" data-en="Previous">Previous</button>
+        <button class="nav-btn" id="facNext" data-th="ถัดไป" data-en="Next">Next</button>
       </div>
       <div class="dots" id="facDots"></div>
       <div class="pager-label" id="facLabel">1 / 4</div>
@@ -584,8 +597,8 @@
 
   <!-- ===== COUNTERS ===== -->
   <section id="tab-counters" class="tab-page">
-    <h2>ตาราง Counter Matchup</h2>
-    <p class="cat-desc">สรุปว่าแต่ละสถานะควรใช้เพื่อรับมือกับสถานการณ์หรือทีมศัตรูแบบใด</p>
+    <h2 data-th="ตาราง Counter Matchup" data-en="Counter Matchup Table">Counter Matchup Table</h2>
+    <p class="cat-desc" data-th="สรุปว่าแต่ละสถานะควรใช้เพื่อรับมือกับสถานการณ์หรือทีมศัตรูแบบใด" data-en="A quick guide to which status effects answer each enemy situation or team.">A quick guide to which status effects answer each enemy situation or team.</p>
     <table class="counter-table">
       <thead>
         <tr><th>สถานะ (ผู้ใช้)</th><th>เคาน์เตอร์ / ใช้เมื่อไหร่</th><th>ขุนพลแนะนำ</th><th>หมายเหตุ</th></tr>
@@ -609,7 +622,7 @@
 
   <!-- ===== COMBOS ===== -->
   <section id="tab-combos" class="tab-page">
-    <h2>คอมโบแนะนำ</h2>
+    <h2 data-th="คอมโบแนะนำ" data-en="Recommended Combos">Recommended Combos</h2>
     <div class="combo-grid">
 
       <div class="combo-card">
@@ -662,7 +675,7 @@
 
     </div>
 
-    <h2>ตำแหน่งขุนพลที่ควรจัดเข้าทีม</h2>
+    <h2 data-th="ตำแหน่งขุนพลที่ควรจัดเข้าทีม" data-en="Recommended Team Roles">Recommended Team Roles</h2>
     <div class="role-grid">
 
       <div class="role-card">
@@ -700,11 +713,27 @@
 
 </main>
 
-<footer class="wrap">
-  แปลและจัดหมวดหมู่จากภาพหน้าจอสกิล/สถานะที่ให้มาทั้งหมด 18 ภาพ (19 สถานะ/กลไก) &middot; การจัดสังกัดอ้างอิงวรรณกรรมสามก๊กทั่วไป &middot; ตัวเลขบางส่วนในภาพต้นฉบับอาจไม่ชัดเจนสมบูรณ์ ควรตรวจสอบค่าจริงในเกมอีกครั้งก่อนใช้วางแผนจริงจัง
+<footer class="wrap" data-th="แปลและจัดหมวดหมู่จากภาพหน้าจอสกิล/สถานะที่ให้มาทั้งหมด 18 ภาพ (19 สถานะ/กลไก) · การจัดสังกัดอ้างอิงวรรณกรรมสามก๊กทั่วไป · ตัวเลขบางส่วนในภาพต้นฉบับอาจไม่ชัดเจนสมบูรณ์ ควรตรวจสอบค่าจริงในเกมอีกครั้งก่อนใช้วางแผนจริงจัง" data-en="Compiled and categorized from 18 provided skill/status screenshots (19 statuses/mechanics) · Factions follow common Three Kingdoms references · Some source values may be unclear, so verify them in-game before serious planning.">
+  Compiled and categorized from 18 provided skill/status screenshots (19 statuses/mechanics) · Factions follow common Three Kingdoms references · Some source values may be unclear, so verify them in-game before serious planning.
 </footer>
 
 <script>
+  // Keep the interface bilingual while starting in English for new visitors.
+  const languageToggle = document.getElementById('languageToggle');
+  const translatableElements = document.querySelectorAll('[data-en][data-th]');
+  let currentLanguage = 'en';
+  function applyLanguage(language){
+    currentLanguage = language;
+    document.documentElement.lang = language;
+    translatableElements.forEach(element=>{
+      element.innerHTML = element.dataset[language];
+    });
+    languageToggle.textContent = language === 'en' ? 'TH' : 'ENG';
+    languageToggle.setAttribute('aria-label', language === 'en' ? 'Switch to Thai' : 'Switch to English');
+  }
+  languageToggle.addEventListener('click',()=>applyLanguage(currentLanguage === 'en' ? 'th' : 'en'));
+  applyLanguage('en');
+
   // main tab switching
   const tabButtons = document.querySelectorAll('.tabs button');
   const tabPages = document.querySelectorAll('.tab-page');
