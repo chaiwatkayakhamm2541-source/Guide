@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ตำราสถานะและสกิลกองทัพ | คู่มืออ้างอิง</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#1B1712;
+    --panel:#241F18;
+    --panel-2:#2C2519;
+    --border:#43392A;
+    --border-bright:#8A6D2F;
+    --gold:#CBA135;
+    --gold-soft:#E4C766;
+    --seal:#8B3A2E;
+    --text:#EDE6D6;
+    --text-muted:#A79C89;
+    --wei:#4A7FB5;
+    --shu:#4F9A5D;
+    --wu:#C1443B;
+    --qun:#9C8AA5;
+    --cat-a:#5C8A82;
+    --cat-b:#B08D3D;
+    --cat-c:#B5602E;
+    --cat-d:#5C6B8A;
+    --cat-e:#9C4A3C;
+    --cat-f:#6E8F5C;
+    --radius:5px;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Sarabun',Tahoma,sans-serif;
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.brand-title,.tabs button{font-family:'Trirong',Tahoma,serif;}
+  h1,h2,h3{margin:0 0 .4em 0;color:var(--gold-soft);font-weight:600;}
+  h1{font-size:clamp(22px,4.5vw,32px);}
+  h2{font-size:clamp(18px,3vw,22px);border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:16px;}
+  h3{font-size:17px;color:var(--text);margin-bottom:.3em;}
+  p{margin:.5em 0;}
+  a{color:var(--gold-soft);}
+  strong{color:var(--gold-soft);font-weight:600;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 18px;}
+
+  /* header */
+  .site-header{
+    position:sticky;top:0;z-index:20;
+    background:linear-gradient(var(--bg),var(--bg) 92%,transparent);
+    background-color:var(--bg);
+    border-bottom:1px solid var(--border-bright);
+  }
+  .brand{display:flex;align-items:center;gap:14px;padding:16px 0 10px;}
+  .emblem{width:46px;height:46px;flex:none;}
+  .brand-title{font-size:clamp(19px,3.6vw,26px);color:var(--gold-soft);font-weight:600;line-height:1.2;}
+  .brand-sub{color:var(--text-muted);font-size:13.5px;margin-top:2px;}
+  nav.tabs{
+    display:flex;gap:4px;overflow-x:auto;padding-bottom:0;
+    -ms-overflow-style:none;scrollbar-width:none;
+  }
+  nav.tabs::-webkit-scrollbar{display:none;}
+  nav.tabs button{
+    flex:none;background:none;border:none;color:var(--text-muted);
+    font-size:14.5px;padding:10px 14px 12px;cursor:pointer;
+    border-bottom:2px solid transparent;white-space:nowrap;
+  }
+  nav.tabs button.active{color:var(--gold-soft);border-bottom-color:var(--gold);}
+  nav.tabs button:hover{color:var(--text);}
+
+  main{padding:22px 0 60px;}
+  .tab-page{display:none;}
+  .tab-page.active{display:block;animation:fadein .25s ease;}
+  @keyframes fadein{from{opacity:0;}to{opacity:1;}}
+
+  .lede{color:var(--text);max-width:68ch;}
+  .hint{color:var(--text-muted);font-size:14px;}
+
+  /* stat chips */
+  .stat-row{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 28px;}
+  .stat-chip{
+    background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);
+    padding:10px 16px;min-width:110px;
+  }
+  .stat-chip strong{display:block;font-size:22px;color:var(--gold-soft);font-family:'Trirong',serif;}
+  .stat-chip span{font-size:12.5px;color:var(--text-muted);}
+
+  /* legend */
+  .legend-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:8px;}
+  @media(max-width:640px){.legend-grid{grid-template-columns:1fr;}}
+  .legend-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px;}
+  .legend-dot{width:12px;height:12px;border-radius:50%;flex:none;margin-top:5px;}
+  .legend-item .t{font-weight:600;color:var(--text);}
+  .legend-item .d{color:var(--text-muted);font-size:13.5px;}
+
+  .note{
+    border-left:3px solid var(--border-bright);background:var(--panel);
+    padding:12px 16px;border-radius:0 var(--radius) var(--radius) 0;
+    color:var(--text-muted);font-size:14px;margin-top:22px;
+  }
+
+  /* pager */
+  .pager{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;flex-wrap:wrap;}
+  .pager .pager-btns{display:flex;gap:8px;align-items:center;}
+  .pager button.nav-btn{
+    background:var(--panel-2);border:1px solid var(--border-bright);color:var(--gold-soft);
+    padding:7px 16px;border-radius:var(--radius);cursor:pointer;font-family:'Sarabun',sans-serif;font-size:14px;
+  }
+  .pager button.nav-btn:hover{background:var(--panel);}
+  .pager-label{color:var(--text-muted);font-size:13.5px;min-width:64px;text-align:center;}
+  .dots{display:flex;gap:6px;}
+  .dot{width:9px;height:9px;border-radius:50%;border:1px solid var(--border-bright);background:transparent;padding:0;cursor:pointer;}
+  .dot.active{background:var(--gold);}
+
+  .cat-page,.faction-page{display:none;}
+  .cat-page.active,.faction-page.active{display:block;animation:fadein .25s ease;}
+  .cat-desc{color:var(--text-muted);margin-bottom:18px;}
+
+  /* skill cards */
+  .skill-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;}
+  .skill-card{
+    background:var(--panel-2);border:1px solid var(--border);border-left:3px solid var(--cat-color,var(--gold));
+    border-radius:var(--radius);padding:16px 18px;
+  }
+  .skill-card__head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;}
+  .skill-card__head h3 .en{color:var(--text-muted);font-weight:400;font-size:14px;}
+  .badges{display:flex;gap:6px;flex-wrap:wrap;}
+  .badge{
+    font-size:11.5px;padding:3px 9px;border-radius:20px;border:1px solid var(--border-bright);
+    color:var(--gold-soft);background:rgba(203,161,53,.08);white-space:nowrap;
+  }
+  .skill-card p{font-size:14.5px;}
+  .skill-card .lbl{color:var(--gold-soft);font-weight:600;}
+  .chip-row{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
+  .chip{
+    display:inline-block;background:var(--panel);border:1px solid var(--border);
+    padding:2px 9px;border-radius:3px;font-size:13px;color:var(--text);
+  }
+  .chip--synergy{border-style:dashed;color:var(--text-muted);}
+
+  .cat-a .skill-card{--cat-color:var(--cat-a);}
+  .cat-b .skill-card{--cat-color:var(--cat-b);}
+  .cat-c .skill-card{--cat-color:var(--cat-c);}
+  .cat-d .skill-card{--cat-color:var(--cat-d);}
+  .cat-e .skill-card{--cat-color:var(--cat-e);}
+  .cat-f .skill-card{--cat-color:var(--cat-f);}
+
+  /* faction pages */
+  .faction-banner{
+    display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    padding:14px 18px;border-radius:var(--radius);margin-bottom:18px;background:var(--panel-2);
+    border:1px solid var(--border);border-top:3px solid var(--f-color,var(--gold));
+  }
+  .faction-banner h3{margin:0;font-size:20px;}
+  .faction-banner .count{color:var(--text-muted);font-size:13.5px;}
+  .fb-wei{--f-color:var(--wei);} .fb-shu{--f-color:var(--shu);}
+  .fb-wu{--f-color:var(--wu);} .fb-qun{--f-color:var(--qun);}
+  .officer-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;}
+  .officer-card{
+    background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);
+    padding:10px 12px;
+  }
+  .officer-card--synergy{border-style:dashed;opacity:.85;}
+  .officer-name{display:block;font-weight:600;color:var(--text);}
+  .officer-skill{display:block;font-size:12.5px;color:var(--text-muted);margin-top:2px;}
+
+  /* counters table */
+  table.counter-table{width:100%;border-collapse:collapse;font-size:14.5px;}
+  .counter-table th{
+    text-align:left;background:var(--panel-2);color:var(--gold-soft);
+    padding:10px 12px;border-bottom:2px solid var(--border-bright);font-weight:600;
+  }
+  .counter-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;}
+  .counter-table tr:nth-child(even) td{background:rgba(255,255,255,.02);}
+  @media(max-width:720px){
+    .counter-table thead{display:none;}
+    .counter-table, .counter-table tbody, .counter-table tr, .counter-table td{display:block;width:100%;}
+    .counter-table tr{background:var(--panel-2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;padding:6px 4px;}
+    .counter-table td{border:none;padding:6px 12px;}
+    .counter-table td::before{content:attr(data-label);display:block;color:var(--gold-soft);font-size:12px;margin-bottom:2px;}
+  }
+
+  /* combos & roles */
+  .combo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;margin-bottom:34px;}
+  .combo-card{background:var(--panel-2);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;}
+  .combo-card p{font-size:14.5px;}
+  .role-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
+  .role-card{background:var(--panel-2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;}
+  .role-card p{font-size:13.5px;color:var(--text-muted);margin:4px 0 8px;}
+
+  footer{border-top:1px solid var(--border);margin-top:20px;padding:20px 0 40px;color:var(--text-muted);font-size:13px;}
+
+  @media(max-width:640px){
+    .skill-card__head{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand">
+      <svg class="emblem" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="32" cy="32" r="29" fill="none" stroke="#CBA135" stroke-width="2"/>
+        <circle cx="32" cy="32" r="23" fill="none" stroke="#CBA135" stroke-width="1" opacity="0.5"/>
+        <path d="M32 13 L45 21 L45 41 L32 51 L19 41 L19 21 Z" fill="none" stroke="#CBA135" stroke-width="1.5"/>
+        <circle cx="32" cy="32" r="7.5" fill="#8B3A2E"/>
+      </svg>
+      <div>
+        <div class="brand-title">ตำราสถานะและสกิลกองทัพ</div>
+        <div class="brand-sub">คู่มืออ้างอิงฉบับสรุป สำหรับวางแผนจัดทัพและตัวเคาน์เตอร์</div>
+      </div>
+    </div>
+    <nav class="tabs">
+      <button class="active" data-tab="overview">ภาพรวม</button>
+      <button data-tab="categories">หมวดหมู่สกิล</button>
+      <button data-tab="factions">สังกัด/ฝ่าย</button>
+      <button data-tab="counters">ตาราง Counter</button>
+      <button data-tab="combos">คอมโบ &amp; ทีม</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ===== OVERVIEW ===== -->
+  <section id="tab-overview" class="tab-page active">
+    <h2>ภาพรวมเอกสาร</h2>
+    <p class="lede">เอกสารนี้รวบรวมและแปลข้อมูลสถานะ (Status) และกลไกพิเศษ (Special Mechanics) ทั้งหมด 19 รายการจากภาพหน้าจอที่ให้มา จัดกลุ่มตามลักษณะการใช้งาน แยกตามสังกัดของขุนพลตัวแทน พร้อมตาราง Counter matchup และคอมโบทีมแนะนำ เพื่อใช้อ้างอิงวางแผนจัดทัพได้สะดวก ทั้งบนคอมพิวเตอร์และมือถือ</p>
+    <p class="hint">แตะแท็บด้านบนเพื่อสลับหมวดหลัก และใช้ปุ่ม "ก่อนหน้า / ถัดไป" ภายในหมวดหมู่สกิลและสังกัด เพื่อพลิกดูทีละหน้า</p>
+
+    <div class="stat-row">
+      <div class="stat-chip"><strong>19</strong><span>สถานะ/สกิลทั้งหมด</span></div>
+      <div class="stat-chip"><strong>6</strong><span>หมวดหมู่การใช้งาน</span></div>
+      <div class="stat-chip"><strong>4</strong><span>สังกัด/ฝ่าย</span></div>
+      <div class="stat-chip"><strong>34</strong><span>ขุนพลที่ปรากฏ</span></div>
+      <div class="stat-chip"><strong>12</strong><span>คู่ Counter matchup</span></div>
+      <div class="stat-chip"><strong>8</strong><span>คอมโบแนะนำ</span></div>
+    </div>
+
+    <h2>หมวดหมู่สกิล</h2>
+    <div class="legend-grid">
+      <div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--cat-a)"></span><div><div class="t">บัฟตั้งรับ (เสริมพลังตนเอง)</div><div class="d">เพิ่ม DEF หรือโล่ให้ทัพตัวเอง</div></div></div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--cat-b)"></span><div><div class="t">ดีบัฟลดพลังศัตรู</div><div class="d">ลดดาเมจหรือประสิทธิภาพฮีลของศัตรู</div></div></div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--cat-c)"></span><div><div class="t">เพิ่มดาเมจ/จุดอ่อนศัตรู</div><div class="d">ทำให้ศัตรูรับดาเมจเพิ่มขึ้น</div></div></div>
+      </div>
+      <div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--cat-d)"></span><div><div class="t">ควบคุมสนามรบ</div><div class="d">ลดความเร็ว ดึงเป้า หรือบังคับแตกทัพ</div></div></div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--cat-e)"></span><div><div class="t">โจมตีเสริม/สวนกลับ</div><div class="d">เพิ่มจำนวนครั้งโจมตี หรือดาเมจสวนกลับ</div></div></div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--cat-f)"></span><div><div class="t">ฟื้นฟู/รักษากำลังพล</div><div class="d">ฟื้นจำนวนทหารจากดาเมจที่สร้าง</div></div></div>
+      </div>
+    </div>
+
+    <h2 style="margin-top:26px;">สังกัด/ฝ่าย</h2>
+    <div class="legend-grid">
+      <div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--wei)"></span><div><div class="t">วุ่ย (Wei)</div><div class="d">8 ขุนพลในเอกสารนี้</div></div></div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--shu)"></span><div><div class="t">จ๊ก (Shu)</div><div class="d">9 ขุนพลในเอกสารนี้</div></div></div>
+      </div>
+      <div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--wu)"></span><div><div class="t">ง่อ (Wu)</div><div class="d">9 ขุนพลในเอกสารนี้</div></div></div>
+        <div class="legend-item"><span class="legend-dot" style="background:var(--qun)"></span><div><div class="t">กลุ่มอื่น/ไม่สังกัด (Qun)</div><div class="d">8 ขุนพลในเอกสารนี้</div></div></div>
+      </div>
+    </div>
+
+    <div class="note">การจัดสังกัดในเอกสารนี้อ้างอิงจากวรรณกรรม/ประวัติศาสตร์สามก๊กโดยทั่วไป เนื่องจากภาพต้นฉบับไม่ได้ระบุฝ่ายไว้ กรุณาตรวจสอบกับสังกัดจริงในเกมอีกครั้งก่อนใช้วางแผน และตัวเลขบางส่วนที่ปรากฏในภาพต้นฉบับ (เช่น ค่าตัวคูณดาเมจของ Frozen และ Mired) ไม่ชัดเจนสมบูรณ์ จึงแนะนำให้ตรวจสอบค่าที่แน่นอนในเกมอีกครั้ง</div>
+  </section>
+
+  <!-- ===== CATEGORIES ===== -->
+  <section id="tab-categories" class="tab-page">
+    <h2>หมวดหมู่สกิล</h2>
+    <div class="pager">
+      <div class="pager-btns">
+        <button class="nav-btn" id="catPrev">ก่อนหน้า</button>
+        <button class="nav-btn" id="catNext">ถัดไป</button>
+      </div>
+      <div class="dots" id="catDots"></div>
+      <div class="pager-label" id="catLabel">1 / 6</div>
+    </div>
+
+    <div class="cat-page cat-a">
+      <p class="cat-desc">บัฟตั้งรับ (เสริมพลังตนเอง) — เพิ่ม DEF หรือโล่ให้ทัพของตัวเอง เหมาะกับแนวหน้าที่ต้องดูดดาเมจ</p>
+      <div class="skill-grid">
+
+        <article class="skill-card">
+          <div class="skill-card__head"><h3>พลังทรหด <span class="en">(Fortitude)</span></h3><div class="badges"><span class="badge">Passive</span><span class="badge">เป้าหมายเดี่ยว</span></div></div>
+          <p>ขณะติดสถานะนี้ ทหารจะได้รับค่าป้องกัน (DEF) เพิ่มขึ้น โดยมีคูลดาวน์</p>
+          <p><span class="lbl">สกิล:</span> Mystic Formation Breaker (5 ดาว)</p>
+          <p><span class="lbl">เอฟเฟกต์:</span> เมื่อเข้าสู่การรบ ได้รับสถานะ Fortitude เพิ่ม DEF 50% (อิงจาก STR) นาน 20 วิ คูลดาวน์ 40 วิ และเพิ่มดาเมจโจมตีธรรมดา 82% (อิงจาก STR)</p>
+          <p><span class="lbl">ขุนพลตัวแทน:</span></p>
+          <div class="chip-row"><span class="chip">Zhang Liang</span></div>
+          <p><span class="lbl">คอมโบ:</span> Zhang Yan สร้างดาเมจสกิล active เพิ่มขึ้นขณะมีสถานะ Fortitude</p>
+          <p><span class="lbl">การใช้งาน:</span> เสริมความมั่นคงแนวหน้าอย่างมาก เข้ากันดีกับ Unyielding โล่ และเอฟเฟกต์ฮีล ช่วยให้ทหารแนวหน้าดูดดาเมจได้ดีในศึกยืดเยื้อ</p>
+        </article>
+
+        <article class="skill-card">
+          <div class="skill-card__head"><h3>ยืนหยัด <span class="en">(Unyielding)</span></h3><div class="badges"><span class="badge">Passive</span><span class="badge">เป้าหมายเดี่ยว</span></div></div>
+          <p>ขณะติดสถานะนี้ ทหารจะได้รับค่าป้องกันเพิ่มขึ้น</p>
+          <p><span class="lbl">เอฟเฟกต์:</span> เมื่อโดนโจมตีธรรมดา สะสม 1 stack เพิ่ม DEF 16% → 32% (อิงจาก STR) นาน 5 วิ</p>
+          <p><span class="lbl">ขุนพลตัวแทน:</span></p>
+          <div class="chip-row"><span class="chip">Zhang Fei</span><span class="chip">Meng Huo</span><span class="chip">Cheng Pu</span><span class="chip">Cao Pi</span></div>
+          <p><span class="lbl">การใช้งาน:</span> หนึ่งในเอฟเฟกต์หลักของสายโล่ ช่วยให้ดูดดาเมจได้ดีขึ้น เหมาะกับช่วงบุกเบิกต้นเกมและยันแนวหน้าเมื่อเจอหลายทัพในศึกกลุ่ม</p>
+        </article>
+
+        <article class="skill-card">
+          <div class="skill-card__head"><h3>เจ้าครองแคว้น <span class="en">(Overlord)</span></h3><div class="badges"><span class="badge">Passive</span><span class="badge">เป้าหมายเดี่ยว</span></div></div>
+          <p>ทหารได้ DEF เพิ่มขึ้น และขุนพลทุกคนในทัพสร้างดาเมจสกิลเพิ่มขึ้น</p>
+          <p><span class="lbl">สกิล:</span> Short Ballad</p>
+          <p><span class="lbl">เอฟเฟกต์:</span> เมื่อโดนโจมตีธรรมดา สะสมสถานะ Overlord เพิ่ม DEF 13% → 26% (อิงจาก CMD) และดาเมจสกิลของทุกคนในทัพเพิ่ม 1.2% → 2.4% นาน 6 วิ (ไม่ซ้อน)</p>
+          <p><span class="lbl">ขุนพลตัวแทน:</span></p>
+          <div class="chip-row"><span class="chip">Cao Cao</span></div>
+          <p><span class="lbl">การใช้งาน:</span> เพิ่ม DEF และ DPS โดยรวมของทัพอย่างมาก เข้ากันดีกับขุนพลสายสกิล ใช้ได้ผลดีทั้งช่วงบุกเบิกและศึกกลุ่ม</p>
+        </article>
+
+        <article class="skill-card">
+          <div class="skill-card__head"><h3>ฟ้าเหลือง <span class="en">(Yellow Heaven)</span></h3><div class="badges"><span class="badge">Passive</span><span class="badge">เป้าหมายเดี่ยว</span></div></div>
+          <p>ทหารได้รับโล่ดูดซับดาเมจ</p>
+          <p><span class="lbl">เอฟเฟกต์:</span> เมื่อเข้าสู่การรบ เข้าสถานะ Yellow Heaven ได้โล่ดูดดาเมจ (ตัวคูณ 40 → 80) นาน 9 วิ คูลดาวน์ 9 วิ</p>
+          <p><span class="lbl">ขุนพลตัวแทน:</span></p>
+          <div class="chip-row"><span class="chip">Zhang Jiao</span></div>
+          <p><span class="lbl">การใช้งาน:</span> โล่นี้เข้ากันดีกับการฮีลตัวเองหรือสถานะ Fortitude เพิ่มการป้องกันและความอึดอย่างมาก ช่วยรับมือการจู่โจมจากหลายทัพศัตรู รักษาจำนวนทหารไว้ในจังหวะสำคัญ</p>
+        </article>
+
+      </div>
+    </div>
+
+    <div class="cat-page cat-b">
+      <p class="cat-desc">ดีบัฟลดพลังศัตรู — ลดดาเมจ หรือลดประสิทธิภาพฮีลของฝั่งศัตรู เพิ่มอัตรารอดของทัพเรา</p>
+      <div class="skill-grid">
+
+        <article class="skill-card">
+          <div class="skill-card__head"><h3>เสน่หา <span class="en">(Charm)</span></h3><div class="badges"><span class="badge">Passive</span></div></div>
+          <p>ขณะติดสถานะนี้ ขุนพลศัตรูสร้างดาเมจทุกประเภทลดลง</p>
+          <p><span class="lbl">ขุนพลตัวแทน:</span></p>
+          <div class="chip-row"><span class="chip">Diao Chan</span></div>
+          <p><span class="lbl">การใช้งาน:</span> ได้ผลดีกับขุนพลชาย ช่วยลดดาเมจที่ออกจากพวกเขา เช่น ทีมที่มี Lü Bu, Guan Yu หรือ Zhou Yu</p>
+        </article>
+
+        <article class="skill-card">
+          <div class="skill-card__head"><h3>อ่อนแรง <span class="en">(Enfeeble)</span></h3><div class="badges"><span class="badge">Passive</span><span class="badge">เป้าหมายเดี่ยว</span></div></div>
+          <p>ขุนพลศัตรูสร้างดาเมจโจมตีธรรมดาลดลง</p>
+          <p><span class="lbl">สกิล:</span> Ancient Terror</p>
+          <p><span class="lbl">เอฟเฟกต์:</span> เพิ่มตัวคูณดาเมจสกิล active 18 → 36 (อิงจาก STR) หลังโจมตีธรรมดาสำเร็จ มีโอกาส 10% → 20% ทำให้ขุนพลสุ่มในทัพเป้าหมายติด Enfeeble ลดดาเมจโจมตีธรรมดา 10% นาน 1 วิ</p>
+          <p><span class="lbl">ขุนพลตัวแทน:</span></p>
+          <div class="chip-row"><span class="chip">Dian Wei</span></div>
+          <p><span class="lbl">การใช้งาน:</span> เคาน์เตอร์ทีมที่พึ่งโจมตีธรรมดาเป็นหลัก เช่น Ma Chao, Zhao Yun</p>
+        </article>
+
+        <article class="skill-card">
+          <div class="skill-card__head"><h3>อ่อนแอ <span class="en">(Weakness)</span></h3><div class="badges"><span class="badge">Active</span><span class="badge">ระยะ</span></div></div>
+          <p>ศัตรูที่ติดสถานะนี้จะสร้างดาเมจใส่ทัพเราลดลง (เอฟเฟกต์ลดลงสำหรับเป้าหมายที่ไม่ใช่เป้าหลัก)</p>
+          <p><span class="lbl">เอฟเฟกต์:</span> เป้าหมายหลักรับดาเมจเต็ม ทัพอื่นรับ 50% มีโอกาส 50% ทำให้เป้าหมายหลักติด Weakness ลดดาเมจที่สร้างได้ทั้งหมด 2.2% → 4.4% นาน 3 วิ</p>
+          <p><span class="lbl">ขุนพลตัวแทน:</span></p>
+          <div class="chip-row"><span class="chip">Zhang Fei</span><span class="chip">Meng Huo</span></div>
+          <p><span class="lbl">คอมโบ:</span> Guan Yu ได้เอฟเฟกต์ Vulnerability เพิ่มกับเป้าหมายที่ติด Weakness / Liao Hua สร้างดาเมจเพิ่มเมื่อโจมตีธรรมดาใส่เป้าหมายที่ติด Weakness</p>
+          <p><span class="lbl">การใช้งาน:</span> ลดดาเมจศัตรู เพิ่มการอยู่รอดของทัพเรา ใช้กันแพร่หลายทั้งช่วงบุกเบิกและศึกกลุ่ม</p>
+        </article>
+
+        <article class="skill-card">
+          <div class="skill-card__head"><h3>ขวัญเสีย <span class="en">(Spirit Break)</span></h3><div class="badges"><span class="badge">Active</span><span class="badge">ระยะ</span></div></div>
+          <p>ขุนพลศัตรูสร้างดาเมจสกิลลดลง</p>
+          <p><span class="lbl">เอฟเฟกต์:</span> ตัวคูณดาเมจใส่ทัพอื่น 11 → 22 (เพิ่มอีก 11 → 22 หากคุมทัพม้า) โดนสูงสุด 5 ทัพ มีโอกาส 37% → 44% ทำให้ขุนพลสุ่มในทัพเป้าหมายติด Spirit Break ลดดาเมจสกิลลง 5% นาน 6 วิ</p>
+          <p><span class="lbl">ขุนพลตัวแทน:</span></p>
+          <div class="chip-row"><span class="chip">Lü Bu</span></div>
+          <p><span class="lbl">การใช้งาน:</span> ลดดาเมจสกิลศัตรู เพิ่มการอยู่รอดของทัพเรา และกดข่มทัพศัตรูในสนามรบได้อย่างมีประสิทธิภาพ</p>
+        </article>
+
+        <article class="skill-card">
+          <div class="skill-card__head"><h3>อดอยาก <span class="en">(Starvation)</span></h3><div class="badges"><span class="badge">Passive</span><span class="badge">เป้าหมายเดี่ยว</span></div></div>
+          <p>ขุนพลศัตรูสร้างเอฟเฟกต์ฮีลลดลง</p>
+          <p><span class="lbl">เอฟเฟกต์:</span> เพิ่มดาเมจโจมตีธรรมดาของทุกคนในทัพ 7% → 13% (อิงจาก CMD) หลังโจมตีธรรมดาสำเร็จ มีโอกาส 40% ทำให้ทัพเป้าหมายติด Starvation ลดประสิทธิภาพฮีล 5% → 10% นาน 1 วิ</p>
+          <p><span class="lbl">ขุนพลตัวแทน:</span></p>
+          <div class="chip-row"><span class="chip">Sun Jian</span></div>
+          <p><span class="lbl">การใช้งาน:</span> ได้ผลมากกับทัพศัตรูที่พึ่งการฮีลตัวเองหรือเอฟเฟกต์ฮีล ลดความอึดและศักยภาพของสายโล่ได้อย่างมาก</p>
+        </article>
+
+      </div>
+    </div>
+
+    <div class="cat-page cat-c">
+      <p class="cat-desc">เพิ่มดาเมจ/จุดอ่อนศัตรู — ทำให้ศัตรูรับดาเมจจากทุกแหล่งเพิ่มขึ้น เหมาะกับทีมสายเบิร์สต์</p>
+      <div class="skill-grid">
+
+        <article class="skill-card">
+          <div class="skill-card__head"><h3>เปราะบาง <span class="en">(Vulnerability)</span></h3><div class="badges"><span class="badge">Active</span><span class="badge">เป้าหมายเดี่ยว</span></div></div>
+          <p>ศัตรูที่ติดสถานะนี้จะรับดาเมจจากทุกแหล่งเพิ่มขึ้น</p>
+          <p><span class="lbl">เอฟเฟกต์:</span> สร้างดาเมจตรงใส่ศัตรู (ตัวคูณ 32 → 45 อิงจาก INT) มีโอกาส 30% ทำให้ศัตรูติด Vulnerability รับดาเมจเพิ่ม 1% → 2% (อิงจาก INT) นาน 5 วิ</p>
+          <p><span class="lbl">ขุนพลตัวแทน:</span></p>
+          <div class="chip-row"><span class="chip">Fa Zheng</span><span class="chip">Xun Yu</span><span class="chip">Guan Yu</span><span class="chip">Sun Quan</span><span class="chip">Yue Jin</span></div>
+          <p><span class="lbl">คอมโบ:</span> Cheng Yu สร้างดาเมจแบบตีหลายครั้งใส่เป้าหมายที่ติด Vulnerability ได้</p>
+          <p><span class="lbl">การใช้งาน:</span> เพิ่มประสิทธิภาพการโฟกัสยิงและการเสริมกันของสกิล เหมาะกับทัพสายเบิร์สต์ ช่วยจบเป้าหมายสำคัญได้เร็วขึ้น</p>
+        </article>
+
+        <article class="skill-card">
+          <div class="skill-card__head"><h3>เผาไหม้ <span class="en">(Burn)</span></h3><div class="badges"><span class="badge">Passive</span><span class="badge">เป้าหมายเดี่ยว</span></div></div>
+          <p>ศัตรูที่ติดสถานะนี้จะโดนดาเมจไฟทุกวินาที</p>
+          <p><span class="lbl">เอฟเฟกต์:</span> หลังปล่อยสกิล active สำเร็จ มีโอกาส 28% → 36% ทำให้ศัตรูติด Burn โดนดาเมจ 1 ครั้ง/วิ (ตัวคูณ 1.4 → 2.8 อิงจาก INT) นาน 4 วิ</p>
+          <p><span class="lbl">ขุนพลตัวแทน:</span></p>
+          <div class="chip-row"><span class="chip">Lu Su</span><span class="chip">Zhou Yu</span></div>
+          <p><span class="lbl">คอมโบ:</span> Lu Su มีโอกาสทำให้เป้าหมายที่ติด Burn ได้ Vulnerability เพิ่ม / Xiao Qiao, Lü Meng สร้างดาเมจเพิ่มใส่เป้าหมายที่ติด Burn</p>
+          <p><span class="lbl">การใช้งาน:</span> ให้ดาเมจต่อเนื่องเป็นวงกว้าง เข้ากันดีกับตัวเพิ่ม Vulnerability/ดาเมจ โดดเด่นในศึกขนาดใหญ่ที่สาย Archer สร้างแรงกดดันเป็นวงกว้างและเป็น DPS หลักช่วงปลายเกม</p>
+        </article>
+
+      </div>
+    </div>
+
+    <div class="cat-page cat-d">
+      <p class="cat-desc">ควบคุมสนามรบ — ลดความเร็วเคลื่อนที่ ดึงเป้าหมาย หรือบังคับให้ทัพศัตรูแตก</p>
+      <div class="skill-grid">
+
+        <article class="skill-card">
+          <div class="skill-card__head"><h3>แช่แข็ง <span class="en">(Frozen)</span></h3><div class="badges"><span class="badge">Active</span><span class="badge">เป้าหมายเดี่ยว</span></div></div>
+          <p>ลดความเร็วเคลื่อนที่ สกิลที่สร้างดาเมจมีโอกาสกระตุ้นดาเมจแช่แข็งเพิ่มเติม</p>
+          <p><span class="lbl">เอฟเฟกต์:</span> ทำให้เป้าหมายหลักติด Frozen 6 วิ (ไม่ซ้อน) ลด Movement SPD 10% หลังโดนดาเมจสกิลจากขุนพลในทัพของ Guo Jia มีโอกาส 50% เกิดดาเมจโบนัสจากความเย็น (ตัวคูณดาเมจ 2.6 → 5.1)</p>
+          <p><span class="lbl">ขุนพลตัวแทน:</span></p>
+          <div class="chip-row"><span class="chip">Guo Jia</span></div>
+          <p><span class="lbl">การใช้งาน:</span> ควบคุมพื้นที่ด้วยการลดความเร็วเคลื่อนที่ เหมาะกับขุนพลที่ปล่อยสกิลถี่ ให้ดาเมจเดี่ยวสูงและใช้งานได้จริงในการต่อสู้</p>
+        </article>
+
+        <article class="skill-card">
+          <div class="skill-card__head"><h3>ติดหล่ม <span class="en">(Mired)</span></h3><div class="badges"><span class="badge">Active</span><span class="badge">เป้าหมายเดี่ยว</span></div></div>
+          <p>ลดความเร็วเคลื่อนที่ของศัตรู</p>
+          <p><span class="lbl">เอฟเฟกต์:</span> ตัวคูณดาเมจ 36 → 52 (อิงจาก CMD) หากคุมทัพระยะประชิด มีโอกาส 37% → 44% ทำให้เป้าหมายหลักติด Mired ลด Movement SPD 10% นาน 5 วิ</p>
+          <p><span class="lbl">ขุนพลตัวแทน:</span></p>
+          <div class="chip-row"><span class="chip">Gongsun Zan</span><span class="chip">Huang Gai</span><span class="chip">Ma Yunlu</span><span class="chip">Gan Ning</span><span class="chip">Sun Jian</span><span class="chip">Xu Huang</span></div>
+          <p><span class="lbl">คอมโบ:</span> Gan Ning / Cheng Pu สร้างดาเมจเพิ่มหรือได้ DEF เพิ่มเมื่อเจอเป้าหมายที่ติด Mired</p>
+          <p><span class="lbl">การใช้งาน:</span> ในศึกขนาดเล็กช่วยขยายดาเมจจากเอฟเฟกต์ผลต่างความเร็ว (เช่น ตำราสกิล Ma Chao) จำกัดความคล่องตัวของทัพม้าศัตรู และช่วยไล่ล่าศัตรูที่กำลังหนีได้ดีขึ้น</p>
+        </article>
+
+        <article class="skill-card">
+          <div class="skill-card__head"><h3>ยั่วยุ <span class="en">(Taunt)</span></h3><div class="badges"><span class="badge">Passive</span><span class="badge">ระยะ</span></div></div>
+          <p>บังคับให้ทัพศัตรูในระยะโจมตีผู้ใช้สกิล</p>
+          <p><span class="lbl">เอฟเฟกต์:</span> เพิ่มตัวคูณดาเมจสกิล active 12 → 24 หลังโจมตีธรรมดาสำเร็จ หากคุมทัพระยะประชิด มีโอกาส 2% → 4% ทำให้ศัตรูสูงสุด 3000 ในระยะ 5 หลาติด Taunt นาน 5 วิ (มีผลเฉพาะทัพผู้เล่นและด่านทรัพยากร)</p>
+          <p><span class="lbl">ขุนพลตัวแทน:</span></p>
+          <div class="chip-row"><span class="chip">Zhang Jiao</span></div>
+          <p><span class="lbl">การใช้งาน:</span> ดึงเป้าความสนใจของศัตรู สร้างความปลอดภัยให้ทัพแนวหลัง ช่วยรับมือการตีโฉบของทัพม้าและปกป้องสาย Archer ที่เปราะบาง</p>
+        </article>
+
+        <article class="skill-card">
+          <div class="skill-card__head"><h3>แตกทัพ <span class="en">(Rout)</span></h3><div class="badges"><span class="badge">Passive</span><span class="badge">เป้าหมายเดี่ยว</span></div></div>
+          <p>เมื่อทหารศัตรูเหลือต่ำกว่าเกณฑ์ที่กำหนด โจมตีธรรมดามีโอกาสทำให้ทัพศัตรูแตกทันที</p>
+          <p><span class="lbl">เอฟเฟกต์:</span> เพิ่ม DEF 12.5% → 25% (อิงจาก STR) เมื่อทหารศัตรูเหลือต่ำกว่า 10% โจมตีธรรมดามีโอกาส 10% บังคับให้ทัพศัตรูเข้าสถานะ Rout</p>
+          <p><span class="lbl">ขุนพลตัวแทน:</span></p>
+          <div class="chip-row"><span class="chip">Lü Bu</span></div>
+          <p><span class="lbl">การใช้งาน:</span> เปิดโอกาสกำจัดทัพศัตรูที่อ่อนแรงได้ทันที ใช้เก็บกวาดหรือไล่ล่าศัตรูที่กำลังหนีได้อย่างมีประสิทธิภาพ</p>
+        </article>
+
+      </div>
+    </div>
+
+    <div class="cat-page cat-e">
+      <p class="cat-desc">โจมตีเสริม/สวนกลับ — เพิ่มจำนวนครั้งโจมตีธรรมดา หรือสร้างดาเมจสวนกลับเมื่อโดนตี</p>
+      <div class="skill-grid">
+
+        <article class="skill-card">
+          <div class="skill-card__head"><h3>สวนกลับ <span class="en">(Counterattack)</span></h3><div class="badges"><span class="badge">อาวุธเฉพาะ</span></div></div>
+          <p>สร้างดาเมจตอบโต้เมื่อโดนโจมตีธรรมดา</p>
+          <p><span class="lbl">เอฟเฟกต์:</span> เมื่อโดนโจมตีธรรมดา เพิ่ม DEF 125% → 138% (อิงจาก INT) นาน 3 วิ พร้อมโอกาส 100% สร้างดาเมจตอบโต้ (ตัวคูณ 3 → 3.6 อิงจาก INT เกิดได้สูงสุด 15 ครั้ง/วิ)</p>
+          <p><span class="lbl">ขุนพลตัวแทน (อาวุธเฉพาะ):</span></p>
+          <div class="chip-row"><span class="chip">Gan Ning</span><span class="chip">Zhang Jiao</span><span class="chip">Zhang Yan</span><span class="chip">Yue Jin</span></div>
+          <p><span class="lbl">การใช้งาน:</span> สร้างดาเมจเมื่อโดนตีพร้อมเพิ่ม DEF เป็นตัวเคาน์เตอร์ทีม Pursue และทีม Archer ได้ดี ช่วงท้ายเกมให้ทั้งการดูดดาเมจและดาเมจโจมตี</p>
+        </article>
+
+        <article class="skill-card">
+          <div class="skill-card__head"><h3>ดาเมจกระจาย <span class="en">(Splash)</span></h3><div class="badges"><span class="badge">Passive</span><span class="badge">เป้าหมายเดี่ยว</span></div></div>
+          <p>โจมตีธรรมดาสร้างดาเมจกระจายไปยังศัตรูหลายทัพในระยะ</p>
+          <p><span class="lbl">เอฟเฟกต์:</span> เพิ่ม DEF 4.55% → 9.1% (อิงจาก STR) โจมตีธรรมดามีดาเมจกระจายสูงสุด 2600 ถึงศัตรูในระยะ 5 หลา (ตัวคูณ 0.16 → 0.32 อิงจาก STR)</p>
+          <p><span class="lbl">ขุนพลตัวแทน:</span></p>
+          <div class="chip-row"><span class="chip">Zhang Bao</span><span class="chip">Gan Ning</span></div>
+          <p><span class="lbl">การใช้งาน:</span> ให้สายโล่มีดาเมจเป็นวงกว้าง มีค่ามากในศึกกลุ่ม เมื่อผสมกับ Defection จะได้ทั้งบุกและรับอย่างสมดุล</p>
+        </article>
+
+        <article class="skill-card">
+          <div class="skill-card__head"><h3>ไล่ล่าต่อเนื่อง <span class="en">(Pursue)</span></h3><div class="badges"><span class="badge">Passive</span><span class="badge">เป้าหมายเดี่ยว</span></div></div>
+          <p>หลังโจมตีธรรมดา มีโอกาสกระตุ้นการโจมตีธรรมดาเพิ่มอีกครั้ง</p>
+          <p><span class="lbl">เอฟเฟกต์:</span> หลังปล่อยโจมตีธรรมดา มีโอกาส 11.5% → 13% กระตุ้น Pursuit ให้โจมตีธรรมดาเพิ่มอีกครั้ง</p>
+          <p><span class="lbl">ขุนพลตัวแทน:</span></p>
+          <div class="chip-row"><span class="chip">Zhao Yun</span><span class="chip">Ma Chao</span><span class="chip">Ma Yunlu</span><span class="chip">Guan Yinping</span></div>
+          <p><span class="lbl">การใช้งาน:</span> การโจมตีเพิ่มนี้เข้ากันดีกับตัวเพิ่มดาเมจโจมตีธรรมดา (เช่น Sun Jian, Ma Yunlu) ดันดาเมจเดี่ยวได้สูงสุด ทีมสาย Pursue ล้างทหารศัตรูได้รวดเร็ว</p>
+        </article>
+
+      </div>
+    </div>
+
+    <div class="cat-page cat-f">
+      <p class="cat-desc">ฟื้นฟู/รักษากำลังพล — ฟื้นจำนวนทหารจากดาเมจที่สร้าง ช่วยให้ทัพยืนระยะได้นานขึ้น</p>
+      <div class="skill-grid">
+
+        <article class="skill-card">
+          <div class="skill-card__head"><h3>แปรพักตร์ <span class="en">(Defection)</span></h3><div class="badges"><span class="badge">Active</span><span class="badge">ระยะ</span></div></div>
+          <p>ฟื้นฟูจำนวนทหารตามเปอร์เซ็นต์ดาเมจที่สร้างกับเป้าหมายหลัก</p>
+          <p><span class="lbl">เอฟเฟกต์:</span> ระยะกว้าง 2000 หลา สร้างดาเมจครั้งเดียวสูงสุด 5 ทัพศัตรู (ตัวคูณ 8 → 16 อิงจาก STR) เป้าหมายหลักรับดาเมจเต็ม ทัพอื่นรับ 50% พร้อมได้ Defection 30% (ฟื้นทหารตามดาเมจที่สร้างกับเป้าหมายหลัก)</p>
+          <p><span class="lbl">ขุนพลตัวแทน:</span></p>
+          <div class="chip-row"><span class="chip">Wei Yan</span><span class="chip">Ma Chao</span></div>
+          <p><span class="lbl">การใช้งาน:</span> ให้ความอึดกับทัพอย่างมาก ใช้ได้ดีทั้งช่วงบุกเบิกและศึกกลุ่ม ช่วยให้ทัพทนต่อคลื่นโจมตีหลายระลอกโดยรักษาจำนวนทหารไว้ได้</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FACTIONS ===== -->
+  <section id="tab-factions" class="tab-page">
+    <h2>สังกัด/ฝ่าย</h2>
+    <div class="pager">
+      <div class="pager-btns">
+        <button class="nav-btn" id="facPrev">ก่อนหน้า</button>
+        <button class="nav-btn" id="facNext">ถัดไป</button>
+      </div>
+      <div class="dots" id="facDots"></div>
+      <div class="pager-label" id="facLabel">1 / 4</div>
+    </div>
+
+    <div class="faction-page">
+      <div class="faction-banner fb-wei"><h3>วุ่ย (Wei)</h3><span class="count">8 ขุนพล</span></div>
+      <div class="officer-grid">
+        <div class="officer-card"><span class="officer-name">Guo Jia</span><span class="officer-skill">Frozen</span></div>
+        <div class="officer-card"><span class="officer-name">Dian Wei</span><span class="officer-skill">Enfeeble</span></div>
+        <div class="officer-card"><span class="officer-name">Cao Cao</span><span class="officer-skill">Overlord</span></div>
+        <div class="officer-card"><span class="officer-name">Xu Huang</span><span class="officer-skill">Mired</span></div>
+        <div class="officer-card"><span class="officer-name">Yue Jin</span><span class="officer-skill">Counterattack, Vulnerability</span></div>
+        <div class="officer-card"><span class="officer-name">Cao Pi</span><span class="officer-skill">Unyielding</span></div>
+        <div class="officer-card"><span class="officer-name">Xun Yu</span><span class="officer-skill">Vulnerability</span></div>
+        <div class="officer-card officer-card--synergy"><span class="officer-name">Cheng Yu</span><span class="officer-skill">คอมโบ: Vulnerability</span></div>
+      </div>
+    </div>
+
+    <div class="faction-page">
+      <div class="faction-banner fb-shu"><h3>จ๊ก (Shu)</h3><span class="count">9 ขุนพล</span></div>
+      <div class="officer-grid">
+        <div class="officer-card"><span class="officer-name">Zhang Fei</span><span class="officer-skill">Unyielding, Weakness</span></div>
+        <div class="officer-card"><span class="officer-name">Ma Yunlu</span><span class="officer-skill">Mired, Pursue</span></div>
+        <div class="officer-card"><span class="officer-name">Zhao Yun</span><span class="officer-skill">Pursue</span></div>
+        <div class="officer-card"><span class="officer-name">Ma Chao</span><span class="officer-skill">Pursue, Defection</span></div>
+        <div class="officer-card"><span class="officer-name">Guan Yinping</span><span class="officer-skill">Pursue</span></div>
+        <div class="officer-card"><span class="officer-name">Wei Yan</span><span class="officer-skill">Defection</span></div>
+        <div class="officer-card"><span class="officer-name">Fa Zheng</span><span class="officer-skill">Vulnerability</span></div>
+        <div class="officer-card"><span class="officer-name">Guan Yu</span><span class="officer-skill">Vulnerability</span></div>
+        <div class="officer-card officer-card--synergy"><span class="officer-name">Liao Hua</span><span class="officer-skill">คอมโบ: Weakness</span></div>
+      </div>
+    </div>
+
+    <div class="faction-page">
+      <div class="faction-banner fb-wu"><h3>ง่อ (Wu)</h3><span class="count">9 ขุนพล</span></div>
+      <div class="officer-grid">
+        <div class="officer-card"><span class="officer-name">Gan Ning</span><span class="officer-skill">Counterattack, Splash, Mired</span></div>
+        <div class="officer-card"><span class="officer-name">Cheng Pu</span><span class="officer-skill">Unyielding</span></div>
+        <div class="officer-card"><span class="officer-name">Huang Gai</span><span class="officer-skill">Mired</span></div>
+        <div class="officer-card"><span class="officer-name">Sun Jian</span><span class="officer-skill">Mired, Starvation</span></div>
+        <div class="officer-card"><span class="officer-name">Lu Su</span><span class="officer-skill">Burn</span></div>
+        <div class="officer-card"><span class="officer-name">Zhou Yu</span><span class="officer-skill">Burn</span></div>
+        <div class="officer-card"><span class="officer-name">Sun Quan</span><span class="officer-skill">Vulnerability</span></div>
+        <div class="officer-card officer-card--synergy"><span class="officer-name">Xiao Qiao</span><span class="officer-skill">คอมโบ: Burn</span></div>
+        <div class="officer-card officer-card--synergy"><span class="officer-name">Lü Meng</span><span class="officer-skill">คอมโบ: Burn</span></div>
+      </div>
+    </div>
+
+    <div class="faction-page">
+      <div class="faction-banner fb-qun"><h3>กลุ่มอื่น/ไม่สังกัด (Qun)</h3><span class="count">8 ขุนพล</span></div>
+      <div class="officer-grid">
+        <div class="officer-card"><span class="officer-name">Zhang Liang</span><span class="officer-skill">Fortitude</span></div>
+        <div class="officer-card"><span class="officer-name">Diao Chan</span><span class="officer-skill">Charm</span></div>
+        <div class="officer-card"><span class="officer-name">Zhang Jiao</span><span class="officer-skill">Counterattack, Yellow Heaven, Taunt</span></div>
+        <div class="officer-card"><span class="officer-name">Zhang Yan</span><span class="officer-skill">Counterattack</span></div>
+        <div class="officer-card"><span class="officer-name">Zhang Bao</span><span class="officer-skill">Splash</span></div>
+        <div class="officer-card"><span class="officer-name">Gongsun Zan</span><span class="officer-skill">Mired</span></div>
+        <div class="officer-card"><span class="officer-name">Lü Bu</span><span class="officer-skill">Spirit Break, Rout</span></div>
+        <div class="officer-card"><span class="officer-name">Meng Huo</span><span class="officer-skill">Unyielding, Weakness</span></div>
+      </div>
+    </div>
+
+    <div class="note">การจัดสังกัดอ้างอิงจากวรรณกรรม/ประวัติศาสตร์สามก๊กทั่วไป ไม่ได้มาจากภาพต้นฉบับ กรุณาตรวจสอบกับสังกัดจริงในเกมของท่านอีกครั้ง</div>
+  </section>
+
+  <!-- ===== COUNTERS ===== -->
+  <section id="tab-counters" class="tab-page">
+    <h2>ตาราง Counter Matchup</h2>
+    <p class="cat-desc">สรุปว่าแต่ละสถานะควรใช้เพื่อรับมือกับสถานการณ์หรือทีมศัตรูแบบใด</p>
+    <table class="counter-table">
+      <thead>
+        <tr><th>สถานะ (ผู้ใช้)</th><th>เคาน์เตอร์ / ใช้เมื่อไหร่</th><th>ขุนพลแนะนำ</th><th>หมายเหตุ</th></tr>
+      </thead>
+      <tbody>
+        <tr><td data-label="สถานะ">เสน่หา (Charm)</td><td data-label="เคาน์เตอร์">ทีมที่มีขุนพลชายสายดาเมจ เช่น Lü Bu, Guan Yu, Zhou Yu</td><td data-label="ขุนพลแนะนำ">Diao Chan</td><td data-label="หมายเหตุ">ลดดาเมจออกของขุนพลชายทุกประเภท</td></tr>
+        <tr><td data-label="สถานะ">อ่อนแรง (Enfeeble)</td><td data-label="เคาน์เตอร์">ทีมที่พึ่งโจมตีธรรมดา เช่น Ma Chao, Zhao Yun</td><td data-label="ขุนพลแนะนำ">Dian Wei</td><td data-label="หมายเหตุ">ลดดาเมจโจมตีธรรมดาของศัตรู</td></tr>
+        <tr><td data-label="สถานะ">อดอยาก (Starvation)</td><td data-label="เคาน์เตอร์">ทีมที่พึ่งการฮีล/สายโล่ Self-heal</td><td data-label="ขุนพลแนะนำ">Sun Jian</td><td data-label="หมายเหตุ">ลดประสิทธิภาพฮีลของศัตรู</td></tr>
+        <tr><td data-label="สถานะ">สวนกลับ (Counterattack)</td><td data-label="เคาน์เตอร์">ทีม Pursue และทีม Archer</td><td data-label="ขุนพลแนะนำ">Gan Ning, Zhang Jiao, Zhang Yan, Yue Jin</td><td data-label="หมายเหตุ">โต้กลับดาเมจพร้อมเพิ่ม DEF ตัวเอง</td></tr>
+        <tr><td data-label="สถานะ">ติดหล่ม (Mired)</td><td data-label="เคาน์เตอร์">ทัพม้าที่เน้นความเร็ว หรือศัตรูที่กำลังหนี</td><td data-label="ขุนพลแนะนำ">Gongsun Zan, Huang Gai, Ma Yunlu, Gan Ning, Sun Jian, Xu Huang</td><td data-label="หมายเหตุ">ลด Movement SPD ของศัตรู</td></tr>
+        <tr><td data-label="สถานะ">อ่อนแอ (Weakness)</td><td data-label="เคาน์เตอร์">ศัตรูดาเมจสูงทั่วไป</td><td data-label="ขุนพลแนะนำ">Zhang Fei, Meng Huo</td><td data-label="หมายเหตุ">คอมโบกับ Guan Yu และ Liao Hua</td></tr>
+        <tr><td data-label="สถานะ">เปราะบาง (Vulnerability)</td><td data-label="เคาน์เตอร์">เป้าหมายสำคัญที่ต้องโฟกัสไฟ</td><td data-label="ขุนพลแนะนำ">Fa Zheng, Xun Yu, Guan Yu, Sun Quan, Yue Jin</td><td data-label="หมายเหตุ">คอมโบกับ Cheng Yu (ดาเมจหลายครั้ง)</td></tr>
+        <tr><td data-label="สถานะ">แตกทัพ (Rout)</td><td data-label="เคาน์เตอร์">ทัพศัตรูที่ทหารเหลือต่ำกว่า 10%</td><td data-label="ขุนพลแนะนำ">Lü Bu</td><td data-label="หมายเหตุ">ใช้เก็บกวาด/ไล่ล่าปิดเกม</td></tr>
+        <tr><td data-label="สถานะ">ยั่วยุ (Taunt)</td><td data-label="เคาน์เตอร์">ทัพม้าที่ตีโฉบ ปกป้องแนวหลัง</td><td data-label="ขุนพลแนะนำ">Zhang Jiao</td><td data-label="หมายเหตุ">ดึงเป้าความสนใจของศัตรู</td></tr>
+        <tr><td data-label="สถานะ">ขวัญเสีย (Spirit Break)</td><td data-label="เคาน์เตอร์">ศัตรูที่พึ่งดาเมจสกิลเป็นหลัก</td><td data-label="ขุนพลแนะนำ">Lü Bu</td><td data-label="หมายเหตุ">กด DPS สายสกิลของศัตรู</td></tr>
+        <tr><td data-label="สถานะ">เผาไหม้ (Burn)</td><td data-label="เคาน์เตอร์">ศึกกลุ่มขนาดใหญ่ / กดดันเป็นวงกว้าง</td><td data-label="ขุนพลแนะนำ">Lu Su, Zhou Yu</td><td data-label="หมายเหตุ">คอมโบกับ Xiao Qiao, Lü Meng</td></tr>
+        <tr><td data-label="สถานะ">แช่แข็ง (Frozen)</td><td data-label="เคาน์เตอร์">ควบคุมพื้นที่ / ทัพที่ปล่อยสกิลถี่</td><td data-label="ขุนพลแนะนำ">Guo Jia</td><td data-label="หมายเหตุ">ลด Movement SPD ของศัตรู</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ===== COMBOS ===== -->
+  <section id="tab-combos" class="tab-page">
+    <h2>คอมโบแนะนำ</h2>
+    <div class="combo-grid">
+
+      <div class="combo-card">
+        <h3>แนวหน้าทรหด</h3>
+        <div class="chip-row"><span class="chip">Zhang Liang</span><span class="chip">Zhang Yan</span></div>
+        <p>Zhang Liang เปิด Fortitude เพิ่ม DEF ให้ตัวเอง ขณะที่ Zhang Yan สร้างดาเมจสกิลเพิ่มขึ้นตราบใดที่ Fortitude ยังทำงานอยู่ เหมาะกับตั้งรับต้นเกมแล้วระเบิดดาเมจตอนสถานะพร้อม</p>
+      </div>
+
+      <div class="combo-card">
+        <h3>โล่เหล็กไม่มีวันแตก</h3>
+        <div class="chip-row"><span class="chip">Zhang Fei</span><span class="chip">Meng Huo</span><span class="chip">Zhang Bao</span><span class="chip">Wei Yan</span></div>
+        <p>ผสาน Unyielding เพื่อความอึด กับ Splash เพื่อดาเมจเป็นวงกว้าง และ Defection เพื่อฟื้นทหาร ทำให้แนวหน้ายืนระยะในศึกกลุ่มได้ยาวนาน</p>
+      </div>
+
+      <div class="combo-card">
+        <h3>สายกดสถานะต่อเนื่อง</h3>
+        <div class="chip-row"><span class="chip">Zhang Fei</span><span class="chip">Guan Yu</span><span class="chip">Liao Hua</span></div>
+        <p>Weakness จาก Zhang Fei เปิดทางให้ Guan Yu อัด Vulnerability เพิ่ม แล้ว Liao Hua ตามด้วยดาเมจโจมตีธรรมดาที่เพิ่มขึ้นใส่เป้าเดิม เป็นห่วงโซ่ดีบัฟที่ขยายผลกันเอง</p>
+      </div>
+
+      <div class="combo-card">
+        <h3>เพลิงไหม้กวาดกระดาน</h3>
+        <div class="chip-row"><span class="chip">Lu Su</span><span class="chip">Zhou Yu</span><span class="chip">Xiao Qiao</span><span class="chip">Lü Meng</span></div>
+        <p>Lu Su และ Zhou Yu ปูสถานะ Burn เป็นวงกว้าง ส่วน Xiao Qiao และ Lü Meng ตามด้วยดาเมจที่เพิ่มขึ้นใส่เป้าที่ติดไฟ เหมาะกับศึกกลุ่มขนาดใหญ่</p>
+      </div>
+
+      <div class="combo-card">
+        <h3>ไล่ล่าไม่หยุดหย่อน</h3>
+        <div class="chip-row"><span class="chip">Zhao Yun</span><span class="chip">Ma Chao</span><span class="chip">Ma Yunlu</span><span class="chip">Sun Jian</span></div>
+        <p>ขุนพลสาย Pursue กระตุ้นโจมตีธรรมดาซ้ำ ผสานกับ Sun Jian หรือ Ma Yunlu ที่เพิ่มดาเมจโจมตีธรรมดาโดยตรง ดันดาเมจเดี่ยวได้สูงสุดในทีมเดียว</p>
+      </div>
+
+      <div class="combo-card">
+        <h3>ผู้พิชิตปิดเกม</h3>
+        <div class="chip-row"><span class="chip">Lü Bu</span></div>
+        <p>Lü Bu ถือทั้ง Spirit Break (กดดาเมจสกิลศัตรู) และ Rout (จบทัพที่ทหารเหลือน้อย) ในตัวเดียว เหมาะเป็นตัวปิดเกมเมื่อฝ่ายตรงข้ามอ่อนกำลังลง</p>
+      </div>
+
+      <div class="combo-card">
+        <h3>กำแพงสวนกลับ</h3>
+        <div class="chip-row"><span class="chip">Gan Ning</span><span class="chip">Zhang Jiao</span><span class="chip">Zhang Yan</span><span class="chip">Yue Jin</span></div>
+        <p>ขุนพลที่ถืออาวุธเฉพาะ Counterattack รับมือทีม Archer และทีม Pursue ได้ตรงจุด เพราะยิ่งโดนตีถี่ยิ่งได้ทั้ง DEF และดาเมจตอบโต้เพิ่ม</p>
+      </div>
+
+      <div class="combo-card">
+        <h3>ยั่วศัตรู คุ้มกันหลังบ้าน</h3>
+        <div class="chip-row"><span class="chip">Zhang Jiao</span></div>
+        <p>Zhang Jiao ใช้ Taunt ดึงทัพม้าศัตรูที่ตีโฉบให้เข้ามาปะทะตัวเองแทน ช่วยคุ้มกันสาย Archer หรือดาเมจดีลเลอร์แนวหลังให้ปลอดภัย</p>
+      </div>
+
+    </div>
+
+    <h2>ตำแหน่งขุนพลที่ควรจัดเข้าทีม</h2>
+    <div class="role-grid">
+
+      <div class="role-card">
+        <h3>แนวหน้า/แทงค์</h3>
+        <p>รับดาเมจแทนทัพหลัง ควรมีสถานะ Unyielding หรือ Fortitude ติดตัว</p>
+        <div class="chip-row"><span class="chip">Zhang Fei</span><span class="chip">Meng Huo</span><span class="chip">Cheng Pu</span><span class="chip">Cao Pi</span><span class="chip">Zhang Liang</span></div>
+      </div>
+
+      <div class="role-card">
+        <h3>ดีบัฟ/คอนโทรล</h3>
+        <p>ลดพลังศัตรูหรือควบคุมสนามรบก่อนการปะทะหลัก</p>
+        <div class="chip-row"><span class="chip">Diao Chan</span><span class="chip">Dian Wei</span><span class="chip">Sun Jian</span><span class="chip">Guo Jia</span><span class="chip">Zhang Jiao</span></div>
+      </div>
+
+      <div class="role-card">
+        <h3>ดาเมจหลัก (DPS)</h3>
+        <p>สร้างดาเมจต่อเนื่องหรือดาเมจเดี่ยวสูงในการปะทะ</p>
+        <div class="chip-row"><span class="chip">Lü Bu</span><span class="chip">Zhao Yun</span><span class="chip">Ma Chao</span><span class="chip">Lu Su</span><span class="chip">Zhou Yu</span></div>
+      </div>
+
+      <div class="role-card">
+        <h3>ซัพพอร์ต/ฟื้นฟู</h3>
+        <p>รักษาจำนวนทหารให้ทัพอยู่รอดได้นานขึ้น</p>
+        <div class="chip-row"><span class="chip">Wei Yan</span><span class="chip">Ma Chao</span><span class="chip">Zhang Jiao</span></div>
+      </div>
+
+      <div class="role-card">
+        <h3>เบิร์สต์/โฟกัสไฟ</h3>
+        <p>เร่งกำจัดเป้าหมายสำคัญด้วย Vulnerability และดาเมจตรง</p>
+        <div class="chip-row"><span class="chip">Fa Zheng</span><span class="chip">Xun Yu</span><span class="chip">Guan Yu</span><span class="chip">Sun Quan</span><span class="chip">Yue Jin</span><span class="chip">Cheng Yu</span></div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  แปลและจัดหมวดหมู่จากภาพหน้าจอสกิล/สถานะที่ให้มาทั้งหมด 18 ภาพ (19 สถานะ/กลไก) &middot; การจัดสังกัดอ้างอิงวรรณกรรมสามก๊กทั่วไป &middot; ตัวเลขบางส่วนในภาพต้นฉบับอาจไม่ชัดเจนสมบูรณ์ ควรตรวจสอบค่าจริงในเกมอีกครั้งก่อนใช้วางแผนจริงจัง
+</footer>
+
+<script>
+  // main tab switching
+  const tabButtons = document.querySelectorAll('.tabs button');
+  const tabPages = document.querySelectorAll('.tab-page');
+  tabButtons.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      tabButtons.forEach(b=>b.classList.remove('active'));
+      tabPages.forEach(p=>p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  });
+
+  // generic pager
+  function initPager(rootId, pageClass, prevId, nextId, dotsId, labelId){
+    const root = document.getElementById(rootId);
+    const pages = Array.from(root.querySelectorAll('.'+pageClass));
+    let idx = 0;
+    const dotsWrap = document.getElementById(dotsId);
+    pages.forEach((p,i)=>{
+      const dot=document.createElement('button');
+      dot.className='dot';
+      dot.addEventListener('click',()=>{idx=i; render();});
+      dotsWrap.appendChild(dot);
+    });
+    function render(){
+      pages.forEach((p,i)=>p.classList.toggle('active', i===idx));
+      Array.from(dotsWrap.children).forEach((d,i)=>d.classList.toggle('active', i===idx));
+      document.getElementById(labelId).textContent = (idx+1)+' / '+pages.length;
+    }
+    document.getElementById(prevId).addEventListener('click',()=>{ idx=(idx-1+pages.length)%pages.length; render();});
+    document.getElementById(nextId).addEventListener('click',()=>{ idx=(idx+1)%pages.length; render();});
+    render();
+  }
+  initPager('tab-categories','cat-page','catPrev','catNext','catDots','catLabel');
+  initPager('tab-factions','faction-page','facPrev','facNext','facDots','facLabel');
+</script>
+
+</body>
+</html>
