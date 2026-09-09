@@ -10,16 +10,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#1B1712;
-    --panel:#241F18;
-    --panel-2:#2C2519;
-    --border:#43392A;
-    --border-bright:#8A6D2F;
-    --gold:#CBA135;
-    --gold-soft:#E4C766;
+    --bg:#26211B;
+    --panel:#2E281F;
+    --panel-2:#372F24;
+    --border:#5A4C3B;
+    --border-bright:#8E7545;
+    --gold:#B88F45;
+    --gold-soft:#D4BB7D;
     --seal:#8B3A2E;
-    --text:#EDE6D6;
-    --text-muted:#A79C89;
+    --text:#E4DED2;
+    --text-muted:#B9B0A2;
     --wei:#4A7FB5;
     --shu:#4F9A5D;
     --wu:#C1443B;
@@ -33,6 +33,29 @@
     --radius:5px;
     --maxw:1080px;
   }
+  [data-theme="dim"]{
+    --bg:#302A22;
+    --panel:#3A3329;
+    --panel-2:#453B2F;
+    --border:#665844;
+    --border-bright:#9A8150;
+    --gold:#B89553;
+    --gold-soft:#D5BE87;
+    --text:#E7E0D4;
+    --text-muted:#C2B8A8;
+  }
+  [data-theme="light"]{
+    --bg:#F3EEE4;
+    --panel:#E9E0D2;
+    --panel-2:#DED2C1;
+    --border:#C8B99F;
+    --border-bright:#9C7A3F;
+    --gold:#876322;
+    --gold-soft:#76551D;
+    --text:#30291F;
+    --text-muted:#665B4E;
+    --seal:#8B3A2E;
+  }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{
@@ -41,7 +64,7 @@
     color:var(--text);
     font-family:'Sarabun',Tahoma,sans-serif;
     font-size:16px;
-    line-height:1.65;
+    line-height:1.76;
     -webkit-font-smoothing:antialiased;
   }
   h1,h2,h3,.brand-title,.tabs button{font-family:'Trirong',Tahoma,serif;}
@@ -66,24 +89,27 @@
   .brand-title{font-size:clamp(19px,3.6vw,26px);color:var(--gold-soft);font-weight:600;line-height:1.2;}
   .brand-sub{color:var(--text-muted);font-size:13.5px;margin-top:2px;}
   nav.tabs{
-    display:flex;gap:4px;overflow-x:auto;padding-bottom:0;
+    display:flex;gap:4px;overflow-x:auto;overflow-y:hidden;padding-bottom:0;
+    touch-action:pan-x;overscroll-behavior-x:contain;scroll-snap-type:x proximity;
     -ms-overflow-style:none;scrollbar-width:none;
   }
   nav.tabs::-webkit-scrollbar{display:none;}
   nav.tabs button{
     flex:none;background:none;border:none;color:var(--text-muted);
     font-size:14.5px;padding:10px 14px 12px;cursor:pointer;
-    border-bottom:2px solid transparent;white-space:nowrap;
+    border-bottom:2px solid transparent;white-space:nowrap;scroll-snap-align:start;
   }
   nav.tabs button.active{color:var(--gold-soft);border-bottom-color:var(--gold);}
   nav.tabs button:hover{color:var(--text);}
-  .language-switcher{
+  .language-switcher,.theme-switcher{
     margin-left:auto;background:var(--panel-2);border:1px solid var(--border-bright);
     color:var(--gold-soft);border-radius:var(--radius);padding:6px 12px;cursor:pointer;
     font:600 12px 'Sarabun',sans-serif;letter-spacing:.04em;white-space:nowrap;
   }
-  .language-switcher option{background:var(--panel-2);color:var(--text);}
-  .language-switcher:hover{background:var(--panel);color:var(--text);}
+  .theme-switcher{margin-left:auto;appearance:none;min-width:64px;display:inline-flex;align-items:center;justify-content:center;gap:6px;}
+  .theme-icon{font-size:16px;line-height:1;}
+  .language-switcher{margin-left:10px;}
+  .language-switcher:hover,.theme-switcher:hover{background:var(--panel);color:var(--text);}
   .header-row{display:flex;align-items:center;gap:12px;}
 
   main{padding:22px 0 60px;}
@@ -95,10 +121,10 @@
   .hint{color:var(--text-muted);font-size:14px;}
 
   /* stat chips */
-  .stat-row{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 28px;}
+  .stat-row{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin:20px 0 28px;}
   .stat-chip{
     background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);
-    padding:10px 16px;min-width:110px;
+    padding:10px 14px;min-width:0;
   }
   .stat-chip strong{display:block;font-size:22px;color:var(--gold-soft);font-family:'Trirong',serif;}
   .stat-chip span{font-size:12.5px;color:var(--text-muted);}
@@ -126,19 +152,26 @@
   }
   .pager button.nav-btn:hover{background:var(--panel);}
   .pager-label{color:var(--text-muted);font-size:13.5px;min-width:64px;text-align:center;}
+  .faction-search,.category-search{display:flex;align-items:center;gap:10px;margin:0 0 18px;}
+  .faction-search label,.category-search label{color:var(--gold-soft);font-size:14px;white-space:nowrap;}
+  .faction-search input,.category-search input{flex:1;min-width:0;background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font:inherit;padding:9px 12px;}
+  .faction-search input::placeholder,.category-search input::placeholder{color:var(--text-muted);}
+  .faction-search input:focus,.category-search input:focus{outline:2px solid var(--border-bright);outline-offset:1px;}
+  .search-empty{display:none;color:var(--text-muted);border:1px dashed var(--border);padding:16px;border-radius:var(--radius);}
+  .search-empty.visible{display:block;}
   .dots{display:flex;gap:6px;}
   .dot{width:9px;height:9px;border-radius:50%;border:1px solid var(--border-bright);background:transparent;padding:0;cursor:pointer;}
   .dot.active{background:var(--gold);}
 
   .cat-page,.faction-page{display:none;}
-  .cat-page.active,.faction-page.active{display:block;animation:fadein .25s ease;}
+  .cat-page.active,.cat-page.search-visible,.faction-page.active,.faction-page.search-visible{display:block;animation:fadein .25s ease;}
   .cat-desc{color:var(--text-muted);margin-bottom:18px;}
 
   /* skill cards */
   .skill-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;}
   .skill-card{
     background:var(--panel-2);border:1px solid var(--border);border-left:3px solid var(--cat-color,var(--gold));
-    border-radius:var(--radius);padding:16px 18px;
+    border-radius:var(--radius);padding:16px 18px;min-width:0;
   }
   .skill-card__head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;}
   .skill-card__head h3 .en{color:var(--text-muted);font-weight:400;font-size:14px;}
@@ -147,7 +180,7 @@
     font-size:11.5px;padding:3px 9px;border-radius:20px;border:1px solid var(--border-bright);
     color:var(--gold-soft);background:rgba(203,161,53,.08);white-space:nowrap;
   }
-  .skill-card p{font-size:14.5px;}
+  .skill-card p{font-size:14.5px;margin:.65em 0;}
   .skill-card .lbl{color:var(--gold-soft);font-weight:600;}
   .chip-row{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;}
   .chip{
@@ -220,17 +253,33 @@
 
   /* combos & roles */
   .combo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;margin-bottom:34px;}
-  .combo-card{background:var(--panel-2);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;}
+  .combo-card{background:var(--panel-2);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;min-width:0;}
   .combo-card p{font-size:14.5px;}
   .role-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
-  .role-card{background:var(--panel-2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;}
+  .role-card{background:var(--panel-2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;min-width:0;}
   .role-card p{font-size:13.5px;color:var(--text-muted);margin:4px 0 8px;}
 
-  footer{border-top:1px solid var(--border);margin-top:20px;padding:20px 0 40px;color:var(--text-muted);font-size:13px;}
+  footer.wrap{border-top:1px solid var(--border);margin-top:28px;padding:28px 28px 52px;color:var(--text-muted);font-size:13px;}
+
+  @media(max-width:1000px){
+    .stat-row{grid-template-columns:repeat(3,minmax(0,1fr));}
+    .skill-grid,.combo-grid{grid-template-columns:repeat(auto-fit,minmax(250px,1fr));}
+    .officer-grid{grid-template-columns:repeat(auto-fit,minmax(170px,1fr));}
+  }
 
   @media(max-width:640px){
+    .stat-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:16px 0 24px;}
+    .stat-chip{padding:9px 12px;}
+    .stat-chip strong{font-size:20px;}
     .header-row{align-items:flex-start;}
-    .language-switcher{margin-top:4px;}
+    .brand{gap:10px;padding:10px 0 6px;}
+    .emblem{width:38px;height:38px;}
+    .brand-title{font-size:20px;}
+    .brand-sub{font-size:12px;line-height:1.4;}
+    .language-switcher,.theme-switcher{margin-top:4px;padding:6px 8px;}
+    nav.tabs button{font-size:14px;padding:8px 12px 10px;}
+    main{padding-top:18px;}
+    .faction-search,.category-search{align-items:stretch;flex-direction:column;gap:6px;}
     .skill-card__head{flex-direction:column;}
   }
 </style>
@@ -247,9 +296,10 @@
         <div class="brand-sub" data-th="คู่มืออ้างอิงฉบับสรุป สำหรับวางแผนจัดทัพและตัวเคาน์เตอร์" data-en="A concise reference for army planning and counters" data-zh="用于军队规划和克制搭配的简明参考指南">A concise reference for army planning and counters</div>
       </div>
     </div>
+    <button class="theme-switcher" id="themeToggle" type="button" aria-label="เปลี่ยนโหมดสี" title="เปลี่ยนโหมดสี"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">DARK</span></button>
     <select class="language-switcher" id="languageToggle" aria-label="Select language">
       <option value="en">ENG</option>
-      <option value="th">TH</option>
+      <option value="th" selected>TH</option>
       <option value="zh">中文</option>
     </select>
     </div>
@@ -320,6 +370,11 @@
       <div class="dots" id="catDots"></div>
       <div class="pager-label" id="catLabel">1 / 6</div>
     </div>
+    <div class="category-search">
+      <label for="categorySearchInput" data-th="ค้นหาสกิล/สถานะ" data-en="Search skills/status" data-zh="搜索技能/状态">ค้นหาสกิล/สถานะ</label>
+      <input id="categorySearchInput" type="search" placeholder="ค้นหาชื่อสกิลหรือสถานะ..." autocomplete="off">
+    </div>
+    <p class="search-empty" id="categorySearchEmpty" data-th="ไม่พบสกิลหรือสถานะที่ค้นหา" data-en="No matching skills or statuses found" data-zh="未找到匹配的技能或状态">ไม่พบสกิลหรือสถานะที่ค้นหา</p>
 
     <div class="cat-page cat-a">
       <p class="cat-desc" data-th="บัฟตั้งรับ (เสริมพลังตนเอง) — เพิ่ม DEF หรือโล่ให้ทัพของตัวเอง เหมาะกับแนวหน้าที่ต้องดูดดาเมจ" data-en="Defensive buffs (self-enhancement) — Increase DEF or grant shields to your army. Ideal for front-line units that absorb damage." data-zh="防御增益（强化自身）——提高防御或为己方部队提供护盾，适合承受伤害的前排部队。">Defensive buffs (self-enhancement) — Increase DEF or grant shields to your army. Ideal for front-line units that absorb damage.</p>
@@ -553,18 +608,23 @@
       <div class="dots" id="facDots"></div>
       <div class="pager-label" id="facLabel">1 / 4</div>
     </div>
+    <div class="faction-search">
+      <label for="factionSearchInput" data-th="ค้นหาตัวละคร" data-en="Search characters" data-zh="搜索角色">ค้นหาตัวละคร</label>
+      <input id="factionSearchInput" type="search" placeholder="ค้นหาชื่อไทย ชื่ออังกฤษ หรือสกิล..." autocomplete="off">
+    </div>
+    <p class="search-empty" id="factionSearchEmpty" data-th="ไม่พบตัวละครที่ค้นหา" data-en="No matching characters found" data-zh="未找到匹配的角色">ไม่พบตัวละครที่ค้นหา</p>
 
     <div class="faction-page">
       <div class="faction-banner fb-wei"><h3>วุ่ย (Wei)</h3><span class="count">8 ขุนพล</span></div>
       <div class="officer-grid">
         <button class="officer-card" data-officer="cao-cao"><img class="officer-card__image" src="images/characters/cao-cao.jpg" alt="โจโฉ"><span class="officer-card__body"><span class="officer-name">โจโฉ (Cao Cao)</span><span class="officer-skill">ซัพพอร์ตเพิ่มดาเมจ · พลม้า/พลโล่</span></span></button>
-        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Guo Jia</span><span class="officer-skill">Frozen</span></span></div>
-        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Dian Wei</span><span class="officer-skill">Enfeeble</span></span></div>
-        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Xu Huang</span><span class="officer-skill">Mired</span></span></div>
-        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Yue Jin</span><span class="officer-skill">Counterattack, Vulnerability</span></span></div>
-        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Cao Pi</span><span class="officer-skill">Unyielding</span></span></div>
-        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Xun Yu</span><span class="officer-skill">Vulnerability</span></span></div>
-        <div class="officer-card officer-card--static officer-card--synergy"><span class="officer-card__body"><span class="officer-name">Cheng Yu</span><span class="officer-skill">คอมโบ: Vulnerability</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name" data-name-id="guo-jia">กัวเจีย (Guo Jia)</span><span class="officer-skill">Frozen</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name" data-name-id="dian-wei">เตียนอุย (Dian Wei)</span><span class="officer-skill">Enfeeble</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name" data-name-id="xu-huang">ซิหลง (Xu Huang)</span><span class="officer-skill">Mired</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name" data-name-id="yue-jin">เลียวคับ (Yue Jin)</span><span class="officer-skill">Counterattack, Vulnerability</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name" data-name-id="cao-pi">โจผี (Cao Pi)</span><span class="officer-skill">Unyielding</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name" data-name-id="xun-yu">ซุนฮก (Xun Yu)</span><span class="officer-skill">Vulnerability</span></span></div>
+        <div class="officer-card officer-card--static officer-card--synergy"><span class="officer-card__body"><span class="officer-name" data-name-id="cheng-yu">เฉิงอวี้ (Cheng Yu)</span><span class="officer-skill">คอมโบ: Vulnerability</span></span></div>
       </div>
     </div>
 
@@ -577,11 +637,11 @@
         <button class="officer-card" data-officer="ma-chao"><img class="officer-card__image" src="images/characters/ma-chao.jpg" alt="ม้าเฉียว"><span class="officer-card__body"><span class="officer-name">ม้าเฉียว (Ma Chao)</span><span class="officer-skill">อเนกประสงค์ · พลม้า</span></span></button>
         <button class="officer-card" data-officer="guan-yu"><img class="officer-card__image" src="images/characters/guan-yu.jpg" alt="กวนอู"><span class="officer-card__body"><span class="officer-name">กวนอู (Guan Yu)</span><span class="officer-skill">กำลังสำคัญ · พลโล่</span></span></button>
         <button class="officer-card" data-officer="zhang-fei"><img class="officer-card__image" src="images/characters/zhang-fei.jpg" alt="เตียวหุย"><span class="officer-card__body"><span class="officer-name">เตียวหุย (Zhang Fei)</span><span class="officer-skill">แกนหลัก · พลโล่</span></span></button>
-        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Ma Yunlu</span><span class="officer-skill">Mired, Pursue</span></span></div>
-        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Guan Yinping</span><span class="officer-skill">Pursue</span></span></div>
-        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Wei Yan</span><span class="officer-skill">Defection</span></span></div>
-        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Fa Zheng</span><span class="officer-skill">Vulnerability</span></span></div>
-        <div class="officer-card officer-card--static officer-card--synergy"><span class="officer-card__body"><span class="officer-name">Liao Hua</span><span class="officer-skill">คอมโบ: Weakness</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name" data-name-id="ma-yunlu">ม้าอวิ๋นลู่ (Ma Yunlu)</span><span class="officer-skill">Mired, Pursue</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name" data-name-id="guan-yinping">กวนอิ๋นผิง (Guan Yinping)</span><span class="officer-skill">Pursue</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name" data-name-id="wei-yan">เว่ยเอี๋ยน (Wei Yan)</span><span class="officer-skill">Defection</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name" data-name-id="fa-zheng">ฝาเจิ้ง (Fa Zheng)</span><span class="officer-skill">Vulnerability</span></span></div>
+        <div class="officer-card officer-card--static officer-card--synergy"><span class="officer-card__body"><span class="officer-name" data-name-id="liao-hua">เลียวฮัว (Liao Hua)</span><span class="officer-skill">คอมโบ: Weakness</span></span></div>
       </div>
     </div>
 
@@ -589,14 +649,14 @@
       <div class="faction-banner fb-wu"><h3>ง่อ (Wu)</h3><span class="count">9 ขุนพล</span></div>
       <div class="officer-grid">
         <button class="officer-card" data-officer="sun-quan"><img class="officer-card__image" src="images/characters/sun-quan.jpg" alt="ซุนกวน"><span class="officer-card__body"><span class="officer-name">ซุนกวน (Sun Quan)</span><span class="officer-skill">ซัพพอร์ตชั้นยอด · พลธนู</span></span></button>
-        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Gan Ning</span><span class="officer-skill">Counterattack, Splash, Mired</span></span></div>
-        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Cheng Pu</span><span class="officer-skill">Unyielding</span></span></div>
-        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Huang Gai</span><span class="officer-skill">Mired</span></span></div>
-        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Sun Jian</span><span class="officer-skill">Mired, Starvation</span></span></div>
-        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Lu Su</span><span class="officer-skill">Burn</span></span></div>
-        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Zhou Yu</span><span class="officer-skill">Burn</span></span></div>
-        <div class="officer-card officer-card--static officer-card--synergy"><span class="officer-card__body"><span class="officer-name">Xiao Qiao</span><span class="officer-skill">คอมโบ: Burn</span></span></div>
-        <div class="officer-card officer-card--static officer-card--synergy"><span class="officer-card__body"><span class="officer-name">Lü Meng</span><span class="officer-skill">คอมโบ: Burn</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name" data-name-id="gan-ning">กันหนิง (Gan Ning)</span><span class="officer-skill">Counterattack, Splash, Mired</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name" data-name-id="cheng-pu">เฉิงผู่ (Cheng Pu)</span><span class="officer-skill">Unyielding</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name" data-name-id="huang-gai">หวงไก่ (Huang Gai)</span><span class="officer-skill">Mired</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name" data-name-id="sun-jian">ซุนเกี๋ยน (Sun Jian)</span><span class="officer-skill">Mired, Starvation</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name" data-name-id="lu-su">โลซก (Lu Su)</span><span class="officer-skill">Burn</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name" data-name-id="zhou-yu">จิวยี่ (Zhou Yu)</span><span class="officer-skill">Burn</span></span></div>
+        <div class="officer-card officer-card--static officer-card--synergy"><span class="officer-card__body"><span class="officer-name" data-name-id="xiao-qiao">เสียวเฉียว (Xiao Qiao)</span><span class="officer-skill">คอมโบ: Burn</span></span></div>
+        <div class="officer-card officer-card--static officer-card--synergy"><span class="officer-card__body"><span class="officer-name" data-name-id="lu-meng">ลิบอง (Lü Meng)</span><span class="officer-skill">คอมโบ: Burn</span></span></div>
       </div>
     </div>
 
@@ -605,12 +665,12 @@
       <div class="officer-grid">
         <button class="officer-card" data-officer="lu-bu"><img class="officer-card__image" src="images/characters/lu-bu.jpg" alt="ลิโป้"><span class="officer-card__body"><span class="officer-name">ลิโป้ (Lu Bu)</span><span class="officer-skill">แกนหลักดาเมจ · พลม้า</span></span></button>
         <button class="officer-card" data-officer="zhang-jiao"><img class="officer-card__image" src="images/characters/zhang-jiao.jpg" alt="เตียวก๊ก"><span class="officer-card__body"><span class="officer-name">เตียวก๊ก (Zhang Jiao)</span><span class="officer-skill">ขุนพลหลัก · พลโล่</span></span></button>
-        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Zhang Liang</span><span class="officer-skill">Fortitude</span></span></div>
-        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Diao Chan</span><span class="officer-skill">Charm</span></span></div>
-        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Zhang Yan</span><span class="officer-skill">Counterattack</span></span></div>
-        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Zhang Bao</span><span class="officer-skill">Splash</span></span></div>
-        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Gongsun Zan</span><span class="officer-skill">Mired</span></span></div>
-        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Meng Huo</span><span class="officer-skill">Unyielding, Weakness</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name" data-name-id="zhang-liang">เตียวเหลียง (Zhang Liang)</span><span class="officer-skill">Fortitude</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name" data-name-id="diao-chan">เตียวเสี้ยน (Diao Chan)</span><span class="officer-skill">Charm</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name" data-name-id="zhang-yan">เตียวเอี๋ยน (Zhang Yan)</span><span class="officer-skill">Counterattack</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name" data-name-id="zhang-bao">เตียวโป้ (Zhang Bao)</span><span class="officer-skill">Splash</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name" data-name-id="gongsun-zan">กองซุนจ้าน (Gongsun Zan)</span><span class="officer-skill">Mired</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name" data-name-id="meng-huo">เบ้งเฮ็ก (Meng Huo)</span><span class="officer-skill">Unyielding, Weakness</span></span></div>
       </div>
     </div>
 
@@ -756,9 +816,30 @@
 
 <script>
   const embeddedTranslations = {"8 ขุนพล":{"en":"8 generals","th":"8 ขุนพล","zh":"8位将军"},"9 ขุนพล":{"en":"9 generals","th":"9 ขุนพล","zh":"9名将军"},"Cheng Yu สร้างดาเมจแบบตีหลายครั้งใส่เป้าหมายที่ติด Vulnerability ได้":{"en":"Cheng Yu deals multi-hit damage to affected targets. Vulnerability","th":"Cheng Yu สร้างดาเมจแบบตีหลายครั้งใส่เป้าหมายที่ติด Vulnerability ได้","zh":"程宇对受影响的目标造成多重伤害。漏洞"},"Gan Ning / Cheng Pu สร้างดาเมจเพิ่มหรือได้ DEF เพิ่มเมื่อเจอเป้าหมายที่ติด Mired":{"en":"Gan Ning / Cheng Pu deals additional damage or gains additional DEF when encountering Mired targets.","th":"Gan Ning / Cheng Pu สร้างดาเมจเพิ่มหรือได้ DEF เพิ่มเมื่อเจอเป้าหมายที่ติด Mired","zh":"甘宁/程普遇到泥潭目标时造成额外伤害或获得额外防御力。"},"Guan Yu ได้เอฟเฟกต์ Vulnerability เพิ่มกับเป้าหมายที่ติด Weakness / Liao Hua สร้างดาเมจเพิ่มเมื่อโจมตีธรรมดาใส่เป้าหมายที่ติด Weakness":{"en":"Guan Yu gained the Vulnerability effect. Added to targets with Weakness / Liao Hua deals additional damage when attacking targets with Weakness with normal attacks.","th":"Guan Yu ได้เอฟเฟกต์ Vulnerability เพิ่มกับเป้าหมายที่ติด Weakness / Liao Hua สร้างดาเมจเพิ่มเมื่อโจมตีธรรมดาใส่เป้าหมายที่ติด Weakness","zh":"关羽获得了脆弱效果。添加到虚弱目标/廖化普通攻击攻击虚弱目标时造成额外伤害。"},"Lü Bu ถือทั้ง Spirit Break (กดดาเมจสกิลศัตรู) และ Rout (จบทัพที่ทหารเหลือน้อย) ในตัวเดียว เหมาะเป็นตัวปิดเกมเมื่อฝ่ายตรงข้ามอ่อนกำลังลง":{"en":"Lü Bu wields both Spirit Break (damage enemy skills) and Rout (finish an army with few soldiers left) in one, perfect for ending the game when the opponent is weakened.","th":"Lü Bu ถือทั้ง Spirit Break (กดดาเมจสกิลศัตรู) และ Rout (จบทัพที่ทหารเหลือน้อย) ในตัวเดียว เหมาะเป็นตัวปิดเกมเมื่อฝ่ายตรงข้ามอ่อนกำลังลง","zh":"吕布将“魂破”（伤害敌人的技能）和“溃败”（消灭军队所剩无几的士兵）合二为一，非常适合在对手被削弱时结束比赛。"},"Lu Su และ Zhou Yu ปูสถานะ Burn เป็นวงกว้าง ส่วน Xiao Qiao และ Lü Meng ตามด้วยดาเมจที่เพิ่มขึ้นใส่เป้าที่ติดไฟ เหมาะกับศึกกลุ่มขนาดใหญ่":{"en":"Lu Su and Zhou Yu applied Burn status in a wide area, while Xiao Qiao and Lü Meng followed up with increased damage to burned targets. Suitable for large group battles.","th":"Lu Su และ Zhou Yu ปูสถานะ Burn เป็นวงกว้าง ส่วน Xiao Qiao และ Lü Meng ตามด้วยดาเมจที่เพิ่มขึ้นใส่เป้าที่ติดไฟ เหมาะกับศึกกลุ่มขนาดใหญ่","zh":"鲁肃和周瑜大范围施放烧伤状态，小乔和吕蒙紧随其后，对烧伤目标造成伤害增加。适合大型团战。"},"Lu Su มีโอกาสทำให้เป้าหมายที่ติด Burn ได้ Vulnerability เพิ่ม / Xiao Qiao, Lü Meng สร้างดาเมจเพิ่มใส่เป้าหมายที่ติด Burn":{"en":"Lu Su has a chance to cause Burn targets to increase Vulnerability / Xiao Qiao, Lü Meng deal additional damage to Burn targets.","th":"Lu Su มีโอกาสทำให้เป้าหมายที่ติด Burn ได้ Vulnerability เพิ่ม / Xiao Qiao, Lü Meng สร้างดาเมจเพิ่มใส่เป้าหมายที่ติด Burn","zh":"鲁肃有一定几率使烧伤目标增加脆弱/小乔、吕蒙对烧伤目标造成额外伤害。"},"Mystic Formation Breaker (5 ดาว)":{"en":"Mystic Formation Breaker (5 stars)","th":"Mystic Formation Breaker (5 ดาว)","zh":"玄阵破者（5星）"},"Weakness จาก Zhang Fei เปิดทางให้ Guan Yu อัด Vulnerability เพิ่ม แล้ว Liao Hua ตามด้วยดาเมจโจมตีธรรมดาที่เพิ่มขึ้นใส่เป้าเดิม เป็นห่วงโซ่ดีบัฟที่ขยายผลกันเอง":{"en":"Zhang Fei\u0027s Weakness opens the way for Guan Yu to add Vulnerability, and Liao Hua follows up with increased normal attack damage to the original target. It\u0027s a chain of debuffs that amplifies each other\u0027s effects.","th":"Weakness จาก Zhang Fei เปิดทางให้ Guan Yu อัด Vulnerability เพิ่ม แล้ว Liao Hua ตามด้วยดาเมจโจมตีธรรมดาที่เพิ่มขึ้นใส่เป้าเดิม เป็นห่วงโซ่ดีบัฟที่ขยายผลกันเอง","zh":"张飞的弱点为关羽附加弱点打开了道路，廖化跟进增加了对原目标的普通攻击伤害。这是一连串的减益效果，可以放大彼此的效果。"},"Zhang Jiao ใช้ Taunt ดึงทัพม้าศัตรูที่ตีโฉบให้เข้ามาปะทะตัวเองแทน ช่วยคุ้มกันสาย Archer หรือดาเมจดีลเลอร์แนวหลังให้ปลอดภัย":{"en":"Zhang Jiao used his Taunt to pull the enemy horses and attack him. Help protect the Archer line or damage the backline dealers safely.","th":"Zhang Jiao ใช้ Taunt ดึงทัพม้าศัตรูที่ตีโฉบให้เข้ามาปะทะตัวเองแทน ช่วยคุ้มกันสาย Archer หรือดาเมจดีลเลอร์แนวหลังให้ปลอดภัย","zh":"张角用嘲讽拉住敌军马匹攻击。帮助保护弓箭手线或安全地伤害后线经销商。"},"Zhang Liang เปิด Fortitude เพิ่ม DEF ให้ตัวเอง ขณะที่ Zhang Yan สร้างดาเมจสกิลเพิ่มขึ้นตราบใดที่ Fortitude ยังทำงานอยู่ เหมาะกับตั้งรับต้นเกมแล้วระเบิดดาเมจตอนสถานะพร้อม":{"en":"Zhang Liang opens Fortitude to increase his own DEF, while Zhang Yan deals additional skill damage as long as Fortitude is active, suitable for defending early in the game and then exploding damage when ready.","th":"Zhang Liang เปิด Fortitude เพิ่ม DEF ให้ตัวเอง ขณะที่ Zhang Yan สร้างดาเมจสกิลเพิ่มขึ้นตราบใดที่ Fortitude ยังทำงานอยู่ เหมาะกับตั้งรับต้นเกมแล้วระเบิดดาเมจตอนสถานะพร้อม","zh":"张良开坚韧可以增加自身防御，而张炎只要坚韧开启就会造成额外的技能伤害，适合前期防守，准备好爆发伤害。"},"Zhang Yan สร้างดาเมจสกิล active เพิ่มขึ้นขณะมีสถานะ Fortitude":{"en":"Zhang Yan deals increased damage to his active skills while in Fortitude.","th":"Zhang Yan สร้างดาเมจสกิล active เพิ่มขึ้นขณะมีสถานะ Fortitude","zh":"张岩在坚韧状态下对其主动技能造成的伤害增加。"},"เคาน์เตอร์ทีมที่พึ่งโจมตีธรรมดาเป็นหลัก เช่น Ma Chao, Zhao Yun":{"en":"Counter teams that rely mainly on normal attacks, such as Ma Chao, Zhao Yun.","th":"เคาน์เตอร์ทีมที่พึ่งโจมตีธรรมดาเป็นหลัก เช่น Ma Chao, Zhao Yun","zh":"主要依靠普通攻击的反击队伍，比如马超、赵云。"},"เจ้าครองแคว้น":{"en":"ruler of the region","th":"เจ้าครองแคว้น","zh":"该地区的统治者"},"เบิร์สต์/โฟกัสไฟ":{"en":"Burst/Focus Fire","th":"เบิร์สต์/โฟกัสไฟ","zh":"连发/集中火力"},"เปราะบาง":{"en":"Fragile","th":"เปราะบาง","zh":"脆弱的"},"เปราะบาง (Vulnerability)":{"en":"Vulnerability","th":"เปราะบาง (Vulnerability)","zh":"漏洞"},"เป้าหมายเดี่ยว":{"en":"Single goal","th":"เป้าหมายเดี่ยว","zh":"单球"},"เป้าหมายสำคัญที่ต้องโฟกัสไฟ":{"en":"Important goals that need to be focused","th":"เป้าหมายสำคัญที่ต้องโฟกัสไฟ","zh":"需要重点关注的重要目标"},"เป้าหมายหลักรับดาเมจเต็ม ทัพอื่นรับ 50% มีโอกาส 50% ทำให้เป้าหมายหลักติด Weakness ลดดาเมจที่สร้างได้ทั้งหมด 2.2% → 4.4% นาน 3 วิ":{"en":"The main target receives full damage. Other troops receive 50%. There is a 50% chance of causing the main target to become Weakness, reducing all damage dealt by 2.2% → 4.4% for 3 seconds.","th":"เป้าหมายหลักรับดาเมจเต็ม ทัพอื่นรับ 50% มีโอกาส 50% ทำให้เป้าหมายหลักติด Weakness ลดดาเมจที่สร้างได้ทั้งหมด 2.2% → 4.4% นาน 3 วิ","zh":"主要目标受到全部伤害。其他部队获得50%。有50%概率使主要目标陷入虚弱状态，减少所有伤害2.2%→4.4%，持续3秒。"},"เปิดโอกาสกำจัดทัพศัตรูที่อ่อนแรงได้ทันที ใช้เก็บกวาดหรือไล่ล่าศัตรูที่กำลังหนีได้อย่างมีประสิทธิภาพ":{"en":"Provides an opportunity to immediately defeat the weakened enemy army. Effectively used to sweep up or chase down fleeing enemies.","th":"เปิดโอกาสกำจัดทัพศัตรูที่อ่อนแรงได้ทันที ใช้เก็บกวาดหรือไล่ล่าศัตรูที่กำลังหนีได้อย่างมีประสิทธิภาพ","zh":"提供了立即击败被削弱的敌军的机会。有效地用于扫荡或追捕逃跑的敌人。"},"เผาไหม้":{"en":"burn","th":"เผาไหม้","zh":"烧伤"},"เผาไหม้ (Burn)":{"en":"Burn","th":"เผาไหม้ (Burn)","zh":"烧伤"},"เพลิงไหม้กวาดกระดาน":{"en":"Fire sweeps the board","th":"เพลิงไหม้กวาดกระดาน","zh":"火势席卷整个棋盘"},"เพิ่ม DEF 12.5% → 25% (อิงจาก STR) เมื่อทหารศัตรูเหลือต่ำกว่า 10% โจมตีธรรมดามีโอกาส 10% บังคับให้ทัพศัตรูเข้าสถานะ Rout":{"en":"Increase DEF 12.5% ​​→ 25% (based on STR) When enemy troops are below 10%, normal attacks have a 10% chance to force enemy troops into Rout status.","th":"เพิ่ม DEF 12.5% → 25% (อิงจาก STR) เมื่อทหารศัตรูเหลือต่ำกว่า 10% โจมตีธรรมดามีโอกาส 10% บังคับให้ทัพศัตรูเข้าสถานะ Rout","zh":"防御力提升12.5%→25%（基于力量）当敌军兵力低于10%时，普通攻击有10%概率使敌军溃败。"},"เพิ่ม DEF 4.55% → 9.1% (อิงจาก STR) โจมตีธรรมดามีดาเมจกระจายสูงสุด 2600 ถึงศัตรูในระยะ 5 หลา (ตัวคูณ 0.16 → 0.32 อิงจาก STR)":{"en":"Increases DEF 4.55% → 9.1% (based on STR). Normal attacks have a maximum splash damage of 2600 to enemies within 5 yards (multiplier 0.16 → 0.32 based on STR).","th":"เพิ่ม DEF 4.55% → 9.1% (อิงจาก STR) โจมตีธรรมดามีดาเมจกระจายสูงสุด 2600 ถึงศัตรูในระยะ 5 หลา (ตัวคูณ 0.16 → 0.32 อิงจาก STR)","zh":"防御力增加 4.55% → 9.1%（基于 STR）。普通攻击对 5 码内的敌人最大溅射伤害为 2600（根据 STR 乘数 0.16 → 0.32）。"},"เพิ่ม DEF และ DPS โดยรวมของทัพอย่างมาก เข้ากันดีกับขุนพลสายสกิล ใช้ได้ผลดีทั้งช่วงบุกเบิกและศึกกลุ่ม":{"en":"Greatly increases your army\u0027s DEF and overall DPS. Goes well with skilled generals. Effective in both pioneering and group battles.","th":"เพิ่ม DEF และ DPS โดยรวมของทัพอย่างมาก เข้ากันดีกับขุนพลสายสกิล ใช้ได้ผลดีทั้งช่วงบุกเบิกและศึกกลุ่ม","zh":"大大提高你的军队的防御力和整体 DPS。与熟练的将军很相配。无论是先锋还是团战都有效。"},"เพิ่มดาเมจโจมตีธรรมดาของทุกคนในทัพ 7% → 13% (อิงจาก CMD) หลังโจมตีธรรมดาสำเร็จ มีโอกาส 40% ทำให้ทัพเป้าหมายติด Starvation ลดประสิทธิภาพฮีล 5% → 10% นาน 1 วิ":{"en":"Increases normal attack damage of everyone in the army by 7% → 13% (based on CMD). After a successful normal attack, there is a 40% chance of inflicting Starvation on the target army, reducing healing efficiency by 5% → 10% for 1 second.","th":"เพิ่มดาเมจโจมตีธรรมดาของทุกคนในทัพ 7% → 13% (อิงจาก CMD) หลังโจมตีธรรมดาสำเร็จ มีโอกาส 40% ทำให้ทัพเป้าหมายติด Starvation ลดประสิทธิภาพฮีล 5% → 10% นาน 1 วิ","zh":"军队全体普通攻击力增加7%→13%（基于CMD）。普通攻击成功后，有40%概率使目标部队陷入饥饿状态，治疗效果降低5%→10%，持续1秒。"},"เพิ่มตัวคูณดาเมจสกิล active 12 → 24 หลังโจมตีธรรมดาสำเร็จ หากคุมทัพระยะประชิด มีโอกาส 2% → 4% ทำให้ศัตรูสูงสุด 3000 ในระยะ 5 หลาติด Taunt นาน 5 วิ (มีผลเฉพาะทัพผู้เล่นและด่านทรัพยากร)":{"en":"Increases active skill damage multiplier from 12 → 24 after a successful normal attack. If controlling an army in melee, there is a 2% → 4% chance to cause up to 3000 enemies within 5 yards to be taunted for 5 seconds (only affects the player\u0027s army and resource stages).","th":"เพิ่มตัวคูณดาเมจสกิล active 12 → 24 หลังโจมตีธรรมดาสำเร็จ หากคุมทัพระยะประชิด มีโอกาส 2% → 4% ทำให้ศัตรูสูงสุด 3000 ในระยะ 5 หลาติด Taunt นาน 5 วิ (มีผลเฉพาะทัพผู้เล่นและด่านทรัพยากร)","zh":"普通攻击成功后，主动技能伤害倍数从 12 → 24 增加。如果控制军队进行近战，有2%→4%的几率使5码内最多3000名敌人被嘲讽5秒（仅影响玩家的军队和资源阶段）。"},"เพิ่มตัวคูณดาเมจสกิล active 18 → 36 (อิงจาก STR) หลังโจมตีธรรมดาสำเร็จ มีโอกาส 10% → 20% ทำให้ขุนพลสุ่มในทัพเป้าหมายติด Enfeeble ลดดาเมจโจมตีธรรมดา 10% นาน 1 วิ":{"en":"Increases active skill damage multiplier 18 → 36 (based on STR). After a successful normal attack, there is a 10% → 20% chance to cause random generals in the target army to be Enfeeble, reducing normal attack damage by 10% for 1 second.","th":"เพิ่มตัวคูณดาเมจสกิล active 18 → 36 (อิงจาก STR) หลังโจมตีธรรมดาสำเร็จ มีโอกาส 10% → 20% ทำให้ขุนพลสุ่มในทัพเป้าหมายติด Enfeeble ลดดาเมจโจมตีธรรมดา 10% นาน 1 วิ","zh":"主动技能伤害倍数增加18→36（基于STR）。普通攻击成功后，有10%→20%的概率使目标部队随机将领衰弱，普通攻击伤害降低10%，持续1秒。"},"เพิ่มประสิทธิภาพการโฟกัสยิงและการเสริมกันของสกิล เหมาะกับทัพสายเบิร์สต์ ช่วยจบเป้าหมายสำคัญได้เร็วขึ้น":{"en":"Increases the efficiency of shooting focus and skill synergy. Suitable for Burst troops. Help finish important goals faster.","th":"เพิ่มประสิทธิภาพการโฟกัสยิงและการเสริมกันของสกิล เหมาะกับทัพสายเบิร์สต์ ช่วยจบเป้าหมายสำคัญได้เร็วขึ้น","zh":"提高射击对焦和技能协同效率。适合爆发部队。帮助更快地完成重要目标。"},"เมื่อเข้าสู่การรบ เข้าสถานะ Yellow Heaven ได้โล่ดูดดาเมจ (ตัวคูณ 40 → 80) นาน 9 วิ คูลดาวน์ 9 วิ":{"en":"When entering battle, enter Yellow Heaven status and gain a damage absorbing shield (multiplier 40 → 80) for 9 seconds, cooldown 9 seconds.","th":"เมื่อเข้าสู่การรบ เข้าสถานะ Yellow Heaven ได้โล่ดูดดาเมจ (ตัวคูณ 40 → 80) นาน 9 วิ คูลดาวน์ 9 วิ","zh":"进入战斗时，进入黄天状态，获得伤害吸收护盾（倍数40→80），持续9秒，冷却9秒。"},"เมื่อเข้าสู่การรบ ได้รับสถานะ Fortitude เพิ่ม DEF 50% (อิงจาก STR) นาน 20 วิ คูลดาวน์ 40 วิ และเพิ่มดาเมจโจมตีธรรมดา 82% (อิงจาก STR)":{"en":"When entering battle, gain Fortitude status, increasing DEF by 50% (based on STR) for 20 seconds, cooldown 40 seconds, and increasing normal attack damage by 82% (based on STR).","th":"เมื่อเข้าสู่การรบ ได้รับสถานะ Fortitude เพิ่ม DEF 50% (อิงจาก STR) นาน 20 วิ คูลดาวน์ 40 วิ และเพิ่มดาเมจโจมตีธรรมดา 82% (อิงจาก STR)","zh":"进入战斗时，获得坚韧状态，防御力增加50%（基于力量），持续20秒，冷却40秒，普通攻击伤害增加82%（基于力量）。"},"เมื่อโดนโจมตีธรรมดา เพิ่ม DEF 125% → 138% (อิงจาก INT) นาน 3 วิ พร้อมโอกาส 100% สร้างดาเมจตอบโต้ (ตัวคูณ 3 → 3.6 อิงจาก INT เกิดได้สูงสุด 15 ครั้ง/วิ)":{"en":"When hit by a normal attack, increase DEF by 125% → 138% (based on INT) for 3 seconds with a 100% chance to deal counter damage (multiplier 3 → 3.6 based on INT, can occur up to 15 times/sec).","th":"เมื่อโดนโจมตีธรรมดา เพิ่ม DEF 125% → 138% (อิงจาก INT) นาน 3 วิ พร้อมโอกาส 100% สร้างดาเมจตอบโต้ (ตัวคูณ 3 → 3.6 อิงจาก INT เกิดได้สูงสุด 15 ครั้ง/วิ)","zh":"受到普通攻击时，防御力增加125% → 138%（基于智力），持续3秒，并有100%几率造成反击伤害（根据智力乘数3 → 3.6，最多可发生15次/秒）。"},"เมื่อโดนโจมตีธรรมดา สะสม 1 stack เพิ่ม DEF 16% → 32% (อิงจาก STR) นาน 5 วิ":{"en":"When hit by a normal attack, accumulate 1 stack to increase DEF by 16% → 32% (based on STR) for 5 seconds.","th":"เมื่อโดนโจมตีธรรมดา สะสม 1 stack เพิ่ม DEF 16% → 32% (อิงจาก STR) นาน 5 วิ","zh":"受到普通攻击时，累积1层，防御力增加16%→32%（基于力量），持续5秒。"},"เมื่อโดนโจมตีธรรมดา สะสมสถานะ Overlord เพิ่ม DEF 13% → 26% (อิงจาก CMD) และดาเมจสกิลของทุกคนในทัพเพิ่ม 1.2% → 2.4% นาน 6 วิ (ไม่ซ้อน)":{"en":"When hit by a normal attack, accumulate Overlord status, increasing DEF by 13% → 26% (based on CMD) and skill damage of everyone in the army increases by 1.2% → 2.4% for 6 seconds (not stacked).","th":"เมื่อโดนโจมตีธรรมดา สะสมสถานะ Overlord เพิ่ม DEF 13% → 26% (อิงจาก CMD) และดาเมจสกิลของทุกคนในทัพเพิ่ม 1.2% → 2.4% นาน 6 วิ (ไม่ซ้อน)","zh":"受到普通攻击时，累积霸主状态，防御力增加13%→26%（基于CMD），全军技能伤害增加1.2%→2.4%，持续6秒（不叠加）。"},"เมื่อทหารศัตรูเหลือต่ำกว่าเกณฑ์ที่กำหนด โจมตีธรรมดามีโอกาสทำให้ทัพศัตรูแตกทันที":{"en":"When enemy soldiers are below the specified threshold Normal attacks have a chance to instantly destroy the enemy army.","th":"เมื่อทหารศัตรูเหลือต่ำกว่าเกณฑ์ที่กำหนด โจมตีธรรมดามีโอกาสทำให้ทัพศัตรูแตกทันที","zh":"当敌方士兵低于指定阈值时，普通攻击有一定几率瞬间消灭敌方军队。"},"เร่งกำจัดเป้าหมายสำคัญด้วย Vulnerability และดาเมจตรง":{"en":"Speed ​​up the elimination of important targets as well. Vulnerability and direct damage","th":"เร่งกำจัดเป้าหมายสำคัญด้วย Vulnerability และดาเมจตรง","zh":"也加快消灭重要目标的速度。脆弱性和直接损害"},"เสน่หา":{"en":"affection","th":"เสน่หา","zh":"感情"},"เสน่หา (Charm)":{"en":"Charm","th":"เสน่หา (Charm)","zh":"魅力"},"เสริมความมั่นคงแนวหน้าอย่างมาก เข้ากันดีกับ Unyielding โล่ และเอฟเฟกต์ฮีล ช่วยให้ทหารแนวหน้าดูดดาเมจได้ดีในศึกยืดเยื้อ":{"en":"Greatly enhances front line stability, pairs well with Unyielding, shield, and healing effects. Helps frontline soldiers absorb damage well in prolonged battles.","th":"เสริมความมั่นคงแนวหน้าอย่างมาก เข้ากันดีกับ Unyielding โล่ และเอฟเฟกต์ฮีล ช่วยให้ทหารแนวหน้าดูดดาเมจได้ดีในศึกยืดเยื้อ","zh":"大幅提升前线稳定性，与不屈、护盾、治疗效果完美搭配。帮助前线士兵在长时间战斗中很好地吸收伤害。"},"เอฟเฟกต์:":{"en":"Effect:","th":"เอฟเฟกต์:","zh":"影响："},"แช่แข็ง":{"en":"Frozen","th":"แช่แข็ง","zh":"冷冻"},"แช่แข็ง (Frozen)":{"en":"Frozen (Frozen)","th":"แช่แข็ง (Frozen)","zh":"冷冻（冷冻）"},"แตกทัพ":{"en":"be defeated in war","th":"แตกทัพ","zh":"战败"},"แตกทัพ (Rout)":{"en":"Rout (Rout)","th":"แตกทัพ (Rout)","zh":"溃败（溃败）"},"แนวหน้า/แทงค์":{"en":"Vanguard/Tank","th":"แนวหน้า/แทงค์","zh":"先锋/坦克"},"แนวหน้าทรหด":{"en":"The front line is tough.","th":"แนวหน้าทรหด","zh":"前线很艰难。"},"แปรพักตร์":{"en":"renege","th":"แปรพักตร์","zh":"食言"},"โจมตีธรรมดาสร้างดาเมจกระจายไปยังศัตรูหลายทัพในระยะ":{"en":"Normal attack deals damage to multiple enemy troops in range.","th":"โจมตีธรรมดาสร้างดาเมจกระจายไปยังศัตรูหลายทัพในระยะ","zh":"普通攻击对范围内的多个敌方部队造成伤害。"},"โต้กลับดาเมจพร้อมเพิ่ม DEF ตัวเอง":{"en":"Counter damage and increase your own DEF.","th":"โต้กลับดาเมจพร้อมเพิ่ม DEF ตัวเอง","zh":"反击伤害并增加自己的防御力。"},"โล่เหล็กไม่มีวันแตก":{"en":"The iron shield is unbreakable.","th":"โล่เหล็กไม่มีวันแตก","zh":"铁盾坚不可摧。"},"โล่นี้เข้ากันดีกับการฮีลตัวเองหรือสถานะ Fortitude เพิ่มการป้องกันและความอึดอย่างมาก ช่วยรับมือการจู่โจมจากหลายทัพศัตรู รักษาจำนวนทหารไว้ในจังหวะสำคัญ":{"en":"This shield pairs well with self-heal or Fortitude status, greatly increasing your defense and toughness. Help cope with attacks from many enemy forces. Maintain the number of troops at key moments.","th":"โล่นี้เข้ากันดีกับการฮีลตัวเองหรือสถานะ Fortitude เพิ่มการป้องกันและความอึดอย่างมาก ช่วยรับมือการจู่โจมจากหลายทัพศัตรู รักษาจำนวนทหารไว้ในจังหวะสำคัญ","zh":"该护盾与自我治疗或坚韧状态完美搭配，大大提高了你的防御力和韧性。帮助应对许多敌军的攻击。关键时刻保持兵力数量。"},"ใช้เก็บกวาด/ไล่ล่าปิดเกม":{"en":"Used to clean up/chase to end the game.","th":"ใช้เก็บกวาด/ไล่ล่าปิดเกม","zh":"用于清理/追​​逐以结束游戏。"},"ในศึกขนาดเล็กช่วยขยายดาเมจจากเอฟเฟกต์ผลต่างความเร็ว (เช่น ตำราสกิล Ma Chao) จำกัดความคล่องตัวของทัพม้าศัตรู และช่วยไล่ล่าศัตรูที่กำลังหนีได้ดีขึ้น":{"en":"In small battles, it helps amplify the damage from speed difference effects (such as Ma Chao\u0027s skill book), limiting the mobility of the enemy cavalry. And helps chase fleeing enemies better.","th":"ในศึกขนาดเล็กช่วยขยายดาเมจจากเอฟเฟกต์ผลต่างความเร็ว (เช่น ตำราสกิล Ma Chao) จำกัดความคล่องตัวของทัพม้าศัตรู และช่วยไล่ล่าศัตรูที่กำลังหนีได้ดีขึ้น","zh":"在小型战斗中，有助于放大速度差效果（如马超的技能书）的伤害，限制敌方骑兵的机动性。并帮助更好地追击逃跑的敌人。"},"ให้ความอึดกับทัพอย่างมาก ใช้ได้ดีทั้งช่วงบุกเบิกและศึกกลุ่ม ช่วยให้ทัพทนต่อคลื่นโจมตีหลายระลอกโดยรักษาจำนวนทหารไว้ได้":{"en":"Gives a lot of toughness to the troops. It works well in both pioneering and group battles. It helps the army withstand multiple attack waves while maintaining its number of troops.","th":"ให้ความอึดกับทัพอย่างมาก ใช้ได้ดีทั้งช่วงบุกเบิกและศึกกลุ่ม ช่วยให้ทัพทนต่อคลื่นโจมตีหลายระลอกโดยรักษาจำนวนทหารไว้ได้","zh":"给予部队很大的韧性。无论是开荒还是团战都有很好的效果。它帮助军队抵御多波攻击，同时保持兵力数量。"},"ให้ดาเมจต่อเนื่องเป็นวงกว้าง เข้ากันดีกับตัวเพิ่ม Vulnerability/ดาเมจ โดดเด่นในศึกขนาดใหญ่ที่สาย Archer สร้างแรงกดดันเป็นวงกว้างและเป็น DPS หลักช่วงปลายเกม":{"en":"Gives continuous damage in a wide area. Goes well with the additive. Vulnerability/damage Stands out in large battles, the Archer line creates pressure in a wide area and is the main DPS in the late game.","th":"ให้ดาเมจต่อเนื่องเป็นวงกว้าง เข้ากันดีกับตัวเพิ่ม Vulnerability/ดาเมจ โดดเด่นในศึกขนาดใหญ่ที่สาย Archer สร้างแรงกดดันเป็นวงกว้างและเป็น DPS หลักช่วงปลายเกม","zh":"在大范围内造成持续伤害。与添加剂配合良好。脆弱/伤害 在大型战斗中脱颖而出，弓箭手线在大范围内制造压力，是游戏后期的主要 DPS。"},"ให้สายโล่มีดาเมจเป็นวงกว้าง มีค่ามากในศึกกลุ่ม เมื่อผสมกับ Defection จะได้ทั้งบุกและรับอย่างสมดุล":{"en":"Give the shield damage in a wide area. Very valuable in group battles. When combined with Defection, it will have a balanced attack and defense.","th":"ให้สายโล่มีดาเมจเป็นวงกว้าง มีค่ามากในศึกกลุ่ม เมื่อผสมกับ Defection จะได้ทั้งบุกและรับอย่างสมดุล","zh":"在大范围内给予护盾伤害。在团战中非常有价值。与叛逃结合起来，就会有均衡的攻击和防御。"},"ได้ผลดีกับขุนพลชาย ช่วยลดดาเมจที่ออกจากพวกเขา เช่น ทีมที่มี Lü Bu, Guan Yu หรือ Zhou Yu":{"en":"It works well with male generals. It reduces the damage output from them, such as teams with Lü Bu, Guan Yu, or Zhou Yu.","th":"ได้ผลดีกับขุนพลชาย ช่วยลดดาเมจที่ออกจากพวกเขา เช่น ทีมที่มี Lü Bu, Guan Yu หรือ Zhou Yu","zh":"与男将军配合效果很好。它会减少他们的伤害输出，例如与吕布、关羽或周瑜一起组队。"},"ได้ผลมากกับทัพศัตรูที่พึ่งการฮีลตัวเองหรือเอฟเฟกต์ฮีล ลดความอึดและศักยภาพของสายโล่ได้อย่างมาก":{"en":"Very effective against enemy forces that rely on self-healing or healing effects. Significantly reduces the stamina and potential of the shield type.","th":"ได้ผลมากกับทัพศัตรูที่พึ่งการฮีลตัวเองหรือเอฟเฟกต์ฮีล ลดความอึดและศักยภาพของสายโล่ได้อย่างมาก","zh":"对依赖自我修复或治疗效果的敌军非常有效。大幅降低盾牌型的体力和潜力。"},"ไล่ล่าไม่หยุดหย่อน":{"en":"Chase incessantly","th":"ไล่ล่าไม่หยุดหย่อน","zh":"追逐不停"},"ไล่ล่าต่อเนื่อง":{"en":"Continuing the chase","th":"ไล่ล่าต่อเนื่อง","zh":"继续追逐"},"กด DPS สายสกิลของศัตรู":{"en":"Press the enemy\u0027s skill line DPS.","th":"กด DPS สายสกิลของศัตรู","zh":"压敌人的技能线DPS。"},"กลุ่มอื่น/ไม่สังกัด (Qun)":{"en":"Other groups/not affiliated with (Qun)","th":"กลุ่มอื่น/ไม่สังกัด (Qun)","zh":"其他团体/不隶属于（Qun）"},"การโจมตีเพิ่มนี้เข้ากันดีกับตัวเพิ่มดาเมจโจมตีธรรมดา (เช่น Sun Jian, Ma Yunlu) ดันดาเมจเดี่ยวได้สูงสุด ทีมสาย Pursue ล้างทหารศัตรูได้รวดเร็ว":{"en":"This additional attack pairs well with normal attack damage boosters (such as Sun Jian, Ma Yunlu), pushing maximum solo damage. Pursue-type teams can wipe out enemy soldiers quickly.","th":"การโจมตีเพิ่มนี้เข้ากันดีกับตัวเพิ่มดาเมจโจมตีธรรมดา (เช่น Sun Jian, Ma Yunlu) ดันดาเมจเดี่ยวได้สูงสุด ทีมสาย Pursue ล้างทหารศัตรูได้รวดเร็ว","zh":"这种额外的攻击与普通攻击伤害增强器（例如孙坚、马云禄）完美搭配，从而推动最大的单人伤害。追击型小队可以快速消灭敌方士兵。"},"การใช้งาน:":{"en":"Usage:","th":"การใช้งาน:","zh":"用法："},"กำแพงสวนกลับ":{"en":"counter wall","th":"กำแพงสวนกลับ","zh":"柜台墙"},"ขณะติดสถานะนี้ ขุนพลศัตรูสร้างดาเมจทุกประเภทลดลง":{"en":"While in this state Enemy generals deal reduced damage of all types.","th":"ขณะติดสถานะนี้ ขุนพลศัตรูสร้างดาเมจทุกประเภทลดลง","zh":"在此状态下，敌方将军造成的所有类型伤害都会减少。"},"ขณะติดสถานะนี้ ทหารจะได้รับค่าป้องกัน (DEF) เพิ่มขึ้น โดยมีคูลดาวน์":{"en":"While in this state Soldiers gain increased Defense (DEF) with a cooldown.","th":"ขณะติดสถานะนี้ ทหารจะได้รับค่าป้องกัน (DEF) เพิ่มขึ้น โดยมีคูลดาวน์","zh":"在此状态下，士兵在冷却时间内获得更高的防御力 (DEF)。"},"ขณะติดสถานะนี้ ทหารจะได้รับค่าป้องกันเพิ่มขึ้น":{"en":"While in this state Soldiers will receive increased protection costs.","th":"ขณะติดสถานะนี้ ทหารจะได้รับค่าป้องกันเพิ่มขึ้น","zh":"在这种状态下，士兵将获得更高的保护费用。"},"ขวัญเสีย":{"en":"Demoralized","th":"ขวัญเสีย","zh":"士气低落"},"ขวัญเสีย (Spirit Break)":{"en":"Spirit Break","th":"ขวัญเสีย (Spirit Break)","zh":"精神分裂"},"ขุนพลตัวแทน (อาวุธเฉพาะ):":{"en":"Representative generals (unique weapons):","th":"ขุนพลตัวแทน (อาวุธเฉพาะ):","zh":"代表将领（独特武器）："},"ขุนพลตัวแทน:":{"en":"Representative General:","th":"ขุนพลตัวแทน:","zh":"总代表："},"ขุนพลที่ถืออาวุธเฉพาะ Counterattack รับมือทีม Archer และทีม Pursue ได้ตรงจุด เพราะยิ่งโดนตีถี่ยิ่งได้ทั้ง DEF และดาเมจตอบโต้เพิ่ม":{"en":"Generals who wield specific weapons Counterattack can deal with the Archer team and the Pursue team directly because the more frequently they are hit, the more both DEF and counter damage will be increased.","th":"ขุนพลที่ถืออาวุธเฉพาะ Counterattack รับมือทีม Archer และทีม Pursue ได้ตรงจุด เพราะยิ่งโดนตีถี่ยิ่งได้ทั้ง DEF และดาเมจตอบโต้เพิ่ม","zh":"持有特定武器反击的武将可以直接对付弓箭手队和追击队，因为被击中的次数越多，防御力和反击伤害都会增加。"},"ขุนพลศัตรูสร้างเอฟเฟกต์ฮีลลดลง":{"en":"Enemy generals\u0027 healing effects are reduced.","th":"ขุนพลศัตรูสร้างเอฟเฟกต์ฮีลลดลง","zh":"敌方将领的治疗效果降低。"},"ขุนพลศัตรูสร้างดาเมจโจมตีธรรมดาลดลง":{"en":"Enemy generals deal reduced normal attack damage.","th":"ขุนพลศัตรูสร้างดาเมจโจมตีธรรมดาลดลง","zh":"敌方将军造成的普通攻击伤害减少。"},"ขุนพลศัตรูสร้างดาเมจสกิลลดลง":{"en":"Enemy generals deal reduced skill damage.","th":"ขุนพลศัตรูสร้างดาเมจสกิลลดลง","zh":"敌方将军造成的技能伤害减少。"},"ขุนพลสาย Pursue กระตุ้นโจมตีธรรมดาซ้ำ ผสานกับ Sun Jian หรือ Ma Yunlu ที่เพิ่มดาเมจโจมตีธรรมดาโดยตรง ดันดาเมจเดี่ยวได้สูงสุดในทีมเดียว":{"en":"Pursue generals trigger repeated normal attacks, combining with Sun Jian or Ma Yunlu to directly increase normal attack damage. Push maximum solo damage in one team.","th":"ขุนพลสาย Pursue กระตุ้นโจมตีธรรมดาซ้ำ ผสานกับ Sun Jian หรือ Ma Yunlu ที่เพิ่มดาเมจโจมตีธรรมดาโดยตรง ดันดาเมจเดี่ยวได้สูงสุดในทีมเดียว","zh":"追击武将触发重复普通攻击，与孙坚或马云禄配合直接增加普通攻击伤害。在一支队伍中推动最大的单人伤害。"},"ควบคุมพื้นที่ / ทัพที่ปล่อยสกิลถี่":{"en":"Control the area / army that releases skills frequently.","th":"ควบคุมพื้นที่ / ทัพที่ปล่อยสกิลถี่","zh":"控制频繁释放技能的区域/军队。"},"ควบคุมพื้นที่ด้วยการลดความเร็วเคลื่อนที่ เหมาะกับขุนพลที่ปล่อยสกิลถี่ ให้ดาเมจเดี่ยวสูงและใช้งานได้จริงในการต่อสู้":{"en":"Control area by slowing your movement speed. Suitable for generals who release skills frequently. It provides high single damage and is really usable in battle.","th":"ควบคุมพื้นที่ด้วยการลดความเร็วเคลื่อนที่ เหมาะกับขุนพลที่ปล่อยสกิลถี่ ให้ดาเมจเดี่ยวสูงและใช้งานได้จริงในการต่อสู้","zh":"通过减慢移动速度来控制区域。适合频繁释放技能的武将。它的单体伤害很高，在战斗中非常有用。"},"คอมโบ:":{"en":"Combo:","th":"คอมโบ:","zh":"组合："},"คอมโบ: Burn":{"en":"Combo: Burn","th":"คอมโบ: Burn","zh":"组合：燃烧"},"คอมโบ: Vulnerability":{"en":"Combo: Vulnerability","th":"คอมโบ: Vulnerability","zh":"组合：漏洞"},"คอมโบ: Weakness":{"en":"Combo: Weakness","th":"คอมโบ: Weakness","zh":"组合：弱点"},"คอมโบกับ Cheng Yu (ดาเมจหลายครั้ง)":{"en":"Combo with Cheng Yu (multiple damage)","th":"คอมโบกับ Cheng Yu (ดาเมจหลายครั้ง)","zh":"与成宇连击（多重伤害）"},"คอมโบกับ Guan Yu และ Liao Hua":{"en":"Combo with Guan Yu and Liao Hua","th":"คอมโบกับ Guan Yu และ Liao Hua","zh":"与关羽、廖化的组合"},"คอมโบกับ Xiao Qiao, Lü Meng":{"en":"Combo with Xiao Qiao, Lü Meng","th":"คอมโบกับ Xiao Qiao, Lü Meng","zh":"与小乔、吕蒙的组合"},"ง่อ (Wu)":{"en":"Wu (Wu)","th":"ง่อ (Wu)","zh":"吴（吴）"},"จ๊ก (Shu)":{"en":"Jok (Shu)","th":"จ๊ก (Shu)","zh":"乔克（舒）"},"ซัพพอร์ต/ฟื้นฟู":{"en":"Support/Recovery","th":"ซัพพอร์ต/ฟื้นฟู","zh":"支持/恢复"},"ดาเมจกระจาย":{"en":"Spread damage","th":"ดาเมจกระจาย","zh":"传播伤害"},"ดาเมจหลัก (DPS)":{"en":"Main damage (DPS)","th":"ดาเมจหลัก (DPS)","zh":"主要伤害（DPS）"},"ดีบัฟ/คอนโทรล":{"en":"Debuff/Control","th":"ดีบัฟ/คอนโทรล","zh":"减益/控制"},"ดึงเป้าความสนใจของศัตรู":{"en":"Capture the enemy\u0027s attention","th":"ดึงเป้าความสนใจของศัตรู","zh":"吸引敌人的注意力"},"ดึงเป้าความสนใจของศัตรู สร้างความปลอดภัยให้ทัพแนวหลัง ช่วยรับมือการตีโฉบของทัพม้าและปกป้องสาย Archer ที่เปราะบาง":{"en":"Capture the enemy\u0027s attention Create safety for the troops in the rear. Helps counter the cavalry\u0027s swoop attacks and protects the fragile Archer line.","th":"ดึงเป้าความสนใจของศัตรู สร้างความปลอดภัยให้ทัพแนวหลัง ช่วยรับมือการตีโฉบของทัพม้าและปกป้องสาย Archer ที่เปราะบาง","zh":"吸引敌人注意力，为后方部队创造安全。帮助对抗骑兵的猛扑攻击并保护脆弱的弓箭手防线。"},"ตัวคูณดาเมจ 36 → 52 (อิงจาก CMD) หากคุมทัพระยะประชิด มีโอกาส 37% → 44% ทำให้เป้าหมายหลักติด Mired ลด Movement SPD 10% นาน 5 วิ":{"en":"Damage multiplier 36 → 52 (based on CMD) If controlling an army in close range, there is a 37% → 44% chance of causing the main target to be Mired, reducing Movement SPD by 10% for 5 seconds.","th":"ตัวคูณดาเมจ 36 → 52 (อิงจาก CMD) หากคุมทัพระยะประชิด มีโอกาส 37% → 44% ทำให้เป้าหมายหลักติด Mired ลด Movement SPD 10% นาน 5 วิ","zh":"伤害倍数36 → 52（基于CMD）近距离控制军队时，有37% → 44%的几率使主目标陷入泥潭，移动速度降低10%，持续5秒。"},"ตัวคูณดาเมจใส่ทัพอื่น 11 → 22 (เพิ่มอีก 11 → 22 หากคุมทัพม้า) โดนสูงสุด 5 ทัพ มีโอกาส 37% → 44% ทำให้ขุนพลสุ่มในทัพเป้าหมายติด Spirit Break ลดดาเมจสกิลลง 5% นาน 6 วิ":{"en":"Damage multiplier against other armies: 11 → 22 (additional 11 → 22 if controlling a horse army). Hits up to 5 armies. Has a 37% → 44% chance of causing a random general in the target army to get Spirit Break, reducing skill damage by 5% for 6 seconds.","th":"ตัวคูณดาเมจใส่ทัพอื่น 11 → 22 (เพิ่มอีก 11 → 22 หากคุมทัพม้า) โดนสูงสุด 5 ทัพ มีโอกาส 37% → 44% ทำให้ขุนพลสุ่มในทัพเป้าหมายติด Spirit Break ลดดาเมจสกิลลง 5% นาน 6 วิ","zh":"对其他军队的伤害倍数：11→22（如果控制骑兵部队则额外11→22）。最多可打击 5 支军队。有37%→44%概率使目标部队随机一名武将精神崩溃，减少技能伤害5%，持续6秒。"},"ติดหล่ม":{"en":"mired","th":"ติดหล่ม","zh":"陷入困境"},"ติดหล่ม (Mired)":{"en":"Mired (Mired)","th":"ติดหล่ม (Mired)","zh":"米尔德（米尔德）"},"ทหารได้ DEF เพิ่มขึ้น และขุนพลทุกคนในทัพสร้างดาเมจสกิลเพิ่มขึ้น":{"en":"Soldiers\u0027 DEF increases and all generals in the army deal increased skill damage.","th":"ทหารได้ DEF เพิ่มขึ้น และขุนพลทุกคนในทัพสร้างดาเมจสกิลเพิ่มขึ้น","zh":"士兵防御力提升，全军将领技能伤害提升。"},"ทหารได้รับโล่ดูดซับดาเมจ":{"en":"Soldiers receive shields that absorb damage.","th":"ทหารได้รับโล่ดูดซับดาเมจ","zh":"士兵获得吸收伤害的盾牌。"},"ทัพม้าที่เน้นความเร็ว หรือศัตรูที่กำลังหนี":{"en":"Horse team that emphasizes speed or enemies who are fleeing","th":"ทัพม้าที่เน้นความเร็ว หรือศัตรูที่กำลังหนี","zh":"强调速度的马队或逃跑的敌人"},"ทัพม้าที่ตีโฉบ ปกป้องแนวหลัง":{"en":"A swooping cavalry Protect the backline","th":"ทัพม้าที่ตีโฉบ ปกป้องแนวหลัง","zh":"俯冲骑兵 保护后线"},"ทัพศัตรูที่ทหารเหลือต่ำกว่า 10%":{"en":"The enemy army has less than 10% of its soldiers remaining.","th":"ทัพศัตรูที่ทหารเหลือต่ำกว่า 10%","zh":"敌军仅剩不到百分之十的兵力。"},"ทำให้เป้าหมายหลักติด Frozen 6 วิ (ไม่ซ้อน) ลด Movement SPD 10% หลังโดนดาเมจสกิลจากขุนพลในทัพของ Guo Jia มีโอกาส 50% เกิดดาเมจโบนัสจากความเย็น (ตัวคูณดาเมจ 2.6 → 5.1)":{"en":"Makes the main target Frozen for 6 seconds (not stacked). Reduces Movement SPD by 10%. After taking skill damage from a general in Guo Jia\u0027s army, there is a 50% chance of inflicting bonus damage from cold (damage multiplier 2.6 → 5.1).","th":"ทำให้เป้าหมายหลักติด Frozen 6 วิ (ไม่ซ้อน) ลด Movement SPD 10% หลังโดนดาเมจสกิลจากขุนพลในทัพของ Guo Jia มีโอกาส 50% เกิดดาเมจโบนัสจากความเย็น (ตัวคูณดาเมจ 2.6 → 5.1)","zh":"使主要目标冻结 6 秒（不叠加）。移动速度降低 10%。受到郭嘉军将领的技能伤害后，有50%的几率造成额外的寒冷伤害（伤害倍数2.6 → 5.1）。"},"ทีม Pursue และทีม Archer":{"en":"Team Pursue and Team Archer","th":"ทีม Pursue และทีม Archer","zh":"团队追击和团队弓箭手"},"ทีมที่พึ่งโจมตีธรรมดา เช่น Ma Chao, Zhao Yun":{"en":"Teams that rely on normal attacks, such as Ma Chao, Zhao Yun","th":"ทีมที่พึ่งโจมตีธรรมดา เช่น Ma Chao, Zhao Yun","zh":"马超、赵云等依靠普通攻击的队伍"},"ทีมที่พึ่งการฮีล/สายโล่ Self-heal":{"en":"Teams that rely on self-heal/shield","th":"ทีมที่พึ่งการฮีล/สายโล่ Self-heal","zh":"依赖自我修复/防护的团队"},"ทีมที่มีขุนพลชายสายดาเมจ เช่น Lü Bu, Guan Yu, Zhou Yu":{"en":"Teams with damage-type male generals such as Lü Bu, Guan Yu, Zhou Yu","th":"ทีมที่มีขุนพลชายสายดาเมจ เช่น Lü Bu, Guan Yu, Zhou Yu","zh":"与吕布、关羽、周瑜等伤害型男将组队"},"บังคับให้ทัพศัตรูในระยะโจมตีผู้ใช้สกิล":{"en":"Forces enemy troops within range to attack the skill user.","th":"บังคับให้ทัพศัตรูในระยะโจมตีผู้ใช้สกิล","zh":"迫使范围内的敌军攻击技能使用者。"},"ผสาน Unyielding เพื่อความอึด กับ Splash เพื่อดาเมจเป็นวงกว้าง และ Defection เพื่อฟื้นทหาร ทำให้แนวหน้ายืนระยะในศึกกลุ่มได้ยาวนาน":{"en":"Combine Unyielding for toughness, Splash for wide area damage, and Defection to revive soldiers. Makes the front line stand out in group battles for a long time.","th":"ผสาน Unyielding เพื่อความอึด กับ Splash เพื่อดาเมจเป็นวงกว้าง และ Defection เพื่อฟื้นทหาร ทำให้แนวหน้ายืนระยะในศึกกลุ่มได้ยาวนาน","zh":"结合使用“不屈”来获得韧性，使用“溅射”来造成大范围伤害，结合使用“叛逃”来复活士兵。使得前线在团战中长期脱颖而出。"},"ผู้พิชิตปิดเกม":{"en":"The Conqueror closes the game.","th":"ผู้พิชิตปิดเกม","zh":"征服者结束了游戏。"},"พลังทรหด":{"en":"Enduring power","th":"พลังทรหด","zh":"持久的力量"},"ฟ้าเหลือง":{"en":"blue yellow","th":"ฟ้าเหลือง","zh":"蓝黄色"},"ฟื้นฟูจำนวนทหารตามเปอร์เซ็นต์ดาเมจที่สร้างกับเป้าหมายหลัก":{"en":"Restores the number of soldiers based on the percentage of damage dealt to the main target.","th":"ฟื้นฟูจำนวนทหารตามเปอร์เซ็นต์ดาเมจที่สร้างกับเป้าหมายหลัก","zh":"根据对主要目标造成的伤害百分比恢复士兵数量。"},"ยั่วยุ":{"en":"provoke","th":"ยั่วยุ","zh":"惹"},"ยั่วยุ (Taunt)":{"en":"Taunt","th":"ยั่วยุ (Taunt)","zh":"嘲讽"},"ยั่วศัตรู คุ้มกันหลังบ้าน":{"en":"Taunt the enemy, protect the back of the house.","th":"ยั่วศัตรู คุ้มกันหลังบ้าน","zh":"嘲讽敌人，保护后方。"},"ยืนหยัด":{"en":"insistent","th":"ยืนหยัด","zh":"坚持的"},"ระยะ":{"en":"phase","th":"ระยะ","zh":"阶段"},"ระยะกว้าง 2000 หลา สร้างดาเมจครั้งเดียวสูงสุด 5 ทัพศัตรู (ตัวคูณ 8 → 16 อิงจาก STR) เป้าหมายหลักรับดาเมจเต็ม ทัพอื่นรับ 50% พร้อมได้ Defection 30% (ฟื้นทหารตามดาเมจที่สร้างกับเป้าหมายหลัก)":{"en":"Range: 2000 yards. Deals one-time damage to up to 5 enemy troops (multiplier 8 → 16 based on STR). The main target receives full damage, other troops receive 50% and receive 30% Defection (recover soldiers based on damage dealt to the main target).","th":"ระยะกว้าง 2000 หลา สร้างดาเมจครั้งเดียวสูงสุด 5 ทัพศัตรู (ตัวคูณ 8 → 16 อิงจาก STR) เป้าหมายหลักรับดาเมจเต็ม ทัพอื่นรับ 50% พร้อมได้ Defection 30% (ฟื้นทหารตามดาเมจที่สร้างกับเป้าหมายหลัก)","zh":"射程：2000码。对最多 5 名敌军造成一次性伤害（根据 STR 乘数 8 → 16）。主要目标受到全部伤害，其他部队受到 50% 的伤害，并受到 30% 的叛变（根据对主要目标造成的伤害恢复士兵）。"},"รักษาจำนวนทหารให้ทัพอยู่รอดได้นานขึ้น":{"en":"Maintain the number of soldiers so the army can survive longer.","th":"รักษาจำนวนทหารให้ทัพอยู่รอดได้นานขึ้น","zh":"维持士兵数量，使军队能够生存更长时间。"},"รับดาเมจแทนทัพหลัง ควรมีสถานะ Unyielding หรือ Fortitude ติดตัว":{"en":"Take damage instead of the rear. Should have Unyielding or Fortitude status.","th":"รับดาเมจแทนทัพหลัง ควรมีสถานะ Unyielding หรือ Fortitude ติดตัว","zh":"承受伤害而不是后方。应该具有不屈或坚韧状态。"},"ลด Movement SPD ของศัตรู":{"en":"Reduces enemy Movement SPD.","th":"ลด Movement SPD ของศัตรู","zh":"降低敌人的移动速度。"},"ลดความเร็วเคลื่อนที่ สกิลที่สร้างดาเมจมีโอกาสกระตุ้นดาเมจแช่แข็งเพิ่มเติม":{"en":"Reduce movement speed Skills that deal damage have a chance to trigger additional freeze damage.","th":"ลดความเร็วเคลื่อนที่ สกิลที่สร้างดาเมจมีโอกาสกระตุ้นดาเมจแช่แข็งเพิ่มเติม","zh":"降低移动速度造成伤害的技能有一定几率触发额外的冰冻伤害。"},"ลดความเร็วเคลื่อนที่ของศัตรู":{"en":"Reduces enemy movement speed.","th":"ลดความเร็วเคลื่อนที่ของศัตรู","zh":"降低敌人的移动速度。"},"ลดดาเมจโจมตีธรรมดาของศัตรู":{"en":"Reduces enemy\u0027s normal attack damage.","th":"ลดดาเมจโจมตีธรรมดาของศัตรู","zh":"减少敌人的普通攻击伤害。"},"ลดดาเมจศัตรู เพิ่มการอยู่รอดของทัพเรา ใช้กันแพร่หลายทั้งช่วงบุกเบิกและศึกกลุ่ม":{"en":"Reduce enemy damage, increase the survivability of our troops. Widely used during both pioneering and group battles.","th":"ลดดาเมจศัตรู เพิ่มการอยู่รอดของทัพเรา ใช้กันแพร่หลายทั้งช่วงบุกเบิกและศึกกลุ่ม","zh":"减少敌方伤害，增加我军生存能力。在先锋和团战中广泛使用。"},"ลดดาเมจสกิลศัตรู เพิ่มการอยู่รอดของทัพเรา และกดข่มทัพศัตรูในสนามรบได้อย่างมีประสิทธิภาพ":{"en":"Reduce enemy skill damage Increase the survival of our troops and effectively suppress enemy forces on the battlefield","th":"ลดดาเมจสกิลศัตรู เพิ่มการอยู่รอดของทัพเรา และกดข่มทัพศัตรูในสนามรบได้อย่างมีประสิทธิภาพ","zh":"减少敌方技能伤害增加我军生存，有效压制战场敌军"},"ลดดาเมจออกของขุนพลชายทุกประเภท":{"en":"Reduces the damage output of all types of male generals.","th":"ลดดาเมจออกของขุนพลชายทุกประเภท","zh":"降低各类男将的伤害输出。"},"ลดประสิทธิภาพฮีลของศัตรู":{"en":"Reduces the enemy\u0027s healing efficiency.","th":"ลดประสิทธิภาพฮีลของศัตรู","zh":"降低敌人的治疗效率。"},"ลดพลังศัตรูหรือควบคุมสนามรบก่อนการปะทะหลัก":{"en":"Reduce enemy power or control the battlefield before the main battle.","th":"ลดพลังศัตรูหรือควบคุมสนามรบก่อนการปะทะหลัก","zh":"主战前削弱敌方力量或控制战场。"},"วุ่ย (Wei)":{"en":"Wei (Wei)","th":"วุ่ย (Wei)","zh":"魏（魏）"},"ศัตรูดาเมจสูงทั่วไป":{"en":"General high damage enemies","th":"ศัตรูดาเมจสูงทั่วไป","zh":"一般高伤害敌人"},"ศัตรูที่ติดสถานะนี้จะโดนดาเมจไฟทุกวินาที":{"en":"Enemies affected by this status will take fire damage every second.","th":"ศัตรูที่ติดสถานะนี้จะโดนดาเมจไฟทุกวินาที","zh":"受此状态影响的敌人每秒都会受到火焰伤害。"},"ศัตรูที่ติดสถานะนี้จะรับดาเมจจากทุกแหล่งเพิ่มขึ้น":{"en":"Enemies affected by this status will take increased damage from all sources.","th":"ศัตรูที่ติดสถานะนี้จะรับดาเมจจากทุกแหล่งเพิ่มขึ้น","zh":"受此状态影响的敌人将从所有来源受到的伤害都会增加。"},"ศัตรูที่ติดสถานะนี้จะสร้างดาเมจใส่ทัพเราลดลง (เอฟเฟกต์ลดลงสำหรับเป้าหมายที่ไม่ใช่เป้าหลัก)":{"en":"Enemies affected by this status will deal reduced damage to our troops. (Effect decreased for non-primary targets)","th":"ศัตรูที่ติดสถานะนี้จะสร้างดาเมจใส่ทัพเราลดลง (เอฟเฟกต์ลดลงสำหรับเป้าหมายที่ไม่ใช่เป้าหลัก)","zh":"受此状态影响的敌人对我方部队造成的伤害将会减少。 （对非主要目标效果降低）"},"ศัตรูที่พึ่งดาเมจสกิลเป็นหลัก":{"en":"Enemies that rely heavily on skill damage","th":"ศัตรูที่พึ่งดาเมจสกิลเป็นหลัก","zh":"严重依赖技能伤害的敌人"},"ศึกกลุ่มขนาดใหญ่ / กดดันเป็นวงกว้าง":{"en":"Large group battles / Widespread pressure","th":"ศึกกลุ่มขนาดใหญ่ / กดดันเป็นวงกว้าง","zh":"大型团战/普遍压力"},"สกิล:":{"en":"Skills:","th":"สกิล:","zh":"技能："},"สร้างดาเมจเมื่อโดนตีพร้อมเพิ่ม DEF เป็นตัวเคาน์เตอร์ทีม Pursue และทีม Archer ได้ดี ช่วงท้ายเกมให้ทั้งการดูดดาเมจและดาเมจโจมตี":{"en":"Deals damage when hit and increases DEF. It is a good counter to the Pursue and Archer teams. In the late game, it provides both damage absorption and attack damage.","th":"สร้างดาเมจเมื่อโดนตีพร้อมเพิ่ม DEF เป็นตัวเคาน์เตอร์ทีม Pursue และทีม Archer ได้ดี ช่วงท้ายเกมให้ทั้งการดูดดาเมจและดาเมจโจมตี","zh":"被击中时造成伤害并增加防御力。对于追击队和弓箭队来说是一个很好的反击。在游戏后期，它同时提供伤害吸收和攻击伤害。"},"สร้างดาเมจตรงใส่ศัตรู (ตัวคูณ 32 → 45 อิงจาก INT) มีโอกาส 30% ทำให้ศัตรูติด Vulnerability รับดาเมจเพิ่ม 1% → 2% (อิงจาก INT) นาน 5 วิ":{"en":"Deals direct damage to enemies (multiplier 32 → 45 based on INT), has a 30% chance of inflicting enemies. Vulnerability Receive additional damage 1% → 2% (based on INT) for 5 seconds.","th":"สร้างดาเมจตรงใส่ศัตรู (ตัวคูณ 32 → 45 อิงจาก INT) มีโอกาส 30% ทำให้ศัตรูติด Vulnerability รับดาเมจเพิ่ม 1% → 2% (อิงจาก INT) นาน 5 วิ","zh":"对敌人造成直接伤害（根据智力乘数 32 → 45），有 30% 的几率对敌人造成伤害。脆弱性 受到额外伤害 1% → 2%（基于智力），持续 5 秒。"},"สร้างดาเมจต่อเนื่องหรือดาเมจเดี่ยวสูงในการปะทะ":{"en":"Deals continuous damage or high single damage in hits.","th":"สร้างดาเมจต่อเนื่องหรือดาเมจเดี่ยวสูงในการปะทะ","zh":"造成连续伤害或高单次伤害。"},"สร้างดาเมจตอบโต้เมื่อโดนโจมตีธรรมดา":{"en":"Deals counter damage when hit by normal attacks.","th":"สร้างดาเมจตอบโต้เมื่อโดนโจมตีธรรมดา","zh":"受到普通攻击时会造成反击伤害。"},"สวนกลับ":{"en":"counter","th":"สวนกลับ","zh":"柜台"},"สวนกลับ (Counterattack)":{"en":"Counterattack","th":"สวนกลับ (Counterattack)","zh":"反击"},"สายกดสถานะต่อเนื่อง":{"en":"Continuous status press line","th":"สายกดสถานะต่อเนื่อง","zh":"连续状态冲压线"},"หนึ่งในเอฟเฟกต์หลักของสายโล่ ช่วยให้ดูดดาเมจได้ดีขึ้น เหมาะกับช่วงบุกเบิกต้นเกมและยันแนวหน้าเมื่อเจอหลายทัพในศึกกลุ่ม":{"en":"One of the main effects of the Shield line. Helps absorb damage better. Suitable for the pioneering period of the early game and supporting the front line when encountering many armies in group battles.","th":"หนึ่งในเอฟเฟกต์หลักของสายโล่ ช่วยให้ดูดดาเมจได้ดีขึ้น เหมาะกับช่วงบุกเบิกต้นเกมและยันแนวหน้าเมื่อเจอหลายทัพในศึกกลุ่ม","zh":"盾牌线的主要功效之一。帮助更好地吸收伤害。适合游戏前期开荒期，团战遭遇多军时支援前线。"},"หลังโจมตีธรรมดา มีโอกาสกระตุ้นการโจมตีธรรมดาเพิ่มอีกครั้ง":{"en":"After normal attack Has a chance to trigger another normal attack.","th":"หลังโจมตีธรรมดา มีโอกาสกระตุ้นการโจมตีธรรมดาเพิ่มอีกครั้ง","zh":"普通攻击后有一定几率触发另一次普通攻击。"},"หลังปล่อยโจมตีธรรมดา มีโอกาส 11.5% → 13% กระตุ้น Pursuit ให้โจมตีธรรมดาเพิ่มอีกครั้ง":{"en":"After releasing a normal attack, there is a 11.5% → 13% chance to trigger Pursuit to use another normal attack.","th":"หลังปล่อยโจมตีธรรมดา มีโอกาส 11.5% → 13% กระตุ้น Pursuit ให้โจมตีธรรมดาเพิ่มอีกครั้ง","zh":"释放一次普通攻击后，有11.5%→13%的几率触发追击再次使用普通攻击。"},"หลังปล่อยสกิล active สำเร็จ มีโอกาส 28% → 36% ทำให้ศัตรูติด Burn โดนดาเมจ 1 ครั้ง/วิ (ตัวคูณ 1.4 → 2.8 อิงจาก INT) นาน 4 วิ":{"en":"After successfully releasing an active skill, there is a 28% → 36% chance of inflicting Burn damage on the enemy 1 time/second (multiplier 1.4 → 2.8 based on INT) for 4 seconds.","th":"หลังปล่อยสกิล active สำเร็จ มีโอกาส 28% → 36% ทำให้ศัตรูติด Burn โดนดาเมจ 1 ครั้ง/วิ (ตัวคูณ 1.4 → 2.8 อิงจาก INT) นาน 4 วิ","zh":"成功释放主动技能后，有 28% → 36% 概率对敌人造成 1 次/秒燃烧伤害（根据智力倍数 1.4 → 2.8），持续 4 秒。"},"อดอยาก":{"en":"starve","th":"อดอยาก","zh":"饿死"},"อดอยาก (Starvation)":{"en":"Starvation","th":"อดอยาก (Starvation)","zh":"饥饿"},"อ่อนแรง":{"en":"Weak","th":"อ่อนแรง","zh":"虚弱的"},"อ่อนแรง (Enfeeble)":{"en":"Enfeeble","th":"อ่อนแรง (Enfeeble)","zh":"衰弱"},"อ่อนแอ":{"en":"weak","th":"อ่อนแอ","zh":"虚弱的"},"อ่อนแอ (Weakness)":{"en":"Weakness","th":"อ่อนแอ (Weakness)","zh":"弱点"},"อาวุธเฉพาะ":{"en":"Unique weapons","th":"อาวุธเฉพาะ","zh":"独特的武器"}};
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = themeToggle.querySelector('.theme-icon');
+  const themeLabel = themeToggle.querySelector('.theme-label');
+  const savedTheme = localStorage.getItem('guide-theme') || 'dark';
+  const themeOrder = ['dark','dim','light'];
+  const themeIcons = {dark:'☾',dim:'◐',light:'☀'};
+  function applyTheme(theme){
+    const validTheme = themeOrder.includes(theme) ? theme : 'dark';
+    document.documentElement.dataset.theme = validTheme;
+    themeIcon.textContent = themeIcons[validTheme];
+    themeLabel.textContent = validTheme.toUpperCase();
+    themeToggle.setAttribute('aria-label', 'เปลี่ยนโหมดสี: '+validTheme.toUpperCase());
+    themeToggle.title = 'เปลี่ยนโหมดสี: '+validTheme.toUpperCase();
+    localStorage.setItem('guide-theme', validTheme);
+  }
+  themeToggle.addEventListener('click',()=>{
+    const currentIndex = themeOrder.indexOf(document.documentElement.dataset.theme);
+    applyTheme(themeOrder[(currentIndex+1)%themeOrder.length]);
+  });
+  applyTheme(savedTheme);
+
   const languageToggle = document.getElementById('languageToggle');
   const translatableElements = document.querySelectorAll('[data-en][data-th][data-zh]');
-  let currentLanguage = 'en';
+  let currentLanguage = 'th';
   const detailedTextNodes = [];
   document.querySelectorAll('.skill-card, .faction-page, .counter-table, .combo-card, .role-card').forEach(block=>{
     const walker = document.createTreeWalker(block, NodeFilter.SHOW_TEXT);
@@ -783,6 +864,13 @@
     translatableElements.forEach(element=>{
       element.innerHTML = element.dataset[language];
     });
+    const searchPlaceholders = language === 'en'
+      ? {faction:'Search by character name...', category:'Search by skill or status...'}
+      : language === 'zh'
+        ? {faction:'搜索角色名称...', category:'搜索技能或状态...'}
+        : {faction:'ค้นหาชื่อตัวละคร...', category:'ค้นหาชื่อสกิลหรือสถานะ...'};
+    document.getElementById('factionSearchInput').placeholder = searchPlaceholders.faction;
+    document.getElementById('categorySearchInput').placeholder = searchPlaceholders.category;
     const tableLabels = language === 'en'
       ? { 'สถานะ': 'Status', 'เคาน์เตอร์': 'Counter', 'ขุนพลแนะนำ': 'Recommended officers', 'หมายเหตุ': 'Notes' }
       : language === 'zh'
@@ -907,6 +995,21 @@
     en:{active:'Active Skill',passive:'Passive Skills',tactic:'Tactics Manual',formation:'Recommended Formation'},
     zh:{active:'主动技能',passive:'被动技能',tactic:'兵法技能',formation:'推荐阵容'}
   };
+  const staticOfficerNames = {
+    'guo-jia':{th:'กัวเจีย',en:'Guo Jia',zh:'郭嘉'},'dian-wei':{th:'เตียนอุย',en:'Dian Wei',zh:'典韦'},
+    'xu-huang':{th:'ซิหลง',en:'Xu Huang',zh:'徐晃'},'yue-jin':{th:'เลียวคับ',en:'Yue Jin',zh:'乐进'},
+    'cao-pi':{th:'โจผี',en:'Cao Pi',zh:'曹丕'},'xun-yu':{th:'ซุนฮก',en:'Xun Yu',zh:'荀彧'},
+    'cheng-yu':{th:'เฉิงอวี้',en:'Cheng Yu',zh:'程昱'},'ma-yunlu':{th:'ม้าอวิ๋นลู่',en:'Ma Yunlu',zh:'马云禄'},
+    'guan-yinping':{th:'กวนอิ๋นผิง',en:'Guan Yinping',zh:'关银屏'},'wei-yan':{th:'เว่ยเอี๋ยน',en:'Wei Yan',zh:'魏延'},
+    'fa-zheng':{th:'ฝาเจิ้ง',en:'Fa Zheng',zh:'法正'},'liao-hua':{th:'เลียวฮัว',en:'Liao Hua',zh:'廖化'},
+    'gan-ning':{th:'กันหนิง',en:'Gan Ning',zh:'甘宁'},'cheng-pu':{th:'เฉิงผู่',en:'Cheng Pu',zh:'程普'},
+    'huang-gai':{th:'หวงไก่',en:'Huang Gai',zh:'黄盖'},'sun-jian':{th:'ซุนเกี๋ยน',en:'Sun Jian',zh:'孙坚'},
+    'lu-su':{th:'โลซก',en:'Lu Su',zh:'鲁肃'},'zhou-yu':{th:'จิวยี่',en:'Zhou Yu',zh:'周瑜'},
+    'xiao-qiao':{th:'เสียวเฉียว',en:'Xiao Qiao',zh:'小乔'},'lu-meng':{th:'ลิบอง',en:'Lü Meng',zh:'吕蒙'},
+    'zhang-liang':{th:'เตียวเหลียง',en:'Zhang Liang',zh:'张梁'},'diao-chan':{th:'เตียวเสี้ยน',en:'Diao Chan',zh:'貂蝉'},
+    'zhang-yan':{th:'เตียวเอี๋ยน',en:'Zhang Yan',zh:'张燕'},'zhang-bao':{th:'เตียวโป้',en:'Zhang Bao',zh:'张宝'},
+    'gongsun-zan':{th:'กองซุนจ้าน',en:'Gongsun Zan',zh:'公孙瓒'},'meng-huo':{th:'เบ้งเฮ็ก',en:'Meng Huo',zh:'孟获'}
+  };
   function getOfficerLocale(id, language){
     return language === 'th' ? officerDetails[id] : officerTranslations[language][id];
   }
@@ -917,6 +1020,10 @@
       if (!localized) return;
       card.querySelector('.officer-name').textContent = localized.name;
       card.querySelector('.officer-skill').textContent = localized.role;
+    });
+    document.querySelectorAll('.officer-name[data-name-id]').forEach(name=>{
+      const localized = staticOfficerNames[name.dataset.nameId];
+      if (localized) name.textContent = localized[language] || localized.en;
     });
     const labels = officerLabels[language];
     document.getElementById('officerLabelActive').textContent = labels.active;
@@ -951,7 +1058,7 @@
   officerDialog.addEventListener('click',event=>{
     if (event.target === officerDialog) officerDialog.close();
   });
-  applyLanguage('en');
+  applyLanguage('th');
 
   // main tab switching
   const tabButtons = document.querySelectorAll('.tabs button');
@@ -991,6 +1098,102 @@
   }
   initPager('tab-categories','cat-page','catPrev','catNext','catDots','catLabel');
   initPager('tab-factions','faction-page','facPrev','facNext','facDots','facLabel');
+
+  const factionSearchInput = document.getElementById('factionSearchInput');
+  const factionSearchEmpty = document.getElementById('factionSearchEmpty');
+  const factionTab = document.getElementById('tab-factions');
+  let factionPageBeforeSearch = null;
+  function normalizeSearch(value){
+    return value.toLocaleLowerCase().normalize('NFKC');
+  }
+  function getOfficerSearchText(card){
+    const values = [card.querySelector('.officer-name').textContent];
+    const nameId = card.querySelector('.officer-name').dataset.nameId;
+    if (nameId && staticOfficerNames[nameId]) values.push(...Object.values(staticOfficerNames[nameId]));
+    if (card.dataset.officer){
+      [officerDetails[card.dataset.officer], ...Object.values(officerTranslations).map(items=>items[card.dataset.officer])]
+        .filter(Boolean).forEach(officer=>values.push(officer.name));
+    }
+    return normalizeSearch(values.join(' '));
+  }
+  factionSearchInput.addEventListener('input',()=>{
+    const query = normalizeSearch(factionSearchInput.value.trim());
+    const pages = Array.from(factionTab.querySelectorAll('.faction-page'));
+
+    if (!query) {
+      pages.forEach(page=>{
+        page.classList.remove('search-visible');
+        page.querySelectorAll('.officer-card').forEach(card=>{card.hidden=false;});
+      });
+      (factionPageBeforeSearch || pages[0]).classList.add('active');
+      factionPageBeforeSearch = null;
+      factionTab.querySelector('.pager').style.display = '';
+      factionSearchEmpty.classList.remove('visible');
+      return;
+    }
+
+    if (!factionPageBeforeSearch) factionPageBeforeSearch = factionTab.querySelector('.faction-page.active');
+    factionTab.querySelector('.pager').style.display = 'none';
+    let matchCount = 0;
+    pages.forEach(page=>{
+      let pageMatches = 0;
+      page.querySelectorAll('.officer-card').forEach(card=>{
+        const matches = getOfficerSearchText(card).includes(query);
+        card.hidden = !matches;
+        if (matches) pageMatches++;
+      });
+      page.classList.remove('active');
+      page.classList.toggle('search-visible', pageMatches > 0);
+      matchCount += pageMatches;
+    });
+    factionSearchEmpty.classList.toggle('visible', matchCount === 0);
+  });
+
+  const categorySearchInput = document.getElementById('categorySearchInput');
+  const categorySearchEmpty = document.getElementById('categorySearchEmpty');
+  const categoryTab = document.getElementById('tab-categories');
+  let categoryPageBeforeSearch = null;
+  function getSkillSearchText(card){
+    const values = [card.textContent];
+    detailedTextNodes.filter(item=>item.node.parentElement && item.node.parentElement.closest('.skill-card') === card).forEach(item=>{
+      values.push(item.source, item.key);
+      const translated = embeddedTranslations[item.key];
+      if (translated) values.push(...Object.values(translated));
+    });
+    return normalizeSearch(values.join(' '));
+  }
+  categorySearchInput.addEventListener('input',()=>{
+    const query = normalizeSearch(categorySearchInput.value.trim());
+    const pages = Array.from(categoryTab.querySelectorAll('.cat-page'));
+
+    if (!query) {
+      pages.forEach(page=>{
+        page.classList.remove('search-visible');
+        page.querySelectorAll('.skill-card').forEach(card=>{card.hidden=false;});
+      });
+      (categoryPageBeforeSearch || pages[0]).classList.add('active');
+      categoryPageBeforeSearch = null;
+      categoryTab.querySelector('.pager').style.display = '';
+      categorySearchEmpty.classList.remove('visible');
+      return;
+    }
+
+    if (!categoryPageBeforeSearch) categoryPageBeforeSearch = categoryTab.querySelector('.cat-page.active');
+    categoryTab.querySelector('.pager').style.display = 'none';
+    let matchCount = 0;
+    pages.forEach(page=>{
+      let pageMatches = 0;
+      page.querySelectorAll('.skill-card').forEach(card=>{
+        const matches = getSkillSearchText(card).includes(query);
+        card.hidden = !matches;
+        if (matches) pageMatches++;
+      });
+      page.classList.remove('active');
+      page.classList.toggle('search-visible', pageMatches > 0);
+      matchCount += pageMatches;
+    });
+    categorySearchEmpty.classList.toggle('visible', matchCount === 0);
+  });
 </script>
 
 </body>
