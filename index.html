@@ -176,11 +176,31 @@
   .officer-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;}
   .officer-card{
     background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);
-    padding:10px 12px;
+    padding:0;overflow:hidden;cursor:pointer;text-align:left;color:inherit;font:inherit;
+    transition:transform .18s ease,border-color .18s ease,background .18s ease;
   }
+  .officer-card:hover{transform:translateY(-2px);border-color:var(--border-bright);background:var(--panel-2);}
+  .officer-card--static{cursor:default;}
+  .officer-card--static:hover{transform:none;}
   .officer-card--synergy{border-style:dashed;opacity:.85;}
+  .officer-card--synergy:hover{transform:none;}
+  .officer-card__image{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--panel-2);}
+  .officer-card__body{display:block;padding:10px 12px;}
   .officer-name{display:block;font-weight:600;color:var(--text);}
   .officer-skill{display:block;font-size:12.5px;color:var(--text-muted);margin-top:2px;}
+
+  /* officer detail dialog */
+  .officer-dialog{width:min(760px,calc(100% - 28px));max-height:calc(100vh - 28px);padding:0;border:1px solid var(--border-bright);border-radius:var(--radius);background:var(--panel);color:var(--text);}
+  .officer-dialog::backdrop{background:rgba(0,0,0,.72);backdrop-filter:blur(3px);}
+  .officer-detail{display:grid;grid-template-columns:minmax(180px,34%) 1fr;gap:22px;padding:22px;overflow:auto;max-height:calc(100vh - 28px);}
+  .officer-detail__image{width:100%;aspect-ratio:3/4;object-fit:cover;background:var(--panel-2);border:1px solid var(--border);border-radius:var(--radius);}
+  .officer-detail__content h2{border:0;margin:0 32px 4px 0;padding:0;font-size:clamp(21px,4vw,29px);}
+  .officer-detail__subtitle{color:var(--text-muted);margin:0 0 16px;}
+  .officer-detail__section{border-top:1px solid var(--border);padding-top:12px;margin-top:14px;}
+  .officer-detail__section h3{color:var(--gold-soft);font-size:15px;margin-bottom:4px;}
+  .officer-detail__section p{font-size:14px;margin:4px 0;color:var(--text);}
+  .officer-dialog__close{position:absolute;top:10px;right:12px;border:1px solid var(--border-bright);background:var(--panel-2);color:var(--gold-soft);border-radius:var(--radius);width:32px;height:32px;font-size:20px;line-height:1;cursor:pointer;}
+  @media(max-width:620px){.officer-detail{grid-template-columns:1fr;gap:14px;padding:16px;}.officer-detail__image{max-height:280px;aspect-ratio:16/9;}.officer-dialog__close{top:8px;right:8px;}}
 
   /* counters table */
   table.counter-table{width:100%;border-collapse:collapse;font-size:14.5px;}
@@ -542,63 +562,80 @@
     <div class="faction-page">
       <div class="faction-banner fb-wei"><h3>วุ่ย (Wei)</h3><span class="count">8 ขุนพล</span></div>
       <div class="officer-grid">
-        <div class="officer-card"><span class="officer-name">Guo Jia</span><span class="officer-skill">Frozen</span></div>
-        <div class="officer-card"><span class="officer-name">Dian Wei</span><span class="officer-skill">Enfeeble</span></div>
-        <div class="officer-card"><span class="officer-name">Cao Cao</span><span class="officer-skill">Overlord</span></div>
-        <div class="officer-card"><span class="officer-name">Xu Huang</span><span class="officer-skill">Mired</span></div>
-        <div class="officer-card"><span class="officer-name">Yue Jin</span><span class="officer-skill">Counterattack, Vulnerability</span></div>
-        <div class="officer-card"><span class="officer-name">Cao Pi</span><span class="officer-skill">Unyielding</span></div>
-        <div class="officer-card"><span class="officer-name">Xun Yu</span><span class="officer-skill">Vulnerability</span></div>
-        <div class="officer-card officer-card--synergy"><span class="officer-name">Cheng Yu</span><span class="officer-skill">คอมโบ: Vulnerability</span></div>
+        <button class="officer-card" data-officer="cao-cao"><img class="officer-card__image" src="images/characters/cao-cao.jpg" alt="โจโฉ"><span class="officer-card__body"><span class="officer-name">โจโฉ (Cao Cao)</span><span class="officer-skill">ซัพพอร์ตเพิ่มดาเมจ · พลม้า/พลโล่</span></span></button>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Guo Jia</span><span class="officer-skill">Frozen</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Dian Wei</span><span class="officer-skill">Enfeeble</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Xu Huang</span><span class="officer-skill">Mired</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Yue Jin</span><span class="officer-skill">Counterattack, Vulnerability</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Cao Pi</span><span class="officer-skill">Unyielding</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Xun Yu</span><span class="officer-skill">Vulnerability</span></span></div>
+        <div class="officer-card officer-card--static officer-card--synergy"><span class="officer-card__body"><span class="officer-name">Cheng Yu</span><span class="officer-skill">คอมโบ: Vulnerability</span></span></div>
       </div>
     </div>
 
     <div class="faction-page">
       <div class="faction-banner fb-shu"><h3>จ๊ก (Shu)</h3><span class="count">9 ขุนพล</span></div>
       <div class="officer-grid">
-        <div class="officer-card"><span class="officer-name">Zhang Fei</span><span class="officer-skill">Unyielding, Weakness</span></div>
-        <div class="officer-card"><span class="officer-name">Ma Yunlu</span><span class="officer-skill">Mired, Pursue</span></div>
-        <div class="officer-card"><span class="officer-name">Zhao Yun</span><span class="officer-skill">Pursue</span></div>
-        <div class="officer-card"><span class="officer-name">Ma Chao</span><span class="officer-skill">Pursue, Defection</span></div>
-        <div class="officer-card"><span class="officer-name">Guan Yinping</span><span class="officer-skill">Pursue</span></div>
-        <div class="officer-card"><span class="officer-name">Wei Yan</span><span class="officer-skill">Defection</span></div>
-        <div class="officer-card"><span class="officer-name">Fa Zheng</span><span class="officer-skill">Vulnerability</span></div>
-        <div class="officer-card"><span class="officer-name">Guan Yu</span><span class="officer-skill">Vulnerability</span></div>
-        <div class="officer-card officer-card--synergy"><span class="officer-name">Liao Hua</span><span class="officer-skill">คอมโบ: Weakness</span></div>
+        <button class="officer-card" data-officer="liu-bei"><img class="officer-card__image" src="images/characters/liu-bei.jpg" alt="เล่าปี่"><span class="officer-card__body"><span class="officer-name">เล่าปี่ (Liu Bei)</span><span class="officer-skill">ซัพพอร์ต · พลโล่</span></span></button>
+        <button class="officer-card" data-officer="zhao-yun"><img class="officer-card__image" src="images/characters/zhao-yun.jpg" alt="จูล่ง"><span class="officer-card__body"><span class="officer-name">จูล่ง (Zhao Yun)</span><span class="officer-skill">โจมตีต่อเนื่อง · พลม้า</span></span></button>
+        <button class="officer-card" data-officer="zhuge-liang"><img class="officer-card__image" src="images/characters/zhuge-liang.jpg" alt="จูกัดเหลียง"><span class="officer-card__body"><span class="officer-name">จูกัดเหลียง (Zhuge Liang)</span><span class="officer-skill">แกนหลักดาเมจ · พลธนู</span></span></button>
+        <button class="officer-card" data-officer="ma-chao"><img class="officer-card__image" src="images/characters/ma-chao.jpg" alt="ม้าเฉียว"><span class="officer-card__body"><span class="officer-name">ม้าเฉียว (Ma Chao)</span><span class="officer-skill">อเนกประสงค์ · พลม้า</span></span></button>
+        <button class="officer-card" data-officer="guan-yu"><img class="officer-card__image" src="images/characters/guan-yu.jpg" alt="กวนอู"><span class="officer-card__body"><span class="officer-name">กวนอู (Guan Yu)</span><span class="officer-skill">กำลังสำคัญ · พลโล่</span></span></button>
+        <button class="officer-card" data-officer="zhang-fei"><img class="officer-card__image" src="images/characters/zhang-fei.jpg" alt="เตียวหุย"><span class="officer-card__body"><span class="officer-name">เตียวหุย (Zhang Fei)</span><span class="officer-skill">แกนหลัก · พลโล่</span></span></button>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Ma Yunlu</span><span class="officer-skill">Mired, Pursue</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Guan Yinping</span><span class="officer-skill">Pursue</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Wei Yan</span><span class="officer-skill">Defection</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Fa Zheng</span><span class="officer-skill">Vulnerability</span></span></div>
+        <div class="officer-card officer-card--static officer-card--synergy"><span class="officer-card__body"><span class="officer-name">Liao Hua</span><span class="officer-skill">คอมโบ: Weakness</span></span></div>
       </div>
     </div>
 
     <div class="faction-page">
       <div class="faction-banner fb-wu"><h3>ง่อ (Wu)</h3><span class="count">9 ขุนพล</span></div>
       <div class="officer-grid">
-        <div class="officer-card"><span class="officer-name">Gan Ning</span><span class="officer-skill">Counterattack, Splash, Mired</span></div>
-        <div class="officer-card"><span class="officer-name">Cheng Pu</span><span class="officer-skill">Unyielding</span></div>
-        <div class="officer-card"><span class="officer-name">Huang Gai</span><span class="officer-skill">Mired</span></div>
-        <div class="officer-card"><span class="officer-name">Sun Jian</span><span class="officer-skill">Mired, Starvation</span></div>
-        <div class="officer-card"><span class="officer-name">Lu Su</span><span class="officer-skill">Burn</span></div>
-        <div class="officer-card"><span class="officer-name">Zhou Yu</span><span class="officer-skill">Burn</span></div>
-        <div class="officer-card"><span class="officer-name">Sun Quan</span><span class="officer-skill">Vulnerability</span></div>
-        <div class="officer-card officer-card--synergy"><span class="officer-name">Xiao Qiao</span><span class="officer-skill">คอมโบ: Burn</span></div>
-        <div class="officer-card officer-card--synergy"><span class="officer-name">Lü Meng</span><span class="officer-skill">คอมโบ: Burn</span></div>
+        <button class="officer-card" data-officer="sun-quan"><img class="officer-card__image" src="images/characters/sun-quan.jpg" alt="ซุนกวน"><span class="officer-card__body"><span class="officer-name">ซุนกวน (Sun Quan)</span><span class="officer-skill">ซัพพอร์ตชั้นยอด · พลธนู</span></span></button>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Gan Ning</span><span class="officer-skill">Counterattack, Splash, Mired</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Cheng Pu</span><span class="officer-skill">Unyielding</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Huang Gai</span><span class="officer-skill">Mired</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Sun Jian</span><span class="officer-skill">Mired, Starvation</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Lu Su</span><span class="officer-skill">Burn</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Zhou Yu</span><span class="officer-skill">Burn</span></span></div>
+        <div class="officer-card officer-card--static officer-card--synergy"><span class="officer-card__body"><span class="officer-name">Xiao Qiao</span><span class="officer-skill">คอมโบ: Burn</span></span></div>
+        <div class="officer-card officer-card--static officer-card--synergy"><span class="officer-card__body"><span class="officer-name">Lü Meng</span><span class="officer-skill">คอมโบ: Burn</span></span></div>
       </div>
     </div>
 
     <div class="faction-page">
       <div class="faction-banner fb-qun"><h3>กลุ่มอื่น/ไม่สังกัด (Qun)</h3><span class="count">8 ขุนพล</span></div>
       <div class="officer-grid">
-        <div class="officer-card"><span class="officer-name">Zhang Liang</span><span class="officer-skill">Fortitude</span></div>
-        <div class="officer-card"><span class="officer-name">Diao Chan</span><span class="officer-skill">Charm</span></div>
-        <div class="officer-card"><span class="officer-name">Zhang Jiao</span><span class="officer-skill">Counterattack, Yellow Heaven, Taunt</span></div>
-        <div class="officer-card"><span class="officer-name">Zhang Yan</span><span class="officer-skill">Counterattack</span></div>
-        <div class="officer-card"><span class="officer-name">Zhang Bao</span><span class="officer-skill">Splash</span></div>
-        <div class="officer-card"><span class="officer-name">Gongsun Zan</span><span class="officer-skill">Mired</span></div>
-        <div class="officer-card"><span class="officer-name">Lü Bu</span><span class="officer-skill">Spirit Break, Rout</span></div>
-        <div class="officer-card"><span class="officer-name">Meng Huo</span><span class="officer-skill">Unyielding, Weakness</span></div>
+        <button class="officer-card" data-officer="lu-bu"><img class="officer-card__image" src="images/characters/lu-bu.jpg" alt="ลิโป้"><span class="officer-card__body"><span class="officer-name">ลิโป้ (Lu Bu)</span><span class="officer-skill">แกนหลักดาเมจ · พลม้า</span></span></button>
+        <button class="officer-card" data-officer="zhang-jiao"><img class="officer-card__image" src="images/characters/zhang-jiao.jpg" alt="เตียวก๊ก"><span class="officer-card__body"><span class="officer-name">เตียวก๊ก (Zhang Jiao)</span><span class="officer-skill">ขุนพลหลัก · พลโล่</span></span></button>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Zhang Liang</span><span class="officer-skill">Fortitude</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Diao Chan</span><span class="officer-skill">Charm</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Zhang Yan</span><span class="officer-skill">Counterattack</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Zhang Bao</span><span class="officer-skill">Splash</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Gongsun Zan</span><span class="officer-skill">Mired</span></span></div>
+        <div class="officer-card officer-card--static"><span class="officer-card__body"><span class="officer-name">Meng Huo</span><span class="officer-skill">Unyielding, Weakness</span></span></div>
       </div>
     </div>
 
     <div class="note" data-th="การจัดสังกัดอ้างอิงจากวรรณกรรม/ประวัติศาสตร์สามก๊กทั่วไป ไม่ได้มาจากภาพต้นฉบับ กรุณาตรวจสอบกับสังกัดจริงในเกมของท่านอีกครั้ง" data-en="Factions follow common Three Kingdoms literature and history rather than the source screenshots. Verify the actual in-game factions before use." data-zh="阵营划分参考三国文学和历史资料，并非来自原始截图。使用前请在游戏中确认实际阵营。">Factions follow common Three Kingdoms literature and history rather than the source screenshots. Verify the actual in-game factions before use.</div>
   </section>
+
+  <dialog class="officer-dialog" id="officerDialog" aria-labelledby="officerDialogTitle">
+    <button class="officer-dialog__close" id="officerDialogClose" type="button" aria-label="Close">&times;</button>
+    <div class="officer-detail">
+      <img class="officer-detail__image" id="officerDetailImage" src="" alt="">
+      <div class="officer-detail__content">
+        <h2 id="officerDialogTitle"></h2>
+        <p class="officer-detail__subtitle" id="officerDetailSubtitle"></p>
+        <div class="officer-detail__section"><h3 id="officerLabelActive">สกิลแอคทีฟ</h3><p id="officerDetailActive"></p></div>
+        <div class="officer-detail__section"><h3 id="officerLabelPassive">สกิลพาสซีฟ</h3><p id="officerDetailPassive"></p></div>
+        <div class="officer-detail__section"><h3 id="officerLabelTactic">สกิลตำรายุทธ</h3><p id="officerDetailTactic"></p></div>
+        <div class="officer-detail__section"><h3 id="officerLabelFormation">รูปทัพแนะนำ</h3><p id="officerDetailFormation"></p></div>
+      </div>
+    </div>
+  </dialog>
 
   <!-- ===== COUNTERS ===== -->
   <section id="tab-counters" class="tab-page">
@@ -764,8 +801,161 @@
     languageToggle.value = language;
     languageToggle.setAttribute('aria-label', 'Select language');
     translateDetailedContent(language);
+    renderOfficerLanguage(language);
   }
   languageToggle.addEventListener('change',()=>applyLanguage(languageToggle.value));
+
+  const officerDetails = {
+    'cao-cao': {
+      name:'โจโฉ (Cao Cao)', subtitle:'Wei · ซัพพอร์ตเพิ่มดาเมจ · พลม้า/พลโล่',
+      active:'[จ้าวแห่งชายแดน] สร้างดาเมจตรง และเพิ่มดาเมจสกิลของขุนพลที่มีพลังบู๊สูงสุดในทีม',
+      passive:'[ลำนำสันติ] เมื่อถูกโจมตี ได้รับสถานะขุนศึก เพิ่มป้องกันและดาเมจสกิลของทุกคน; [ตัดหนวดหนี] เพิ่มความเร็วเคลื่อนที่ของพลม้า',
+      tactic:'[ปณิธานยุทธ์วุย] ต้านลดความเร็ว ดาเมจสกิลเพิ่มเมื่อพลมากกว่า 50% และป้องกันเพิ่มเมื่อพลน้อยกว่า 50%',
+      formation:'ซิหลง, เตียนอุย, โจโฉ', image:'images/characters/cao-cao.jpg'
+    },
+    'sun-quan': {
+      name:'ซุนกวน (Sun Quan)', subtitle:'Wu · ซัพพอร์ตชั้นยอด · พลธนู',
+      active:'[ยุทธการยู่สี] โจมตีวงกว้าง ยิ่งโดนเป้าหมายมาก ยิ่งเพิ่มดาเมจสกิลให้ขุนพลอื่นในกองพล',
+      passive:'[ขึ้นครองราชย์] เพิ่มอัตราดาเมจสกิลแอคทีฟ; [ขี่ม้ายิงเสือ] มีโอกาสทำให้ศัตรูติดเปราะบาง พร้อมเพิ่มป้องกันฝ่ายตน',
+      tactic:'[ชื่นชมเชลยศึก] เพิ่มดาเมจสกิลตนเอง เพิ่มระยะยิงพลธนู และเพิ่มพลังป้องกัน',
+      formation:'ซุนกวน, จิวยี่, เสียวเกี้ยว', image:'images/characters/sun-quan.jpg'
+    },
+    'liu-bei': {
+      name:'เล่าปี่ (Liu Bei)', subtitle:'Shu · สุดยอดสายซัพพอร์ต · พลโล่',
+      active:'[ออร่าคุณธรรม] สร้างดาเมจตรง มีโอกาสดาเมจซ้ำ รักษาพลและมอบสถานะเยียวยา',
+      passive:'[เยือนกระท่อมสามครา] เพิ่มป้องกันและเพิ่มดาเมจสกิลให้ทุกคนในกองพล; [อุบายยืมเกงจิ๋ว] ยิ่งค่าบัญชารวมสูง เอฟเฟกต์รักษายิ่งเพิ่ม',
+      tactic:'[โผนม้าหนีภัย] เมื่อมีศัตรูรอบตัว จะเพิ่มป้องกันตนเองและเพิ่มตัวคูณดาเมจสกิลให้ขุนพลทุกคน',
+      formation:'เล่าปี่, เตียวหุย, กวนอู', image:'images/characters/liu-bei.jpg'
+    },
+    'zhao-yun': {
+      name:'จูล่ง (Zhao Yun)', subtitle:'Shu · โจมตีต่อเนื่อง · พลม้า',
+      active:'[สยบสามทัพ] เมื่อสร้างดาเมจ จะเพิ่มดาเมจการโจมตีทั่วไปของตนเอง',
+      passive:'[ผู้เดียวช่วยนายท่าน] โจมตีทั่วไปสำเร็จ มีโอกาสโจมตีทั่วไปเพิ่มอีก 1 ครั้ง (ไล่ล่า); [แม่ทัพอปราชัย] เพิ่มป้องกันและความเร็วเคลื่อนที่',
+      tactic:'[ฝ่าวงล้อมข้าศึก] ทริกเกอร์ไล่ล่าต่อเนื่องได้สูงสุด 5 ครั้ง และได้รับป้องกันเพิ่มทุกครั้ง',
+      formation:'จูล่ง, ม้าเฉียว, กวนอิ๋นผิง', image:'images/characters/zhao-yun.jpg'
+    },
+    'lu-bu': {
+      name:'ลิโป้ (Lu Bu)', subtitle:'Qun · แกนหลักทำดาเมจ · พลม้า',
+      active:'[ยิงง้าวประตูหยวน] ทำดาเมจวงกว้าง มีโอกาสลดดาเมจสกิลของเป้าหมายหลัก',
+      passive:'[ดุร้ายบ้าคลั่ง] เพิ่มดาเมจสกิลตามจำนวนศัตรูที่โจมตีโดน; [ยอดพลกล้าหาญ] เพิ่มป้องกัน และโจมตีศัตรูที่กำลังพลต่ำมีโอกาสทำให้พ่ายแพ้ทันที',
+      tactic:'[ธงชัยหมื่นไมล์] ท้าสู้กับศัตรูที่พลังโจมตีต่ำสุด หากชนะจะสร้างดาเมจเพิ่มและเพิ่มป้องกัน',
+      formation:'ลิโป้, โกซุ่น, ลิหลิงฉี', image:'images/characters/lu-bu.jpg'
+    },
+    'zhuge-liang': {
+      name:'จูกัดเหลียง (Zhuge Liang)', subtitle:'Shu · แกนหลักดาเมจ · พลธนู',
+      active:'[ก้าวเดินมั่นคง] สร้างดาเมจ ยิ่งค่าปัญญาสูงกว่าศัตรูมาก ดาเมจยิ่งแรงขึ้น',
+      passive:'[แต่งหน้าเทพ] ทุกครั้งที่ทำลายกองพลศัตรู จะเพิ่มดาเมจสกิลตนเอง; [มังกรหลับโผล่] เมื่อถูกโจมตีทั่วไป จะเพิ่มป้องกัน (ซ้อนทับไม่ได้)',
+      tactic:'[ค่ายแปดทิศ] มีโอกาสปล่อยสกิลแอคทีฟซ้ำ พร้อมเพิ่มป้องกัน',
+      formation:'จูกัดเหลียง, อุ๋ยซี, หวดเจ้ง', image:'images/characters/zhuge-liang.jpg'
+    },
+    'ma-chao': {
+      name:'ม้าเฉียว (Ma Chao)', subtitle:'Shu · อเนกประสงค์ · พลม้า',
+      active:'[กล้าหาญชาญศึก] สร้างดาเมจและหักหลังศัตรู พร้อมฟื้นฟูกำลังพลทุกครั้งที่สร้างดาเมจ',
+      passive:'[หมื่นนายมิอาจต้าน] เพิ่มดาเมจการโจมตีทั่วไปของตน; [ศึกม้าเหล็ก] มีโอกาสโจมตีทั่วไปเพิ่ม 1 ครั้ง (ไล่ล่า) และเพิ่มป้องกัน',
+      tactic:'[พายุอัสนี] ได้รับโบนัสโจมตีและป้องกันตามส่วนต่างความเร็ว โบนัสเพิ่มตามค่าพลังบู๊',
+      formation:'ม้าเฉียว, จูล่ง, กวนอิ๋นผิง', image:'images/characters/ma-chao.jpg'
+    },
+    'guan-yu': {
+      name:'กวนอู (Guan Yu)', subtitle:'Shu · กำลังสำคัญ · พลโล่',
+      active:'[ร่วมงานดาบเดียว] สร้างดาเมจแก่กองพลศัตรูหลายกองภายในพื้นที่รูปวงกลม',
+      passive:'[บุกเดี่ยวพันไมล์] เพิ่มค่าป้องกันตามจำนวนกองพลศัตรูในระยะ; [ควบม้านำพล] เพิ่มค่าป้องกันตามจำนวนเป้าหมายที่สกิลแอคทีฟโจมตีโดน',
+      tactic:'[น้ำท่วมเจ็ดทัพ] เพิ่มตัวคูณดาเมจสกิลแอคทีฟ มีโอกาสติดเปราะบาง หากศัตรูติดอ่อนแอจะรุนแรงขึ้น พร้อมเพิ่มป้องกัน',
+      formation:'เล่าปี่, กวนอู, เตียวหุย', image:'images/characters/guan-yu.jpg'
+    },
+    'zhang-jiao': {
+      name:'เตียวก๊ก (Zhang Jiao)', subtitle:'Qun · ขุนพลหลัก · พลโล่',
+      active:'[ฟ้าเหลืองขึ้นแทน] สร้างดาเมจแก่กองพลศัตรู พร้อมเพิ่มค่าป้องกันให้กองพลของตน',
+      passive:'[หลอกลวงไพร่ฟ้า] เพิ่มดาเมจสกิลแอคทีฟ เมื่อโจมตีทั่วไปสำเร็จ (พลโล่/พลม้า) มีโอกาสทำให้ศัตรูติดเยาะเย้ย; [ดาวลับขอบฟ้า] เข้าสู่สถานะฟ้าเหลืองและได้รับโล่ดูดซับดาเมจตอนเริ่มต่อสู้',
+      tactic:'[ดั่งตะวันขึ้น] เมื่อโล่สลาย สร้างดาเมจแก่ศัตรูในพื้นที่ พร้อมเพิ่มค่าป้องกันให้กองพล',
+      formation:'เตียวก๊ก, เตียวโป้, เตียวเหลียง', image:'images/characters/zhang-jiao.jpg'
+    },
+    'zhang-fei': {
+      name:'เตียวหุย (Zhang Fei)', subtitle:'Shu · แกนหลักสายพลโล่',
+      active:'[มั่นคงดุจภูเขา] สร้างดาเมจแก่กองพลศัตรูภายในพื้นที่ พร้อมมีโอกาสทำให้ศัตรูติดอ่อนแอ ส่งผลให้ดาเมจที่สร้างได้ลดลง',
+      passive:'[ตัดสะพานริมน้ำ] เมื่อถูกโจมตีทั่วไป กองพลจะได้รับสถานะไม่ย่อท้อ 1 ชั้น ทำให้ค่าป้องกันเพิ่มขึ้น; [บารมีข่มขวัญ] เพิ่มขอบเขตการโจมตีของสกิลมั่นคงดุจภูเขา',
+      tactic:'[แกร่งดั่งหินผา] เมื่อถูกโจมตีทั่วไปจากศัตรู สถานะไม่ย่อท้อสามารถทับซ้อนได้ ทุกครั้งที่รับดาเมจโจมตีทั่วไป ดาเมจสกิลตัวเองจะเพิ่มขึ้น',
+      formation:'เล่าปี่, เตียวหุย, กวนอู', image:'images/characters/zhang-fei.jpg'
+    }
+  };
+
+  const officerTranslations = {
+    en: {
+      'cao-cao': {name:'Cao Cao', role:'Damage support · Cavalry/Shield', subtitle:'Wei · Damage support · Cavalry/Shield', active:'[Border Call] Deals direct damage and increases the skill damage of the officer with the highest STR.', passive:'[Peaceful Ballad] When attacked, gains Warlord, increasing the whole army\'s DEF and skill damage; [Cut the Beard] increases Cavalry movement speed.', tactic:'[Wei War Oath] Resists slow. Skill damage increases above 50% troop strength and DEF increases below 50%.', formation:'Xu Huang, Dian Wei, Cao Cao'},
+      'sun-quan': {name:'Sun Quan', role:'Elite support · Archer', subtitle:'Wu · Elite support · Archer', active:'[Yuexi Campaign] Attacks an area. Hitting more targets increases skill damage for other officers in the army.', passive:'[Ascend the Throne] Increases active skill damage; [Mounted Tiger Hunt] may inflict Vulnerability and increases allied DEF.', tactic:'[Praise the Captives] Increases personal skill damage, Archer range, and DEF.', formation:'Sun Quan, Zhou Yu, Xiao Qiao'},
+      'liu-bei': {name:'Liu Bei', role:'Top support · Shield', subtitle:'Shu · Top support · Shield', active:'[Virtue Aura] Deals direct damage, may strike again, heals troops, and grants recovery.', passive:'[Three Visits] Increases DEF and skill damage for the army; [Borrow Jingzhou] improves healing as total CMD increases.', tactic:'[Escape on Horseback] With enemies nearby, increases self DEF and the skill damage multiplier of all officers.', formation:'Liu Bei, Zhang Fei, Guan Yu'},
+      'zhao-yun': {name:'Zhao Yun', role:'Continuous attack · Cavalry', subtitle:'Shu · Continuous attack · Cavalry', active:'[Pacify Three Armies] Dealing damage increases personal normal attack damage.', passive:'[Lone Savior] A successful normal attack may trigger one extra Pursue attack; [Defeated General] increases DEF and movement speed.', tactic:'[Break the Encirclement] Triggers up to five consecutive Pursue attacks and gains DEF each time.', formation:'Zhao Yun, Ma Chao, Guan Yinping'},
+      'lu-bu': {name:'Lu Bu', role:'Primary damage · Cavalry', subtitle:'Qun · Primary damage · Cavalry', active:'[Gate of Yuan Volley] Deals area damage and may reduce the main target\'s skill damage.', passive:'[Fierce Berserker] Skill damage rises with the number of enemies hit; [Brave Champion] increases DEF and may instantly defeat low-strength enemies.', tactic:'[Banner of Ten Thousand Miles] Challenges the enemy with the lowest ATK. Winning deals bonus damage and increases DEF.', formation:'Lu Bu, Gongsun Zan, Lü Lingqi'},
+      'zhuge-liang': {name:'Zhuge Liang', role:'Primary damage · Archer', subtitle:'Shu · Primary damage · Archer', active:'[Steady Advance] Deals damage. The greater the INT advantage, the higher the damage.', passive:'[Heavenly Disguise] Destroying an enemy army increases personal skill damage; [Sleeping Dragon Rises] increases DEF when hit by a normal attack.', tactic:'[Eight Trigrams Camp] May cast the active skill again and increases DEF.', formation:'Zhuge Liang, Wei Yan, Fa Zheng'},
+      'ma-chao': {name:'Ma Chao', role:'Versatile · Cavalry', subtitle:'Shu · Versatile · Cavalry', active:'[Battle-Hardened] Deals damage and Defection, restoring troops whenever damage is dealt.', passive:'[Ten Thousand Cannot Stand] Increases personal normal attack damage; [Iron Cavalry] may trigger one extra Pursue attack and increases DEF.', tactic:'[Thunderstorm] Gains ATK and DEF from the speed difference, with bonuses scaling from STR.', formation:'Ma Chao, Zhao Yun, Guan Yinping'},
+      'guan-yu': {name:'Guan Yu', role:'Key damage · Shield', subtitle:'Shu · Key damage · Shield', active:'[One Sword Together] Deals area damage to multiple enemy armies.', passive:'[Solo Charge] Increases DEF based on enemy armies in range; [Lead the Cavalry] increases DEF based on active skill targets hit.', tactic:'[Seven Armies Flood] Increases active skill damage and may inflict Vulnerability, becoming stronger against Weakness.', formation:'Liu Bei, Guan Yu, Zhang Fei'},
+      'zhang-jiao': {name:'Zhang Jiao', role:'Primary officer · Shield', subtitle:'Qun · Primary officer · Shield', active:'[Yellow Heaven Rises] Deals damage and increases allied army DEF.', passive:'[Deceive the People] Increases active skill damage and may Taunt after a normal attack; [Dusk Star] enters Yellow Heaven and gains a damage-absorbing shield at battle start.', tactic:'[Sunrise] When the shield breaks, deals area damage and increases army DEF.', formation:'Zhang Jiao, Zhang Bao, Zhang Liang'},
+      'zhang-fei': {name:'Zhang Fei', role:'Core Shield officer', subtitle:'Shu · Core Shield officer', active:'[Steady as a Mountain] Deals area damage and may inflict Weakness, reducing damage dealt by the enemy.', passive:'[Bridge Breaker] Normal attacks grant one stack of Unyielding and increase DEF; [Dread Reputation] increases the range of Steady as a Mountain.', tactic:'[Rock-Hard] Unyielding can stack when hit by normal attacks, increasing personal skill damage each time damage is received.', formation:'Liu Bei, Zhang Fei, Guan Yu'}
+    },
+    zh: {
+      'cao-cao': {name:'曹操', role:'增伤辅助 · 骑兵/盾兵', subtitle:'魏 · 增伤辅助 · 骑兵/盾兵', active:'[边疆号令] 造成直接伤害，并提高队伍中武力最高武将的技能伤害。', passive:'[和平之歌] 受到攻击时获得战将状态，提高全军防御和技能伤害；[割须弃袍] 提高骑兵移动速度。', tactic:'[魏武战志] 抵抗减速。兵力高于50%时提高技能伤害，低于50%时提高防御。', formation:'徐晃、典韦、曹操'},
+      'sun-quan': {name:'孙权', role:'顶级辅助 · 弓兵', subtitle:'吴 · 顶级辅助 · 弓兵', active:'[鱼市战术] 范围攻击，命中目标越多，为其他武将提高的技能伤害越高。', passive:'[登基称王] 提高主动技能伤害；[骑射猛虎] 有几率施加脆弱并提高己方防御。', tactic:'[嘉奖俘虏] 提高自身技能伤害、弓兵射程和防御。', formation:'孙权、周瑜、小乔'},
+      'liu-bei': {name:'刘备', role:'顶级辅助 · 盾兵', subtitle:'蜀 · 顶级辅助 · 盾兵', active:'[仁德光环] 造成直接伤害，有几率重复伤害，并治疗部队、施加恢复。', passive:'[三顾茅庐] 提高全军防御和技能伤害；[借荆州之计] 总统御越高，治疗效果越强。', tactic:'[跃马逃生] 周围有敌人时提高自身防御，并提高全体武将技能伤害倍率。', formation:'刘备、张飞、关羽'},
+      'zhao-yun': {name:'赵云', role:'连续攻击 · 骑兵', subtitle:'蜀 · 连续攻击 · 骑兵', active:'[平定三军] 造成伤害时提高自身普通攻击伤害。', passive:'[单骑救主] 普攻成功后有几率追加一次追击；[败军之将] 提高防御和移动速度。', tactic:'[突围] 最多触发五次连续追击，并在每次触发时提高防御。', formation:'赵云、马超、关银屏'},
+      'lu-bu': {name:'吕布', role:'核心输出 · 骑兵', subtitle:'群 · 核心输出 · 骑兵', active:'[辕门射戟] 造成范围伤害，有几率降低主要目标的技能伤害。', passive:'[狂暴] 命中敌人越多，技能伤害越高；[勇冠三军] 提高防御，攻击低兵力敌人时有几率直接击败。', tactic:'[万里旗] 挑战攻击力最低的敌人，胜利后造成额外伤害并提高防御。', formation:'吕布、公孙瓒、吕玲绮'},
+      'zhuge-liang': {name:'诸葛亮', role:'核心输出 · 弓兵', subtitle:'蜀 · 核心输出 · 弓兵', active:'[稳步推进] 造成伤害，智力高于敌人越多，伤害越高。', passive:'[天妆] 每消灭一支敌军，提高自身技能伤害；[卧龙出山] 受到普攻时提高防御。', tactic:'[八卦阵] 有几率再次释放主动技能，并提高防御。', formation:'诸葛亮、魏延、法正'},
+      'ma-chao': {name:'马超', role:'全能 · 骑兵', subtitle:'蜀 · 全能 · 骑兵', active:'[勇冠三军] 造成伤害并施加叛变，每次造成伤害时恢复兵力。', passive:'[万夫莫当] 提高自身普攻伤害；[铁骑] 有几率追加一次追击并提高防御。', tactic:'[雷暴] 根据速度差获得攻击和防御加成，武力越高加成越强。', formation:'马超、赵云、关银屏'},
+      'guan-yu': {name:'关羽', role:'核心战力 · 盾兵', subtitle:'蜀 · 核心战力 · 盾兵', active:'[单刀赴会] 对范围内多支敌军造成伤害。', passive:'[千里走单骑] 根据范围内敌军数量提高防御；[领骑] 根据主动技能命中的目标数提高防御。', tactic:'[水淹七军] 提高主动技能伤害并有几率施加脆弱，对虚弱敌人效果更强。', formation:'刘备、关羽、张飞'},
+      'zhang-jiao': {name:'张角', role:'核心武将 · 盾兵', subtitle:'群 · 核心武将 · 盾兵', active:'[黄天当立] 造成伤害并提高己方军队防御。', passive:'[蛊惑百姓] 普攻成功后提高主动技能伤害并有几率嘲讽；[暗星] 战斗开始进入黄天状态并获得护盾。', tactic:'[旭日东升] 护盾破裂时造成范围伤害并提高军队防御。', formation:'张角、张宝、张梁'},
+      'zhang-fei': {name:'张飞', role:'核心盾兵武将', subtitle:'蜀 · 核心盾兵武将', active:'[稳如泰山] 造成范围伤害并有几率施加虚弱，降低敌方造成的伤害。', passive:'[断桥] 普攻时获得一层不屈并提高防御；[威震] 提高稳如泰山的攻击范围。', tactic:'[坚如磐石] 受到普攻时不屈可以叠加，每次承受普攻伤害都会提高自身技能伤害。', formation:'刘备、张飞、关羽'}
+    }
+  };
+
+  const officerDialog = document.getElementById('officerDialog');
+  let selectedOfficerId = null;
+  const officerLabels = {
+    th:{active:'สกิลแอคทีฟ',passive:'สกิลพาสซีฟ',tactic:'สกิลตำรายุทธ',formation:'รูปทัพแนะนำ'},
+    en:{active:'Active Skill',passive:'Passive Skills',tactic:'Tactics Manual',formation:'Recommended Formation'},
+    zh:{active:'主动技能',passive:'被动技能',tactic:'兵法技能',formation:'推荐阵容'}
+  };
+  function getOfficerLocale(id, language){
+    return language === 'th' ? officerDetails[id] : officerTranslations[language][id];
+  }
+  function renderOfficerLanguage(language){
+    if (typeof officerDetails === 'undefined') return;
+    document.querySelectorAll('[data-officer]').forEach(card=>{
+      const localized = getOfficerLocale(card.dataset.officer, language);
+      if (!localized) return;
+      card.querySelector('.officer-name').textContent = localized.name;
+      card.querySelector('.officer-skill').textContent = localized.role;
+    });
+    const labels = officerLabels[language];
+    document.getElementById('officerLabelActive').textContent = labels.active;
+    document.getElementById('officerLabelPassive').textContent = labels.passive;
+    document.getElementById('officerLabelTactic').textContent = labels.tactic;
+    document.getElementById('officerLabelFormation').textContent = labels.formation;
+    if (selectedOfficerId && officerDialog.open) renderOfficerDialog(selectedOfficerId, language);
+  }
+  function renderOfficerDialog(id, language){
+    const officer = getOfficerLocale(id, language);
+    if (!officer) return;
+    document.getElementById('officerDialogTitle').textContent = officer.name;
+    document.getElementById('officerDetailSubtitle').textContent = officer.subtitle;
+    document.getElementById('officerDetailActive').textContent = officer.active;
+    document.getElementById('officerDetailPassive').textContent = officer.passive;
+    document.getElementById('officerDetailTactic').textContent = officer.tactic;
+    document.getElementById('officerDetailFormation').textContent = officer.formation;
+  }
+  document.querySelectorAll('[data-officer]').forEach(card=>{
+    card.addEventListener('click',()=>{
+      selectedOfficerId = card.dataset.officer;
+      const officer = officerDetails[selectedOfficerId];
+      if (!officer) return;
+      renderOfficerDialog(selectedOfficerId, currentLanguage);
+      const image = document.getElementById('officerDetailImage');
+      image.src = officer.image;
+      image.alt = officer.name;
+      officerDialog.showModal();
+    });
+  });
+  document.getElementById('officerDialogClose').addEventListener('click',()=>officerDialog.close());
+  officerDialog.addEventListener('click',event=>{
+    if (event.target === officerDialog) officerDialog.close();
+  });
   applyLanguage('en');
 
   // main tab switching
