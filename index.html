@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Trirong:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
   :root{
     --bg:#26211B;
@@ -259,23 +258,12 @@
   .role-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
   .role-card{background:var(--panel-2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;min-width:0;}
   .role-card p{font-size:13.5px;color:var(--text-muted);margin:4px 0 8px;}
-  .pdca-kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:18px 0 22px;}
-  .pdca-kpi{background:var(--panel-2);border:1px solid var(--border);border-top:3px solid var(--kpi-color,var(--gold));border-radius:var(--radius);padding:14px 16px;}
-  .pdca-kpi h3{font-size:14px;color:var(--text-muted);margin:0 0 8px;}
-  .pdca-kpi strong{display:block;font:600 26px 'Trirong',serif;color:var(--gold-soft);}
-  .pdca-kpi span{font-size:12px;color:var(--text-muted);}
-  .pdca-kpi--good{--kpi-color:var(--shu);}.pdca-kpi--blue{--kpi-color:var(--wei);}
-  .pdca-chart-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}
-  .pdca-chart{background:var(--panel-2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;min-width:0;min-height:340px;}
-  .pdca-chart h3{font-size:16px;color:var(--gold-soft);margin-bottom:12px;}
-  .pdca-chart canvas{display:block;width:100%!important;height:260px!important;max-height:260px;}
   .character-data-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-bottom:34px;}
   .character-data-card{background:var(--panel-2);border:1px solid var(--border);border-left:3px solid var(--f-color,var(--gold));border-radius:var(--radius);padding:13px 15px;}
   .character-data-card h3{font-size:16px;color:var(--text);margin-bottom:2px;}
   .character-data-card .character-meta{color:var(--gold-soft);font-size:12.5px;}
   .character-data-card p{font-size:13.5px;color:var(--text-muted);margin:7px 0 0;}
   .character-data-card[data-faction="wu"]{--f-color:var(--wu);}.character-data-card[data-faction="wei"]{--f-color:var(--wei);}.character-data-card[data-faction="shu"]{--f-color:var(--shu);}.character-data-card[data-faction="qun"]{--f-color:var(--qun);}
-  @media(max-width:900px){.pdca-chart-grid{grid-template-columns:1fr;}.pdca-chart{min-height:330px;}}
   .system-toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 18px;}
   .system-toolbar input,.system-toolbar select{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font:inherit;padding:9px 12px;}
   .system-toolbar input{flex:1;min-width:220px;}
@@ -348,7 +336,6 @@
       <button data-tab="counters" data-th="ตาราง Counter" data-en="Counter Table" data-zh="克制表">Counter Table</button>
       <button data-tab="categories" data-th="หมวดหมู่สกิล" data-en="Skill Categories" data-zh="技能分类">Skill Categories</button>
       <button data-tab="systems" data-th="ระบบเกม" data-en="Game Systems" data-zh="游戏系统">Game Systems</button>
-      <button data-tab="pdca" data-th="แดชบอร์ด PDCA" data-en="PDCA Dashboard" data-zh="PDCA仪表板">PDCA Dashboard</button>
     </nav>
   </div>
 </header>
@@ -397,24 +384,6 @@
     </div>
 
     <div class="note" data-th="การจัดสังกัดในเอกสารนี้อ้างอิงจากวรรณกรรม/ประวัติศาสตร์สามก๊กโดยทั่วไป เนื่องจากภาพต้นฉบับไม่ได้ระบุฝ่ายไว้ กรุณาตรวจสอบกับสังกัดจริงในเกมอีกครั้งก่อนใช้วางแผน และตัวเลขบางส่วนที่ปรากฏในภาพต้นฉบับ (เช่น ค่าตัวคูณดาเมจของ Frozen และ Mired) ไม่ชัดเจนสมบูรณ์ จึงแนะนำให้ตรวจสอบค่าที่แน่นอนในเกมอีกครั้ง" data-en="Factions in this guide follow common Three Kingdoms literature and history because the source screenshots do not identify them. Verify each faction in-game before planning. Some source values, such as the Frozen and Mired damage multipliers, are unclear and should also be checked in-game." data-zh="由于原始截图未标明阵营，本指南的阵营划分参考三国文学和历史资料。规划阵容前请在游戏中确认实际阵营。部分原始数值（例如 Frozen 和 Mired 的伤害倍率）不清晰，也请在游戏中核实。">Factions in this guide follow common Three Kingdoms literature and history because the source screenshots do not identify them. Verify each faction in-game before planning. Some source values, such as the Frozen and Mired damage multipliers, are unclear and should also be checked in-game.</div>
-  </section>
-
-  <!-- ===== PDCA ===== -->
-  <section id="tab-pdca" class="tab-page">
-    <h2 data-th="แดชบอร์ดติดตามผล PDCA" data-en="PDCA Execution Dashboard" data-zh="PDCA执行仪表板">PDCA Execution Dashboard</h2>
-    <p class="lede" data-th="ติดตามการวางแผน การลงมือทำ การตรวจสอบผล และการปรับปรุงทีมจากข้อมูลคอมโบในคู่มือนี้" data-en="Track planning, execution, checking, and improvement using the team and combo data in this guide." data-zh="使用本指南中的队伍与组合数据，跟踪计划、执行、检查和改进。">Track planning, execution, checking, and improvement using the team and combo data in this guide.</p>
-    <div class="pdca-kpi-grid">
-      <div class="pdca-kpi pdca-kpi--good"><h3 data-th="Plan · เป้าหมายความสำเร็จ" data-en="Plan · Completion Target" data-zh="计划 · 完成目标">Plan · Completion Target</h3><strong>85%</strong><span data-th="อยู่ในแผน" data-en="On track" data-zh="按计划进行">On track</span></div>
-      <div class="pdca-kpi pdca-kpi--good"><h3 data-th="Do · สถานะการดำเนินงาน" data-en="Do · Action Status" data-zh="执行 · 行动状态">Do · Action Status</h3><strong>12 / 15</strong><span data-th="ดำเนินการแล้ว 80%" data-en="80% executed" data-zh="已执行80%">80% executed</span></div>
-      <div class="pdca-kpi pdca-kpi--blue"><h3 data-th="Check · ช่องว่างเทียบฐานเดิม" data-en="Check · Gap vs Baseline" data-zh="检查 · 与基线差距">Check · Gap vs Baseline</h3><strong>+18%</strong><span data-th="ดีขึ้น" data-en="Improved" data-zh="已改善">Improved</span></div>
-      <div class="pdca-kpi pdca-kpi--good"><h3 data-th="Act · ประสิทธิผล" data-en="Act · Effectiveness" data-zh="改进 · 有效性">Act · Effectiveness</h3><strong>92%</strong><span data-th="ผลกระทบสูง" data-en="High impact" data-zh="影响力高">High impact</span></div>
-    </div>
-    <div class="pdca-chart-grid">
-      <div class="pdca-chart"><h3 data-th="ฐานเดิม เทียบเป้าหมายและผลจริง" data-en="Baseline vs Target vs Actual" data-zh="基线、目标与实际">Baseline vs Target vs Actual</h3><canvas id="baselineTargetChart"></canvas></div>
-      <div class="pdca-chart"><h3 data-th="สถานะการดำเนินงานตามแผน" data-en="Action Plan Execution Status" data-zh="行动计划执行状态">Action Plan Execution Status</h3><canvas id="actionStatusChart"></canvas></div>
-      <div class="pdca-chart"><h3 data-th="แนวโน้ม KPI ผลงาน" data-en="Performance KPI Trend" data-zh="绩效KPI趋势">Performance KPI Trend</h3><canvas id="kpiTrendChart"></canvas></div>
-      <div class="pdca-chart"><h3 data-th="ประเมินประสิทธิผลของกลยุทธ์" data-en="Strategy Effectiveness Evaluation" data-zh="策略有效性评估">Strategy Effectiveness Evaluation</h3><canvas id="effectivenessChart"></canvas></div>
-    </div>
   </section>
 
   <!-- ===== CATEGORIES ===== -->
@@ -1039,7 +1008,6 @@
     languageToggle.setAttribute('aria-label', 'Select language');
     translateDetailedContent(language);
     renderOfficerLanguage(language);
-    updatePdcaChartLanguage(language);
   }
   languageToggle.addEventListener('change',()=>applyLanguage(languageToggle.value));
 
@@ -1218,48 +1186,6 @@
   });
   applyLanguage(languageToggle.value || 'th');
 
-  const chartTextColor = '#B9B0A2';
-  const chartGridColor = 'rgba(142,117,69,.25)';
-  window.pdcaCharts = {};
-  const chartOptions = {responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:chartTextColor}}},scales:{x:{ticks:{color:chartTextColor},grid:{color:chartGridColor}},y:{ticks:{color:chartTextColor},grid:{color:chartGridColor},beginAtZero:true,max:100}}};
-  function createPdcaCharts(){
-    if (typeof Chart === 'undefined' || document.querySelector('#baselineTargetChart.chart-created')) return;
-    ['baselineTargetChart','actionStatusChart','kpiTrendChart','effectivenessChart'].forEach(id=>{
-      const canvas = document.getElementById(id);
-      if (canvas) canvas.parentElement.style.height = '300px';
-    });
-    window.pdcaCharts.baseline = new Chart(document.getElementById('baselineTargetChart'),{type:'bar',data:{labels:['คุณภาพ','ความเร็ว','ลดต้นทุน','ความปลอดภัย'],datasets:[
-      {label:'Baseline',data:[50,60,40,70],backgroundColor:'#77756f'},
-      {label:'Target',data:[90,85,80,95],backgroundColor:'#4A7FB5'},
-      {label:'Actual',data:[78,82,65,90],backgroundColor:'#4F9A5D'}]},options:chartOptions});
-    window.pdcaCharts.status = new Chart(document.getElementById('actionStatusChart'),{type:'doughnut',data:{labels:['Completed','In Progress','Pending','Delayed'],datasets:[{data:[12,5,2,1],backgroundColor:['#4F9A5D','#4A7FB5','#B08D3D','#9C4A3C']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:chartTextColor}}}}});
-    window.pdcaCharts.trend = new Chart(document.getElementById('kpiTrendChart'),{type:'line',data:{labels:['Jan','Feb','Mar','Apr','May','Jun'],datasets:[
-      {label:'Target',data:[80,80,80,80,80,80],borderColor:'#B5602E',borderDash:[5,5],fill:false},
-      {label:'Actual',data:[55,62,68,75,79,85],borderColor:'#4A7FB5',backgroundColor:'rgba(74,127,181,.18)',fill:true,tension:.3}]},options:chartOptions});
-    window.pdcaCharts.effectiveness = new Chart(document.getElementById('effectivenessChart'),{type:'radar',data:{labels:['โล่','ธนู','ม้า','ทีมม่วง'],datasets:[{label:'Effectiveness',data:[88,92,85,78],borderColor:'#B88F45',backgroundColor:'rgba(184,143,69,.2)'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:chartTextColor}}},scales:{r:{min:0,max:100,ticks:{color:chartTextColor,backdropColor:'transparent'},grid:{color:chartGridColor},angleLines:{color:chartGridColor},pointLabels:{color:chartTextColor}}}}});
-    document.querySelectorAll('#tab-pdca canvas').forEach(canvas=>canvas.classList.add('chart-created'));
-  }
-  function updatePdcaChartLanguage(language){
-    const translations = {
-      th:{baseline:['คุณภาพ','ความเร็ว','ลดต้นทุน','ความปลอดภัย'],datasets:['ฐานเดิม','เป้าหมาย','ผลจริง'],status:['เสร็จแล้ว','กำลังดำเนินการ','รอดำเนินการ','ล่าช้า'],target:'เป้าหมาย',actual:'ผลจริง',months:['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.'],effectiveness:'ประสิทธิผล',roles:['ทหารโล่','ทหารธนู','ทหารม้า','ทีมม่วง']},
-      en:{baseline:['Quality','Speed','Cost Reduction','Safety'],datasets:['Baseline','Target','Actual'],status:['Completed','In Progress','Pending','Delayed'],target:'Target',actual:'Actual',months:['Jan','Feb','Mar','Apr','May','Jun'],effectiveness:'Effectiveness',roles:['Shield','Archer','Cavalry','Purple Team']},
-      zh:{baseline:['质量','速度','降低成本','安全'],datasets:['基线','目标','实际'],status:['已完成','进行中','待处理','延迟'],target:'目标',actual:'实际',months:['一月','二月','三月','四月','五月','六月'],effectiveness:'有效性',roles:['盾兵','弓兵','骑兵','紫色队伍']}
-    }[language] || {};
-    const charts = window.pdcaCharts || {};
-    if (!charts.baseline) return;
-    charts.baseline.data.labels = translations.baseline;
-    charts.baseline.data.datasets.forEach((dataset,index)=>{dataset.label=translations.datasets[index];});
-    charts.status.data.labels = translations.status;
-    charts.trend.data.labels = translations.months;
-    charts.trend.data.datasets[0].label = translations.target;
-    charts.trend.data.datasets[1].label = translations.actual;
-    charts.effectiveness.data.labels = translations.roles;
-    charts.effectiveness.data.datasets[0].label = translations.effectiveness;
-    Object.values(charts).forEach(chart=>chart.update('none'));
-  }
-  createPdcaCharts();
-  updatePdcaChartLanguage(currentLanguage);
-
   // main tab switching
   const tabButtons = document.querySelectorAll('.tabs button');
   const tabPages = document.querySelectorAll('.tab-page');
@@ -1269,7 +1195,6 @@
       tabPages.forEach(p=>p.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
-      if (btn.dataset.tab === 'pdca') createPdcaCharts();
       translateDetailedContent(currentLanguage);
       window.scrollTo({top:0,behavior:'smooth'});
     });
