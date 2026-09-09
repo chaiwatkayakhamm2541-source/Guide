@@ -258,6 +258,26 @@
   .role-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;}
   .role-card{background:var(--panel-2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;min-width:0;}
   .role-card p{font-size:13.5px;color:var(--text-muted);margin:4px 0 8px;}
+  .system-toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 18px;}
+  .system-toolbar input,.system-toolbar select{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font:inherit;padding:9px 12px;}
+  .system-toolbar input{flex:1;min-width:220px;}
+  .system-toolbar select{min-width:170px;}
+  .system-toolbar input:focus,.system-toolbar select:focus{outline:2px solid var(--border-bright);outline-offset:1px;}
+  .system-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;}
+  .system-card{background:var(--panel-2);border:1px solid var(--border);border-top:3px solid var(--cat-color,var(--gold));border-radius:var(--radius);padding:16px 18px;min-width:0;}
+  .system-card h3{color:var(--gold-soft);margin-bottom:6px;}
+  .system-card p{font-size:14px;margin:.5em 0;color:var(--text);}
+  .system-card ul{padding-left:20px;margin:8px 0;color:var(--text-muted);font-size:14px;}
+  .system-card li{margin:4px 0;}
+  .system-card .source{font-size:12px;color:var(--gold-soft);margin-top:12px;}
+  .system-card[data-system="city"]{--cat-color:var(--cat-b);}.system-card[data-system="tech"]{--cat-color:var(--cat-a);}.system-card[data-system="heroes"]{--cat-color:var(--cat-c);}.system-card[data-system="army"]{--cat-color:var(--cat-d);}.system-card[data-system="alliance"]{--cat-color:var(--cat-f);}.system-card[data-system="season"]{--cat-color:var(--cat-e);}
+  .system-card[hidden]{display:none;}
+  .system-checklist{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:18px 0 26px;}
+  .system-check{display:flex;gap:9px;align-items:flex-start;background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;color:var(--text);font-size:14px;cursor:pointer;}
+  .system-check input{accent-color:var(--gold);margin-top:5px;}
+  .system-check:has(input:checked){border-color:var(--border-bright);color:var(--gold-soft);}
+  .system-empty{display:none;color:var(--text-muted);border:1px dashed var(--border);padding:16px;border-radius:var(--radius);}
+  .system-empty.visible{display:block;}
 
   footer.wrap{border-top:1px solid var(--border);margin-top:28px;padding:28px 28px 52px;color:var(--text-muted);font-size:13px;}
 
@@ -309,6 +329,7 @@
       <button data-tab="factions" data-th="สังกัด/ฝ่าย" data-en="Factions" data-zh="阵营">Factions</button>
       <button data-tab="counters" data-th="ตาราง Counter" data-en="Counter Table" data-zh="克制表">Counter Table</button>
       <button data-tab="combos" data-th="คอมโบ &amp; ทีม" data-en="Combos &amp; Teams" data-zh="组合与队伍">Combos &amp; Teams</button>
+      <button data-tab="systems" data-th="ระบบเกม" data-en="Game Systems" data-zh="游戏系统">Game Systems</button>
     </nav>
   </div>
 </header>
@@ -698,6 +719,40 @@
     </div>
   </dialog>
 
+  <!-- ===== SYSTEMS ===== -->
+  <section id="tab-systems" class="tab-page">
+    <h2 data-th="ระบบเกมและแนวทางพัฒนา" data-en="Game Systems &amp; Progression" data-zh="游戏系统与发展指南">Game Systems &amp; Progression</h2>
+    <p class="lede" data-th="สรุปข้อมูลจากคู่มือทางการของเกม โดยแยกข้อมูลระบบออกจากคำแนะนำเชิงกลยุทธ์ เพื่อใช้วางแผนตั้งแต่เริ่มเกมจนถึงการรบระหว่างผู้เล่น" data-en="A concise reference based on the official game guides, separating system facts from strategic recommendations for planning from the opening through PvP." data-zh="根据官方攻略整理，区分系统事实与策略建议，帮助规划从开局到玩家对战的成长路线。">สรุปข้อมูลจากคู่มือทางการของเกม โดยแยกข้อมูลระบบออกจากคำแนะนำเชิงกลยุทธ์ เพื่อใช้วางแผนตั้งแต่เริ่มเกมจนถึงการรบระหว่างผู้เล่น</p>
+    <div class="system-toolbar">
+      <input id="systemSearchInput" type="search" placeholder="ค้นหาระบบ เช่น อาคาร เทคโนโลยี ทหาร..." autocomplete="off" data-placeholder-th="ค้นหาระบบ เช่น อาคาร เทคโนโลยี ทหาร..." data-placeholder-en="Search systems, buildings, technology, troops..." data-placeholder-zh="搜索系统、建筑、科技、兵种...">
+      <select id="systemFilter" aria-label="กรองหมวดระบบ">
+        <option value="all" data-th="ทุกหมวดระบบ" data-en="All systems" data-zh="全部系统">ทุกหมวดระบบ</option>
+        <option value="city" data-th="เมืองและอาคาร" data-en="City &amp; buildings" data-zh="城建与建筑">เมืองและอาคาร</option>
+        <option value="tech" data-th="เทคโนโลยี" data-en="Technology" data-zh="科技">เทคโนโลยี</option>
+        <option value="heroes" data-th="พัฒนาขุนพล" data-en="Officer growth" data-zh="武将养成">พัฒนาขุนพล</option>
+        <option value="army" data-th="จัดทัพและทหาร" data-en="Army &amp; troops" data-zh="部队与兵种">จัดทัพและทหาร</option>
+        <option value="alliance" data-th="พันธมิตร" data-en="Alliance" data-zh="联盟">พันธมิตร</option>
+        <option value="season" data-th="凌空對決" data-en="Sky Clash season" data-zh="凌空对决赛季">凌空對決</option>
+      </select>
+    </div>
+    <p class="system-empty" id="systemSearchEmpty" data-th="ไม่พบข้อมูลระบบที่ค้นหา" data-en="No matching system information found" data-zh="未找到匹配的系统信息">ไม่พบข้อมูลระบบที่ค้นหา</p>
+    <h2 data-th="เช็กลิสต์เริ่มต้น" data-en="Opening checklist" data-zh="开局清单">Opening checklist</h2>
+    <div class="system-checklist">
+      <label class="system-check"><input type="checkbox"> <span data-th="เดินตามภารกิจหลักเพื่อปลดล็อกฟังก์ชันตามลำดับ" data-en="Follow main quests to unlock features in order" data-zh="跟随主线任务按顺序解锁功能">เดินตามภารกิจหลักเพื่อปลดล็อกฟังก์ชันตามลำดับ</span></label>
+      <label class="system-check"><input type="checkbox"> <span data-th="รีบพัฒนา君主殿ไปเลเวล 8 เพื่อเปิด軍事府" data-en="Prioritize Lord Hall level 8 to unlock the Military Office" data-zh="优先将君主殿升至8级以解锁军事府">รีบพัฒนา君主殿ไปเลเวล 8 เพื่อเปิด軍事府</span></label>
+      <label class="system-check"><input type="checkbox"> <span data-th="อัป兵營เลเวล 9 เพื่อปลดล็อกทหารขั้น 2" data-en="Raise Barracks to level 9 to unlock tier-2 troops" data-zh="兵营升至9级解锁二阶兵种">อัป兵營เลเวล 9 เพื่อปลดล็อกทหารขั้น 2</span></label>
+      <label class="system-check"><input type="checkbox"> <span data-th="เข้าพันธมิตรเร็วเพื่อรับบัฟ การสนับสนุน และกิจกรรมรวมกลุ่ม" data-en="Join an alliance early for buffs, support, and group activities" data-zh="尽早加入联盟以获得加成、支援和集体活动">เข้าพันธมิตรเร็วเพื่อรับบัฟ การสนับสนุน และกิจกรรมรวมกลุ่ม</span></label>
+    </div>
+    <div class="system-grid" id="systemGrid">
+      <article class="system-card" data-system="city"><h3 data-th="เมืองและการอัปเกรดอาคาร" data-en="City Development and Building Upgrades" data-zh="城建与建筑升级">เมืองและการอัปเกรดอาคาร</h3><p data-th="君主殿คือศูนย์กลางของเมือง ระดับของมันกำหนดเพดานอาคารอื่นและเงื่อนไขการปลดล็อก ควรวางแผนทรัพยากรกับ繁榮度ให้พร้อมก่อนกดอัปเกรด" data-en="The Lord Hall is the city hub. Its level sets the level cap and unlock requirements for other buildings, so plan resources and Prosperity before upgrading." data-zh="君主殿是城市核心，其等级决定其他建筑的等级上限和解锁条件。升级前应提前规划资源与繁荣度。">君主殿คือศูนย์กลางของเมือง ระดับของมันกำหนดเพดานอาคารอื่นและเงื่อนไขการปลดล็อก ควรวางแผนทรัพยากรกับ繁榮度ให้พร้อมก่อนกดอัปเกรด</p><ul><li data-th="ช่วงต้นเน้น君主殿, 兵營 และ軍事府" data-en="Prioritize the Lord Hall, Barracks, and Military Office early." data-zh="前期优先升级君主殿、兵营和军事府。">ช่วงต้นเน้น君主殿, 兵營 และ軍事府</li><li data-th="君主殿 7: อัป校場เพื่อเพิ่มช่อง副將" data-en="At Lord Hall 7, upgrade the Drill Ground to unlock an extra sub-general slot." data-zh="君主殿7级时升级校场，解锁副将槽位。">君主殿 7: อัป校場เพื่อเพิ่มช่อง副將</li><li data-th="君主殿 8: อัป軍事府เพื่อเพิ่มจำนวนทหารที่部曲บรรทุก" data-en="At Lord Hall 8, upgrade the Military Office to increase troop capacity." data-zh="君主殿8级时升级军事府，提高部曲带兵量。">君主殿 8: อัป軍事府เพื่อเพิ่มจำนวนทหารที่部曲บรรทุก</li><li data-th="หลังอาคารทหารเริ่มนิ่ง ค่อยเติม磨坊, 木工坊, 石作坊 และ民居" data-en="After military buildings are stable, develop the Mill, Lumberyard, Quarry, and Residences." data-zh="军事建筑稳定后，再发展磨坊、木工坊、石作坊和民居。">หลังอาคารทหารเริ่มนิ่ง ค่อยเติม磨坊, 木工坊, 石作坊 และ民居</li></ul><p class="source" data-th="แหล่งข้อมูล: คู่มือทางการ ID 977 และ 981" data-en="Source: Official guides 977 and 981" data-zh="来源：官方攻略 977、981">แหล่งข้อมูล: คู่มือทางการ ID 977 และ 981</p></article>
+      <article class="system-card" data-system="tech"><h3 data-th="เทคโนโลยีและ研學館" data-en="Technology and the Academy" data-zh="科技与研学馆">เทคโนโลยีและ研學館</h3><p data-th="研學館แบ่งเป็นเทคโนโลยีการรบและสนับสนุน โดยเทคโนโลยีจะค่อย ๆ เปิดตามระดับอาคาร การวิจัยช่วงต้นควรตรงกับประเภททหารที่ใช้จริง" data-en="The Academy has combat and support technologies unlocked by building level. Early research should match the troop type you actually use." data-zh="研学馆分为战斗与辅助科技，随建筑等级逐步解锁。前期研究应与实际使用的兵种相匹配。">研學館แบ่งเป็นเทคโนโลยีการรบและสนับสนุน โดยเทคโนโลยีจะค่อย ๆ เปิดตามระดับอาคาร การวิจัยช่วงต้นควรตรงกับประเภททหารที่ใช้จริง</p><ul><li data-th="สายรบมีเทคโนโลยีโจมตี/ป้องกันของ騎, 盾 และ弓" data-en="Combat research covers attack and defense for cavalry, shields, and archers." data-zh="战斗科技包括骑兵、盾兵和弓兵的攻击与防御。">สายรบมีเทคโนโลยีโจมตี/ป้องกันของ騎, 盾 และ弓</li><li data-th="ช่วงเปิดเมืองให้เร่งเทคโนโลยีโจมตีของทัพหลัก" data-en="During early development, prioritize attack research for your main army." data-zh="前期发展优先研究主力部队的攻击科技。">ช่วงเปิดเมืองให้เร่งเทคโนโลยีโจมตีของทัพหลัก</li><li data-th="ช่วงกลางเกมเสริม預備徵兵, 部曲招兵 และ部曲攻城" data-en="Mid-game priorities include reserve recruitment, unit recruitment, and unit siege." data-zh="中期可补强预备征兵、部曲招兵和部曲攻城。">ช่วงกลางเกมเสริม預備徵兵, 部曲招兵 และ部曲攻城</li><li data-th="เทคโนโลยีพันธมิตรเริ่มจากสายพัฒนา แล้วค่อยขยายไปดินแดนและสงคราม" data-en="For alliance technology, start with Development, then expand into Territory and War." data-zh="联盟科技先发展，再研究领土与战争。">เทคโนโลยีพันธมิตรเริ่มจากสายพัฒนา แล้วค่อยขยายไปดินแดนและสงคราม</li></ul><p class="source" data-th="แหล่งข้อมูล: คู่มือทางการ ID 978" data-en="Source: Official guide 978" data-zh="来源：官方攻略 978">แหล่งข้อมูล: คู่มือทางการ ID 978</p></article>
+      <article class="system-card" data-system="heroes"><h3 data-th="พัฒนาขุนพล" data-en="Officer Development" data-zh="武将养成">พัฒนาขุนพล</h3><p data-th="ให้เร่งเลเวลขุนพลหลักก่อน เพราะทุกเลเวลเพิ่มขีดจำกัดการนำทหารและขนาด部曲 จากนั้นค่อยลงทุนสกิล ขั้นก้าวหน้า อาวุธเฉพาะ อุปกรณ์ และพรสวรรค์" data-en="Level your core officers first because each level increases troop capacity and unit size. Then invest in skills, advancement, exclusive weapons, equipment, and talents." data-zh="优先提升核心武将等级，因为每级都会提高带兵上限与部曲规模，再投入技能、进阶、专武、装备和天赋。">ให้เร่งเลเวลขุนพลหลักก่อน เพราะทุกเลเวลเพิ่มขีดจำกัดการนำทหารและขนาด部曲 จากนั้นค่อยลงทุนสกิล ขั้นก้าวหน้า อาวุธเฉพาะ อุปกรณ์ และพรสวรรค์</p><ul><li data-th="สกิลติดตัวปลดล็อกที่เลเวล 15 และ 25" data-en="Passive skills unlock at levels 15 and 25." data-zh="被动技能在15级和25级解锁。">สกิลติดตัวปลดล็อกที่เลเวล 15 และ 25</li><li data-th="สกิลปลุกพลังต้องใช้兵書ประจำตัว" data-en="Awakening skills require the officer's exclusive War Scroll." data-zh="觉醒技能需要武将专属兵书。">สกิลปลุกพลังต้องใช้兵書ประจำตัว</li><li data-th="อาวุธเฉพาะเปิดได้เมื่อมีขุนพลและ兵書ครบ" data-en="Exclusive weapons unlock when both the officer and War Scroll are owned." data-zh="拥有武将和兵书后即可解锁专武。">อาวุธเฉพาะเปิดได้เมื่อมีขุนพลและ兵書ครบ</li><li data-th="แต้มพรสวรรค์รีเซ็ตมีคูลดาวน์ 36 ชั่วโมง ควรวางแผนก่อนใช้" data-en="Talent reset has a 36-hour cooldown, so plan before resetting." data-zh="天赋重置有36小时冷却，请谨慎规划。">แต้มพรสวรรค์รีเซ็ตมีคูลดาวน์ 36 ชั่วโมง ควรวางแผนก่อนใช้</li></ul><p class="source" data-th="แหล่งข้อมูล: คู่มือทางการ ID 971" data-en="Source: Official guide 971" data-zh="来源：官方攻略 971">แหล่งข้อมูล: คู่มือทางการ ID 971</p></article>
+      <article class="system-card" data-system="army"><h3 data-th="การจัดทัพและประเภททหาร" data-en="Army Composition and Troop Types" data-zh="部队编成与兵种">การจัดทัพและประเภททหาร</h3><p data-th="จัดตำแหน่งตามหน้าที่ของทัพ: 盾 รับแรงปะทะ, 騎 ใช้ความเร็วและไล่ล่า, 弓 ทำดาเมจจากระยะไกล การเลือกทัพควรดูทั้งสกิลขุนพล ประเภท兵種 และสถานการณ์" data-en="Build armies around roles: shields absorb pressure, cavalry use speed and pursuit, and archers deal ranged damage. Consider officer skills, troop type, and the situation together." data-zh="按部队职责编成：盾兵承受压力，骑兵利用速度追击，弓兵从远程输出。选择阵容时要同时考虑武将技能、兵种和战场情况。">จัดตำแหน่งตามหน้าที่ของทัพ: 盾 รับแรงปะทะ, 騎 ใช้ความเร็วและไล่ล่า, 弓 ทำดาเมจจากระยะไกล การเลือกทัพควรดูทั้งสกิลขุนพล ประเภท兵種 และสถานการณ์</p><ul><li data-th="เปิดเกมนิยมใช้ 盾 + 弓 หรือ 盾 + 騎 เพื่อความเสถียร" data-en="Early game: use Shield + Archer or Shield + Cavalry for stability." data-zh="开局可使用盾兵+弓兵或盾兵+骑兵以提高稳定性。">เปิดเกมนิยมใช้ 盾 + 弓 หรือ 盾 + 騎 เพื่อความเสถียร</li><li data-th="ทัพ追擊騎เน้นโจมตีปกติและการโจมตีต่อเนื่อง" data-en="Pursuit Cavalry focuses on normal attacks and repeated pursuit attacks." data-zh="追击骑以普攻和连续追击为核心。">ทัพ追擊騎เน้นโจมตีปกติและการโจมตีต่อเนื่อง</li><li data-th="燃燒弓เด่นในศึกใหญ่ที่ศัตรูอยู่รวมกัน" data-en="Burning Archers excel in large battles where enemies cluster together." data-zh="燃烧弓适合敌军密集的大规模战斗。">燃燒弓เด่นในศึกใหญ่ที่ศัตรูอยู่รวมกัน</li><li data-th="鬥智弓เหมาะกับการโฟกัสเป้าหมายเดียวและความต่าง INT" data-en="Strategic Archers suit single-target focus and Intelligence-gap damage." data-zh="斗智弓适合单点集火，并利用智力差造成伤害。">鬥智弓เหมาะกับการโฟกัสเป้าหมายเดียวและความต่าง INT</li></ul><p class="source" data-th="แหล่งข้อมูล: คู่มือทางการ ID 970, 973, 975 และ 976" data-en="Source: Official guides 970, 973, 975, and 976" data-zh="来源：官方攻略 970、973、975、976">แหล่งข้อมูล: คู่มือทางการ ID 970, 973, 975 และ 976</p></article>
+      <article class="system-card" data-system="alliance"><h3 data-th="พันธมิตรและการมอบหมาย部曲" data-en="Alliance and Unit Delegation" data-zh="联盟与部曲委托">พันธมิตรและการมอบหมาย部曲</h3><p data-th="เข้าพันธมิตรตั้งแต่ต้นเพื่อรับการสนับสนุน เข้าร่วม攻城, 集結 และกิจกรรมรวมกลุ่มได้สะดวก เมื่อมีเวลาจำกัดให้ใช้部曲委託ช่วยจัดการงานบางส่วน" data-en="Join an alliance early for support and access to sieges, rallies, and group activities. Use unit delegation when you cannot manage every operation yourself." data-zh="尽早加入联盟以获得支援，并参与攻城、集结和集体活动。时间有限时可使用部曲委托协助处理部分行动。">เข้าพันธมิตรตั้งแต่ต้นเพื่อรับการสนับสนุน เข้าร่วม攻城, 集結 และกิจกรรมรวมกลุ่มได้สะดวก เมื่อมีเวลาจำกัดให้ใช้部曲委託ช่วยจัดการงานบางส่วน</p><ul><li data-th="ตรวจประกาศและเวลาเข้าร่วมกิจกรรมของ盟" data-en="Check alliance notices and event schedules." data-zh="留意联盟公告与活动时间。">ตรวจประกาศและเวลาเข้าร่วมกิจกรรมของ盟</li><li data-th="ใช้เทคโนโลยีพันธมิตรเพิ่มทรัพยากรและประสิทธิภาพสงคราม" data-en="Use alliance technology to improve resources and war efficiency." data-zh="利用联盟科技提升资源产量与作战效率。">ใช้เทคโนโลยีพันธมิตรเพิ่มทรัพยากรและประสิทธิภาพสงคราม</li><li data-th="วางแผนการสนับสนุนและเส้นทางก่อนการ攻城" data-en="Plan support and routes before a siege." data-zh="攻城前规划支援与行军路线。">วางแผนการสนับสนุนและเส้นทางก่อนการ攻城</li></ul><p class="source" data-th="แหล่งข้อมูล: คู่มือทางการ ID 965 และ 979" data-en="Source: Official guides 965 and 979" data-zh="来源：官方攻略 965、979">แหล่งข้อมูล: คู่มือทางการ ID 965 และ 979</p></article>
+      <article class="system-card" data-system="season"><h3 data-th="凌空對決 และ兵種พิเศษ" data-en="Sky Clash and Special Troops" data-zh="凌空对决与特殊兵种">凌空對決 และ兵種พิเศษ</h3><p data-th="คู่มือซีซันระบุว่ามี兵種พิเศษใหม่ 9 แบบ โดยปลดล็อกผ่าน兵營เลเวล 12 จุดเด่นของแต่ละแบบแตกต่างกัน จึงควรเลือกให้เข้ากับแผนทัพ" data-en="The season guide introduces nine special troop types unlocked at Barracks level 12. Each has a different specialty, so choose according to your army plan." data-zh="赛季攻略介绍了九种特殊兵种，兵营达到12级即可解锁。各兵种特色不同，应根据阵容规划选择。">คู่มือซีซันระบุว่ามี兵種พิเศษใหม่ 9 แบบ โดยปลดล็อกผ่าน兵營เลเวล 12 จุดเด่นของแต่ละแบบแตกต่างกัน จึงควรเลือกให้เข้ากับแผนทัพ</p><ul><li data-th="ตรวจเงื่อนไขและค่าสถานะในเกมก่อนลงทุนจริง" data-en="Check the in-game requirements and stats before investing." data-zh="投入资源前先确认游戏内条件与属性。">ตรวจเงื่อนไขและค่าสถานะในเกมก่อนลงทุนจริง</li><li data-th="ทดลอง兵種พิเศษกับทัพหลักและดูผลในสนาม" data-en="Test special troops with your main army and observe the results." data-zh="先在主力部队中测试特殊兵种并观察效果。">ทดลอง兵種พิเศษกับทัพหลักและดูผลในสนาม</li><li data-th="คำนึงถึงการลด/เพิ่ม攻防ของ兵種แต่ละแบบ" data-en="Account for each troop type's attack and defense changes." data-zh="注意各兵种带来的攻防变化。">คำนึงถึงการลด/เพิ่ม攻防ของ兵種แต่ละแบบ</li></ul><p class="source" data-th="แหล่งข้อมูล: คู่มือทางการ ID 983" data-en="Source: Official guide 983" data-zh="来源：官方攻略 983">แหล่งข้อมูล: คู่มือทางการ ID 983</p></article>
+    </div>
+  </section>
+
   <!-- ===== COUNTERS ===== -->
   <section id="tab-counters" class="tab-page">
     <h2 data-th="ตาราง Counter Matchup" data-en="Counter Matchup Table" data-zh="克制搭配表">Counter Matchup Table</h2>
@@ -870,6 +925,22 @@
     translatableElements.forEach(element=>{
       element.innerHTML = element.dataset[language];
     });
+    if (language === 'th') {
+      const thaiSystemTerms = {
+        '君主殿':'พระราชวัง', '兵營':'ค่ายทหาร', '軍事府':'สำนักทหาร', '繁榮度':'ค่าความเจริญ',
+        '校場':'สนามฝึก', '副將':'รองแม่ทัพ', '部曲':'กองทัพ', '磨坊':'โรงสี', '木工坊':'โรงไม้',
+        '石作坊':'โรงหิน', '民居':'บ้านเรือน', '研學館':'สถาบันวิจัย', '騎':'ทหารม้า', '盾':'ทหารโล่',
+        '弓':'ทหารธนู', '預備徵兵':'เกณฑ์ทหารสำรอง', '部曲招兵':'รับสมัครทหาร', '部曲攻城':'ล้อมเมือง',
+        '攻城':'โจมตีเมือง', '集結':'รวมพล', '部曲委託':'มอบหมายกองทัพ', '盟':'พันธมิตร',
+        '追擊騎':'ทหารม้าไล่ล่า', '燃燒弓':'ทหารธนูเพลิง', '鬥智弓':'ทหารธนูวางแผน', '兵種':'ประเภททหาร',
+        '凌空對決':'ศึกประลองกลางอากาศ', '兵書':'ตำรายุทธ', '攻防':'โจมตีและป้องกัน'
+      };
+      document.querySelectorAll('#tab-systems [data-th]').forEach(element=>{
+        Object.entries(thaiSystemTerms).forEach(([source, translated])=>{
+          element.innerHTML = element.innerHTML.split(source).join(translated);
+        });
+      });
+    }
     const searchPlaceholders = language === 'en'
       ? {faction:'Search by character name...', category:'Search by skill or status...'}
       : language === 'zh'
@@ -877,6 +948,8 @@
         : {faction:'ค้นหาชื่อตัวละคร...', category:'ค้นหาชื่อสกิลหรือสถานะ...'};
     document.getElementById('factionSearchInput').placeholder = searchPlaceholders.faction;
     document.getElementById('categorySearchInput').placeholder = searchPlaceholders.category;
+    const systemSearchInput = document.getElementById('systemSearchInput');
+    if (systemSearchInput) systemSearchInput.placeholder = systemSearchInput.dataset['placeholder-'+language];
     const tableLabels = language === 'en'
       ? { 'สถานะ': 'Status', 'เคาน์เตอร์': 'Counter', 'ขุนพลแนะนำ': 'Recommended officers', 'หมายเหตุ': 'Notes' }
       : language === 'zh'
@@ -1067,7 +1140,7 @@
   officerDialog.addEventListener('click',event=>{
     if (event.target === officerDialog) officerDialog.close();
   });
-  applyLanguage('th');
+  applyLanguage(languageToggle.value || 'th');
 
   // main tab switching
   const tabButtons = document.querySelectorAll('.tabs button');
@@ -1203,6 +1276,26 @@
     });
     categorySearchEmpty.classList.toggle('visible', matchCount === 0);
   });
+
+  const systemSearchInput = document.getElementById('systemSearchInput');
+  const systemFilter = document.getElementById('systemFilter');
+  const systemSearchEmpty = document.getElementById('systemSearchEmpty');
+  const systemCards = Array.from(document.querySelectorAll('.system-card'));
+  function filterSystems(){
+    const query = normalizeSearch(systemSearchInput.value.trim());
+    const selectedSystem = systemFilter.value;
+    let matchCount = 0;
+    systemCards.forEach(card=>{
+      const matchesText = !query || normalizeSearch(card.textContent).includes(query);
+      const matchesFilter = selectedSystem === 'all' || card.dataset.system === selectedSystem;
+      const visible = matchesText && matchesFilter;
+      card.hidden = !visible;
+      if (visible) matchCount++;
+    });
+    systemSearchEmpty.classList.toggle('visible', matchCount === 0);
+  }
+  systemSearchInput.addEventListener('input', filterSystems);
+  systemFilter.addEventListener('change', filterSystems);
 </script>
 
 </body>
