@@ -282,12 +282,63 @@
   .system-card .source{font-size:12px;color:var(--gold-soft);margin-top:12px;}
   .system-card[data-system="city"]{--cat-color:var(--cat-b);}.system-card[data-system="tech"]{--cat-color:var(--cat-a);}.system-card[data-system="heroes"]{--cat-color:var(--cat-c);}.system-card[data-system="army"]{--cat-color:var(--cat-d);}.system-card[data-system="alliance"]{--cat-color:var(--cat-f);}.system-card[data-system="season"]{--cat-color:var(--cat-e);}
   .system-card[hidden]{display:none;}
+  #tab-systems > .lede[hidden],#tab-systems > .map-guide[hidden],#tab-systems > .community-guide .community-guide__item[hidden]{display:none;}
+  #systemGrid .community-guide__item[hidden]{display:none;}
+  #tab-systems > .community-guide:has(.community-guide__item:not([hidden])){display:grid;}
+  #tab-systems > .community-guide:has(.community-guide__item[hidden]):not(:has(.community-guide__item:not([hidden]))){display:none;}
   .system-checklist{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:18px 0 26px;}
   .system-check{display:flex;gap:9px;align-items:flex-start;background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;color:var(--text);font-size:14px;cursor:pointer;}
   .system-check input{accent-color:var(--gold);margin-top:5px;}
   .system-check:has(input:checked){border-color:var(--border-bright);color:var(--gold-soft);}
   .system-empty{display:none;color:var(--text-muted);border:1px dashed var(--border);padding:16px;border-radius:var(--radius);}
   .system-empty.visible{display:block;}
+
+  .map-guide{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(260px,1fr);align-items:stretch;margin:22px 0 28px;background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+  .map-guide__image{display:block;width:100%;height:100%;min-height:280px;object-fit:cover;background:var(--panel-2);}
+  .map-guide__details{display:flex;flex-direction:column;justify-content:center;min-width:0;}
+  .map-guide__caption{padding:20px 18px 10px;color:var(--text-muted);font-size:13.5px;}
+  .map-guide__caption strong{display:block;color:var(--gold-soft);font-size:16px;margin-bottom:3px;}
+  .map-guide__warning{margin:0 16px 16px;border-left:3px solid var(--seal);padding:10px 12px;background:var(--panel-2);color:var(--text);font-size:13.5px;}
+  .map-guide__warning strong{display:inline;color:var(--gold-soft);font-size:inherit;}
+  .community-guide{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:20px 0 28px;}
+  .community-guide__item{margin:0;background:var(--panel-2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+  .community-guide__image{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--panel);}
+  .community-guide__text{padding:10px 12px;color:var(--text-muted);font-size:13px;}
+  .community-guide__text strong{display:block;color:var(--gold-soft);margin-bottom:3px;}
+  .resonance-card{display:none;}
+  @media(max-width:720px){
+    .map-guide{display:block;}
+    .map-guide__image{height:auto;min-height:0;max-height:none;aspect-ratio:16/9;}
+    .map-guide__caption{padding-top:14px;}
+    .community-guide{grid-template-columns:1fr;}
+  }
+
+  /* top-up guide */
+  .topup-intro{color:var(--text-muted);max-width:72ch;margin-bottom:20px;}
+  .topup-nav{display:flex;gap:8px;overflow-x:auto;margin:0 0 24px;padding-bottom:4px;scrollbar-width:thin;}
+  .topup-nav a{flex:none;border:1px solid var(--border);border-radius:var(--radius);padding:6px 11px;text-decoration:none;color:var(--text-muted);font-size:13px;white-space:nowrap;}
+  .topup-nav a:hover{border-color:var(--border-bright);color:var(--gold-soft);}
+  .topup-section{border-top:1px solid var(--border);padding:22px 0 4px;}
+  .topup-section h3{color:var(--gold-soft);font-size:19px;margin-bottom:2px;}
+  .topup-sub{color:var(--text-muted);font-size:13px;margin:0 0 10px;}
+  .topup-desc{color:var(--text-muted);font-size:14px;margin:0 0 14px;}
+  .topup-table-wrap{overflow-x:auto;}
+  table.topup-table{width:100%;min-width:650px;border-collapse:collapse;font-size:13.5px;}
+  .topup-table th{text-align:left;color:var(--gold-soft);font-weight:600;background:var(--panel-2);padding:9px 10px;border-bottom:2px solid var(--border-bright);}
+  .topup-table td{padding:9px 10px;border-bottom:1px solid var(--border);vertical-align:top;}
+  .topup-table tr:nth-child(even) td{background:rgba(255,255,255,.02);}
+  .topup-table .ios{display:block;color:var(--text-muted);font-size:12px;margin-top:2px;}
+  .topup-price-reference{display:block;color:var(--text-muted);font-size:12px;margin-top:2px;}
+  .topup-tag{display:inline-block;color:var(--gold-soft);border:1px solid var(--border-bright);border-radius:3px;padding:1px 5px;font-size:11px;margin-left:4px;white-space:nowrap;}
+  .topup-note{border-left-color:var(--gold);margin:16px 0 0;}
+  .topup-foot{color:var(--text-muted);font-size:12px;margin-top:18px;}
+  .opening-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:20px;}
+  .opening-gallery__item{margin:0;background:var(--panel-2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+  .opening-gallery__image{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--panel);}
+  .opening-gallery__caption{padding:12px 14px;color:var(--text-muted);font-size:13.5px;}
+  .opening-gallery__caption strong{display:block;color:var(--gold-soft);font-size:16px;margin-bottom:4px;}
+  .opening-group{margin:26px 0 0;color:var(--gold-soft);font-size:18px;border-bottom:1px solid var(--border);padding-bottom:8px;}
+  .tabs button[data-tab="systems"],#tab-systems{display:none!important;}
 
   footer.wrap{border-top:1px solid var(--border);margin-top:28px;padding:28px 28px 52px;color:var(--text-muted);font-size:13px;}
   .footer-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px 28px;align-items:end;}
@@ -353,7 +404,8 @@
       <button data-tab="combos" data-th="คอมโบ &amp; ทีม" data-en="Combos &amp; Teams" data-zh="组合与队伍">Combos &amp; Teams</button>
       <button data-tab="counters" data-th="ตาราง Counter" data-en="Counter Table" data-zh="克制表">Counter Table</button>
       <button data-tab="categories" data-th="หมวดหมู่สกิล" data-en="Skill Categories" data-zh="技能分类">Skill Categories</button>
-      <button data-tab="systems" data-th="ระบบเกม" data-en="Game Systems" data-zh="游戏系统">Game Systems</button>
+      <button data-tab="opening" data-th="คู่มือเริ่มเกม" data-en="Opening Guide" data-zh="开荒指南">Opening Guide</button>
+      <button data-tab="topup" data-th="คู่มือเติมเงิน" data-en="Top-up Guide" data-zh="充值指南">Top-up Guide</button>
     </nav>
   </div>
 </header>
@@ -746,10 +798,9 @@
   <!-- ===== SYSTEMS ===== -->
   <section id="tab-systems" class="tab-page">
     <h2 data-th="ระบบเกมและแนวทางพัฒนา" data-en="Game Systems &amp; Progression" data-zh="游戏系统与发展指南">Game Systems &amp; Progression</h2>
-    <p class="lede" data-th="สรุปข้อมูลจากคู่มือทางการของเกม โดยแยกข้อมูลระบบออกจากคำแนะนำเชิงกลยุทธ์ เพื่อใช้วางแผนตั้งแต่เริ่มเกมจนถึงการรบระหว่างผู้เล่น" data-en="A concise reference based on the official game guides, separating system facts from strategic recommendations for planning from the opening through PvP." data-zh="根据官方攻略整理，区分系统事实与策略建议，帮助规划从开局到玩家对战的成长路线。">สรุปข้อมูลจากคู่มือทางการของเกม โดยแยกข้อมูลระบบออกจากคำแนะนำเชิงกลยุทธ์ เพื่อใช้วางแผนตั้งแต่เริ่มเกมจนถึงการรบระหว่างผู้เล่น</p>
     <div class="system-toolbar">
       <input id="systemSearchInput" type="search" placeholder="ค้นหาระบบ เช่น อาคาร เทคโนโลยี ทหาร..." autocomplete="off" data-placeholder-th="ค้นหาระบบ เช่น อาคาร เทคโนโลยี ทหาร..." data-placeholder-en="Search systems, buildings, technology, troops..." data-placeholder-zh="搜索系统、建筑、科技、兵种...">
-      <select id="systemFilter" aria-label="กรองหมวดระบบ">
+      <select id="systemFilter" aria-label="กรองหมวดระบบ" data-label-th="กรองหมวดระบบ" data-label-en="Filter system category" data-label-zh="筛选系统分类">
         <option value="all" data-th="ทุกหมวดระบบ" data-en="All systems" data-zh="全部系统">ทุกหมวดระบบ</option>
         <option value="city" data-th="เมืองและอาคาร" data-en="City &amp; buildings" data-zh="城建与建筑">เมืองและอาคาร</option>
         <option value="tech" data-th="เทคโนโลยี" data-en="Technology" data-zh="科技">เทคโนโลยี</option>
@@ -759,14 +810,19 @@
         <option value="season" data-th="凌空對決" data-en="Sky Clash season" data-zh="凌空对决赛季">凌空對決</option>
       </select>
     </div>
-    <p class="system-empty" id="systemSearchEmpty" data-th="ไม่พบข้อมูลระบบที่ค้นหา" data-en="No matching system information found" data-zh="未找到匹配的系统信息">ไม่พบข้อมูลระบบที่ค้นหา</p>
-    <h2 data-th="เช็กลิสต์เริ่มต้น" data-en="Opening checklist" data-zh="开局清单">Opening checklist</h2>
-    <div class="system-checklist">
-      <label class="system-check"><input type="checkbox"> <span data-th="เดินตามภารกิจหลักเพื่อปลดล็อกฟังก์ชันตามลำดับ" data-en="Follow main quests to unlock features in order" data-zh="跟随主线任务按顺序解锁功能">เดินตามภารกิจหลักเพื่อปลดล็อกฟังก์ชันตามลำดับ</span></label>
-      <label class="system-check"><input type="checkbox"> <span data-th="รีบพัฒนา君主殿ไปเลเวล 8 เพื่อเปิด軍事府" data-en="Prioritize Lord Hall level 8 to unlock the Military Office" data-zh="优先将君主殿升至8级以解锁军事府">รีบพัฒนา君主殿ไปเลเวล 8 เพื่อเปิด軍事府</span></label>
-      <label class="system-check"><input type="checkbox"> <span data-th="อัป兵營เลเวล 9 เพื่อปลดล็อกทหารขั้น 2" data-en="Raise Barracks to level 9 to unlock tier-2 troops" data-zh="兵营升至9级解锁二阶兵种">อัป兵營เลเวล 9 เพื่อปลดล็อกทหารขั้น 2</span></label>
-      <label class="system-check"><input type="checkbox"> <span data-th="เข้าพันธมิตรเร็วเพื่อรับบัฟ การสนับสนุน และกิจกรรมรวมกลุ่ม" data-en="Join an alliance early for buffs, support, and group activities" data-zh="尽早加入联盟以获得加成、支援和集体活动">เข้าพันธมิตรเร็วเพื่อรับบัฟ การสนับสนุน และกิจกรรมรวมกลุ่ม</span></label>
+    <p class="lede" data-th="สรุปข้อมูลจากคู่มือทางการของเกม โดยแยกข้อมูลระบบออกจากคำแนะนำเชิงกลยุทธ์ เพื่อใช้วางแผนตั้งแต่เริ่มเกมจนถึงการรบระหว่างผู้เล่น" data-en="A concise reference based on the official game guides, separating system facts from strategic recommendations for planning from the opening through PvP." data-zh="根据官方攻略整理，区分系统事实与策略建议，帮助规划从开局到玩家对战的成长路线。">สรุปข้อมูลจากคู่มือทางการของเกม โดยแยกข้อมูลระบบออกจากคำแนะนำเชิงกลยุทธ์ เพื่อใช้วางแผนตั้งแต่เริ่มเกมจนถึงการรบระหว่างผู้เล่น</p>
+    <figure class="map-guide">
+      <img class="map-guide__image" src="GamePicture/Map.jpg" alt="แผนที่เลือกแคว้นเริ่มต้นในเกม" data-alt-th="แผนที่เลือกแคว้นเริ่มต้นในเกม" data-alt-en="Starting faction selection map" data-alt-zh="游戏初始势力选择地图">
+      <div class="map-guide__details">
+        <figcaption class="map-guide__caption"><strong data-th="แผนที่เลือกแคว้นก่อนเริ่มเกม" data-en="Choose a starting faction" data-zh="选择初始势力">แผนที่เลือกแคว้นก่อนเริ่มเกม</strong><span data-th="ใช้ภาพนี้ประกอบการตัดสินใจก่อนเซิร์ฟเวอร์เปิด โดยเลือกพื้นที่เริ่มต้นให้ตรงกับแผนการเล่นและกลุ่มเพื่อน" data-en="Use this map before the server opens to choose a starting area that fits your playstyle and group of friends." data-zh="开服前可参考此地图，选择适合自己玩法和朋友团队的初始区域。">ใช้ภาพนี้ประกอบการตัดสินใจก่อนเซิร์ฟเวอร์เปิด โดยเลือกพื้นที่เริ่มต้นให้ตรงกับแผนการเล่นและกลุ่มเพื่อน</span></figcaption>
+        <p class="map-guide__warning"><strong data-th="คำเตือน: " data-en="Warning: " data-zh="警告：">คำเตือน: </strong><span data-th="เมื่อเพื่อนหลายคนเข้าเกมพร้อมกัน ภูมิภาคที่ระบบแนะนำอาจดูน่าสนใจเพราะให้เหรียญทอง 50 เหรียญ แต่จริง ๆ แล้วอาจเป็นกับดักขนาดใหญ่ ควรคิดให้รอบคอบก่อนเลือก โดยเฉพาะเมื่อคุณเล่นคนเดียว" data-en="When many friends enter the game at the same time, the system-recommended region may look attractive because it grants 50 gold coins. In reality, it can be a major trap. Think carefully before choosing it, especially if you are playing alone." data-zh="当许多朋友同时进入游戏时，系统推荐的地区可能因为赠送50枚金币而看起来很诱人。但实际上，这可能是一个巨大的陷阱。选择前请仔细考虑，尤其是当你独自游玩时。">เมื่อเพื่อนหลายคนเข้าเกมพร้อมกัน ภูมิภาคที่ระบบแนะนำอาจดูน่าสนใจเพราะให้เหรียญทอง 50 เหรียญ แต่จริง ๆ แล้วอาจเป็นกับดักขนาดใหญ่ ควรคิดให้รอบคอบก่อนเลือก โดยเฉพาะเมื่อคุณเล่นคนเดียว</span></p>
+      </div>
+    </figure>
+    <div class="community-guide">
+      <figure class="community-guide__item"><img class="community-guide__image" src="GamePicture/2.jpg" alt="ภาพการรีเซ็ตสกิลและคืนค่าประสบการณ์" data-alt-th="ภาพการรีเซ็ตสกิลและคืนค่าประสบการณ์" data-alt-en="Skill reset and experience refund screen" data-alt-zh="重置技能与返还经验画面"><figcaption class="community-guide__text"><strong id="skillResetTitle" data-th="รีเซ็ตสกิล" data-en="Skill reset" data-zh="重置技能">รีเซ็ตสกิล</strong><span id="skillResetText" data-th="ภาพตัวอย่างแสดงการคืนค่าประสบการณ์สกิลที่ใช้ไป 100% ควรตรวจสอบค่าใช้จ่ายและเงื่อนไขจริงในเกมก่อนรีเซ็ต" data-en="The example shows a 100% refund of spent skill experience. Check the actual cost and requirements in-game before resetting." data-zh="示例显示返还100%的技能经验。重置前请在游戏内确认实际消耗和条件。">ภาพตัวอย่างแสดงการคืนค่าประสบการณ์สกิลที่ใช้ไป 100% ควรตรวจสอบค่าใช้จ่ายและเงื่อนไขจริงในเกมก่อนรีเซ็ต</span></figcaption></figure>
+      <figure class="community-guide__item"><img class="community-guide__image" src="GamePicture/3.jpg" alt="ภาพสถานะคุ้มครองผู้เล่นใหม่" data-alt-th="ภาพสถานะคุ้มครองผู้เล่นใหม่" data-alt-en="New player protection status screen" data-alt-zh="新手保护状态画面"><figcaption class="community-guide__text"><strong id="newPlayerTitle" data-th="สถานะผู้เล่นใหม่" data-en="New player protection" data-zh="新手保护">สถานะผู้เล่นใหม่</strong><span id="newPlayerText" data-th="ช่วงเริ่มต้นมีการคุ้มครองเมือง ลดความเสียหาย PVE และลดคูลดาวน์บางระบบชั่วคราว การคุ้มครองจะสิ้นสุดตามเวลาและเงื่อนไขในเกม" data-en="The opening period protects the city, reduces PVE damage, and shortens some cooldowns temporarily. Protection ends according to in-game time and conditions." data-zh="开局阶段会保护主城、降低PVE伤害并暂时缩短部分冷却时间。保护会按游戏内时间和条件结束。">ช่วงเริ่มต้นมีการคุ้มครองเมือง ลดความเสียหาย PVE และลดคูลดาวน์บางระบบชั่วคราว การคุ้มครองจะสิ้นสุดตามเวลาและเงื่อนไขในเกม</span></figcaption></figure>
     </div>
+    <p class="system-empty" id="systemSearchEmpty" data-th="ไม่พบข้อมูลระบบที่ค้นหา" data-en="No matching system information found" data-zh="未找到匹配的系统信息">ไม่พบข้อมูลระบบที่ค้นหา</p>
     <div class="system-grid" id="systemGrid">
       <article class="system-card" data-system="city"><h3 data-th="เมืองและการอัปเกรดอาคาร" data-en="City Development and Building Upgrades" data-zh="城建与建筑升级">เมืองและการอัปเกรดอาคาร</h3><p data-th="君主殿คือศูนย์กลางของเมือง ระดับของมันกำหนดเพดานอาคารอื่นและเงื่อนไขการปลดล็อก ควรวางแผนทรัพยากรกับ繁榮度ให้พร้อมก่อนกดอัปเกรด" data-en="The Lord Hall is the city hub. Its level sets the level cap and unlock requirements for other buildings, so plan resources and Prosperity before upgrading." data-zh="君主殿是城市核心，其等级决定其他建筑的等级上限和解锁条件。升级前应提前规划资源与繁荣度。">君主殿คือศูนย์กลางของเมือง ระดับของมันกำหนดเพดานอาคารอื่นและเงื่อนไขการปลดล็อก ควรวางแผนทรัพยากรกับ繁榮度ให้พร้อมก่อนกดอัปเกรด</p><ul><li data-th="ช่วงต้นเน้น君主殿, 兵營 และ軍事府" data-en="Prioritize the Lord Hall, Barracks, and Military Office early." data-zh="前期优先升级君主殿、兵营和军事府。">ช่วงต้นเน้น君主殿, 兵營 และ軍事府</li><li data-th="君主殿 7: อัป校場เพื่อเพิ่มช่อง副將" data-en="At Lord Hall 7, upgrade the Drill Ground to unlock an extra sub-general slot." data-zh="君主殿7级时升级校场，解锁副将槽位。">君主殿 7: อัป校場เพื่อเพิ่มช่อง副將</li><li data-th="君主殿 8: อัป軍事府เพื่อเพิ่มจำนวนทหารที่部曲บรรทุก" data-en="At Lord Hall 8, upgrade the Military Office to increase troop capacity." data-zh="君主殿8级时升级军事府，提高部曲带兵量。">君主殿 8: อัป軍事府เพื่อเพิ่มจำนวนทหารที่部曲บรรทุก</li><li data-th="หลังอาคารทหารเริ่มนิ่ง ค่อยเติม磨坊, 木工坊, 石作坊 และ民居" data-en="After military buildings are stable, develop the Mill, Lumberyard, Quarry, and Residences." data-zh="军事建筑稳定后，再发展磨坊、木工坊、石作坊和民居。">หลังอาคารทหารเริ่มนิ่ง ค่อยเติม磨坊, 木工坊, 石作坊 และ民居</li></ul><p class="source" data-th="แหล่งข้อมูล: คู่มือทางการ ID 977 และ 981" data-en="Source: Official guides 977 and 981" data-zh="来源：官方攻略 977、981">แหล่งข้อมูล: คู่มือทางการ ID 977 และ 981</p></article>
       <article class="system-card" data-system="tech"><h3 data-th="เทคโนโลยีและ研學館" data-en="Technology and the Academy" data-zh="科技与研学馆">เทคโนโลยีและ研學館</h3><p data-th="研學館แบ่งเป็นเทคโนโลยีการรบและสนับสนุน โดยเทคโนโลยีจะค่อย ๆ เปิดตามระดับอาคาร การวิจัยช่วงต้นควรตรงกับประเภททหารที่ใช้จริง" data-en="The Academy has combat and support technologies unlocked by building level. Early research should match the troop type you actually use." data-zh="研学馆分为战斗与辅助科技，随建筑等级逐步解锁。前期研究应与实际使用的兵种相匹配。">研學館แบ่งเป็นเทคโนโลยีการรบและสนับสนุน โดยเทคโนโลยีจะค่อย ๆ เปิดตามระดับอาคาร การวิจัยช่วงต้นควรตรงกับประเภททหารที่ใช้จริง</p><ul><li data-th="สายรบมีเทคโนโลยีโจมตี/ป้องกันของ騎, 盾 และ弓" data-en="Combat research covers attack and defense for cavalry, shields, and archers." data-zh="战斗科技包括骑兵、盾兵和弓兵的攻击与防御。">สายรบมีเทคโนโลยีโจมตี/ป้องกันของ騎, 盾 และ弓</li><li data-th="ช่วงเปิดเมืองให้เร่งเทคโนโลยีโจมตีของทัพหลัก" data-en="During early development, prioritize attack research for your main army." data-zh="前期发展优先研究主力部队的攻击科技。">ช่วงเปิดเมืองให้เร่งเทคโนโลยีโจมตีของทัพหลัก</li><li data-th="ช่วงกลางเกมเสริม預備徵兵, 部曲招兵 และ部曲攻城" data-en="Mid-game priorities include reserve recruitment, unit recruitment, and unit siege." data-zh="中期可补强预备征兵、部曲招兵和部曲攻城。">ช่วงกลางเกมเสริม預備徵兵, 部曲招兵 และ部曲攻城</li><li data-th="เทคโนโลยีพันธมิตรเริ่มจากสายพัฒนา แล้วค่อยขยายไปดินแดนและสงคราม" data-en="For alliance technology, start with Development, then expand into Territory and War." data-zh="联盟科技先发展，再研究领土与战争。">เทคโนโลยีพันธมิตรเริ่มจากสายพัฒนา แล้วค่อยขยายไปดินแดนและสงคราม</li></ul><p class="source" data-th="แหล่งข้อมูล: คู่มือทางการ ID 978" data-en="Source: Official guide 978" data-zh="来源：官方攻略 978">แหล่งข้อมูล: คู่มือทางการ ID 978</p></article>
@@ -804,7 +860,12 @@
 
   <!-- ===== COMBOS ===== -->
   <section id="tab-combos" class="tab-page">
-    <h2 data-th="คอมโบแนะนำ" data-en="Recommended Combos" data-zh="推荐组合">Recommended Combos</h2>
+    <h2 data-th="ข้อมูลการจัดทีม" data-en="Team Building Guide" data-zh="队伍搭配指南">ข้อมูลการจัดทีม</h2>
+    <div class="community-guide">
+      <figure class="community-guide__item"><img class="community-guide__image" src="GamePicture/1.jpg" alt="หน้าระบบ Resonance หรือแชร์เลเวลขุนพล" data-alt-th="หน้าระบบ Resonance หรือแชร์เลเวลขุนพล" data-alt-en="Resonance or shared officer level screen" data-alt-zh="共鸣或武将等级共享画面"><figcaption class="community-guide__text"><strong data-th="Resonance / แชร์เลเวลขุนพล" data-en="Resonance / Shared Officer Levels" data-zh="共鸣/武将等级共享">Resonance / Shared Officer Levels</strong><span data-th="ใช้ช่วยให้ขุนพลหลายตัวอยู่ในระดับพร้อมใช้งาน ลดภาระการปั้นหลายทีม และเปิดทางให้ทดลองคอมโบใหม่ได้ยืดหยุ่นขึ้น" data-en="This keeps multiple officers ready for use, reduces the burden of leveling many teams, and makes it easier to experiment with new combos." data-zh="让多个武将保持可用等级，降低培养多支队伍的负担，也更方便尝试新的队伍组合。">ใช้ช่วยให้ขุนพลหลายตัวอยู่ในระดับพร้อมใช้งาน ลดภาระการปั้นหลายทีม และเปิดทางให้ทดลองคอมโบใหม่ได้ยืดหยุ่นขึ้น</span></figcaption></figure>
+    </div>
+    <article class="combo-card"><h3 data-th="ระบบ Resonance และการเลือกขุนพลแกนหลัก" data-en="Resonance and Core Officer Selection" data-zh="共鸣系统与核心武将选择">ระบบ Resonance และการเลือกขุนพลแกนหลัก</h3><p data-th="ไม่จำเป็นต้องรอขุนพลแกนหลักก่อนเริ่มพัฒนา ใช้ขุนพลที่มีเป็นทีมช่วงเปลี่ยนผ่านก่อน แล้วค่อยสลับไปใช้แกนหลักเมื่อพร้อม ระบบนี้ช่วยลดการสูญเสียทรัพยากรและทำให้ทดลองคอมโบได้ง่ายขึ้น" data-en="You do not need to wait for ideal core officers before progressing. Use the officers you own as a transition team, then switch to core officers when ready. This reduces wasted resources and makes combo experimentation easier." data-zh="不必等到抽到理想核心武将后才开始培养。先用现有武将组成过渡队伍，准备好后再切换核心武将。这个系统能减少资源浪费，也更方便尝试不同组合。">ไม่จำเป็นต้องรอขุนพลแกนหลักก่อนเริ่มพัฒนา ใช้ขุนพลที่มีเป็นทีมช่วงเปลี่ยนผ่านก่อน แล้วค่อยสลับไปใช้แกนหลักเมื่อพร้อม ระบบนี้ช่วยลดการสูญเสียทรัพยากรและทำให้ทดลองคอมโบได้ง่ายขึ้น</p><p class="source" data-th="แหล่งข้อมูล: กระทู้ชุมชน Gamer ประเทศไต้หวัน · ตรวจสอบเงื่อนไข Resonance ในเกมอีกครั้ง" data-en="Source: Gamer Taiwan community guide · Verify the Resonance requirements in-game." data-zh="来源：台湾 Gamer 社区攻略 · 请在游戏内再次确认共鸣条件。">แหล่งข้อมูล: กระทู้ชุมชน Gamer ประเทศไต้หวัน · ตรวจสอบเงื่อนไข Resonance ในเกมอีกครั้ง</p></article>
+    <h2 data-th="คอมโบแนะนำ" data-en="Recommended Combos" data-zh="推荐组合">คอมโบแนะนำ</h2>
     <div class="combo-grid">
 
       <div class="combo-card">
@@ -858,19 +919,19 @@
       <div class="combo-card">
         <h3>ทีมม่วงง่อก๊ก · ธนู/โล่</h3>
         <div class="chip-row"><span class="chip">จูกัดจิ๋น</span><span class="chip">เต็งฮง</span><span class="chip">ซุนหลูบัน</span></div>
-        <p>โบนัสสังกัดง่อก๊ก 3 ตัว (+5%) ซุนหลูบันยืนซับและบัฟดาเมจโจมตีปกติให้แนวหลัง ส่วนจูกัดจิ๋นกับเต็งฮงทำดาเมจวงกว้าง</p>
+        <p data-th="โบนัสสังกัดง่อก๊ก 3 ตัว (+5%) ซุนหลูบันยืนซับและบัฟดาเมจโจมตีปกติให้แนวหลัง ส่วนจูกัดจิ๋นกับเต็งฮงทำดาเมจวงกว้าง" data-en="The 3-officer Wu bonus (+5%) lets Sun Luban support and buff normal attack damage for the backline, while Zhuge Jin and Ding Feng deal area damage." data-zh="吴国3名武将提供+5%势力加成。孙鲁班负责辅助并提高后排普攻伤害，诸葛瑾和丁奉造成范围伤害。">โบนัสสังกัดง่อก๊ก 3 ตัว (+5%) ซุนหลูบันยืนซับและบัฟดาเมจโจมตีปกติให้แนวหลัง ส่วนจูกัดจิ๋นกับเต็งฮงทำดาเมจวงกว้าง</p>
       </div>
 
       <div class="combo-card">
         <h3>ทีมม่วงวุ่ยก๊ก · ม้าระเบิดสกิล</h3>
         <div class="chip-row"><span class="chip">ลิเตียน</span><span class="chip">โจจิ๋น</span><span class="chip">ตันหลิม</span></div>
-        <p>โบนัสสังกัดวุ่ยก๊ก 3 ตัว (+5%) ตันหลิมเพิ่มดาเมจโจมตีปกติทั้งทัพ ขณะที่ลิเตียนและโจจิ๋นเน้นสกิลดาเมจสูงเพื่อบุกจบไฟต์เร็ว</p>
+        <p data-th="โบนัสสังกัดวุ่ยก๊ก 3 ตัว (+5%) ตันหลิมเพิ่มดาเมจโจมตีปกติทั้งทัพ ขณะที่ลิเตียนและโจจิ๋นเน้นสกิลดาเมจสูงเพื่อบุกจบไฟต์เร็ว" data-en="The 3-officer Wei bonus (+5%) lets Chen Lin increase normal attack damage for the army, while Li Dian and Cao Zhen focus on high skill damage to end fights quickly." data-zh="魏国3名武将提供+5%势力加成。陈琳提高全军普攻伤害，李典和曹真专注高技能伤害以快速结束战斗。">โบนัสสังกัดวุ่ยก๊ก 3 ตัว (+5%) ตันหลิมเพิ่มดาเมจโจมตีปกติทั้งทัพ ขณะที่ลิเตียนและโจจิ๋นเน้นสกิลดาเมจสูงเพื่อบุกจบไฟต์เร็ว</p>
       </div>
 
       <div class="combo-card">
         <h3>ทีมม่วงก๊ก · ป้องกันและสวนกลับ</h3>
         <div class="chip-row"><span class="chip">ซีหยง</span><span class="chip">เตียวม่านเฉิง</span><span class="chip">อองอุน</span></div>
-        <p>โบนัสสังกัดก๊ก 3 ตัว (+5%) ซีหยงรับดาเมจได้ดี เตียวม่านเฉิงสวนกลับ และอองอุนเพิ่มความเสียหายสกิลให้แกนหลัก</p>
+        <p data-th="โบนัสสังกัดก๊ก 3 ตัว (+5%) ซีหยงรับดาเมจได้ดี เตียวม่านเฉิงสวนกลับ และอองอุนเพิ่มความเสียหายสกิลให้แกนหลัก" data-en="The 3-officer Qun bonus (+5%) gives Xu Rong strong durability, Zhang Mancheng counterattacks, and Wang Yun increases skill damage for the core officer." data-zh="群雄3名武将提供+5%势力加成。徐荣擅长承受伤害，张曼成进行反击，王允提高核心武将的技能伤害。">โบนัสสังกัดก๊ก 3 ตัว (+5%) ซีหยงรับดาเมจได้ดี เตียวม่านเฉิงสวนกลับ และอองอุนเพิ่มความเสียหายสกิลให้แกนหลัก</p>
       </div>
 
     </div>
@@ -931,6 +992,71 @@
     </div>
   </section>
 
+  <!-- ===== OPENING GUIDE ===== -->
+  <section id="tab-opening" class="tab-page">
+    <h2 data-th="คู่มือเริ่มเกมและบุกเบิก" data-en="Opening and Progression Guide" data-zh="开荒与成长指南">คู่มือเริ่มเกมและบุกเบิก</h2>
+    <p class="lede" data-th="รวมภาพอ้างอิงจากคู่มือชุมชนสำหรับวางแผนช่วงเริ่มเกม ตั้งแต่สถานะผู้เล่นใหม่ เมือง ทรัพยากร การต่อสู้ พันธมิตร ไปจนถึงกิจกรรมและการพัฒนาขุนพล ควรตรวจสอบตัวเลขและเงื่อนไขจริงในเกมอีกครั้ง" data-en="A visual reference from a community guide for the opening phase: new-player protection, city development, resources, combat, alliances, events, and officer growth. Verify exact values and requirements in-game." data-zh="整理社区攻略中的开局参考图片，涵盖新手保护、城市发展、资源、战斗、联盟、活动和武将养成。具体数值与条件请以游戏内为准。">รวมภาพอ้างอิงจากคู่มือชุมชนสำหรับวางแผนช่วงเริ่มเกม ตั้งแต่สถานะผู้เล่นใหม่ เมือง ทรัพยากร การต่อสู้ พันธมิตร ไปจนถึงกิจกรรมและการพัฒนาขุนพล ควรตรวจสอบตัวเลขและเงื่อนไขจริงในเกมอีกครั้ง</p>
+
+    <h3 class="opening-group" data-th="เริ่มต้นและการพัฒนาเมือง" data-en="Starting and City Development" data-zh="开局与城市发展">เริ่มต้นและการพัฒนาเมือง</h3>
+    <div class="opening-gallery">
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/8.jpg" alt="สถานะผู้เล่นใหม่"><figcaption class="opening-gallery__caption"><strong data-th="สถานะผู้เล่นใหม่" data-en="New-player protection" data-zh="新手保护">สถานะผู้เล่นใหม่</strong><span data-th="ช่วงเริ่มต้นมีการคุ้มครองทรัพยากรและเมือง ลดความเสียหาย PVE และช่วยให้เริ่มเกมได้ปลอดภัยขึ้น" data-en="The opening protection safeguards resources and the city, reduces PVE damage, and provides a safer start." data-zh="开局保护资源和主城，降低PVE伤害，让新手更安全地开始游戏。">ช่วงเริ่มต้นมีการคุ้มครองทรัพยากรและเมือง ลดความเสียหาย PVE และช่วยให้เริ่มเกมได้ปลอดภัยขึ้น</span></figcaption></figure>
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/9.jpg" alt="การเริ่มเมืองใหม่"><figcaption class="opening-gallery__caption"><strong data-th="การเริ่มใหม่" data-en="Restarting" data-zh="重新开始">การเริ่มใหม่</strong><span data-th="ใช้เริ่มเมืองใหม่เมื่อยังอยู่ในช่วงต้น โดยตรวจสอบการสูญเสียทรัพยากรและเงื่อนไขก่อนยืนยัน" data-en="Restart during the early phase when needed. Check resource loss and requirements before confirming." data-zh="需要时可在前期重新开始。确认前先查看资源损失和相关条件。">ใช้เริ่มเมืองใหม่เมื่อยังอยู่ในช่วงต้น โดยตรวจสอบการสูญเสียทรัพยากรและเงื่อนไขก่อนยืนยัน</span></figcaption></figure>
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/10.jpg" alt="ภารกิจบทที่ห้า"><figcaption class="opening-gallery__caption"><strong data-th="ภารกิจบทและรางวัล" data-en="Chapter missions and rewards" data-zh="章节任务与奖励">ภารกิจบทและรางวัล</strong><span data-th="ทำภารกิจบทต่อเนื่องเพื่อรับทรัพยากรและปลดล็อกความคืบหน้าระบบต่าง ๆ" data-en="Complete chapter missions to earn resources and unlock system progression." data-zh="完成章节任务获取资源，并推进各项系统解锁。">ทำภารกิจบทต่อเนื่องเพื่อรับทรัพยากรและปลดล็อกความคืบหน้าระบบต่าง ๆ</span></figcaption></figure>
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/11.jpg" alt="การอัปเกรดพระราชวัง"><figcaption class="opening-gallery__caption"><strong data-th="พระราชวังและอาคารหลัก" data-en="Lord Hall and core buildings" data-zh="君主殿与核心建筑">พระราชวังและอาคารหลัก</strong><span data-th="วางแผนทรัพยากรและค่าความเจริญก่อนอัปเกรดพระราชวัง เพราะระดับอาคารหลักกำหนดการปลดล็อกอื่น ๆ" data-en="Plan resources and Prosperity before upgrading the Lord Hall, which controls other building unlocks." data-zh="升级君主殿前规划资源与繁荣度，因为主城等级决定其他建筑的解锁。">วางแผนทรัพยากรและค่าความเจริญก่อนอัปเกรดพระราชวัง เพราะระดับอาคารหลักกำหนดการปลดล็อกอื่น ๆ</span></figcaption></figure>
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/12.jpg" alt="คำสั่งผลิตทรัพยากร"><figcaption class="opening-gallery__caption"><strong data-th="การผลิตและทรัพยากร" data-en="Production and resources" data-zh="生产与资源">การผลิตและทรัพยากร</strong><span data-th="ทำภารกิจและจัดลำดับการใช้ทรัพยากรให้สอดคล้องกับการอัปเกรดเมือง" data-en="Complete tasks and prioritize resources around city upgrades." data-zh="完成任务，并围绕城市升级安排资源优先级。">ทำภารกิจและจัดลำดับการใช้ทรัพยากรให้สอดคล้องกับการอัปเกรดเมือง</span></figcaption></figure>
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/13.jpg" alt="คำสั่งเมืองเทียนเถียน"><figcaption class="opening-gallery__caption"><strong data-th="คำสั่งพิเศษและทรัพยากร" data-en="Special orders and resources" data-zh="特殊命令与资源">คำสั่งพิเศษและทรัพยากร</strong><span data-th="ใช้คำสั่งพิเศษตามจังหวะเพื่อรับทรัพยากรเพิ่มเติมและเร่งความคืบหน้า" data-en="Use special orders at the right time to gain extra resources and accelerate progress." data-zh="把握时机使用特殊命令，获取额外资源并加快成长。">ใช้คำสั่งพิเศษตามจังหวะเพื่อรับทรัพยากรเพิ่มเติมและเร่งความคืบหน้า</span></figcaption></figure>
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/14.jpg" alt="การมอบหมายงานภายในเมือง"><figcaption class="opening-gallery__caption"><strong data-th="มอบหมายขุนพล" data-en="Officer delegation" data-zh="武将委任">มอบหมายขุนพล</strong><span data-th="มอบหมายขุนพลให้สิ่งปลูกสร้างเพื่อเพิ่มอัตราผลิตหรือโบนัสตามความถนัด" data-en="Assign officers to buildings to improve production rates or specialized bonuses." data-zh="将武将委任到建筑中，提高生产效率或获得专属加成。">มอบหมายขุนพลให้สิ่งปลูกสร้างเพื่อเพิ่มอัตราผลิตหรือโบนัสตามความถนัด</span></figcaption></figure>
+    </div>
+
+    <h3 class="opening-group" data-th="แผนที่และการต่อสู้" data-en="Map and Combat" data-zh="地图与战斗">แผนที่และการต่อสู้</h3>
+    <div class="opening-gallery">
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/15.jpg" alt="รายละเอียดกองทัพรักษาการณ์"><figcaption class="opening-gallery__caption"><strong data-th="รายละเอียดกองทัพรักษาการณ์" data-en="Garrison details" data-zh="驻军详情">รายละเอียดกองทัพรักษาการณ์</strong><span data-th="ตรวจจำนวนกองทัพและจำนวนทหารของเป้าหมายก่อนตัดสินใจโจมตี" data-en="Check the target's army count and troop strength before attacking." data-zh="攻击前查看目标的部队数量和兵力。">ตรวจจำนวนกองทัพและจำนวนทหารของเป้าหมายก่อนตัดสินใจโจมตี</span></figcaption></figure>
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/32.jpg" alt="รายละเอียดกองทัพรักษาการณ์เพิ่มเติม"><figcaption class="opening-gallery__caption"><strong data-th="รายละเอียดกองทัพรักษาการณ์เพิ่มเติม" data-en="Additional garrison details" data-zh="补充驻军详情">รายละเอียดกองทัพรักษาการณ์เพิ่มเติม</strong><span data-th="ใช้ดูจำนวนกองทัพและกำลังพลที่เฝ้าพื้นที่โดยตรง ก่อนวางแผนบุกหรือหลีกเลี่ยงเป้าหมาย" data-en="Use this view to inspect the defending armies and troop strength before planning an attack or avoiding the target." data-zh="查看守军部队和兵力，再决定进攻或避开目标。">ใช้ดูจำนวนกองทัพและกำลังพลที่เฝ้าพื้นที่โดยตรง ก่อนวางแผนบุกหรือหลีกเลี่ยงเป้าหมาย</span></figcaption></figure>
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/16.jpg" alt="การต่อสู้ภาคสนาม"><figcaption class="opening-gallery__caption"><strong data-th="การต่อสู้ภาคสนาม" data-en="Field combat" data-zh="野外战斗">การต่อสู้ภาคสนาม</strong><span data-th="ใช้ภูมิประเทศ ระยะโจมตี และจังหวะรวมทัพเพื่อสร้างความได้เปรียบ" data-en="Use terrain, attack range, and coordinated timing to gain an advantage." data-zh="利用地形、攻击距离和集结时机取得优势。">ใช้ภูมิประเทศ ระยะโจมตี และจังหวะรวมทัพเพื่อสร้างความได้เปรียบ</span></figcaption></figure>
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/17.jpg" alt="พลังงานและการฟื้นฟู"><figcaption class="opening-gallery__caption"><strong data-th="พลังงานและการฟื้นฟู" data-en="Stamina and recovery" data-zh="体力与恢复">พลังงานและการฟื้นฟู</strong><span data-th="ตรวจพลังงานคงเหลือและใช้ไอเทมฟื้นฟูเมื่อจำเป็นก่อนออกปฏิบัติการ" data-en="Check remaining stamina and use recovery items when needed before operations." data-zh="行动前查看剩余体力，必要时使用恢复道具。">ตรวจพลังงานคงเหลือและใช้ไอเทมฟื้นฟูเมื่อจำเป็นก่อนออกปฏิบัติการ</span></figcaption></figure>
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/18.jpg" alt="หน้าเมนูพันธมิตร"><figcaption class="opening-gallery__caption"><strong data-th="พันธมิตร" data-en="Alliance" data-zh="联盟">พันธมิตร</strong><span data-th="เข้าพันธมิตรเร็วเพื่อรับการสนับสนุน เทคโนโลยี และกิจกรรมรวมกลุ่ม" data-en="Join an alliance early for support, technology, and group activities." data-zh="尽早加入联盟，获得支援、科技和集体活动。">เข้าพันธมิตรเร็วเพื่อรับการสนับสนุน เทคโนโลยี และกิจกรรมรวมกลุ่ม</span></figcaption></figure>
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/19.jpg" alt="ระบบโจมตีอัตโนมัติ"><figcaption class="opening-gallery__caption"><strong data-th="โจมตีอัตโนมัติ" data-en="Auto-siege" data-zh="自动攻城">โจมตีอัตโนมัติ</strong><span data-th="ใช้การโจมตีอัตโนมัติเพื่อช่วยจัดการงานที่ทำซ้ำ แต่ควรตรวจสอบกำลังทัพก่อนเริ่ม" data-en="Use auto-siege for repetitive operations, but check army strength before starting." data-zh="可用自动攻城处理重复行动，但开始前先确认部队实力。">ใช้การโจมตีอัตโนมัติเพื่อช่วยจัดการงานที่ทำซ้ำ แต่ควรตรวจสอบกำลังทัพก่อนเริ่ม</span></figcaption></figure>
+    </div>
+
+    <h3 class="opening-group" data-th="การพัฒนาขุนพลและกิจกรรม" data-en="Officer Growth and Events" data-zh="武将养成与活动">การพัฒนาขุนพลและกิจกรรม</h3>
+    <div class="opening-gallery">
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/20.jpg" alt="หน้าสุ่มขุนพล"><figcaption class="opening-gallery__caption"><strong data-th="สุ่มขุนพลและการันตี" data-en="Officer recruitment and guarantee" data-zh="武将招募与保底">สุ่มขุนพลและการันตี</strong><span data-th="ตรวจจำนวนครั้งสะสมและรางวัลการันตีก่อนใช้ทรัพยากรสุ่ม" data-en="Check the accumulated count and guarantee reward before spending recruitment resources." data-zh="消耗招募资源前查看累计次数和保底奖励。">ตรวจจำนวนครั้งสะสมและรางวัลการันตีก่อนใช้ทรัพยากรสุ่ม</span></figcaption></figure>
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/21.jpg" alt="การสุ่มขุนพลแบบกำหนดเป้าหมาย"><figcaption class="opening-gallery__caption"><strong data-th="สุ่มแบบกำหนดเป้าหมาย" data-en="Targeted recruitment" data-zh="定向招募">สุ่มแบบกำหนดเป้าหมาย</strong><span data-th="ใช้เมื่อคุณต้องการขุนพลหรือเศษชิ้นส่วนเฉพาะ และตรวจสอบจำนวนครั้งการันตีให้ครบ" data-en="Use this when targeting a specific officer or fragment, and track the guarantee counter." data-zh="目标是特定武将或碎片时使用，并留意保底次数。">ใช้เมื่อคุณต้องการขุนพลหรือเศษชิ้นส่วนเฉพาะ และตรวจสอบจำนวนครั้งการันตีให้ครบ</span></figcaption></figure>
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/22.jpg" alt="ด่านผจญภัย"><figcaption class="opening-gallery__caption"><strong data-th="ด่านผจญภัย" data-en="Campaign stages" data-zh="战役关卡">ด่านผจญภัย</strong><span data-th="ผ่านด่านเพื่อรับทรัพยากรและเปิดความคืบหน้ารางวัลตามบท" data-en="Clear campaign stages to earn resources and progress through chapter rewards." data-zh="通关战役关卡获取资源，并推进章节奖励。">ผ่านด่านเพื่อรับทรัพยากรและเปิดความคืบหน้ารางวัลตามบท</span></figcaption></figure>
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/2.jpg" alt="หน้าต่างยืนยันรีเซ็ตสกิล"><figcaption class="opening-gallery__caption"><strong data-th="ยืนยันการรีเซ็ตสกิล" data-en="Confirm skill reset" data-zh="确认重置技能">ยืนยันการรีเซ็ตสกิล</strong><span data-th="หน้าต่างยืนยันการรีเซ็ตสกิลแสดงว่าจะคืนค่าประสบการณ์สกิลที่ใช้ไป 100% พร้อมค่าใช้จ่ายก่อนยืนยัน" data-en="The skill reset confirmation shows a 100% refund of spent skill experience and the cost before confirmation." data-zh="重置技能确认窗口显示返还100%的技能经验，以及确认前的消耗。">หน้าต่างยืนยันการรีเซ็ตสกิลแสดงว่าจะคืนค่าประสบการณ์สกิลที่ใช้ไป 100% พร้อมค่าใช้จ่ายก่อนยืนยัน</span></figcaption></figure>
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/23.jpg" alt="ระบบแชร์พลังและ Resonance"><figcaption class="opening-gallery__caption"><strong data-th="แชร์พลังและ Resonance" data-en="Shared power and Resonance" data-zh="共享战力与共鸣">แชร์พลังและ Resonance</strong><span data-th="1. กระจายทรัพยากรอย่างเท่าเทียมกันระหว่างสองฝ่าย และใช้ระบบ Resonance เพื่อเปลี่ยนรายชื่อผู้เล่นโดยไม่สูญเสียทรัพยากรที่ลงทุนไป" data-en="1. Distribute resources evenly between both sides, then use Resonance to change the active roster without losing the resources already invested." data-zh="1. 在双方之间平均分配资源，并利用共鸣系统更换出战名单，同时不损失已经投入的资源。">1. กระจายทรัพยากรอย่างเท่าเทียมกันระหว่างสองฝ่าย และใช้ระบบ Resonance เพื่อเปลี่ยนรายชื่อผู้เล่นโดยไม่สูญเสียทรัพยากรที่ลงทุนไป</span></figcaption></figure>
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/25.jpg" alt="ระบบขั้นก้าวหน้าขุนพล"><figcaption class="opening-gallery__caption"><strong data-th="ขั้นก้าวหน้าขุนพล" data-en="Officer advancement" data-zh="武将进阶">ขั้นก้าวหน้าขุนพล</strong><span data-th="ตรวจเส้นทางขั้นก้าวหน้าและวัตถุดิบก่อนลงทุนกับขุนพลแกนหลัก" data-en="Check the advancement path and materials before investing in a core officer." data-zh="培养核心武将前查看进阶路线和材料。">ตรวจเส้นทางขั้นก้าวหน้าและวัตถุดิบก่อนลงทุนกับขุนพลแกนหลัก</span></figcaption></figure>
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/26.jpg" alt="กิจกรรมสุ่มขุนพล"><figcaption class="opening-gallery__caption"><strong data-th="กิจกรรมสุ่มขุนพล" data-en="Recruitment event" data-zh="招募活动">กิจกรรมสุ่มขุนพล</strong><span data-th="เปรียบเทียบรางวัลกิจกรรมกับทรัพยากรที่มี ก่อนตัดสินใจสุ่มหลายครั้ง" data-en="Compare event rewards with your available resources before making multiple pulls." data-zh="多次招募前比较活动奖励与现有资源。">เปรียบเทียบรางวัลกิจกรรมกับทรัพยากรที่มี ก่อนตัดสินใจสุ่มหลายครั้ง</span></figcaption></figure>
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/27.jpg" alt="กิจกรรมลงทะเบียนเจ็ดวัน"><figcaption class="opening-gallery__caption"><strong data-th="ลงทะเบียนเจ็ดวัน" data-en="Seven-day sign-in" data-zh="七日签到">ลงทะเบียนเจ็ดวัน</strong><span data-th="เข้าเกมทุกวันเพื่อรับรางวัลสะสมและไม่พลาดรางวัลช่วงเริ่มต้น" data-en="Log in daily to collect milestone rewards and avoid missing early bonuses." data-zh="每天登录领取累计奖励，不要错过开局福利。">เข้าเกมทุกวันเพื่อรับรางวัลสะสมและไม่พลาดรางวัลช่วงเริ่มต้น</span></figcaption></figure>
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/28.jpg" alt="กิจกรรมเช็กอินรายวัน"><figcaption class="opening-gallery__caption"><strong data-th="เช็กอินรายวัน" data-en="Daily sign-in" data-zh="每日签到">เช็กอินรายวัน</strong><span data-th="เช็กอินต่อเนื่องเพื่อรับทรัพยากรและรางวัลตามจำนวนวันที่เข้าเกม" data-en="Maintain daily sign-ins to earn resources and rewards based on consecutive days." data-zh="连续签到可按天数获得资源和奖励。">เช็กอินต่อเนื่องเพื่อรับทรัพยากรและรางวัลตามจำนวนวันที่เข้าเกม</span></figcaption></figure>
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/29.jpg" alt="กิจกรรมพิเศษ"><figcaption class="opening-gallery__caption"><strong data-th="กิจกรรมจำกัดเวลา" data-en="Limited-time events" data-zh="限时活动">กิจกรรมจำกัดเวลา</strong><span data-th="ตรวจภารกิจและเวลาคงเหลือของกิจกรรมก่อนเลือกใช้ทรัพยากร" data-en="Check event tasks and remaining time before spending resources." data-zh="消耗资源前查看活动任务和剩余时间。">ตรวจภารกิจและเวลาคงเหลือของกิจกรรมก่อนเลือกใช้ทรัพยากร</span></figcaption></figure>
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/30.jpg" alt="กิจกรรมไขดวง"><figcaption class="opening-gallery__caption"><strong data-th="กิจกรรมสะสมแต้มและไขดวง" data-en="Luck and collection event" data-zh="集字与祈福活动">กิจกรรมสะสมแต้มและไขดวง</strong><span data-th="สะสมไอเทมกิจกรรมเพื่อแลกรางวัลใหญ่และวางแผนการใช้แต้มให้คุ้มค่า" data-en="Collect event items for major rewards and plan how to spend points efficiently." data-zh="收集活动道具兑换大奖，并合理规划积分使用。">สะสมไอเทมกิจกรรมเพื่อแลกรางวัลใหญ่และวางแผนการใช้แต้มให้คุ้มค่า</span></figcaption></figure>
+      <figure class="opening-gallery__item"><img class="opening-gallery__image" src="GamePicture/31.jpg" alt="กิจกรรมยืนยันตัวตน"><figcaption class="opening-gallery__caption"><strong data-th="ยืนยันตัวตนรับรางวัล" data-en="Verification rewards" data-zh="认证奖励">ยืนยันตัวตนรับรางวัล</strong><span data-th="ตรวจสอบกิจกรรมยืนยันตัวตนและรับรางวัลที่เปิดให้ตามเงื่อนไข" data-en="Check available verification tasks and claim rewards when eligible." data-zh="查看可用的认证任务，满足条件后领取奖励。">ตรวจสอบกิจกรรมยืนยันตัวตนและรับรางวัลที่เปิดให้ตามเงื่อนไข</span></figcaption></figure>
+    </div>
+  </section>
+
+  <!-- ===== TOP-UP GUIDE ===== -->
+  <section id="tab-topup" class="tab-page">
+    <h2 data-th="คู่มือการเติมเงินก่อนเซิร์ฟเวอร์เปิด" data-en="Pre-launch Top-up Guide" data-zh="开服前充值指南">คู่มือการเติมเงินก่อนเซิร์ฟเวอร์เปิด</h2>
+    <p class="topup-intro" data-th="รวมแพ็คเกจ ราคา Android/iOS และความคุ้มค่าโดยประมาณสำหรับใช้เปรียบเทียบก่อนตัดสินใจเติมเงิน ข้อมูลราคาเป็นแนวทางก่อนเซิร์ฟเวอร์เปิดและอาจเปลี่ยนตามภูมิภาค ร้านค้า และโปรโมชั่น" data-en="A pre-launch reference for comparing packages, Android/iOS prices, and approximate value. Prices may change by region, store, and promotion." data-zh="用于开服前比较礼包、Android/iOS价格和大致性价比的参考。价格可能因地区、商店和促销活动而变化。">รวมแพ็คเกจ ราคา Android/iOS และความคุ้มค่าโดยประมาณสำหรับใช้เปรียบเทียบก่อนตัดสินใจเติมเงิน ข้อมูลราคาเป็นแนวทางก่อนเซิร์ฟเวอร์เปิดและอาจเปลี่ยนตามภูมิภาค ร้านค้า และโปรโมชั่น</p>
+    <nav class="topup-nav" aria-label="หมวดหมู่การเติมเงิน"><a href="#topup-direct" data-th="เติมหยก/ทอง" data-en="Gold / Jade" data-zh="玉石/黄金">เติมหยก/ทอง</a><a href="#topup-monthly" data-th="บัตรเดือน" data-en="Monthly Cards" data-zh="月卡">บัตรเดือน</a><a href="#topup-growth" data-th="กองทุน" data-en="Growth Fund" data-zh="成长基金">กองทุน</a><a href="#topup-pass" data-th="บัตรผ่านศึก" data-en="Battle Pass" data-zh="战令">บัตรผ่านศึก</a><a href="#topup-starter" data-th="แพ็คเริ่มต้น" data-en="Starter Packs" data-zh="新手礼包">แพ็คเริ่มต้น</a><a href="#topup-event" data-th="กิจกรรม" data-en="Events" data-zh="活动礼包">กิจกรรม</a></nav>
+    <p class="topup-foot" data-th="ราคาแสดงเป็นเงินบาท พร้อม USD ตามแพ็คเกจ และ CNY ที่คำนวณคร่าว ๆ จาก 1 USD ≈ 7.2 CNY ราคาจริงอาจแตกต่างตามสโตร์และภูมิภาค" data-en="Prices show Thai Baht, the package USD value, and an approximate CNY conversion at 1 USD ≈ 7.2 CNY. Actual store prices vary by region." data-zh="价格显示泰铢、礼包美元标价，以及按1美元≈7.2元人民币换算的参考价。实际商店价格可能因地区而异。">ราคาแสดงเป็นเงินบาท พร้อม USD ตามแพ็คเกจ และ CNY ที่คำนวณคร่าว ๆ จาก 1 USD ≈ 7.2 CNY ราคาจริงอาจแตกต่างตามสโตร์และภูมิภาค</p>
+
+    <section id="topup-direct" class="topup-section"><h3 data-th="1. เติมหยก/ทองโดยตรง" data-en="1. Direct Gold / Jade Recharge" data-zh="1. 直接充值玉石/黄金">1. เติมหยก/ทองโดยตรง</h3><p class="topup-sub">Direct Gold / Jade Recharge</p><p class="topup-desc" data-th="สำหรับซื้อหยก/ทองไปหมุนตู้สุ่มขุนพลหรือซื้อไอเทม มีโบนัสหยกเพิ่ม x2 สำหรับการเติมครั้งแรกของแต่ละ Tier" data-en="Use Gold/Jade for officer summons or shop items. Each tier grants a x2 first-purchase bonus." data-zh="用于武将招募或购买商店道具。每个档位首次购买可获得双倍玉石奖励。">สำหรับซื้อหยก/ทองไปหมุนตู้สุ่มขุนพลหรือซื้อไอเทม มีโบนัสหยกเพิ่ม x2 สำหรับการเติมครั้งแรกของแต่ละ Tier</p><div class="topup-table-wrap"><table class="topup-table"><thead><tr><th data-th="แพ็คเกจ" data-en="Package" data-zh="礼包">แพ็คเกจ</th><th data-th="จำนวนหยก" data-en="Jade" data-zh="玉石数量">จำนวนหยก</th><th data-th="ราคา Android / iOS" data-en="Android / iOS price" data-zh="Android / iOS价格">ราคา Android / iOS</th><th data-th="คุ้มค่าโดยประมาณ*" data-en="Approx. value*" data-zh="大致性价比*">คุ้มค่าโดยประมาณ*</th></tr></thead><tbody><tr><td>Tier 1 ($0.99)</td><td>60</td><td>Android ~35–39 บาท<span class="ios">iOS ~35 บาท</span></td><td>~62 บาท/100 หยก</td></tr><tr><td>Tier 2 ($4.99)</td><td>300</td><td>Android ~179–189 บาท<span class="ios">iOS ~179–199 บาท</span></td><td>~61 บาท/100 หยก</td></tr><tr><td>Tier 3 ($9.99) <span class="topup-tag">คุ้มที่สุด</span></td><td>680</td><td>Android ~350–370 บาท<span class="ios">iOS ~369–399 บาท</span></td><td>~53 บาท/100 หยก</td></tr><tr><td>Tier 4 ($19.99)</td><td>1,280</td><td>Android ~700–750 บาท<span class="ios">iOS ~729–799 บาท</span></td><td>~57 บาท/100 หยก</td></tr><tr><td>Tier 5 ($49.99)</td><td>3,280</td><td>Android ~1,750–1,850 บาท<span class="ios">iOS ~1,790–1,990 บาท</span></td><td>~55 บาท/100 หยก</td></tr><tr><td>Tier 6 ($99.99)</td><td>6,480</td><td>Android ~3,500–3,700 บาท<span class="ios">iOS ~3,600–3,900 บาท</span></td><td>~56 บาท/100 หยก</td></tr></tbody></table></div><p class="topup-foot" data-th="* คำนวณจากราคาเฉลี่ยของช่วงที่ระบุ ใช้เปรียบเทียบคร่าว ๆ เท่านั้น" data-en="* Based on the average price in each range for rough comparison only." data-zh="* 根据价格区间的平均值计算，仅供粗略比较。">* คำนวณจากราคาเฉลี่ยของช่วงที่ระบุ ใช้เปรียบเทียบคร่าว ๆ เท่านั้น</p></section>
+
+    <section id="topup-monthly" class="topup-section"><h3>2. บัตรเดือนและสิทธิพิเศษ</h3><p class="topup-sub">Monthly Cards &amp; VIP Privileges</p><p class="topup-desc">เหมาะกับสายประหยัด รับหยกทันทีและหยกรายวันต่อเนื่อง 30 วัน บางระดับมีบัฟเร่งสปีด</p><div class="topup-table-wrap"><table class="topup-table"><thead><tr><th>แพ็คเกจ</th><th>สิ่งที่ได้รับ</th><th>ราคา Android / iOS</th></tr></thead><tbody><tr><td>Silver Monthly Card ($4.99)</td><td>รับทันที ~300 หยก + วันละ 100–150 หยก 30 วัน</td><td>Android ~179–189 บาท<span class="ios">iOS ~179–199 บาท</span></td></tr><tr><td>Gold Monthly Card ($9.99–$14.99)</td><td>~680 หยก + บัฟเร่งสร้าง/วิจัย + หยกรายวัน 30 วัน</td><td>Android ~350–550 บาท<span class="ios">iOS ~369–599 บาท</span></td></tr></tbody></table></div></section>
+
+    <section id="topup-growth" class="topup-section"><h3>3. กองทุนการเติบโต <span class="topup-tag">คุ้มค่าสูงสุด</span></h3><p class="topup-sub">Growth Fund</p><p class="topup-desc">ซื้อได้ครั้งเดียวต่อไอดี รับหยกสะสมคืนเมื่ออัปเกรด Castle / Headquarters ถึงเกณฑ์</p><div class="topup-table-wrap"><table class="topup-table"><thead><tr><th>แพ็คเกจ</th><th>ผลตอบแทน</th><th>ราคา Android / iOS</th></tr></thead><tbody><tr><td>Growth Fund ($19.99)</td><td>คืนหยกสะสมรวมกว่า 500%–1,000% ตามความคืบหน้าเมืองหลัก</td><td>Android ~700–750 บาท<span class="ios">iOS ~729–799 บาท</span></td></tr></tbody></table></div><p class="note topup-note">ควรซื้อแต่เนิ่น ๆ เพื่อรับผลตอบแทนตลอดช่วงอัปเกรดเมืองหลัก</p></section>
+
+    <section id="topup-pass" class="topup-section"><h3>4. บัตรผ่านศึก</h3><p class="topup-sub">Battle Pass / Season Pass</p><p class="topup-desc">ทำภารกิจสะสมแต้มเพื่อรับขุนพล SSR อุปกรณ์ และทรัพยากรพัฒนาเมือง</p><div class="topup-table-wrap"><table class="topup-table"><thead><tr><th>แพ็คเกจ</th><th>สิทธิ์ที่ปลดล็อก</th><th>ราคา Android / iOS</th></tr></thead><tbody><tr><td>Advanced Battle Pass ($9.99)</td><td>ปลดล็อกแถวรางวัลพรีเมียม</td><td>Android ~350–370 บาท<span class="ios">iOS ~369–399 บาท</span></td></tr><tr><td>Deluxe Battle Pass ($19.99)</td><td>รางวัลพรีเมียม + ข้ามเลเวล 10–20 เลเวล + สกิน/กรอบพิเศษ</td><td>Android ~700–750 บาท<span class="ios">iOS ~729–799 บาท</span></td></tr></tbody></table></div></section>
+
+    <section id="topup-starter" class="topup-section"><h3>5. แพ็คเกจเริ่มต้นและเติมครั้งแรก</h3><p class="topup-sub">First Top-Up &amp; Starter Packs</p><div class="topup-table-wrap"><table class="topup-table"><thead><tr><th>แพ็คเกจ</th><th>สิ่งที่ได้รับ</th><th>ราคา Android / iOS</th></tr></thead><tbody><tr><td>First Recharge ($0.99) <span class="topup-tag">แนะนำผู้เล่นใหม่</span></td><td>เติมขั้นต่ำราคาใดก็ได้ รับขุนพล SSR ฟรีทันที เช่น จ้าวอวิ๋นหรือเตียวเลี้ยว พร้อมชุดอุปกรณ์เริ่มต้น</td><td>Android ~35–39 บาท<span class="ios">iOS ~35 บาท</span></td></tr><tr><td>7-Day Rookie Gift Pack ($0.99–$4.99)</td><td>ไอเทมเร่งพัฒนาช่วงเปิดไอดีใหม่</td><td>Android ~35–189 บาท<span class="ios">iOS ~35–199 บาท</span></td></tr></tbody></table></div></section>
+
+    <section id="topup-event" class="topup-section"><h3>6. แพ็คเกจกิจกรรมและทรัพยากร</h3><p class="topup-sub">Event &amp; Resource Bundles</p><p class="topup-desc">แพ็คจำกัดเวลาที่เปลี่ยนไปตามอีเวนต์ เช่น แพ็คสุ่มขุนพลหรือแพ็คเร่งเวลาฝึกทหาร/ก่อสร้าง</p><div class="topup-table-wrap"><table class="topup-table"><thead><tr><th>ระดับแพ็คเกจ</th><th>ราคา Android</th><th>ราคา iOS</th></tr></thead><tbody><tr><td>ซุปเปอร์ประหยัด ($0.99)</td><td>~35–39 บาท</td><td>~35 บาท</td></tr><tr><td>ระดับกลาง ($4.99–$19.99)</td><td>~179–750 บาท</td><td>~179–799 บาท</td></tr><tr><td>ระดับใหญ่ ($49.99–$99.99)</td><td>~1,750–3,700 บาท</td><td>~1,790–3,900 บาท</td></tr></tbody></table></div></section>
+
+    <section class="topup-section"><h3>ข้อแนะนำก่อนเติม</h3><ul><li><strong>ราคา:</strong> iOS และ Android อาจต่างกันตาม Tier Matrix อัตราแลกเปลี่ยน และภูมิภาค</li><li><strong>เติมผ่านเว็บ:</strong> หากมีช่องทางเติมเงินทางการ อาจมีโบนัสหยกเพิ่มประมาณ 5%–10% แต่ควรตรวจสอบโดเมนให้ถูกต้องก่อนจ่ายเงิน</li><li><strong>ตรวจสอบจริง:</strong> ราคาทั้งหมดเป็นค่าประมาณ ควรดูราคาในสโตร์และรายละเอียดแพ็คเกจจริงก่อนเติมทุกครั้ง</li></ul></section>
+  </section>
+
 </main>
 
 <footer class="wrap">
@@ -970,7 +1096,116 @@
   const translatableElements = document.querySelectorAll('[data-en][data-th][data-zh]');
   let currentLanguage = 'th';
   const detailedTextNodes = [];
-  document.querySelectorAll('.skill-card, .faction-page, .counter-table, .combo-card, .role-card').forEach(block=>{
+  const topupTranslations = {
+    'เติมหยก/ทองโดยตรง': {en:'Direct Gold / Jade Recharge', zh:'直接充值玉石/黄金'},
+    '1. เติมหยก/ทองโดยตรง': {en:'1. Direct Gold / Jade Recharge', zh:'1. 直接充值玉石/黄金'},
+    'บัตรเดือนและสิทธิพิเศษ': {en:'Monthly Cards and VIP Privileges', zh:'月卡与特权'},
+    '2. บัตรเดือนและสิทธิพิเศษ': {en:'2. Monthly Cards and VIP Privileges', zh:'2. 月卡与特权'},
+    'กองทุนการเติบโต': {en:'Growth Fund', zh:'成长基金'},
+    '3. กองทุนการเติบโต': {en:'3. Growth Fund', zh:'3. 成长基金'},
+    'บัตรผ่านศึก': {en:'Battle Pass', zh:'战令'},
+    '4. บัตรผ่านศึก': {en:'4. Battle Pass', zh:'4. 战令'},
+    'แพ็คเกจเริ่มต้นและเติมครั้งแรก': {en:'Starter Packs and First Top-Up', zh:'新手礼包与首充'},
+    '5. แพ็คเกจเริ่มต้นและเติมครั้งแรก': {en:'5. Starter Packs and First Top-Up', zh:'5. 新手礼包与首充'},
+    'แพ็คเกจกิจกรรมและทรัพยากร': {en:'Event and Resource Bundles', zh:'活动与资源礼包'},
+    '6. แพ็คเกจกิจกรรมและทรัพยากร': {en:'6. Event and Resource Bundles', zh:'6. 活动与资源礼包'},
+    'ข้อแนะนำก่อนเติม': {en:'Before You Top Up', zh:'充值前建议'},
+    'สำหรับซื้อหยก/ทองไปหมุนตู้สุ่มขุนพลหรือซื้อไอเทม มีโบนัสหยกเพิ่ม x2 สำหรับการเติมครั้งแรกของแต่ละ Tier': {en:'Use Gold/Jade for officer summons or shop items. Each tier grants a x2 first-purchase bonus.', zh:'用于武将招募或购买商店道具。每个档位首次购买可获得双倍玉石奖励。'},
+    'เหมาะกับสายประหยัด รับหยกทันทีและหยกรายวันต่อเนื่อง 30 วัน บางระดับมีบัฟเร่งสปีด': {en:'Best for budget players: receive Jade immediately and daily Jade for 30 days, with speed buffs at some tiers.', zh:'适合节省型玩家：立即获得玉石，并连续30天领取每日玉石，部分档位还提供加速增益。'},
+    'ซื้อได้ครั้งเดียวต่อไอดี รับหยกสะสมคืนเมื่ออัปเกรด Castle / Headquarters ถึงเกณฑ์': {en:'Available once per account. Receive accumulated Jade as your Castle / Headquarters reaches milestones.', zh:'每个账号限购一次。城堡/主城达到指定里程碑后返还累计玉石。'},
+    'ทำภารกิจสะสมแต้มเพื่อรับขุนพล SSR อุปกรณ์ และทรัพยากรพัฒนาเมือง': {en:'Complete missions to earn an SSR officer, equipment, and city development resources.', zh:'完成任务获取SSR武将、装备和城市发展资源。'},
+    'แพ็คจำกัดเวลาที่เปลี่ยนไปตามอีเวนต์ เช่น แพ็คสุ่มขุนพลหรือแพ็คเร่งเวลาฝึกทหาร/ก่อสร้าง': {en:'Limited-time packs that change with events, such as officer summon or training/building speed-up packs.', zh:'随活动变化的限时礼包，例如武将招募礼包或训练/建筑加速礼包。'},
+    'เติมครั้งแรก': {en:'First Top-Up', zh:'首次充值'},
+    'คุ้มค่าสูงสุด': {en:'Best Value', zh:'最高性价比'},
+    'คุ้มที่สุด': {en:'Best Value', zh:'最划算'},
+    'แนะนำผู้เล่นใหม่': {en:'Recommended for new players', zh:'推荐新玩家'},
+    'แพ็คเกจ': {en:'Package', zh:'礼包'},
+    'จำนวนหยก': {en:'Jade', zh:'玉石数量'},
+    'ราคา Android / iOS': {en:'Android / iOS price', zh:'Android / iOS价格'},
+    'คุ้มค่าโดยประมาณ*': {en:'Approx. value*', zh:'大致性价比*'},
+    'สิ่งที่ได้รับ': {en:'Contents', zh:'获得内容'},
+    'ผลตอบแทน': {en:'Return', zh:'回报'},
+    'สิทธิ์ที่ปลดล็อก': {en:'Unlocked benefits', zh:'解锁权益'},
+    'ระดับแพ็คเกจ': {en:'Package level', zh:'礼包等级'},
+    'ราคา Android': {en:'Android price', zh:'Android价格'},
+    'ราคา iOS': {en:'iOS price', zh:'iOS价格'},
+    'ซุปเปอร์ประหยัด': {en:'Super Saver', zh:'超值小礼包'},
+    'ระดับกลาง': {en:'Mid-tier', zh:'中档礼包'},
+    'ระดับใหญ่': {en:'Large', zh:'大型礼包'},
+    'Direct Gold / Jade Recharge': {en:'Direct Gold / Jade Recharge', zh:'直接充值玉石/黄金'},
+    'Monthly Cards & VIP Privileges': {en:'Monthly Cards & VIP Privileges', zh:'月卡与特权'},
+    'Growth Fund': {en:'Growth Fund', zh:'成长基金'},
+    'Battle Pass / Season Pass': {en:'Battle Pass / Season Pass', zh:'战令/赛季通行证'},
+    'First Top-Up & Starter Packs': {en:'First Top-Up & Starter Packs', zh:'首充与新手礼包'},
+    'Event & Resource Bundles': {en:'Event & Resource Bundles', zh:'活动与资源礼包'},
+    'รับทันที ~300 หยก + วันละ 100–150 หยก 30 วัน': {en:'Receive ~300 Jade immediately + 100–150 Jade daily for 30 days', zh:'立即获得约300玉石，并连续30天每天领取100–150玉石'},
+    '~680 หยก + บัฟเร่งสร้าง/วิจัย + หยกรายวัน 30 วัน': {en:'~680 Jade + building/research speed buffs + daily Jade for 30 days', zh:'约680玉石 + 建造/研究加速增益 + 30天每日玉石'},
+    'คืนหยกสะสมรวมกว่า 500%–1,000% ตามความคืบหน้าเมืองหลัก': {en:'Return over 500%–1,000% in accumulated Jade based on city progress', zh:'根据主城进度返还超过500%–1,000%的累计玉石'},
+    'ควรซื้อแต่เนิ่น ๆ เพื่อรับผลตอบแทนตลอดช่วงอัปเกรดเมืองหลัก': {en:'Buy early to receive returns throughout the city upgrade journey', zh:'建议尽早购买，以便在主城升级期间持续获得回报'},
+    'ปลดล็อกแถวรางวัลพรีเมียม': {en:'Unlock the premium reward track', zh:'解锁高级奖励路线'},
+    'รางวัลพรีเมียม + ข้ามเลเวล 10–20 เลเวล + สกิน/กรอบพิเศษ': {en:'Premium rewards + skip 10–20 levels + exclusive skin/profile frame', zh:'高级奖励 + 直升10–20级 + 专属皮肤/头像框'},
+    'เติมขั้นต่ำราคาใดก็ได้ รับขุนพล SSR ฟรีทันที เช่น จ้าวอวิ๋นหรือเตียวเลี้ยว พร้อมชุดอุปกรณ์เริ่มต้น': {en:'Make a minimum-price purchase to receive a free SSR officer, such as Zhao Yun or Zhang Liao, plus starter equipment', zh:'以任意最低档位充值即可获得SSR武将，例如赵云或张辽，并附赠新手装备'},
+    'ไอเทมเร่งพัฒนาช่วงเปิดไอดีใหม่': {en:'Development items for a new account', zh:'新账号成长道具'},
+    'ราคา:': {en:'Price:', zh:'价格：'},
+    'เติมผ่านเว็บ:': {en:'Web top-up:', zh:'网页充值：'},
+    'ตรวจสอบจริง:': {en:'Verify before buying:', zh:'购买前确认：'},
+    'iOS และ Android อาจต่างกันตาม Tier Matrix อัตราแลกเปลี่ยน และภูมิภาค': {en:'iOS and Android prices may differ by tier matrix, exchange rate, and region', zh:'iOS和Android价格可能因价格等级、汇率和地区而不同'},
+    'หากมีช่องทางเติมเงินทางการ อาจมีโบนัสหยกเพิ่มประมาณ 5%–10% แต่ควรตรวจสอบโดเมนให้ถูกต้องก่อนจ่ายเงิน': {en:'An official web top-up channel may offer around 5%–10% extra Jade, but verify the domain before paying', zh:'官方网页充值渠道可能额外赠送约5%–10%玉石，但付款前请确认域名正确'},
+    'ราคาทั้งหมดเป็นค่าประมาณ ควรดูราคาในสโตร์และรายละเอียดแพ็คเกจจริงก่อนเติมทุกครั้ง': {en:'All prices are estimates. Check the store price and package details before every purchase', zh:'所有价格仅为估算。每次充值前请确认商店价格和礼包详情'},
+    'Android': {en:'Android', zh:'Android'},
+    'iOS': {en:'iOS', zh:'iOS'}
+  };
+  const comboTranslations = {
+    'จูกัดจิ๋น': {en:'Zhuge Jin', zh:'诸葛瑾'},
+    'เต็งฮง': {en:'Ding Feng', zh:'丁奉'},
+    'ซุนหลูบัน': {en:'Sun Luban', zh:'孙鲁班'},
+    'ลิเตียน': {en:'Li Dian', zh:'李典'},
+    'โจจิ๋น': {en:'Cao Zhen', zh:'曹真'},
+    'ตันหลิม': {en:'Chen Lin', zh:'陈琳'},
+    'ซีหยง': {en:'Xu Rong', zh:'徐荣'},
+    'เตียวม่านเฉิง': {en:'Zhang Mancheng', zh:'张曼成'},
+    'อองอุน': {en:'Wang Yun', zh:'王允'},
+    'แนวหน้าทรหด': {en:'Fortified Frontline', zh:'坚韧前排'},
+    'โล่เหล็กไม่มีวันแตก': {en:'Unbreakable Shield', zh:'坚不可摧的盾墙'},
+    'สายกดสถานะต่อเนื่อง': {en:'Continuous Status Pressure', zh:'持续状态压制'},
+    'เพลิงไหม้กวาดกระดาน': {en:'Burning Board Clear', zh:'烈焰清场'},
+    'ไล่ล่าไม่หยุดหย่อน': {en:'Endless Pursuit', zh:'无尽追击'},
+    'ผู้พิชิตปิดเกม': {en:'Finisher', zh:'终结者'},
+    'กำแพงสวนกลับ': {en:'Counterattack Wall', zh:'反击之墙'},
+    'ยั่วศัตรู คุ้มกันหลังบ้าน': {en:'Taunt and Protect the Backline', zh:'嘲讽敌人，保护后排'},
+    'ทีมม่วงง่อก๊ก · ธนู/โล่': {en:'Wu Purple Team · Archer / Shield', zh:'吴国紫队·弓兵/盾兵'},
+    'ทีมม่วงวุ่ยก๊ก · ม้าระเบิดสกิล': {en:'Wei Purple Team · Skill Burst Cavalry', zh:'魏国紫队·技能爆发骑兵'},
+    'ทีมม่วงก๊ก · ป้องกันและสวนกลับ': {en:'Qun Purple Team · Defense and Counterattack', zh:'群雄紫队·防御与反击'},
+    'แนวหน้าทรหด': {en:'Fortified Frontline', zh:'坚韧前排'},
+    'Zhang Liang เปิด Fortitude เพิ่ม DEF ให้ตัวเอง ขณะที่ Zhang Yan สร้างดาเมจสกิลเพิ่มขึ้นตราบใดที่ Fortitude ยังทำงานอยู่ เหมาะกับตั้งรับต้นเกมแล้วระเบิดดาเมจตอนสถานะพร้อม': {en:'Zhang Liang activates Fortitude to increase his DEF, while Zhang Yan deals more skill damage while Fortitude is active. This is useful for early defense followed by a burst when the status is ready.', zh:'张梁开启坚毅提高自身防御，张燕在坚毅生效期间获得技能伤害提升。适合前期防守，并在状态准备好后爆发。'},
+    'ผสาน Unyielding เพื่อความอึด กับ Splash เพื่อดาเมจเป็นวงกว้าง และ Defection เพื่อฟื้นทหาร ทำให้แนวหน้ายืนระยะในศึกกลุ่มได้ยาวนาน': {en:'Combine Unyielding for durability, Splash for area damage, and Defection for troop recovery. The frontline can endure longer in group battles.', zh:'结合不屈提高耐久、溅射造成范围伤害，以及叛变恢复兵力，让前排在团战中坚持更久。'},
+    'Weakness จาก Zhang Fei เปิดทางให้ Guan Yu อัด Vulnerability เพิ่ม แล้ว Liao Hua ตามด้วยดาเมจโจมตีธรรมดาที่เพิ่มขึ้นใส่เป้าเดิม เป็นห่วงโซ่ดีบัฟที่ขยายผลกันเอง': {en:'Zhang Fei applies Weakness, Guan Yu adds Vulnerability, and Liao Hua follows with enhanced normal attacks against the same target. The debuffs amplify one another.', zh:'张飞施加虚弱，关羽追加脆弱，廖化再对同一目标进行强化普攻。多个减益效果可以相互放大。'},
+    'Lu Su และ Zhou Yu ปูสถานะ Burn เป็นวงกว้าง ส่วน Xiao Qiao และ Lü Meng ตามด้วยดาเมจที่เพิ่มขึ้นใส่เป้าที่ติดไฟ เหมาะกับศึกกลุ่มขนาดใหญ่': {en:'Lu Su and Zhou Yu spread Burn across the battlefield, while Xiao Qiao and Lü Meng follow up with increased damage against burning targets. Ideal for large group battles.', zh:'鲁肃和周瑜大范围施加灼烧，小乔和吕蒙再对燃烧目标造成额外伤害，适合大型团战。'},
+    'ขุนพลสาย Pursue กระตุ้นโจมตีธรรมดาซ้ำ ผสานกับ Sun Jian หรือ Ma Yunlu ที่เพิ่มดาเมจโจมตีธรรมดาโดยตรง ดันดาเมจเดี่ยวได้สูงสุดในทีมเดียว': {en:'Pursuit officers trigger repeated normal attacks. Pair them with Sun Jian or Ma Yunlu, who directly increase normal attack damage, to maximize single-target damage.', zh:'追击武将可以触发连续普攻，搭配直接提升普攻伤害的孙坚或马云禄，可最大化单体伤害。'},
+    'Lü Bu ถือทั้ง Spirit Break (กดดาเมจสกิลศัตรู) และ Rout (จบทัพที่ทหารเหลือน้อย) ในตัวเดียว เหมาะเป็นตัวปิดเกมเมื่อฝ่ายตรงข้ามอ่อนกำลังลง': {en:'Lü Bu combines Spirit Break, which suppresses enemy skill damage, with Rout, which finishes weakened armies. He is ideal for closing out fights.', zh:'吕布同时拥有压制敌方技能伤害的魂破和收割残兵的溃败，适合在对手虚弱时终结战斗。'},
+    'ขุนพลที่ถืออาวุธเฉพาะ Counterattack รับมือทีม Archer และทีม Pursue ได้ตรงจุด เพราะยิ่งโดนตีถี่ยิ่งได้ทั้ง DEF และดาเมจตอบโต้เพิ่ม': {en:'Officers with the Counterattack exclusive weapon directly answer Archer and Pursuit teams. The more often they are hit, the more DEF and retaliation damage they gain.', zh:'拥有反击专武的武将可以有效应对弓兵和追击队。受到攻击越频繁，获得的防御和反击伤害越高。'},
+    'Zhang Jiao ใช้ Taunt ดึงทัพม้าศัตรูที่ตีโฉบให้เข้ามาปะทะตัวเองแทน ช่วยคุ้มกันสาย Archer หรือดาเมจดีลเลอร์แนวหลังให้ปลอดภัย': {en:'Zhang Jiao uses Taunt to pull dive-attacking cavalry toward himself, protecting Archers and backline damage dealers.', zh:'张角使用嘲讽将突袭后排的敌方骑兵吸引到自己身上，保护弓兵和后排输出。'}
+  };
+  const characterTranslations = {
+    'อองอุน (王允)': {en:'Wang Yun (王允)', zh:'王允'}, 'หุยโชว (戲志才)': {en:'Xi Zhicai (戲志才)', zh:'戏志才'}, 'จูกัดจิ๋น (諸葛瑾)': {en:'Zhuge Jin (諸葛瑾)', zh:'诸葛瑾'}, 'เต็งฮง (丁奉)': {en:'Ding Feng (丁奉)', zh:'丁奉'}, 'โป่จี้ (步騭)': {en:'Bu Zhi (步騭)', zh:'步骘'}, 'เปี้ยนสี่ (卞喜)': {en:'Bian Xi (卞喜)', zh:'卞喜'}, 'เตียวม่านเฉิง (張曼成)': {en:'Zhang Mancheng (張曼成)', zh:'张曼成'}, 'ลิเตียน (李典)': {en:'Li Dian (李典)', zh:'李典'}, 'โจจิ๋น (曹真)': {en:'Cao Zhen (曹真)', zh:'曹真'}, 'ตันหลิม (陳琳)': {en:'Chen Lin (陳琳)', zh:'陈琳'}, 'ซีหยง (徐榮)': {en:'Xu Rong (徐榮)', zh:'徐荣'}, 'กวนเป๋ง (關平)': {en:'Guan Ping (關平)', zh:'关平'}, 'ซุนหลูบัน (孫魯班)': {en:'Sun Luban (孫魯班)', zh:'孙鲁班'}, 'ลื่อต้าย (呂岱)': {en:'Lü Dai (呂岱)', zh:'吕岱'}, 'เล่าฮอง (凌統)': {en:'Ling Tong (凌統)', zh:'凌统'},
+    'Qun · ธนู': {en:'Qun · Archer', zh:'群雄·弓兵'}, 'Wei · ธนู': {en:'Wei · Archer', zh:'魏·弓兵'}, 'Wu · ธนู': {en:'Wu · Archer', zh:'吴·弓兵'}, 'Qun · ม้า': {en:'Qun · Cavalry', zh:'群雄·骑兵'}, 'Wei · ม้า': {en:'Wei · Cavalry', zh:'魏·骑兵'}, 'Wu · โล่': {en:'Wu · Shield', zh:'吴·盾兵'}, 'Qun · โล่': {en:'Qun · Shield', zh:'群雄·盾兵'}, 'Shu · โล่': {en:'Shu · Shield', zh:'蜀·盾兵'},
+    'สกิล: ดาเมจ 80% และเพิ่มดาเมจสกิลของแม่ทัพพลังโจมตีสูงสุด 20% · อาวุธ: ดาเมจเพิ่มเติม 100% และ DEF +6%': {en:'Skill: 80% damage and up to 20% more skill damage for the officer with the highest attack · Weapon: 100% additional damage and DEF +6%', zh:'技能：造成80%伤害，并使攻击最高的武将技能伤害提高20% · 专武：额外伤害100%，防御+6%'},
+    'สกิล: ดาเมจ 85% โจมตีกระจาย 5 ยูนิต · อาวุธ: เพิ่มระยะโจมตีกระจาย 250 และ DEF +5.7%': {en:'Skill: 85% damage against 5 units · Weapon: +250 splash range and DEF +5.7%', zh:'技能：对5个单位造成85%伤害 · 专武：范围攻击距离+250，防御+5.7%'},
+    'สกิล: โจมตี 5 ยูนิต ดาเมจหลัก 40 และเพิ่มดาเมจสกิล 50% · อาวุธ: ดาเมจโจมตีปกติ +45%': {en:'Skill: Attacks 5 units, main damage 40, and increases skill damage by 50% · Weapon: Normal attack damage +45%', zh:'技能：攻击5个单位，主目标伤害40，技能伤害+50% · 专武：普攻伤害+45%'},
+    'สกิล: โจมตี 5 ยูนิต ดาเมจหลัก 50 และนอกหอส่งสัญญาณเพิ่มดาเมจสกิล +73 · อาวุธ: ดาเมจปกติ +45%': {en:'Skill: Attacks 5 units, main damage 50, and gains +73 skill damage outside the Beacon Tower · Weapon: Normal damage +45%', zh:'技能：攻击5个单位，主目标伤害50，在烽火台外技能伤害+73 · 专武：普攻伤害+45%'},
+    'สกิล: ดาเมจ 75% และในหอส่งสัญญาณดาเมจเพิ่ม 130% · อาวุธ: ในหอส่งสัญญาณเพิ่ม DEF และดาเมจปกติ': {en:'Skill: 75% damage and +130% damage in the Beacon Tower · Weapon: Increases DEF and normal damage in the Beacon Tower', zh:'技能：造成75%伤害，在烽火台内伤害+130% · 专武：在烽火台内提高防御和普攻伤害'},
+    'สกิล: ดาเมจ 96% เพิ่ม DEF 5% และความเร็ว +5% · อาวุธ: มีโอกาสสร้างดาเมจซ้ำ 84.5% และ DEF +10%': {en:'Skill: 96% damage, DEF +5%, and speed +5% · Weapon: 84.5% chance to deal repeated damage and DEF +10%', zh:'技能：造成96%伤害，防御+5%，速度+5% · 专武：有84.5%概率造成重复伤害，防御+10%'},
+    'สกิล: ดาเมจ 77% เพิ่มโจมตีปกติและ DEF 5% · อาวุธ: DEF +10% และสวนกลับได้ 15 ครั้งต่อวินาที': {en:'Skill: 77% damage, normal attack and DEF +5% · Weapon: DEF +10% and up to 15 counterattacks per second', zh:'技能：造成77%伤害，普攻和防御+5% · 专武：防御+10%，每秒最多反击15次'},
+    'สกิล: ดาเมจ 99% เพิ่ม DEF 5% และดาเมจปกติ +50% · อาวุธ: ดาเมจสกิล +17% และ DEF +10%': {en:'Skill: 99% damage, DEF +5%, and normal damage +50% · Weapon: Skill damage +17% and DEF +10%', zh:'技能：造成99%伤害，防御+5%，普攻伤害+50% · 专武：技能伤害+17%，防御+10%'},
+    'สกิล: ดาเมจ 71% เพิ่มสัมฤทธิผลสกิล 100% และ DEF 5% · อาวุธ: ดาเมจสกิล +14% และถูกโจมตีแล้ว DEF +10%': {en:'Skill: 71% damage, skill effectiveness +100%, and DEF +5% · Weapon: Skill damage +14% and DEF +10% after being attacked', zh:'技能：造成71%伤害，技能效果+100%，防御+5% · 专武：技能伤害+14%，受到攻击后防御+10%'},
+    'สกิล: ดาเมจ 99% เพิ่มดาเมจปกติ 5% และ DEF 5% · อาวุธ: เพิ่มดาเมจปกติให้ทัพเดียวกัน 25% และ DEF +10%': {en:'Skill: 99% damage, normal damage +5%, and DEF +5% · Weapon: Grants the same army +25% normal damage and DEF +10%', zh:'技能：造成99%伤害，普攻伤害+5%，防御+5% · 专武：使同部队普攻伤害+25%，防御+10%'},
+    'สกิล: ดาเมจ 64% เพิ่ม DEF 12% และในป่าเพิ่มอีก 15% · อาวุธ: มีโอกาสดาเมจซ้ำและถูกโจมตีแล้ว DEF +11%': {en:'Skill: 64% damage, DEF +12%, and +15% more in forests · Weapon: Chance to repeat damage and DEF +11% after being attacked', zh:'技能：造成64%伤害，防御+12%，在森林中额外+15% · 专武：有概率重复造成伤害，受到攻击后防御+11%'},
+    'สกิล: โจมตี 5 ยูนิต ดาเมจหลัก 41 เพิ่ม DEF 17% และดาเมจปกติ +100% · อาวุธ: ดาเมจซ้ำและ DEF +13%': {en:'Skill: Attacks 5 units, main damage 41, DEF +17%, and normal damage +100% · Weapon: Repeated damage chance and DEF +13%', zh:'技能：攻击5个单位，主目标伤害41，防御+17%，普攻伤害+100% · 专武：重复伤害和防御+13%'},
+    'สกิล: ดาเมจ 60% เพิ่มดาเมจปกติของแม่ทัพพลังโจมตีสูงสุด 24% และ DEF 16.5% · อาวุธ: DEF +13%': {en:'Skill: 60% damage, increases the highest-attack officer normal damage by 24%, and DEF +16.5% · Weapon: DEF +13%', zh:'技能：造成60%伤害，使攻击最高的武将普攻伤害+24%，防御+16.5% · 专武：防御+13%'},
+    'สกิล: โจมตี 5 ยูนิต ดาเมจ 43 เพิ่ม DEF 10% และในหอส่งสัญญาณ DEF +27.6% · อาวุธ: ดาเมจสกิล +17%': {en:'Skill: Attacks 5 units for 43 damage, DEF +10%, and DEF +27.6% in the Beacon Tower · Weapon: Skill damage +17%', zh:'技能：攻击5个单位造成43伤害，防御+10%，在烽火台内防御+27.6% · 专武：技能伤害+17%'},
+    'สกิล: ดาเมจ 42% เพิ่ม DEF เมื่อกำลังพลต่ำกว่าครึ่ง · อาวุธ: มีโอกาสลดความเร็วและเพิ่ม DEF ต่อเป้าหมายติดสโลว์': {en:'Skill: 42% damage and increased DEF when troop strength is below half · Weapon: Chance to slow targets and gain DEF against slowed targets', zh:'技能：造成42%伤害，兵力低于一半时提高防御 · 专武：有概率降低目标速度，并对减速目标提高防御'}
+  };
+  document.querySelectorAll('.skill-card, .faction-page, .counter-table, .combo-card, .role-card, .character-data-card, .topup-section').forEach(block=>{
     const walker = document.createTreeWalker(block, NodeFilter.SHOW_TEXT);
     let node;
     while (node = walker.nextNode()) {
@@ -980,10 +1215,29 @@
       detailedTextNodes.push({node, source, key:source.trim()});
     }
   });
+  function translateTopupFallback(text, language){
+    if (language === 'th') return text;
+    const replacements = language === 'zh'
+      ? [['บาท','泰铢'],['หยก','玉石'],['ราคา','价格'],['คุ้มค่าโดยประมาณ','大致性价比']]
+      : [['บาท','THB'],['หยก','Jade'],['ราคา','Price'],['คุ้มค่าโดยประมาณ','Approx. value']];
+    return replacements.reduce((value,[source,target])=>value.split(source).join(target), text);
+  }
+  function translateCharacterFallback(text, language){
+    if (language === 'th') return text;
+    const replacements = language === 'zh'
+      ? [['สกิล:','技能：'],['อาวุธ:','专武：'],['ธนู','弓兵'],['ม้า','骑兵'],['โล่','盾兵'],['ดาเมจ','伤害'],['เพิ่ม','增加'],['โจมตีปกติ','普通攻击'],['โจมตี','攻击'],['แม่ทัพ','武将'],['ทัพเดียวกัน','同部队'],['พลังโจมตีสูงสุด','最高攻击'],['มีโอกาส','有概率'],['เมื่อถูกโจมตี','受到攻击时'],['ในหอส่งสัญญาณ','在烽火台内'],['ในป่า','在森林中'],['และ','并'],['พร้อม','并且']]
+      : [['สกิล:','Skill:'],['อาวุธ:','Weapon:'],['ธนู','Archer'],['ม้า','Cavalry'],['โล่','Shield'],['ดาเมจ','damage'],['เพิ่ม','increase'],['โจมตีปกติ','normal attack'],['โจมตี','attack'],['แม่ทัพ','officer'],['ทัพเดียวกัน','allied army'],['พลังโจมตีสูงสุด','highest attack'],['มีโอกาส','has a chance to'],['เมื่อถูกโจมตี','when attacked'],['ในหอส่งสัญญาณ','in the Beacon Tower'],['ในป่า','in the forest'],['และ','and'],['พร้อม','with']];
+    return replacements.reduce((value,[source,target])=>value.split(source).join(target), text);
+  }
   function translateDetailedContent(language){
     detailedTextNodes.forEach(item=>{
-      const translated = embeddedTranslations[item.key];
-      const value = translated ? translated[language] : item.key;
+      const translated = comboTranslations[item.key] || characterTranslations[item.key] || embeddedTranslations[item.key] || topupTranslations[item.key];
+      if (!item.node.parentElement) return;
+      const value = translated
+        ? (translated[language] || item.key)
+        : item.node.parentElement.closest('#tab-topup')
+          ? translateTopupFallback(item.key, language)
+          : item.key;
       item.node.nodeValue = item.source.replace(item.key, value);
     });
   }
@@ -992,6 +1246,19 @@
     document.documentElement.lang = language;
     translatableElements.forEach(element=>{
       element.innerHTML = element.dataset[language];
+    });
+    document.querySelectorAll('[data-alt-th][data-alt-en][data-alt-zh]').forEach(element=>{
+      element.alt = element.getAttribute('data-alt-'+language);
+    });
+    document.querySelectorAll('#tab-opening .opening-gallery__item').forEach(figure=>{
+      const image = figure.querySelector('.opening-gallery__image');
+      const title = figure.querySelector('strong');
+      const description = figure.querySelector('span');
+      if (image && title && description) image.alt = `${title.textContent}: ${description.textContent}`;
+    });
+    ['skillResetTitle','skillResetText','newPlayerTitle','newPlayerText'].forEach(id=>{
+      const element = document.getElementById(id);
+      if (element) element.textContent = element.getAttribute('data-'+language);
     });
     if (language === 'th') {
       const thaiSystemTerms = {
@@ -1017,7 +1284,9 @@
     document.getElementById('factionSearchInput').placeholder = searchPlaceholders.faction;
     document.getElementById('categorySearchInput').placeholder = searchPlaceholders.category;
     const systemSearchInput = document.getElementById('systemSearchInput');
-    if (systemSearchInput) systemSearchInput.placeholder = systemSearchInput.dataset['placeholder-'+language];
+    if (systemSearchInput) systemSearchInput.placeholder = systemSearchInput.getAttribute('data-placeholder-'+language);
+    const systemFilter = document.getElementById('systemFilter');
+    if (systemFilter) systemFilter.setAttribute('aria-label', systemFilter.getAttribute('data-label-'+language));
     const tableLabels = language === 'en'
       ? { 'สถานะ': 'Status', 'เคาน์เตอร์': 'Counter', 'ขุนพลแนะนำ': 'Recommended officers', 'หมายเหตุ': 'Notes' }
       : language === 'zh'
@@ -1034,6 +1303,29 @@
     renderOfficerLanguage(language);
   }
   languageToggle.addEventListener('change',()=>applyLanguage(languageToggle.value));
+
+  function addTopupPriceReferences(){
+    const usdToCny = 7.2;
+    document.querySelectorAll('#tab-topup .topup-table tbody tr').forEach(row=>{
+      const packageText = row.cells[0] ? row.cells[0].textContent : '';
+      const prices = packageText.match(/\$\d+(?:\.\d+)?(?:\s*[–-]\s*\$\d+(?:\.\d+)?)?/);
+      if (!prices) return;
+      const usdText = prices[0];
+      const amounts = [...usdText.matchAll(/\$(\d+(?:\.\d+)?)/g)].map(match=>Number(match[1]));
+      const cnyText = amounts.length > 1
+        ? `¥${Math.round(amounts[0] * usdToCny)}–¥${Math.round(amounts[1] * usdToCny)}`
+        : `¥${Math.round(amounts[0] * usdToCny)}`;
+      const sectionId = row.closest('.topup-section').id;
+      const priceIndexes = sectionId === 'topup-direct' ? [2] : sectionId === 'topup-event' ? [1,2] : [2];
+      priceIndexes.map(index=>row.cells[index]).filter(Boolean).forEach(cell=>{
+        if (!/บาท|~\d/.test(cell.textContent) || cell.querySelector('.topup-price-reference')) return;
+        const reference = document.createElement('span');
+        reference.className = 'topup-price-reference';
+        reference.textContent = `USD ${usdText} · CNY ${cnyText}`;
+        cell.appendChild(reference);
+      });
+    });
+  }
 
   const officerDetails = {
     'cao-cao': {
@@ -1209,6 +1501,7 @@
     if (event.target === officerDialog) officerDialog.close();
   });
   applyLanguage(languageToggle.value || 'th');
+  addTopupPriceReferences();
 
   // main tab switching
   const tabButtons = document.querySelectorAll('.tabs button');
@@ -1348,7 +1641,30 @@
   const systemSearchInput = document.getElementById('systemSearchInput');
   const systemFilter = document.getElementById('systemFilter');
   const systemSearchEmpty = document.getElementById('systemSearchEmpty');
+  const systemGrid = document.getElementById('systemGrid');
+  const communityGuide = document.querySelector('#tab-systems > .community-guide');
+  if (systemGrid && communityGuide) {
+    Array.from(communityGuide.querySelectorAll('.community-guide__item')).reverse().forEach(block=>systemGrid.prepend(block));
+    communityGuide.remove();
+  }
+  const openingPage = document.getElementById('tab-opening');
+  const openingFirstGallery = openingPage && openingPage.querySelector('.opening-gallery');
+  const openingFirstGroup = openingPage && openingPage.querySelector('.opening-group');
+  const systemMapGuide = document.querySelector('#tab-systems > .map-guide');
+  const systemReferenceImages = Array.from(document.querySelectorAll('#systemGrid .community-guide__item'));
+  if (openingPage && openingFirstGallery) {
+    if (systemMapGuide && openingFirstGroup) openingPage.insertBefore(systemMapGuide, openingFirstGroup);
+  }
   const systemCards = Array.from(document.querySelectorAll('.system-card'));
+  const systemExtraBlocks = [
+    document.querySelector('#tab-systems > .lede'),
+    document.querySelector('#tab-systems > .map-guide'),
+    ...document.querySelectorAll('#systemGrid .community-guide__item')
+  ].filter(Boolean);
+  function getSystemBlockText(block){
+    const imageText = Array.from(block.querySelectorAll('img')).map(image=>image.alt).join(' ');
+    return normalizeSearch(`${block.textContent} ${imageText}`);
+  }
   function filterSystems(){
     const query = normalizeSearch(systemSearchInput.value.trim());
     const selectedSystem = systemFilter.value;
@@ -1358,6 +1674,12 @@
       const matchesFilter = selectedSystem === 'all' || card.dataset.system === selectedSystem;
       const visible = matchesText && matchesFilter;
       card.hidden = !visible;
+      if (visible) matchCount++;
+    });
+    systemExtraBlocks.forEach(block=>{
+      const matchesText = !query || getSystemBlockText(block).includes(query);
+      const visible = matchesText && selectedSystem === 'all';
+      block.hidden = !visible;
       if (visible) matchCount++;
     });
     systemSearchEmpty.classList.toggle('visible', matchCount === 0);
