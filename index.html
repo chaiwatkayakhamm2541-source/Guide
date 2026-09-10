@@ -111,6 +111,10 @@
   .language-switcher{margin-left:10px;}
   .language-switcher:hover,.theme-switcher:hover{background:var(--panel);color:var(--text);}
   .header-row{display:flex;align-items:center;gap:12px;}
+  .header-actions{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;gap:6px;margin-left:auto;}
+  .header-actions .theme-switcher,.header-actions .language-switcher{margin-left:0;margin-top:0;width:100%;}
+  .header-actions .discord-button{grid-column:1 / -1;width:100%;padding:6px 10px;font-size:12px;}
+  .header-actions .discord-button img{width:22px;height:22px;}
 
   main{padding:22px 0 60px;}
   .tab-page{display:none;}
@@ -286,6 +290,15 @@
   .system-empty.visible{display:block;}
 
   footer.wrap{border-top:1px solid var(--border);margin-top:28px;padding:28px 28px 52px;color:var(--text-muted);font-size:13px;}
+  .footer-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px 28px;align-items:end;}
+  .footer-meta{display:grid;gap:8px;}
+  .footer-credit{color:var(--gold-soft);font-size:14px;font-weight:600;}
+  .footer-warning{border-left:3px solid var(--seal);padding:8px 12px;background:var(--panel);color:var(--text);}
+  .discord-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#5865F2;border:1px solid #7983f5;border-radius:var(--radius);color:#fff;font:600 14px 'Sarabun',sans-serif;padding:8px 16px;text-decoration:none;white-space:nowrap;transition:background .18s ease,transform .18s ease;}
+  .discord-button img{width:28px;height:28px;object-fit:cover;border-radius:50%;}
+  .discord-button:hover{background:#4752C4;transform:translateY(-1px);}
+  .discord-button:focus-visible{outline:2px solid var(--gold-soft);outline-offset:2px;}
+  .footer-source{margin:8px 0 0;}
 
   @media(max-width:1000px){
     .stat-row{grid-template-columns:repeat(3,minmax(0,1fr));}
@@ -302,11 +315,13 @@
     .emblem{width:38px;height:38px;}
     .brand-title{font-size:20px;}
     .brand-sub{font-size:12px;line-height:1.4;}
-    .language-switcher,.theme-switcher{margin-top:4px;padding:6px 8px;}
+    .language-switcher,.theme-switcher{margin-top:0;padding:6px 8px;}
     nav.tabs button{font-size:14px;padding:8px 12px 10px;}
     main{padding-top:18px;}
     .faction-search,.category-search{align-items:stretch;flex-direction:column;gap:6px;}
     .skill-card__head{flex-direction:column;}
+    .footer-grid{grid-template-columns:1fr;align-items:start;}
+    .discord-button{width:100%;}
   }
 </style>
 </head>
@@ -322,12 +337,15 @@
         <div class="brand-sub" data-th="คู่มืออ้างอิงฉบับสรุป สำหรับวางแผนจัดทัพและตัวเคาน์เตอร์" data-en="A concise reference for army planning and counters" data-zh="用于军队规划和克制搭配的简明参考指南">A concise reference for army planning and counters</div>
       </div>
     </div>
-    <button class="theme-switcher" id="themeToggle" type="button" aria-label="เปลี่ยนโหมดสี" title="เปลี่ยนโหมดสี"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">DARK</span></button>
-    <select class="language-switcher" id="languageToggle" aria-label="Select language">
-      <option value="en">ENG</option>
-      <option value="th" selected>TH</option>
-      <option value="zh">中文</option>
-    </select>
+    <div class="header-actions">
+      <select class="language-switcher" id="languageToggle" aria-label="Select language">
+        <option value="en">ENG</option>
+        <option value="th" selected>TH</option>
+        <option value="zh">中文</option>
+      </select>
+      <button class="theme-switcher" id="themeToggle" type="button" aria-label="เปลี่ยนโหมดสี" title="เปลี่ยนโหมดสี"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">DARK</span></button>
+      <a class="discord-button" href="https://discord.gg/gGpHxUa3R" target="_blank" rel="noopener noreferrer"><img src="logo/Discord.jpg" alt="Discord"><span data-th="เข้าร่วม Discord กิล" data-en="Join Guild Discord" data-zh="加入公会 Discord">เข้าร่วม Discord กิล</span></a>
+    </div>
     </div>
     <nav class="tabs">
       <button class="active" data-tab="overview" data-th="ภาพรวม" data-en="Overview" data-zh="总览">Overview</button>
@@ -915,8 +933,14 @@
 
 </main>
 
-<footer class="wrap" data-th="แปลและจัดหมวดหมู่จากภาพหน้าจอสกิล/สถานะที่ให้มาทั้งหมด 18 ภาพ (19 สถานะ/กลไก) · การจัดสังกัดอ้างอิงวรรณกรรมสามก๊กทั่วไป · ตัวเลขบางส่วนในภาพต้นฉบับอาจไม่ชัดเจนสมบูรณ์ ควรตรวจสอบค่าจริงในเกมอีกครั้งก่อนใช้วางแผนจริงจัง" data-en="Compiled and categorized from 18 provided skill/status screenshots (19 statuses/mechanics) · Factions follow common Three Kingdoms references · Some source values may be unclear, so verify them in-game before serious planning." data-zh="根据提供的18张技能/状态截图整理分类（共19种状态/机制）· 阵营参考三国相关资料 · 部分原始数值可能不清晰，正式规划前请在游戏中确认。">
-  Compiled and categorized from 18 provided skill/status screenshots (19 statuses/mechanics) · Factions follow common Three Kingdoms references · Some source values may be unclear, so verify them in-game before serious planning.
+<footer class="wrap">
+  <div class="footer-grid">
+    <div class="footer-meta">
+      <div class="footer-credit" data-th="ผู้จัดทำ: SilentCrownLL และ SAMX" data-en="Created by: SilentCrownLL and SAMX" data-zh="制作人：SilentCrownLL 和 SAMX">ผู้จัดทำ: SilentCrownLL และ SAMX</div>
+      <div class="footer-warning" data-th="คำเตือน: เว็บไซต์นี้สำหรับผู้เล่น IMMORTAL เท่านั้น ห้ามนำไปเผยแพร่หรือแจกจ่ายต่อโดยไม่ได้รับอนุญาต" data-en="Warning: This website is for IMMORTAL players only. Do not publish or redistribute it without permission." data-zh="警告：本网站仅供 IMMORTAL 玩家使用。未经许可，禁止公开发布或再分发。">คำเตือน: เว็บไซต์นี้สำหรับผู้เล่น IMMORTAL เท่านั้น ห้ามนำไปเผยแพร่หรือแจกจ่ายต่อโดยไม่ได้รับอนุญาต</div>
+      <p class="footer-source" data-th="แปลและจัดหมวดหมู่จากภาพหน้าจอสกิล/สถานะที่ให้มาทั้งหมด 18 ภาพ (19 สถานะ/กลไก) · การจัดสังกัดอ้างอิงวรรณกรรมสามก๊กทั่วไป · ตัวเลขบางส่วนในภาพต้นฉบับอาจไม่ชัดเจนสมบูรณ์ ควรตรวจสอบค่าจริงในเกมอีกครั้งก่อนใช้วางแผนจริงจัง" data-en="Compiled and categorized from 18 provided skill/status screenshots (19 statuses/mechanics) · Factions follow common Three Kingdoms references · Some source values may be unclear, so verify them in-game before serious planning." data-zh="根据提供的18张技能/状态截图整理分类（共19种状态/机制）· 阵营参考三国相关资料 · 部分原始数值可能不清晰，正式规划前请在游戏中确认。">Compiled and categorized from 18 provided skill/status screenshots (19 statuses/mechanics) · Factions follow common Three Kingdoms references · Some source values may be unclear, so verify them in-game before serious planning.</p>
+    </div>
+  </div>
 </footer>
 
 <script>
