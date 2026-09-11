@@ -213,11 +213,14 @@
   .fb-wei{--f-color:var(--wei);} .fb-shu{--f-color:var(--shu);}
   .fb-wu{--f-color:var(--wu);} .fb-qun{--f-color:var(--qun);}
   .officer-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;}
+  .officer-grid--text-only{margin-top:10px;}
   .officer-card{
     background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);
-    padding:0;overflow:hidden;cursor:pointer;text-align:left;color:inherit;font:inherit;
+    padding:0;overflow:hidden;position:relative;cursor:pointer;text-align:left;color:inherit;font:inherit;
     transition:transform .18s ease,border-color .18s ease,background .18s ease;
   }
+  .officer-card[data-officer]::after{content:'ⓘ';position:absolute;top:7px;right:8px;color:var(--gold-soft);font-size:16px;line-height:1;text-shadow:0 1px 2px rgba(0,0,0,.7);}
+  .officer-card[data-officer]:hover::after{color:var(--gold);}
   .officer-card:hover{transform:translateY(-2px);border-color:var(--border-bright);background:var(--panel-2);}
   .officer-card--static{cursor:default;}
   .officer-card--static:hover{transform:none;}
@@ -265,11 +268,15 @@
   .role-card{background:var(--panel-2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;min-width:0;}
   .role-card p{font-size:13.5px;color:var(--text-muted);margin:4px 0 8px;}
   .character-data-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-bottom:34px;}
-  .character-data-card{background:var(--panel-2);border:1px solid var(--border);border-left:3px solid var(--f-color,var(--gold));border-radius:var(--radius);padding:13px 15px;}
+  .character-data-card{background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--f-color,var(--gold));border-radius:var(--radius);padding:10px 12px;}
+  .character-data-card[data-officer]{cursor:pointer;transition:transform .18s ease,border-color .18s ease,background .18s ease;}
+  .character-data-card[data-officer]:hover{transform:translateY(-2px);border-color:var(--border-bright);background:var(--panel);}
   .character-data-card h3{font-size:16px;color:var(--text);margin-bottom:2px;}
   .character-data-card .character-meta{color:var(--gold-soft);font-size:12.5px;}
-  .character-data-card p{font-size:13.5px;color:var(--text-muted);margin:7px 0 0;}
+  .character-data-card p{display:none;}
   .character-data-card[data-faction="wu"]{--f-color:var(--wu);}.character-data-card[data-faction="wei"]{--f-color:var(--wei);}.character-data-card[data-faction="shu"]{--f-color:var(--shu);}.character-data-card[data-faction="qun"]{--f-color:var(--qun);}
+  .additional-faction-group{margin:0 0 24px;}
+  .additional-faction-group h3{margin:0 0 10px;padding:10px 12px;border-bottom:2px solid var(--f-color,var(--gold));color:var(--text);font-size:18px;}
   /* SS1 tier list */
   .tierlist-intro{margin-bottom:18px;}
   .tier-row{display:grid;grid-template-columns:86px 1fr;gap:14px;align-items:stretch;margin:0 0 12px;}
@@ -454,10 +461,10 @@
       <button data-tab="opening" data-th="คู่มือเริ่มเกม" data-en="Opening Guide" data-zh="开荒指南">Opening Guide</button>
       <button data-tab="factions" data-th="สังกัด/ฝ่าย" data-en="Factions" data-zh="阵营">Factions</button>
       <button data-tab="tierlist" data-th="Tierlist" data-en="Tierlist" data-zh="强度榜">Tierlist</button>
+      <button data-tab="combos" data-th="คอมโบ &amp; ทีม" data-en="Combos &amp; Teams" data-zh="组合与队伍">Combos &amp; Teams</button>
       <button data-tab="categories" data-th="หมวดหมู่สกิล" data-en="Skill Categories" data-zh="技能分类">Skill Categories</button>
       <button data-tab="counters" data-th="ตาราง Counter" data-en="Counter Table" data-zh="克制表">Counter Table</button>
       <button data-tab="topup" data-th="คู่มือเติมเงิน" data-en="Top-up Guide" data-zh="充值指南">Top-up Guide</button>
-      <button data-tab="combos" data-th="คอมโบ &amp; ทีม" data-en="Combos &amp; Teams" data-zh="组合与队伍">Combos &amp; Teams</button>
     </nav>
   </div>
 </header>
@@ -1019,24 +1026,24 @@
 
     </div>
 
-    <h2 data-th="ข้อมูลแม่ทัพเพิ่มเติมจากภาพต้นฉบับ" data-en="Additional Officer Data from Source Images" data-zh="原始图片中的补充武将资料">ข้อมูลแม่ทัพเพิ่มเติมจากภาพต้นฉบับ</h2>
-    <p class="cat-desc" data-th="ค่าด้านล่างเป็นข้อมูลที่ถอดจากภาพและข้อความอ้างอิง ควรตรวจสอบตัวเลขจริงในเกมก่อนใช้วางแผน" data-en="Values below were transcribed from the supplied images and notes. Verify exact in-game values before planning." data-zh="以下数值根据提供的图片和笔记整理，规划前请在游戏中确认准确数值。">Values below were transcribed from the supplied images and notes. Verify exact in-game values before planning.</p>
+    <div id="additional-officer-data">
     <div class="character-data-grid">
-      <article class="character-data-card" data-faction="qun"><h3>อองอุน (王允)</h3><span class="character-meta">Qun · ธนู</span><p>สกิล: ดาเมจ 80% และเพิ่มดาเมจสกิลของแม่ทัพพลังโจมตีสูงสุด 20% · อาวุธ: ดาเมจเพิ่มเติม 100% และ DEF +6%</p></article>
-      <article class="character-data-card" data-faction="wei"><h3>หุยโชว (戲志才)</h3><span class="character-meta">Wei · ธนู</span><p>สกิล: ดาเมจ 85% โจมตีกระจาย 5 ยูนิต · อาวุธ: เพิ่มระยะโจมตีกระจาย 250 และ DEF +5.7%</p></article>
-      <article class="character-data-card" data-faction="wu"><h3>จูกัดจิ๋น (諸葛瑾)</h3><span class="character-meta">Wu · ธนู</span><p>สกิล: โจมตี 5 ยูนิต ดาเมจหลัก 40 และเพิ่มดาเมจสกิล 50% · อาวุธ: ดาเมจโจมตีปกติ +45%</p></article>
-      <article class="character-data-card" data-faction="wu"><h3>เต็งฮง (丁奉)</h3><span class="character-meta">Wu · ธนู</span><p>สกิล: โจมตี 5 ยูนิต ดาเมจหลัก 50 และนอกหอส่งสัญญาณเพิ่มดาเมจสกิล +73 · อาวุธ: ดาเมจปกติ +45%</p></article>
-      <article class="character-data-card" data-faction="wu"><h3>โป่จี้ (步騭)</h3><span class="character-meta">Wu · ธนู</span><p>สกิล: ดาเมจ 75% และในหอส่งสัญญาณดาเมจเพิ่ม 130% · อาวุธ: ในหอส่งสัญญาณเพิ่ม DEF และดาเมจปกติ</p></article>
-      <article class="character-data-card" data-faction="qun"><h3>เปี้ยนสี่ (卞喜)</h3><span class="character-meta">Qun · ม้า</span><p>สกิล: ดาเมจ 96% เพิ่ม DEF 5% และความเร็ว +5% · อาวุธ: มีโอกาสสร้างดาเมจซ้ำ 84.5% และ DEF +10%</p></article>
-      <article class="character-data-card" data-faction="qun"><h3>เตียวม่านเฉิง (張曼成)</h3><span class="character-meta">Qun · ม้า</span><p>สกิล: ดาเมจ 77% เพิ่มโจมตีปกติและ DEF 5% · อาวุธ: DEF +10% และสวนกลับได้ 15 ครั้งต่อวินาที</p></article>
-      <article class="character-data-card" data-faction="wei"><h3>ลิเตียน (李典)</h3><span class="character-meta">Wei · ม้า</span><p>สกิล: ดาเมจ 99% เพิ่ม DEF 5% และดาเมจปกติ +50% · อาวุธ: ดาเมจสกิล +17% และ DEF +10%</p></article>
-      <article class="character-data-card" data-faction="wei"><h3>โจจิ๋น (曹真)</h3><span class="character-meta">Wei · ม้า</span><p>สกิล: ดาเมจ 71% เพิ่มสัมฤทธิผลสกิล 100% และ DEF 5% · อาวุธ: ดาเมจสกิล +14% และถูกโจมตีแล้ว DEF +10%</p></article>
-      <article class="character-data-card" data-faction="wei"><h3>ตันหลิม (陳琳)</h3><span class="character-meta">Wei · ม้า</span><p>สกิล: ดาเมจ 99% เพิ่มดาเมจปกติ 5% และ DEF 5% · อาวุธ: เพิ่มดาเมจปกติให้ทัพเดียวกัน 25% และ DEF +10%</p></article>
-      <article class="character-data-card" data-faction="qun"><h3>ซีหยง (徐榮)</h3><span class="character-meta">Qun · โล่</span><p>สกิล: ดาเมจ 64% เพิ่ม DEF 12% และในป่าเพิ่มอีก 15% · อาวุธ: มีโอกาสดาเมจซ้ำและถูกโจมตีแล้ว DEF +11%</p></article>
-      <article class="character-data-card" data-faction="shu"><h3>กวนเป๋ง (關平)</h3><span class="character-meta">Shu · โล่</span><p>สกิล: โจมตี 5 ยูนิต ดาเมจหลัก 41 เพิ่ม DEF 17% และดาเมจปกติ +100% · อาวุธ: ดาเมจซ้ำและ DEF +13%</p></article>
-      <article class="character-data-card" data-faction="wu"><h3>ซุนหลูบัน (孫魯班)</h3><span class="character-meta">Wu · โล่</span><p>สกิล: ดาเมจ 60% เพิ่มดาเมจปกติของแม่ทัพพลังโจมตีสูงสุด 24% และ DEF 16.5% · อาวุธ: DEF +13%</p></article>
-      <article class="character-data-card" data-faction="wu"><h3>ลื่อต้าย (呂岱)</h3><span class="character-meta">Wu · โล่</span><p>สกิล: โจมตี 5 ยูนิต ดาเมจ 43 เพิ่ม DEF 10% และในหอส่งสัญญาณ DEF +27.6% · อาวุธ: ดาเมจสกิล +17%</p></article>
-      <article class="character-data-card" data-faction="wu"><h3>เล่าฮอง (凌統)</h3><span class="character-meta">Wu · โล่</span><p>สกิล: ดาเมจ 42% เพิ่ม DEF เมื่อกำลังพลต่ำกว่าครึ่ง · อาวุธ: มีโอกาสลดความเร็วและเพิ่ม DEF ต่อเป้าหมายติดสโลว์</p></article>
+      <article class="character-data-card" data-faction="qun" data-officer="wang-yun"><h3>อองอุน (王允)</h3><span class="character-meta">Qun · ธนู</span><p>สกิล: ดาเมจ 80% และเพิ่มดาเมจสกิลของแม่ทัพพลังโจมตีสูงสุด 20% · อาวุธ: ดาเมจเพิ่มเติม 100% และ DEF +6%</p></article>
+      <article class="character-data-card" data-faction="wei" data-officer="xi-zhicai"><h3>หุยโชว (戲志才)</h3><span class="character-meta">Wei · ธนู</span><p>สกิล: ดาเมจ 85% โจมตีกระจาย 5 ยูนิต · อาวุธ: เพิ่มระยะโจมตีกระจาย 250 และ DEF +5.7%</p></article>
+      <article class="character-data-card" data-faction="wu" data-officer="zhuge-jin"><h3>จูกัดจิ๋น (諸葛瑾)</h3><span class="character-meta">Wu · ธนู</span><p>สกิล: โจมตี 5 ยูนิต ดาเมจหลัก 40 และเพิ่มดาเมจสกิล 50% · อาวุธ: ดาเมจโจมตีปกติ +45%</p></article>
+      <article class="character-data-card" data-faction="wu" data-officer="ding-feng"><h3>เต็งฮง (丁奉)</h3><span class="character-meta">Wu · ธนู</span><p>สกิล: โจมตี 5 ยูนิต ดาเมจหลัก 50 และนอกหอส่งสัญญาณเพิ่มดาเมจสกิล +73 · อาวุธ: ดาเมจปกติ +45%</p></article>
+      <article class="character-data-card" data-faction="wu" data-officer="bu-zhi"><h3>โป่จี้ (步騭)</h3><span class="character-meta">Wu · ธนู</span><p>สกิล: ดาเมจ 75% และในหอส่งสัญญาณดาเมจเพิ่ม 130% · อาวุธ: ในหอส่งสัญญาณเพิ่ม DEF และดาเมจปกติ</p></article>
+      <article class="character-data-card" data-faction="qun" data-officer="bian-xi"><h3>เปี้ยนสี่ (卞喜)</h3><span class="character-meta">Qun · ม้า</span><p>สกิล: ดาเมจ 96% เพิ่ม DEF 5% และความเร็ว +5% · อาวุธ: มีโอกาสสร้างดาเมจซ้ำ 84.5% และ DEF +10%</p></article>
+      <article class="character-data-card" data-faction="qun" data-officer="zhang-mancheng"><h3>เตียวม่านเฉิง (張曼成)</h3><span class="character-meta">Qun · ม้า</span><p>สกิล: ดาเมจ 77% เพิ่มโจมตีปกติและ DEF 5% · อาวุธ: DEF +10% และสวนกลับได้ 15 ครั้งต่อวินาที</p></article>
+      <article class="character-data-card" data-faction="wei" data-officer="li-dian"><h3>ลิเตียน (李典)</h3><span class="character-meta">Wei · ม้า</span><p>สกิล: ดาเมจ 99% เพิ่ม DEF 5% และดาเมจปกติ +50% · อาวุธ: ดาเมจสกิล +17% และ DEF +10%</p></article>
+      <article class="character-data-card" data-faction="wei" data-officer="cao-zhen"><h3>โจจิ๋น (曹真)</h3><span class="character-meta">Wei · ม้า</span><p>สกิล: ดาเมจ 71% เพิ่มสัมฤทธิผลสกิล 100% และ DEF 5% · อาวุธ: ดาเมจสกิล +14% และถูกโจมตีแล้ว DEF +10%</p></article>
+      <article class="character-data-card" data-faction="wei" data-officer="chen-lin"><h3>ตันหลิม (陳琳)</h3><span class="character-meta">Wei · ม้า</span><p>สกิล: ดาเมจ 99% เพิ่มดาเมจปกติ 5% และ DEF 5% · อาวุธ: เพิ่มดาเมจปกติให้ทัพเดียวกัน 25% และ DEF +10%</p></article>
+      <article class="character-data-card" data-faction="qun" data-officer="xu-rong"><h3>ซีหยง (徐榮)</h3><span class="character-meta">Qun · โล่</span><p>สกิล: ดาเมจ 64% เพิ่ม DEF 12% และในป่าเพิ่มอีก 15% · อาวุธ: มีโอกาสดาเมจซ้ำและถูกโจมตีแล้ว DEF +11%</p></article>
+      <article class="character-data-card" data-faction="shu" data-officer="guan-ping"><h3>กวนเป๋ง (關平)</h3><span class="character-meta">Shu · โล่</span><p>สกิล: โจมตี 5 ยูนิต ดาเมจหลัก 41 เพิ่ม DEF 17% และดาเมจปกติ +100% · อาวุธ: ดาเมจซ้ำและ DEF +13%</p></article>
+      <article class="character-data-card" data-faction="wu" data-officer="sun-luban"><h3>ซุนหลูบัน (孫魯班)</h3><span class="character-meta">Wu · โล่</span><p>สกิล: ดาเมจ 60% เพิ่มดาเมจปกติของแม่ทัพพลังโจมตีสูงสุด 24% และ DEF 16.5% · อาวุธ: DEF +13%</p></article>
+      <article class="character-data-card" data-faction="wu" data-officer="lu-dai"><h3>ลื่อต้าย (呂岱)</h3><span class="character-meta">Wu · โล่</span><p>สกิล: โจมตี 5 ยูนิต ดาเมจ 43 เพิ่ม DEF 10% และในหอส่งสัญญาณ DEF +27.6% · อาวุธ: ดาเมจสกิล +17%</p></article>
+      <article class="character-data-card" data-faction="wu" data-officer="ling-tong"><h3>เล่าฮอง (凌統)</h3><span class="character-meta">Wu · โล่</span><p>สกิล: ดาเมจ 42% เพิ่ม DEF เมื่อกำลังพลต่ำกว่าครึ่ง · อาวุธ: มีโอกาสลดความเร็วและเพิ่ม DEF ต่อเป้าหมายติดสโลว์</p></article>
+    </div>
     </div>
 
     <h2 data-th="ตำแหน่งขุนพลที่ควรจัดเข้าทีม" data-en="Recommended Team Roles" data-zh="推荐队伍定位">Recommended Team Roles</h2>
@@ -1759,16 +1766,77 @@
     'zhang-yan':{th:'เตียวเอี๋ยน',en:'Zhang Yan',zh:'张燕'},'zhang-bao':{th:'เตียวโป้',en:'Zhang Bao',zh:'张宝'},
     'gongsun-zan':{th:'กองซุนจ้าน',en:'Gongsun Zan',zh:'公孙瓒'},'meng-huo':{th:'เบ้งเฮ็ก',en:'Meng Huo',zh:'孟获'}
   };
+  const additionalOfficerDetails = Object.fromEntries(
+    Array.from(document.querySelectorAll('#additional-officer-data [data-officer]')).map(card=>{
+      const sourceName = card.querySelector('h3').textContent;
+      const sourceRole = card.querySelector('.character-meta').textContent;
+      const sourceDetails = card.querySelector('p').textContent;
+      const nameTranslations = characterTranslations[sourceName] || {};
+      const roleTranslations = characterTranslations[sourceRole] || {};
+      const detailTranslations = characterTranslations[sourceDetails] || {};
+      const stripChineseName = value=>(value || '').replace(/\s*\([^)]*\)\s*$/, '');
+      return [card.dataset.officer, {
+        name:stripChineseName(nameTranslations.th || sourceName),
+        role:roleTranslations.th || sourceRole,
+        subtitle:roleTranslations.th || sourceRole,
+        active:detailTranslations.th || sourceDetails,
+        passive:'ข้อมูลเพิ่มเติม',
+        tactic:'ข้อมูลอาวุธเฉพาะ',
+        formation:'ยังไม่มีข้อมูล',
+        passives:{th:'ข้อมูลเพิ่มเติม',en:'Additional information',zh:'补充信息'},
+        tactics:{th:'ข้อมูลอาวุธเฉพาะ',en:'Exclusive weapon information',zh:'专属武器信息'},
+        formations:{th:'ยังไม่มีข้อมูล',en:'No data yet',zh:'暂无数据'},
+        names:{th:stripChineseName(nameTranslations.th || sourceName),en:stripChineseName(nameTranslations.en || sourceName),zh:stripChineseName(nameTranslations.zh || sourceName)},
+        roles:{th:roleTranslations.th || sourceRole,en:roleTranslations.en || sourceRole,zh:roleTranslations.zh || sourceRole},
+        actives:{th:detailTranslations.th || sourceDetails,en:detailTranslations.en || sourceDetails,zh:detailTranslations.zh || sourceDetails}
+      }];
+    })
+  );
   function getOfficerLocale(id, language){
-    return language === 'th' ? officerDetails[id] : officerTranslations[language][id];
+    if (officerDetails[id] && language === 'th') return officerDetails[id];
+    if (officerTranslations[language] && officerTranslations[language][id]) return officerTranslations[language][id];
+    const additional = additionalOfficerDetails[id];
+    if (!additional) return null;
+    return {...additional,
+      name:additional.names[language],
+      role:additional.roles[language],
+      subtitle:additional.roles[language],
+      active:additional.actives[language],
+      passive:additional.passives[language],
+      tactic:additional.tactics[language],
+      formation:additional.formations[language]
+    };
   }
   function renderOfficerLanguage(language){
     if (typeof officerDetails === 'undefined') return;
+    const factionLabels = {
+      th:['วุ่ย','จ๊ก','ง่อ','ก๊กอื่น'],
+      en:['Wei','Shu','Wu','Qun'],
+      zh:['魏','蜀','吴','群雄']
+    }[language];
     document.querySelectorAll('[data-officer]').forEach(card=>{
       const localized = getOfficerLocale(card.dataset.officer, language);
       if (!localized) return;
-      card.querySelector('.officer-name').textContent = localized.name;
-      card.querySelector('.officer-skill').textContent = localized.role;
+      const name = card.querySelector('.officer-name');
+      const skill = card.querySelector('.officer-skill');
+      if (name) name.textContent = localized.name;
+      if (skill) {
+        const playstyle = getOfficerPlaystyle(localized.name, language);
+        skill.textContent = [localized.subtitle || localized.role, playstyle].filter(Boolean).join(' · ');
+      }
+      card.title = language === 'en' ? 'View details' : language === 'zh' ? '查看详情' : 'กดเพื่อดูรายละเอียด';
+    });
+    document.querySelectorAll('#tab-factions .officer-card:not([data-officer])').forEach(card=>{
+      const page = card.closest('.faction-page');
+      const pageIndex = page ? Array.from(document.querySelectorAll('#tab-factions .faction-page')).indexOf(page) : -1;
+      const name = card.querySelector('.officer-name');
+      const skill = card.querySelector('.officer-skill');
+      const localizedName = name?.dataset.nameId && staticOfficerNames[name.dataset.nameId]
+        ? staticOfficerNames[name.dataset.nameId][language] || staticOfficerNames[name.dataset.nameId].en
+        : name?.textContent;
+      const playstyle = localizedName ? getOfficerPlaystyle(localizedName, language) : '';
+      if (name && localizedName) name.textContent = localizedName;
+      if (skill && pageIndex >= 0) skill.textContent = [factionLabels[pageIndex], playstyle].filter(Boolean).join(' · ');
     });
     document.querySelectorAll('.officer-name[data-name-id]').forEach(name=>{
       const localized = staticOfficerNames[name.dataset.nameId];
@@ -1779,7 +1847,20 @@
     document.getElementById('officerLabelPassive').textContent = labels.passive;
     document.getElementById('officerLabelTactic').textContent = labels.tactic;
     document.getElementById('officerLabelFormation').textContent = labels.formation;
+    updateFactionCounts(language);
     if (selectedOfficerId && officerDialog.open) renderOfficerDialog(selectedOfficerId, language);
+  }
+  function getOfficerPlaystyle(name, language){
+    const tierName = document.querySelector(`.tier-character__name[data-${language}="${CSS.escape(name)}"]`)
+      || document.querySelector(`.tier-character__name[data-en="${CSS.escape(name)}"]`);
+    return tierName ? tierName.querySelector('.tier-character__role')?.textContent : '';
+  }
+  function updateFactionCounts(language){
+    const suffix = language === 'en' ? 'officers' : language === 'zh' ? '名武将' : 'ขุนพล';
+    document.querySelectorAll('#tab-factions .faction-page').forEach(page=>{
+      const count = page.querySelector('.count');
+      if (count) count.textContent = `${page.querySelectorAll('.officer-card').length} ${suffix}`;
+    });
   }
   function renderOfficerDialog(id, language){
     const officer = getOfficerLocale(id, language);
@@ -1794,12 +1875,15 @@
   document.querySelectorAll('[data-officer]').forEach(card=>{
     card.addEventListener('click',()=>{
       selectedOfficerId = card.dataset.officer;
-      const officer = officerDetails[selectedOfficerId];
+      const officer = getOfficerLocale(selectedOfficerId, currentLanguage);
       if (!officer) return;
       renderOfficerDialog(selectedOfficerId, currentLanguage);
       const image = document.getElementById('officerDetailImage');
-      image.src = officer.image;
-      image.alt = officer.name;
+      image.hidden = !officer.image;
+      if (officer.image) {
+        image.src = officer.image;
+        image.alt = officer.name;
+      }
       officerDialog.showModal();
     });
   });
@@ -1809,6 +1893,53 @@
   });
   applyLanguage(languageToggle.value || 'th');
   addTopupPriceReferences();
+
+  const tierlistPage = document.getElementById('tab-tierlist');
+  const combosPage = document.getElementById('tab-combos');
+  tierlistPage.after(combosPage);
+  const factionsPage = document.getElementById('tab-factions');
+  const additionalOfficerData = document.getElementById('additional-officer-data');
+  const additionalOfficerGrid = additionalOfficerData.querySelector('.character-data-grid');
+  const factionOrder = ['wei','shu','wu','qun'];
+  const factionPages = Array.from(factionsPage.querySelectorAll('.faction-page'));
+  const additionalCards = Array.from(additionalOfficerGrid.children);
+  additionalCards.forEach(card=>{
+    card.className = 'officer-card';
+    const name = card.querySelector('h3');
+    const meta = card.querySelector('.character-meta');
+    const body = document.createElement('span');
+    body.className = 'officer-card__body';
+    const officerName = document.createElement('span');
+    officerName.className = 'officer-name';
+    officerName.textContent = name.textContent;
+    const officerSkill = document.createElement('span');
+    officerSkill.className = 'officer-skill';
+    officerSkill.textContent = meta.textContent;
+    body.append(officerName, officerSkill);
+    card.replaceChildren(body);
+  });
+  renderOfficerLanguage(currentLanguage);
+  additionalCards.forEach(card=>{
+    const factionIndex = factionOrder.indexOf(card.dataset.faction);
+    const factionPage = factionPages[factionIndex];
+    if (!factionPage) return;
+    factionPage.querySelector('.officer-grid').appendChild(card);
+  });
+  factionPages.forEach(factionPage=>{
+    const imageGrid = factionPage.querySelector('.officer-grid');
+    const cards = Array.from(imageGrid.children);
+    const imageCards = cards.filter(card=>card.querySelector('.officer-card__image'));
+    const textOnlyCards = cards.filter(card=>!card.querySelector('.officer-card__image'));
+    imageGrid.replaceChildren(...imageCards);
+    if (textOnlyCards.length) {
+      const textOnlyGrid = document.createElement('div');
+      textOnlyGrid.className = 'officer-grid officer-grid--text-only';
+      textOnlyGrid.append(...textOnlyCards);
+      imageGrid.after(textOnlyGrid);
+    }
+  });
+  updateFactionCounts(currentLanguage);
+  additionalOfficerData.remove();
 
   // main tab switching
   const tabButtons = document.querySelectorAll('.tabs button');
