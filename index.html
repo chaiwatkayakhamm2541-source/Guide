@@ -111,6 +111,8 @@
   .language-switcher{margin-left:10px;}
   .language-switcher:hover,.theme-switcher:hover{background:var(--panel);color:var(--text);}
   .header-row{display:flex;align-items:center;gap:12px;}
+  .header-row,.brand,.brand > div{min-width:0;}
+  .brand{flex:1 1 auto;}
   .header-actions{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;gap:6px;margin-left:auto;}
   .header-actions .theme-switcher,.header-actions .language-switcher{margin-left:0;margin-top:0;width:100%;}
   .header-actions .discord-button{grid-column:1 / -1;width:100%;padding:6px 10px;font-size:12px;}
@@ -268,6 +270,21 @@
   .character-data-card .character-meta{color:var(--gold-soft);font-size:12.5px;}
   .character-data-card p{font-size:13.5px;color:var(--text-muted);margin:7px 0 0;}
   .character-data-card[data-faction="wu"]{--f-color:var(--wu);}.character-data-card[data-faction="wei"]{--f-color:var(--wei);}.character-data-card[data-faction="shu"]{--f-color:var(--shu);}.character-data-card[data-faction="qun"]{--f-color:var(--qun);}
+  /* SS1 tier list */
+  .tierlist-intro{margin-bottom:18px;}
+  .tier-row{display:grid;grid-template-columns:86px 1fr;gap:14px;align-items:stretch;margin:0 0 12px;}
+  .tier-label{display:grid;place-items:center;border:1px solid var(--border-bright);border-radius:var(--radius);font-family:'Trirong',Tahoma,serif;font-size:25px;font-weight:700;color:#201A13;background:var(--gold);}
+  .tier-row[data-tier="s-plus"] .tier-label{background:#D69A4A;}.tier-row[data-tier="s"] .tier-label{background:#C9B458;}.tier-row[data-tier="a"] .tier-label{background:#7FAF83;}.tier-row[data-tier="b"] .tier-label{background:#7897B8;}
+  .tier-list{display:flex;flex-wrap:wrap;gap:10px;padding:10px;background:var(--panel-2);border:1px solid var(--border);border-radius:var(--radius);}
+  .tier-character{display:flex;align-items:center;gap:8px;min-width:145px;max-width:210px;flex:1 1 145px;padding:6px;background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);}
+  .tier-character__image{width:42px;height:42px;flex:0 0 42px;object-fit:cover;border-radius:3px;background:var(--panel-2);}
+  .tier-character__name{font-size:13px;font-weight:600;line-height:1.35;color:var(--text);}
+  .tier-character__role{display:block;font-size:11px;color:var(--text-muted);font-weight:400;}
+  .tier-build-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:20px 0 30px;}
+  .tier-build{background:var(--panel-2);border:1px solid var(--border);border-top:3px solid var(--gold);border-radius:var(--radius);padding:14px 16px;}
+  .tier-build h3{margin-bottom:6px;}.tier-build p{font-size:13.5px;color:var(--text-muted);margin:8px 0 0;}
+  .tier-build .chip-row{margin-top:8px;}
+  @media(max-width:620px){.tier-row{grid-template-columns:56px 1fr;gap:8px;}.tier-label{font-size:21px;}.tier-character{min-width:125px;flex-basis:125px;}.tier-character__image{width:36px;height:36px;flex-basis:36px;}}
   .system-toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 18px;}
   .system-toolbar input,.system-toolbar select{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font:inherit;padding:9px 12px;}
   .system-toolbar input{flex:1;min-width:220px;}
@@ -333,11 +350,40 @@
   .topup-note{border-left-color:var(--gold);margin:16px 0 0;}
   .topup-foot{color:var(--text-muted);font-size:12px;margin-top:18px;}
   .opening-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:20px;}
-  .opening-gallery__item{margin:0;background:var(--panel-2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+  .city-raid-gallery-cards{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .opening-gallery__item{margin:0;background:var(--panel-2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:transform .18s ease,border-color .18s ease;}
+  .opening-gallery__item:hover,.opening-gallery__item:focus-visible{transform:translateY(-2px);border-color:var(--border-bright);outline:none;}
   .opening-gallery__image{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--panel);}
   .opening-gallery__caption{padding:12px 14px;color:var(--text-muted);font-size:13.5px;}
   .opening-gallery__caption strong{display:block;color:var(--gold-soft);font-size:16px;margin-bottom:4px;}
   .opening-group{margin:26px 0 0;color:var(--gold-soft);font-size:18px;border-bottom:1px solid var(--border);padding-bottom:8px;}
+  .guide-dialog{width:min(680px,calc(100% - 28px));max-height:calc(100vh - 28px);padding:0;border:1px solid var(--border-bright);border-radius:var(--radius);background:var(--panel);color:var(--text);}
+  .guide-dialog::backdrop{background:rgba(0,0,0,.72);backdrop-filter:blur(3px);}
+  .guide-dialog__content{padding:22px;overflow:auto;max-height:calc(100vh - 28px);}
+  .guide-dialog__image{display:block;width:100%;max-height:360px;object-fit:contain;background:var(--panel-2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px;}
+  .guide-dialog__gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:16px;}
+  .guide-dialog__gallery img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--panel-2);border:1px solid var(--border);border-radius:var(--radius);}
+  .guide-dialog__entries{display:grid;gap:16px;}
+  .guide-dialog__entry{border-bottom:1px solid var(--border);padding-bottom:14px;}
+  .guide-dialog__entry:last-child{border-bottom:0;}
+  .guide-dialog__entry img{display:block;width:100%;max-height:360px;object-fit:contain;background:var(--panel-2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px;}
+  .guide-dialog__entry h3{color:var(--gold-soft);margin:0 0 4px;}
+  .guide-dialog__entry p{margin:0;}
+  .guide-dialog__content h2{margin-right:34px;}
+  .guide-dialog__content p{color:var(--text-muted);white-space:pre-line;}
+  .guide-dialog__close{position:absolute;top:10px;right:12px;border:1px solid var(--border-bright);background:var(--panel-2);color:var(--gold-soft);border-radius:var(--radius);width:32px;height:32px;font-size:20px;line-height:1;cursor:pointer;}
+  .city-raid-guide{margin:20px 0 28px;}
+  .city-raid-guide__intro{color:var(--text-muted);margin:0 0 12px;}
+  .city-raid-details{display:none;}
+  .city-raid-details details{background:var(--panel-2);border:1px solid var(--border);border-radius:var(--radius);padding:0 14px;}
+  .city-raid-details details[open]{border-color:var(--border-bright);}
+  .city-raid-details summary{cursor:pointer;color:var(--gold-soft);font-weight:600;padding:12px 0;list-style-position:inside;}
+  .city-raid-details summary::marker{color:var(--gold);}
+  .city-raid-details p,.city-raid-details ul{color:var(--text-muted);font-size:13.5px;margin:0 0 12px;}
+  .city-raid-details ul{padding-left:20px;}
+  .city-raid-details li{margin:4px 0;}
+  .city-raid-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:4px 0 14px;}
+  .city-raid-gallery img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border:1px solid var(--border);border-radius:var(--radius);background:var(--panel);}
   .tabs button[data-tab="systems"],#tab-systems{display:none!important;}
 
   footer.wrap{border-top:1px solid var(--border);margin-top:28px;padding:28px 28px 52px;color:var(--text-muted);font-size:13px;}
@@ -359,14 +405,19 @@
 
   @media(max-width:640px){
     .stat-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:16px 0 24px;}
+    .city-raid-gallery-cards{grid-template-columns:1fr;}
     .stat-chip{padding:9px 12px;}
     .stat-chip strong{font-size:20px;}
-    .header-row{align-items:flex-start;}
+    .header-row{align-items:flex-start;gap:8px;}
     .brand{gap:10px;padding:10px 0 6px;}
     .emblem{width:38px;height:38px;}
     .brand-title{font-size:20px;}
     .brand-sub{font-size:12px;line-height:1.4;}
-    .language-switcher,.theme-switcher{margin-top:0;padding:6px 8px;}
+    .header-actions{flex:0 0 96px;grid-template-columns:1fr 1fr;gap:5px;}
+    .language-switcher,.theme-switcher{width:45px!important;min-width:0;padding:6px 3px;margin-top:0;}
+    .theme-label{display:none;}
+    .header-actions .discord-button{width:95px;padding:5px;font-size:0;}
+    .header-actions .discord-button img{width:24px;height:24px;}
     nav.tabs button{font-size:14px;padding:8px 12px 10px;}
     main{padding-top:18px;}
     .faction-search,.category-search{align-items:stretch;flex-direction:column;gap:6px;}
@@ -395,17 +446,18 @@
         <option value="zh">中文</option>
       </select>
       <button class="theme-switcher" id="themeToggle" type="button" aria-label="เปลี่ยนโหมดสี" title="เปลี่ยนโหมดสี"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label">DARK</span></button>
-      <a class="discord-button" href="https://discord.gg/gGpHxUa3R" target="_blank" rel="noopener noreferrer"><img src="logo/Discord.jpg" alt="Discord"><span data-th="เข้าร่วม Discord กิล" data-en="Join Guild Discord" data-zh="加入公会 Discord">เข้าร่วม Discord กิล</span></a>
+      <a class="discord-button" href="https://discord.gg/gGpHxUa3R" target="_blank" rel="noopener noreferrer" aria-label="เข้าร่วม Discord กิล" title="เข้าร่วม Discord กิล"><img src="logo/Discord.jpg" alt="Discord"><span data-th="เข้าร่วม Discord กิล" data-en="Join Guild Discord" data-zh="加入公会 Discord">เข้าร่วม Discord กิล</span></a>
     </div>
     </div>
     <nav class="tabs">
       <button class="active" data-tab="overview" data-th="ภาพรวม" data-en="Overview" data-zh="总览">Overview</button>
-      <button data-tab="factions" data-th="สังกัด/ฝ่าย" data-en="Factions" data-zh="阵营">Factions</button>
-      <button data-tab="combos" data-th="คอมโบ &amp; ทีม" data-en="Combos &amp; Teams" data-zh="组合与队伍">Combos &amp; Teams</button>
-      <button data-tab="counters" data-th="ตาราง Counter" data-en="Counter Table" data-zh="克制表">Counter Table</button>
-      <button data-tab="categories" data-th="หมวดหมู่สกิล" data-en="Skill Categories" data-zh="技能分类">Skill Categories</button>
       <button data-tab="opening" data-th="คู่มือเริ่มเกม" data-en="Opening Guide" data-zh="开荒指南">Opening Guide</button>
+      <button data-tab="factions" data-th="สังกัด/ฝ่าย" data-en="Factions" data-zh="阵营">Factions</button>
+      <button data-tab="tierlist" data-th="Tierlist" data-en="Tierlist" data-zh="强度榜">Tierlist</button>
+      <button data-tab="categories" data-th="หมวดหมู่สกิล" data-en="Skill Categories" data-zh="技能分类">Skill Categories</button>
+      <button data-tab="counters" data-th="ตาราง Counter" data-en="Counter Table" data-zh="克制表">Counter Table</button>
       <button data-tab="topup" data-th="คู่มือเติมเงิน" data-en="Top-up Guide" data-zh="充值指南">Top-up Guide</button>
+      <button data-tab="combos" data-th="คอมโบ &amp; ทีม" data-en="Combos &amp; Teams" data-zh="组合与队伍">Combos &amp; Teams</button>
     </nav>
   </div>
 </header>
@@ -795,6 +847,17 @@
     </div>
   </dialog>
 
+  <dialog class="guide-dialog" id="guideDialog" aria-labelledby="guideDialogTitle">
+    <button class="guide-dialog__close" id="guideDialogClose" type="button" aria-label="Close">&times;</button>
+    <div class="guide-dialog__content">
+      <img class="guide-dialog__image" id="guideDialogImage" src="" alt="">
+      <div class="guide-dialog__gallery" id="guideDialogGallery"></div>
+      <div class="guide-dialog__entries" id="guideDialogEntries"></div>
+      <h2 id="guideDialogTitle"></h2>
+      <p id="guideDialogText"></p>
+    </div>
+  </dialog>
+
   <!-- ===== SYSTEMS ===== -->
   <section id="tab-systems" class="tab-page">
     <h2 data-th="ระบบเกมและแนวทางพัฒนา" data-en="Game Systems &amp; Progression" data-zh="游戏系统与发展指南">Game Systems &amp; Progression</h2>
@@ -865,6 +928,26 @@
       <figure class="community-guide__item"><img class="community-guide__image" src="GamePicture/1.jpg" alt="หน้าระบบ Resonance หรือแชร์เลเวลขุนพล" data-alt-th="หน้าระบบ Resonance หรือแชร์เลเวลขุนพล" data-alt-en="Resonance or shared officer level screen" data-alt-zh="共鸣或武将等级共享画面"><figcaption class="community-guide__text"><strong data-th="Resonance / แชร์เลเวลขุนพล" data-en="Resonance / Shared Officer Levels" data-zh="共鸣/武将等级共享">Resonance / Shared Officer Levels</strong><span data-th="ใช้ช่วยให้ขุนพลหลายตัวอยู่ในระดับพร้อมใช้งาน ลดภาระการปั้นหลายทีม และเปิดทางให้ทดลองคอมโบใหม่ได้ยืดหยุ่นขึ้น" data-en="This keeps multiple officers ready for use, reduces the burden of leveling many teams, and makes it easier to experiment with new combos." data-zh="让多个武将保持可用等级，降低培养多支队伍的负担，也更方便尝试新的队伍组合。">ใช้ช่วยให้ขุนพลหลายตัวอยู่ในระดับพร้อมใช้งาน ลดภาระการปั้นหลายทีม และเปิดทางให้ทดลองคอมโบใหม่ได้ยืดหยุ่นขึ้น</span></figcaption></figure>
     </div>
     <article class="combo-card"><h3 data-th="ระบบ Resonance และการเลือกขุนพลแกนหลัก" data-en="Resonance and Core Officer Selection" data-zh="共鸣系统与核心武将选择">ระบบ Resonance และการเลือกขุนพลแกนหลัก</h3><p data-th="ไม่จำเป็นต้องรอขุนพลแกนหลักก่อนเริ่มพัฒนา ใช้ขุนพลที่มีเป็นทีมช่วงเปลี่ยนผ่านก่อน แล้วค่อยสลับไปใช้แกนหลักเมื่อพร้อม ระบบนี้ช่วยลดการสูญเสียทรัพยากรและทำให้ทดลองคอมโบได้ง่ายขึ้น" data-en="You do not need to wait for ideal core officers before progressing. Use the officers you own as a transition team, then switch to core officers when ready. This reduces wasted resources and makes combo experimentation easier." data-zh="不必等到抽到理想核心武将后才开始培养。先用现有武将组成过渡队伍，准备好后再切换核心武将。这个系统能减少资源浪费，也更方便尝试不同组合。">ไม่จำเป็นต้องรอขุนพลแกนหลักก่อนเริ่มพัฒนา ใช้ขุนพลที่มีเป็นทีมช่วงเปลี่ยนผ่านก่อน แล้วค่อยสลับไปใช้แกนหลักเมื่อพร้อม ระบบนี้ช่วยลดการสูญเสียทรัพยากรและทำให้ทดลองคอมโบได้ง่ายขึ้น</p><p class="source" data-th="แหล่งข้อมูล: กระทู้ชุมชน Gamer ประเทศไต้หวัน · ตรวจสอบเงื่อนไข Resonance ในเกมอีกครั้ง" data-en="Source: Gamer Taiwan community guide · Verify the Resonance requirements in-game." data-zh="来源：台湾 Gamer 社区攻略 · 请在游戏内再次确认共鸣条件。">แหล่งข้อมูล: กระทู้ชุมชน Gamer ประเทศไต้หวัน · ตรวจสอบเงื่อนไข Resonance ในเกมอีกครั้ง</p></article>
+    <h2 data-th="จัดทัพสายฟรีจากคู่มือชุมชน" data-en="Free-to-Play Teams from the Community Guide" data-zh="社区攻略推荐的平民队伍">จัดทัพสายฟรีจากคู่มือชุมชน</h2>
+    <p class="lede" data-th="แนวทางสำหรับผู้เล่นที่ไม่เติมหรือเติมน้อย เน้นใช้ขุนพลที่หาและพัฒนาได้ก่อน แล้วค่อยเปลี่ยนเป็นทีมอัปเกรดเมื่อได้ขุนพลแกนหลักหรือสกิลเฉพาะครบ" data-en="A resource-conscious route for free-to-play and low-spend players. Start with accessible officers, then move to the upgraded teams when you obtain the core officers or their exclusive skills." data-zh="适合无课或微课玩家的资源规划路线。先使用容易获得的武将，拿到核心武将或专属技能后再升级队伍。">แนวทางสำหรับผู้เล่นที่ไม่เติมหรือเติมน้อย เน้นใช้ขุนพลที่หาและพัฒนาได้ก่อน แล้วค่อยเปลี่ยนเป็นทีมอัปเกรดเมื่อได้ขุนพลแกนหลักหรือสกิลเฉพาะครบ</p>
+    <div class="combo-grid">
+      <div class="combo-card">
+        <h3 data-th="ทีมธนู · เริ่มต้น" data-en="Archer Team · Starter" data-zh="弓兵队·开荒">ทีมธนู · เริ่มต้น</h3>
+        <div class="chip-row"><span class="chip">Xu Shu</span><span class="chip">Wang Ping</span><span class="chip">Mi Zhu</span></div>
+        <p data-th="ทีมเริ่มต้นสำหรับสายธนู ใช้เป็นแกนหลักช่วงเปิดเกมและค่อยอัปเกรดเป็น Zhuge Liang + Huang Yueying + Fa Zheng เมื่อมีตัวพร้อม" data-en="The starter Archer core for the opening phase. Upgrade to Zhuge Liang + Huang Yueying + Fa Zheng when those officers become available." data-zh="开局弓兵核心队伍。获得对应武将后，可升级为诸葛亮+黄月英+法正。">ทีมเริ่มต้นสำหรับสายธนู ใช้เป็นแกนหลักช่วงเปิดเกมและค่อยอัปเกรดเป็น Zhuge Liang + Huang Yueying + Fa Zheng เมื่อมีตัวพร้อม</p>
+      </div>
+      <div class="combo-card">
+        <h3 data-th="ทีมโล่ · ยืนระยะ" data-en="Shield Team · Durable Frontline" data-zh="盾兵队·持续作战">ทีมโล่ · ยืนระยะ</h3>
+        <div class="chip-row"><span class="chip">Wei Yan</span><span class="chip">Zhang Bao</span><span class="chip">Guan Xing</span></div>
+        <p data-th="ทีมโล่สำหรับรับดาเมจและลดการเสียทหาร ใช้แทนช่วงต้นเกม แล้วค่อยเปลี่ยนเป็น Liu Bei + Zhang Fei + Guan Yu เมื่อสะสมทรัพยากรได้มากขึ้น" data-en="A durable Shield team that reduces troop losses. Use it early, then transition to Liu Bei + Zhang Fei + Guan Yu as your roster and resources grow." data-zh="适合承受伤害并减少兵损的盾兵队。前期先使用，资源和阵容成熟后可转为刘备+张飞+关羽。">ทีมโล่สำหรับรับดาเมจและลดการเสียทหาร ใช้แทนช่วงต้นเกม แล้วค่อยเปลี่ยนเป็น Liu Bei + Zhang Fei + Guan Yu เมื่อสะสมทรัพยากรได้มากขึ้น</p>
+      </div>
+      <div class="combo-card">
+        <h3 data-th="ทีมม้า · คล่องตัว" data-en="Cavalry Team · Mobile" data-zh="骑兵队·机动">ทีมม้า · คล่องตัว</h3>
+        <div class="chip-row"><span class="chip">Zhao Yun</span><span class="chip">Zhang Xingcai</span><span class="chip">Guan Ping</span></div>
+        <p data-th="ทีมม้าสำหรับบุกและเคลื่อนที่เร็ว ช่วงหลังเปลี่ยน Zhang Xingcai เป็น Ma Chao ได้เมื่อมีตัวและสกิลพร้อม" data-en="A mobile Cavalry team for aggressive play and fast movement. Later, replace Zhang Xingcai with Ma Chao when available and properly skilled." data-zh="适合进攻和快速机动的骑兵队。获得马超并准备好技能后，可将张星彩替换为马超。">ทีมม้าสำหรับบุกและเคลื่อนที่เร็ว ช่วงหลังเปลี่ยน Zhang Xingcai เป็น Ma Chao ได้เมื่อมีตัวและสกิลพร้อม</p>
+      </div>
+    </div>
+    <div class="note" data-th="หลักการจากกระทู้: ช่วงเริ่มเกมควรโฟกัสการสุ่มตู้ใหญ่และเก็บทรัพยากร ไม่กระจายลงทุนหลายทีม ตรวจสอบสกิลเฉพาะก่อนเปลี่ยนตัว และเวลาเก็บพื้นที่ให้เลือกเป้าหมายที่มีโล่+ธนูแล้วรีบโฟกัสธนู โดยอัปเกรดเทคโนโลยีโล่ป้องกัน ธนูดาเมจ และลดความเสียหายจากการโฟกัสตามลำดับ" data-en="The guide's key principles: focus your early summons and resources instead of spreading investment across many teams; check exclusive skills before replacing an officer; when taking land, prioritize Shield + Archer targets and focus the Archer first; prioritize Shield Defense, Archer Damage, and Focus Damage Reduction technologies." data-zh="攻略重点：前期集中招募和资源，不要分散培养多支队伍；替换武将前先确认专属技能；攻占土地时优先选择盾兵+弓兵组合并先集火弓兵；科技优先升级盾兵防御、弓兵伤害和集火减伤。">หลักการจากกระทู้: ช่วงเริ่มเกมควรโฟกัสการสุ่มตู้ใหญ่และเก็บทรัพยากร ไม่กระจายลงทุนหลายทีม ตรวจสอบสกิลเฉพาะก่อนเปลี่ยนตัว และเวลาเก็บพื้นที่ให้เลือกเป้าหมายที่มีโล่+ธนูแล้วรีบโฟกัสธนู โดยอัปเกรดเทคโนโลยีโล่ป้องกัน ธนูดาเมจ และลดความเสียหายจากการโฟกัสตามลำดับ</div>
     <h2 data-th="คอมโบแนะนำ" data-en="Recommended Combos" data-zh="推荐组合">คอมโบแนะนำ</h2>
     <div class="combo-grid">
 
@@ -992,10 +1075,136 @@
     </div>
   </section>
 
+  <!-- ===== TIERLIST ===== -->
+  <section id="tab-tierlist" class="tab-page">
+    <h2 data-th="Tierlist ตัวละคร SS1" data-en="SS1 Character Tierlist" data-zh="S1武将强度榜">Tierlist ตัวละคร SS1</h2>
+    <p class="lede tierlist-intro" data-th="จัดอันดับจากความแข็งแกร่งของทีมเมต้า SS1 ความยืดหยุ่นในการเข้าทีม และความคุ้มค่าของบทบาท โดยดูทั้งตัวละครแกนหลักและตัวสนับสนุน ไม่ได้หมายความว่าตัว Tier ต่ำจะใช้ไม่ได้" data-en="Ranked by SS1 meta strength, team flexibility, and role value. This includes both core carries and supports; a lower tier does not mean an officer is unusable." data-zh="根据S1主流强度、队伍适配性和定位价值排序，同时考虑核心输出与辅助武将。较低梯度不代表武将无法使用。">จัดอันดับจากความแข็งแกร่งของทีมเมต้า SS1 ความยืดหยุ่นในการเข้าทีม และความคุ้มค่าของบทบาท โดยดูทั้งตัวละครแกนหลักและตัวสนับสนุน ไม่ได้หมายความว่าตัว Tier ต่ำจะใช้ไม่ได้</p>
+    <div class="note" data-th="คำเตือน: Tierlist นี้ใช้เป็นแนวทางเริ่มต้นเท่านั้น ไม่ใช่คำตอบตายตัว ผลลัพธ์สุดท้ายขึ้นอยู่กับระดับดาว เลเวลและค่าพลัง สกิลติดตัว/สกิลเฉพาะ อาวุธเฉพาะ อุปกรณ์ เทคโนโลยี ประเภททหาร ตำแหน่งยืน การจับคู่ทีม ศัตรูที่เจอ และแพตช์ของเกม ควรทดลองกับบัญชีและทรัพยากรที่มี ก่อนตัดสินใจลงทุนจริง" data-en="Note: Use this Tierlist only as a starting guide, not as an absolute answer. Final performance depends on stars, level and stats, passive/exclusive skills, exclusive weapons, equipment, technology, troop type, positioning, team synergy, enemy matchups, and game patches. Test with your own roster and resources before investing heavily." data-zh="注意：本强度榜仅作为起步参考，不是绝对答案。最终表现取决于星级、等级与属性、被动/专属技能、专武、装备、科技、兵种、站位、队伍配合、敌方阵容以及版本更新。投入大量资源前，请结合自己的阵容与资源进行测试。">คำเตือน: Tierlist นี้ใช้เป็นแนวทางเริ่มต้นเท่านั้น ไม่ใช่คำตอบตายตัว ผลลัพธ์สุดท้ายขึ้นอยู่กับระดับดาว เลเวลและค่าพลัง สกิลติดตัว/สกิลเฉพาะ อาวุธเฉพาะ อุปกรณ์ เทคโนโลยี ประเภททหาร ตำแหน่งยืน การจับคู่ทีม ศัตรูที่เจอ และแพตช์ของเกม ควรทดลองกับบัญชีและทรัพยากรที่มี ก่อนตัดสินใจลงทุนจริง</div>
+
+    <div class="tier-row" data-tier="s-plus">
+      <div class="tier-label">S+</div>
+      <div class="tier-list">
+        <div class="tier-character"><span class="tier-character__name" data-th="จิวยี่" data-en="Zhou Yu" data-zh="周瑜">จิวยี่<span class="tier-character__role">Burn DPS</span></span></div>
+        <div class="tier-character"><img class="tier-character__image" src="images/characters/sun-quan.jpg" alt="ซุนกวน"><span class="tier-character__name" data-th="ซุนกวน" data-en="Sun Quan" data-zh="孙权">ซุนกวน<span class="tier-character__role">Debuff / Support</span></span></div>
+        <div class="tier-character"><img class="tier-character__image" src="images/characters/liu-bei.jpg" alt="เล่าปี่"><span class="tier-character__name" data-th="เล่าปี่" data-en="Liu Bei" data-zh="刘备">เล่าปี่<span class="tier-character__role">Heal / Shield</span></span></div>
+        <div class="tier-character"><img class="tier-character__image" src="images/characters/guan-yu.jpg" alt="กวนอู"><span class="tier-character__name" data-th="กวนอู" data-en="Guan Yu" data-zh="关羽">กวนอู<span class="tier-character__role">AoE / Vulnerability</span></span></div>
+        <div class="tier-character"><img class="tier-character__image" src="images/characters/zhang-fei.jpg" alt="เตียวหุย"><span class="tier-character__name" data-th="เตียวหุย" data-en="Zhang Fei" data-zh="张飞">เตียวหุย<span class="tier-character__role">Weakness / Frontline</span></span></div>
+      </div>
+    </div>
+
+    <div class="tier-row" data-tier="s">
+      <div class="tier-label">S</div>
+      <div class="tier-list">
+        <div class="tier-character"><img class="tier-character__image" src="images/characters/lu-bu.jpg" alt="ลิโป้"><span class="tier-character__name" data-th="ลิโป้" data-en="Lü Bu" data-zh="吕布">ลิโป้<span class="tier-character__role">AoE Burst / Debuff</span></span></div>
+        <div class="tier-character"><img class="tier-character__image" src="images/characters/zhuge-liang.jpg" alt="จูกัดเหลียง"><span class="tier-character__name" data-th="จูกัดเหลียง" data-en="Zhuge Liang" data-zh="诸葛亮">จูกัดเหลียง<span class="tier-character__role">Burst Archer</span></span></div>
+        <div class="tier-character"><span class="tier-character__name" data-th="เสียวเกี้ยว" data-en="Xiao Qiao" data-zh="小乔">เสียวเกี้ยว<span class="tier-character__role">Burn Amplifier</span></span></div>
+        <div class="tier-character"><img class="tier-character__image" src="images/characters/cao-cao.jpg" alt="โจโฉ"><span class="tier-character__name" data-th="โจโฉ" data-en="Cao Cao" data-zh="曹操">โจโฉ<span class="tier-character__role">Mobility Support</span></span></div>
+        <div class="tier-character"><img class="tier-character__image" src="images/characters/zhao-yun.jpg" alt="จูล่ง"><span class="tier-character__name" data-th="จูล่ง" data-en="Zhao Yun" data-zh="赵云">จูล่ง<span class="tier-character__role">Pursuit Cavalry</span></span></div>
+        <div class="tier-character"><img class="tier-character__image" src="images/characters/ma-chao.jpg" alt="ม้าเฉียว"><span class="tier-character__name" data-th="ม้าเฉียว" data-en="Ma Chao" data-zh="马超">ม้าเฉียว<span class="tier-character__role">Cavalry DPS</span></span></div>
+      </div>
+    </div>
+
+    <div class="tier-row" data-tier="a">
+      <div class="tier-label">A</div>
+      <div class="tier-list">
+        <div class="tier-character"><span class="tier-character__name" data-th="โลซก" data-en="Lu Su" data-zh="鲁肃">โลซก<span class="tier-character__role">Burn Substitute</span></span></div>
+        <div class="tier-character"><span class="tier-character__name" data-th="ซิหลง" data-en="Xu Huang" data-zh="徐晃">ซิหลง<span class="tier-character__role">Mired / Mobility</span></span></div>
+        <div class="tier-character"><span class="tier-character__name" data-th="เตียนอุย" data-en="Dian Wei" data-zh="典韦">เตียนอุย<span class="tier-character__role">Speed-scaling DPS</span></span></div>
+        <div class="tier-character"><img class="tier-character__image" src="images/characters/zhang-jiao.jpg" alt="เตียวก๊ก"><span class="tier-character__name" data-th="เตียวก๊ก" data-en="Zhang Jiao" data-zh="张角">เตียวก๊ก<span class="tier-character__role">Taunt / Shield</span></span></div>
+        <div class="tier-character"><img class="tier-character__image" src="images/characters/wei-yan.jpg" alt="เว่ยเอี๋ยน"><span class="tier-character__name" data-th="เว่ยเอี๋ยน" data-en="Wei Yan" data-zh="魏延">เว่ยเอี๋ยน<span class="tier-character__role">Shield Damage</span></span></div>
+        <div class="tier-character"><img class="tier-character__image" src="images/characters/guan-xing.jpg" alt="กวนซิง"><span class="tier-character__name" data-th="กวนซิง" data-en="Guan Xing" data-zh="关兴">กวนซิง<span class="tier-character__role">Shield AoE</span></span></div>
+        <div class="tier-character"><img class="tier-character__image" src="images/characters/xu-shu.jpg" alt="ชีซี"><span class="tier-character__name" data-th="ชีซี" data-en="Xu Shu" data-zh="徐庶">ชีซี<span class="tier-character__role">Starter Archer</span></span></div>
+        <div class="tier-character"><span class="tier-character__name" data-th="กัวเจีย" data-en="Guo Jia" data-zh="郭嘉">กัวเจีย<span class="tier-character__role">Frozen Control</span></span></div>
+        <div class="tier-character"><span class="tier-character__name" data-th="เลียวคับ" data-en="Yue Jin" data-zh="乐进">เลียวคับ<span class="tier-character__role">Counterattack / Vulnerability</span></span></div>
+        <div class="tier-character"><span class="tier-character__name" data-th="ซุนฮก" data-en="Xun Yu" data-zh="荀彧">ซุนฮก<span class="tier-character__role">Vulnerability Support</span></span></div>
+        <div class="tier-character"><span class="tier-character__name" data-th="เฉิงอวี้" data-en="Cheng Yu" data-zh="程昱">เฉิงอวี้<span class="tier-character__role">Multi-hit Combo</span></span></div>
+        <div class="tier-character"><span class="tier-character__name" data-th="ฝาเจิ้ง" data-en="Fa Zheng" data-zh="法正">ฝาเจิ้ง<span class="tier-character__role">Vulnerability Support</span></span></div>
+        <div class="tier-character"><span class="tier-character__name" data-th="กันหนิง" data-en="Gan Ning" data-zh="甘宁">กันหนิง<span class="tier-character__role">Counterattack / Splash</span></span></div>
+        <div class="tier-character"><span class="tier-character__name" data-th="ซุนเกี๋ยน" data-en="Sun Jian" data-zh="孙坚">ซุนเกี๋ยน<span class="tier-character__role">Mired / Anti-heal</span></span></div>
+        <div class="tier-character"><span class="tier-character__name" data-th="ลิบอง" data-en="Lü Meng" data-zh="吕蒙">ลิบอง<span class="tier-character__role">Burn Follow-up</span></span></div>
+        <div class="tier-character"><span class="tier-character__name" data-th="เตียวโป้" data-en="Zhang Bao" data-zh="张宝">เตียวโป้<span class="tier-character__role">Splash / Shield</span></span></div>
+        <div class="tier-character"><span class="tier-character__name" data-th="เบ้งเฮ็ก" data-en="Meng Huo" data-zh="孟获">เบ้งเฮ็ก<span class="tier-character__role">Frontline / Weakness</span></span></div>
+      </div>
+    </div>
+
+    <div class="tier-row" data-tier="b">
+      <div class="tier-label">B</div>
+      <div class="tier-list">
+        <div class="tier-character"><img class="tier-character__image" src="images/characters/wang-ping.jpg" alt="หวังผิง"><span class="tier-character__name" data-th="หวังผิง" data-en="Wang Ping" data-zh="王平">หวังผิง<span class="tier-character__role">Starter Support</span></span></div>
+        <div class="tier-character"><img class="tier-character__image" src="images/characters/mi-zhu.jpg" alt="มีจู้"><span class="tier-character__name" data-th="มีจู้" data-en="Mi Zhu" data-zh="糜竺">มีจู้<span class="tier-character__role">Starter Archer</span></span></div>
+        <div class="tier-character"><img class="tier-character__image" src="images/characters/zhang-yan.jpg" alt="เตียวเอี๋ยน"><span class="tier-character__name" data-th="เตียวเอี๋ยน" data-en="Zhang Yan" data-zh="张燕">เตียวเอี๋ยน<span class="tier-character__role">Counterattack</span></span></div>
+        <div class="tier-character"><img class="tier-character__image" src="images/characters/zhang-shi.jpg" alt="จางซื่อ"><span class="tier-character__name" data-th="จางซื่อ" data-en="Zhang Xingcai" data-zh="张星彩">จางซื่อ<span class="tier-character__role">Cavalry Starter</span></span></div>
+        <div class="tier-character"><img class="tier-character__image" src="images/characters/lu-lingqi.jpg" alt="ลิหลิงฉี"><span class="tier-character__name" data-th="ลิหลิงฉี" data-en="Lü Lingqi" data-zh="吕玲绮">ลิหลิงฉี<span class="tier-character__role">Cavalry DPS</span></span></div>
+        <div class="tier-character"><span class="tier-character__name" data-th="โจผี" data-en="Cao Pi" data-zh="曹丕">โจผี<span class="tier-character__role">Unyielding Tank</span></span></div>
+        <div class="tier-character"><span class="tier-character__name" data-th="ม้าอวิ๋นลู่" data-en="Ma Yunlu" data-zh="马云禄">ม้าอวิ๋นลู่<span class="tier-character__role">Pursuit / Mired</span></span></div>
+        <div class="tier-character"><span class="tier-character__name" data-th="กวนอิ๋นผิง" data-en="Guan Yinping" data-zh="关银屏">กวนอิ๋นผิง<span class="tier-character__role">Pursuit Cavalry</span></span></div>
+        <div class="tier-character"><span class="tier-character__name" data-th="เลียวฮัว" data-en="Liao Hua" data-zh="廖化">เลียวฮัว<span class="tier-character__role">Weakness Follow-up</span></span></div>
+        <div class="tier-character"><span class="tier-character__name" data-th="เฉิงผู่" data-en="Cheng Pu" data-zh="程普">เฉิงผู่<span class="tier-character__role">Unyielding Tank</span></span></div>
+        <div class="tier-character"><span class="tier-character__name" data-th="หวงไก่" data-en="Huang Gai" data-zh="黄盖">หวงไก่<span class="tier-character__role">Mired Control</span></span></div>
+        <div class="tier-character"><span class="tier-character__name" data-th="เตียวเหลียง" data-en="Zhang Liang" data-zh="张梁">เตียวเหลียง<span class="tier-character__role">Fortitude Setup</span></span></div>
+        <div class="tier-character"><span class="tier-character__name" data-th="เตียวเสี้ยน" data-en="Diao Chan" data-zh="貂蝉">เตียวเสี้ยน<span class="tier-character__role">Charm Counter</span></span></div>
+        <div class="tier-character"><span class="tier-character__name" data-th="กองซุนจ้าน" data-en="Gongsun Zan" data-zh="公孙瓒">กองซุนจ้าน<span class="tier-character__role">Mired Cavalry</span></span></div>
+      </div>
+    </div>
+
+    <h2 data-th="ทีมเมต้า SS1" data-en="SS1 Meta Teams" data-zh="S1主流队伍">ทีมเมต้า SS1</h2>
+    <div class="tier-build-grid">
+      <article class="tier-build"><h3 data-th="ธนูง่อ · ทีมเผาไหม้" data-en="Wu Archers · Burning Team" data-zh="吴国弓·燃烧队">ธนูง่อ · ทีมเผาไหม้</h3><div class="chip-row"><span class="chip">Zhou Yu</span><span class="chip">Xiao Qiao</span><span class="chip">Sun Quan</span></div><p data-th="จิวยี่เป็นตัวทำดาเมจหลัก เสียวเกี้ยวช่วยขยาย Burn และซุนกวนเพิ่ม Vulnerability หากไม่มีจิวยี่ให้ใช้โลซกแทนได้ ส่วนจูกัดเหลียงเป็นทางเลือกที่เน้นระเบิดดาเมจแทนเสียวเกี้ยว" data-en="Zhou Yu is the main damage dealer, Xiao Qiao amplifies Burn, and Sun Quan applies Vulnerability. Use Lu Su if Zhou Yu is unavailable; Zhuge Liang is an alternative burst option for Xiao Qiao." data-zh="周瑜负责主要输出，小乔强化灼烧，孙权施加脆弱。没有周瑜时可用鲁肃替代；诸葛亮可作为小乔的位置，转为爆发玩法。">จิวยี่เป็นตัวทำดาเมจหลัก เสียวเกี้ยวช่วยขยาย Burn และซุนกวนเพิ่ม Vulnerability หากไม่มีจิวยี่ให้ใช้โลซกแทนได้ ส่วนจูกัดเหลียงเป็นทางเลือกที่เน้นระเบิดดาเมจแทนเสียวเกี้ยว</p></article>
+      <article class="tier-build"><h3 data-th="โล่จ๊ก · ทีมเถาหยวน" data-en="Shu Shields · Peach Garden Team" data-zh="蜀国盾·桃园队">โล่จ๊ก · ทีมเถาหยวน</h3><div class="chip-row"><span class="chip">Liu Bei</span><span class="chip">Zhang Fei</span><span class="chip">Guan Yu</span></div><p data-th="เล่าปี่ดูแลการฟื้นฟูและเพิ่มความอยู่รอด เตียวหุยใส่ Weakness และได้ประโยชน์จากการถูกโจมตีหลายครั้ง กวนอูช่วยดาเมจวงกว้างและ Vulnerability ถ้าต้องการดึงเป้า ใช้เตียวก๊กแทนเล่าปี่ได้" data-en="Liu Bei supplies healing and durability, Zhang Fei applies Weakness and benefits from being attacked, while Guan Yu provides area damage and Vulnerability. Use Zhang Jiao when you need Taunt and a shield." data-zh="刘备提供治疗与生存，张飞施加虚弱并从被集火中获益，关羽负责范围伤害和脆弱。需要嘲讽和护盾时可用张角替代刘备。">เล่าปี่ดูแลการฟื้นฟูและเพิ่มความอยู่รอด เตียวหุยใส่ Weakness และได้ประโยชน์จากการถูกโจมตีหลายครั้ง กวนอูช่วยดาเมจวงกว้างและ Vulnerability ถ้าต้องการดึงเป้า ใช้เตียวก๊กแทนเล่าปี่ได้</p></article>
+      <article class="tier-build"><h3 data-th="ม้าวุ่ย · ทีมจู่โจม" data-en="Wei Cavalry · Guerrilla Team" data-zh="魏国骑·游击队">ม้าวุ่ย · ทีมจู่โจม</h3><div class="chip-row"><span class="chip">Cao Cao</span><span class="chip">Xu Huang</span><span class="chip">Dian Wei</span></div><p data-th="โจโฉและซิหลงเพิ่มความเร็ว ส่วนเตียนอุยใช้ความต่างความเร็วเปลี่ยนเป็นดาเมจ เหมาะกับทีมที่ต้องการความคล่องตัวและไล่กดศัตรู หากต้องการดาเมจวงกว้างให้สลับซิหลงเป็นลิโป้" data-en="Cao Cao and Xu Huang provide mobility while Dian Wei converts the speed gap into damage. Replace Xu Huang with Lü Bu for stronger area damage." data-zh="曹操和徐晃提供机动性，典韦根据速度差转化为伤害。想提高范围输出时，可将徐晃替换为吕布。">โจโฉและซิหลงเพิ่มความเร็ว ส่วนเตียนอุยใช้ความต่างความเร็วเปลี่ยนเป็นดาเมจ เหมาะกับทีมที่ต้องการความคล่องตัวและไล่กดศัตรู หากต้องการดาเมจวงกว้างให้สลับซิหลงเป็นลิโป้</p></article>
+    </div>
+  </section>
+
   <!-- ===== OPENING GUIDE ===== -->
   <section id="tab-opening" class="tab-page">
     <h2 data-th="คู่มือเริ่มเกมและบุกเบิก" data-en="Opening and Progression Guide" data-zh="开荒与成长指南">คู่มือเริ่มเกมและบุกเบิก</h2>
     <p class="lede" data-th="รวมภาพอ้างอิงจากคู่มือชุมชนสำหรับวางแผนช่วงเริ่มเกม ตั้งแต่สถานะผู้เล่นใหม่ เมือง ทรัพยากร การต่อสู้ พันธมิตร ไปจนถึงกิจกรรมและการพัฒนาขุนพล ควรตรวจสอบตัวเลขและเงื่อนไขจริงในเกมอีกครั้ง" data-en="A visual reference from a community guide for the opening phase: new-player protection, city development, resources, combat, alliances, events, and officer growth. Verify exact values and requirements in-game." data-zh="整理社区攻略中的开局参考图片，涵盖新手保护、城市发展、资源、战斗、联盟、活动和武将养成。具体数值与条件请以游戏内为准。">รวมภาพอ้างอิงจากคู่มือชุมชนสำหรับวางแผนช่วงเริ่มเกม ตั้งแต่สถานะผู้เล่นใหม่ เมือง ทรัพยากร การต่อสู้ พันธมิตร ไปจนถึงกิจกรรมและการพัฒนาขุนพล ควรตรวจสอบตัวเลขและเงื่อนไขจริงในเกมอีกครั้ง</p>
+
+    <section class="city-raid-guide">
+      <div class="opening-gallery city-raid-gallery-cards">
+        <figure class="opening-gallery__item city-raid-single-card"><img class="opening-gallery__image" src="GamePicture/1212.jpg" alt="คู่มือการตีเมืองและหลังยึดเมือง" data-alt-th="คู่มือการตีเมืองและหลังยึดเมือง" data-alt-en="City assault and after-capture guide" data-alt-zh="攻城与占领后攻略"><figcaption class="opening-gallery__caption"><strong data-th="คู่มือการตีเมือง" data-en="City Assault Guide" data-zh="攻城攻略">คู่มือการตีเมือง</strong><span data-th="กดเพื่อดูรายละเอียดรวม: การเตรียมทัพ การเลือกเป้าหมาย การควบคุมระหว่างรบ การประสานพันธมิตร และสิ่งที่ควรทำหลังยึดเมือง" data-en="Click to view the complete guide: army preparation, target selection, combat control, alliance coordination, and what to do after capture." data-zh="点击查看完整攻略：部队准备、目标选择、战斗操作、联盟协作以及占领城池后的安排。">กดเพื่อดูรายละเอียดรวม: การเตรียมทัพ การเลือกเป้าหมาย การควบคุมระหว่างรบ การประสานพันธมิตร และสิ่งที่ควรทำหลังยึดเมือง</span></figcaption></figure>
+      </div>
+      <div class="city-raid-details">
+        <details open>
+          <summary data-th="แผนตีเมืองและหลังยึดเมือง" data-en="City assault and after capture" data-zh="攻城与占领后规划">แผนตีเมืองและหลังยึดเมือง</summary>
+          <div class="city-raid-gallery">
+            <img src="GamePicture/222.jpg" alt="ภาพรวมพื้นที่เมือง" data-alt-th="ภาพรวมพื้นที่เมือง" data-alt-en="City area overview" data-alt-zh="城池区域概览">
+            <img src="GamePicture/555.jpg" alt="พื้นที่เป้าหมายระดับ 2" data-alt-th="พื้นที่เป้าหมายระดับ 2" data-alt-en="Level 2 target area" data-alt-zh="2级目标区域">
+            <img src="GamePicture/666.jpg" alt="เมืองระดับ 4" data-alt-th="เมืองระดับ 4" data-alt-en="Level 4 city" data-alt-zh="4级城池">
+            <img src="GamePicture/888.jpg" alt="เมืองระดับ 5" data-alt-th="เมืองระดับ 5" data-alt-en="Level 5 city" data-alt-zh="5级城池">
+            <img src="GamePicture/1212.jpg" alt="การรบและการรวมกำลังบนแผนที่" data-alt-th="การรบและการรวมกำลังบนแผนที่" data-alt-en="Map battle and troop coordination" data-alt-zh="地图作战与部队协同">
+          </div>
+          <ul>
+            <li data-th="วันแรก: เมืองระดับ 1 และใช้หอช่วยตีอัตโนมัติได้เมื่อยังไม่มีประสบการณ์" data-en="Day 1: Level 1 city; use tower auto-assault when you lack experience." data-zh="第1天：1级城，缺乏经验时可使用哨塔自动攻城。">วันแรก: เมืองระดับ 1 และใช้หอช่วยตีอัตโนมัติได้เมื่อยังไม่มีประสบการณ์</li>
+            <li data-th="วันที่ 2–3: เมืองระดับ 2–3 เริ่มเน้นการจัดทัพและเข้าร่วมด้วยตัวเอง" data-en="Days 2–3: Level 2–3 cities; formation planning and manual participation become more important." data-zh="第2–3天：2–3级城，更需要规划阵容并手动参战。">วันที่ 2–3: เมืองระดับ 2–3 เริ่มเน้นการจัดทัพและเข้าร่วมด้วยตัวเอง</li>
+            <li data-th="วันที่ 4–5: เมืองระดับ 4 และด่านผ่านเข้าทรัพยากรโซน ต้องใช้เวลานานขึ้น" data-en="Days 4–5: Level 4 cities and the pass into the resource state take noticeably longer." data-zh="第4–5天：4级城和进入资源州的关口，战斗时间明显增加。">วันที่ 4–5: เมืองระดับ 4 และด่านผ่านเข้าทรัพยากรโซน ต้องใช้เวลานานขึ้น</li>
+            <li data-th="วันที่ 6: เมืองระดับ 5 เริ่มต้องมีทัพที่สามและกำลังรบรวมสูงขึ้น" data-en="Day 6: Level 5 cities require stronger total power and a more developed third army." data-zh="第6天：5级城需要更高总战力和逐渐成形的第三队。">วันที่ 6: เมืองระดับ 5 เริ่มต้องมีทัพที่สามและกำลังรบรวมสูงขึ้น</li>
+          </ul>
+          <p data-th="หลังยึดเมือง: ใช้พื้นที่ใหม่เก็บทรัพยากรระดับสูง วางเส้นทางไปเมืองถัดไป ฟื้นทหารและประสานพันธมิตรก่อนศึกครั้งต่อไป โดยคำนึงถึงระยะทางและพลังงานที่ต้องใช้" data-en="After capture: use the new area for higher-level resources, plan the route to the next city, recover troops, and coordinate with the alliance before the next battle while accounting for travel time and stamina." data-zh="占领后：利用新区域采集高级资源，规划前往下一座城的路线，恢复兵力，并在下一场战斗前协调联盟，同时考虑行军时间与体力消耗。">หลังยึดเมือง: ใช้พื้นที่ใหม่เก็บทรัพยากรระดับสูง วางเส้นทางไปเมืองถัดไป ฟื้นทหารและประสานพันธมิตรก่อนศึกครั้งต่อไป โดยคำนึงถึงระยะทางและพลังงานที่ต้องใช้</p>
+        </details>
+        <details>
+          <summary data-th="เตรียมตัวก่อนตีเมือง" data-en="Before the assault" data-zh="进攻前准备">เตรียมตัวก่อนตีเมือง</summary>
+          <p data-th="เข้าพันธมิตรและเช็กเวลานัดหมายให้พร้อม อัปเกรดทัพหลักก่อน ใช้ทรัพยากรกับทหารโล่และธนูเพื่อให้มีทั้งแนวรับกับดาเมจระยะไกล และเผื่อพลังงานสำหรับการเดินทางกับการรบจริง" data-en="Join an alliance and confirm the rally time. Upgrade your main army first, invest in Shield and Archer troops for frontline durability and ranged damage, and save stamina for travel and the actual battle." data-zh="加入联盟并确认集结时间。先提升主力部队，投入盾兵和弓兵以兼顾前排承伤与远程输出，并为行军和实战保留体力。">เข้าพันธมิตรและเช็กเวลานัดหมายให้พร้อม อัปเกรดทัพหลักก่อน ใช้ทรัพยากรกับทหารโล่และธนูเพื่อให้มีทั้งแนวรับกับดาเมจระยะไกล และเผื่อพลังงานสำหรับการเดินทางกับการรบจริง</p>
+        </details>
+        <details>
+          <summary data-th="วิธีเล่นระหว่างบุก" data-en="During the assault" data-zh="进攻过程中">วิธีเล่นระหว่างบุก</summary>
+          <ul>
+            <li data-th="เมืองเล็กอาจใช้ระบบอัตโนมัติช่วยได้ แต่ควรตรวจสอบกำลังทัพก่อนปล่อยไว้" data-en="Auto-assault can help on small cities, but check army strength before leaving it unattended." data-zh="小城可使用自动攻城，但放置前要先确认部队实力。">เมืองเล็กอาจใช้ระบบอัตโนมัติช่วยได้ แต่ควรตรวจสอบกำลังทัพก่อนปล่อยไว้</li>
+            <li data-th="เมืองและด่านสูงควรควบคุมมือ เพราะต้องจัดการเป้าหมายและรักษาดาเมจของธนู" data-en="Manually control higher-level cities and passes to manage targets and keep Archer damage active." data-zh="高等级城池和关口应手动操作，以控制目标并保持弓兵输出。">เมืองและด่านสูงควรควบคุมมือ เพราะต้องจัดการเป้าหมายและรักษาดาเมจของธนู</li>
+            <li data-th="เมื่อศัตรูแข็งขึ้น ให้เคลียร์ทหารย่อยก่อนแล้วค่อยโฟกัสป้อมหรือกำแพง" data-en="As enemies get stronger, clear the smaller defenders before focusing the tower or wall." data-zh="敌军变强后，先清理小兵，再集中攻击箭塔或城墙。">เมื่อศัตรูแข็งขึ้น ให้เคลียร์ทหารย่อยก่อนแล้วค่อยโฟกัสป้อมหรือกำแพง</li>
+            <li data-th="กิจกรรมบอสหรือเผ่าพิเศษต้องหลบสกิลและขยับตำแหน่ง ไม่ควรยืนรับทุกอย่างตรง ๆ" data-en="Boss or special-tribe events require dodging skills and repositioning instead of face-tanking everything." data-zh="首领或特殊部族活动需要躲避技能并调整站位，不要硬吃所有伤害。">กิจกรรมบอสหรือเผ่าพิเศษต้องหลบสกิลและขยับตำแหน่ง ไม่ควรยืนรับทุกอย่างตรง ๆ</li>
+          </ul>
+        </details>
+        <details>
+          <summary data-th="ประสานงานพันธมิตร" data-en="Alliance coordination" data-zh="联盟协作">ประสานงานพันธมิตร</summary>
+          <p data-th="การตีเมืองช่วงต้นจะง่ายขึ้นมากเมื่อมีผู้เล่นกำลังสูงเปิดทางและสมาชิกช่วยเติมกำลัง ควรนัดเวลา แบ่งหน้าที่ และสื่อสารเมื่อมีศัตรูบุกหรือมีเป้าหมายหลายจุดพร้อมกัน" data-en="Early assaults become much easier when stronger players open the route and members reinforce them. Set a time, assign roles, and communicate when enemies attack or multiple objectives are active." data-zh="开局攻城时，由高战玩家开路并由成员补充兵力会轻松很多。应提前约定时间、分配职责，并在敌袭或多目标同时出现时及时沟通。">การตีเมืองช่วงต้นจะง่ายขึ้นมากเมื่อมีผู้เล่นกำลังสูงเปิดทางและสมาชิกช่วยเติมกำลัง ควรนัดเวลา แบ่งหน้าที่ และสื่อสารเมื่อมีศัตรูบุกหรือมีเป้าหมายหลายจุดพร้อมกัน</p>
+        </details>
+        <details>
+          <summary data-th="หลังยึดเมืองได้" data-en="After taking the city" data-zh="占领城池后">หลังยึดเมืองได้</summary>
+          <p data-th="ใช้ช่วงที่เปิดพื้นที่ใหม่เพื่อย้ายกำลังไปเก็บทรัพยากรระดับสูง วางแผนเส้นทางเมืองถัดไป และฟื้นทหารก่อนเริ่มศึกใหญ่ครั้งต่อไป อย่าลืมว่าระยะทางไกลทำให้เสียเวลาและพลังงานมากขึ้น" data-en="Use the newly opened area to claim higher-level resources, plan the next route, and recover troops before the next major battle. Long distances cost more time and stamina." data-zh="利用新开放的区域采集更高级资源，规划下一条路线，并在下一场大战前恢复兵力。长距离行军会消耗更多时间和体力。">ใช้ช่วงที่เปิดพื้นที่ใหม่เพื่อย้ายกำลังไปเก็บทรัพยากรระดับสูง วางแผนเส้นทางเมืองถัดไป และฟื้นทหารก่อนเริ่มศึกใหญ่ครั้งต่อไป อย่าลืมว่าระยะทางไกลทำให้เสียเวลาและพลังงานมากขึ้น</p>
+        </details>
+      </div>
+    </section>
 
     <h3 class="opening-group" data-th="เริ่มต้นและการพัฒนาเมือง" data-en="Starting and City Development" data-zh="开局与城市发展">เริ่มต้นและการพัฒนาเมือง</h3>
     <div class="opening-gallery">
@@ -1093,7 +1302,8 @@
   applyTheme(savedTheme);
 
   const languageToggle = document.getElementById('languageToggle');
-  const translatableElements = document.querySelectorAll('[data-en][data-th][data-zh]');
+  const translatableElements = document.querySelectorAll('[data-en][data-th][data-zh]:not(.tier-character__name)');
+  const tierNameElements = document.querySelectorAll('.tier-character__name');
   let currentLanguage = 'th';
   const detailedTextNodes = [];
   const topupTranslations = {
@@ -1247,6 +1457,9 @@
     translatableElements.forEach(element=>{
       element.innerHTML = element.dataset[language];
     });
+    tierNameElements.forEach(element=>{
+      if (element.firstChild) element.firstChild.nodeValue = element.dataset[language] || element.dataset.en;
+    });
     document.querySelectorAll('[data-alt-th][data-alt-en][data-alt-zh]').forEach(element=>{
       element.alt = element.getAttribute('data-alt-'+language);
     });
@@ -1303,6 +1516,100 @@
     renderOfficerLanguage(language);
   }
   languageToggle.addEventListener('change',()=>applyLanguage(languageToggle.value));
+
+  const guideDialog = document.getElementById('guideDialog');
+  const guideDialogClose = document.getElementById('guideDialogClose');
+  const guideDialogImage = document.getElementById('guideDialogImage');
+  const guideDialogGallery = document.getElementById('guideDialogGallery');
+  const guideDialogEntries = document.getElementById('guideDialogEntries');
+  const guideDialogTitle = document.getElementById('guideDialogTitle');
+  const guideDialogText = document.getElementById('guideDialogText');
+  document.querySelectorAll('#tab-opening .opening-gallery__item').forEach(figure=>{
+    figure.setAttribute('tabindex','0');
+    figure.setAttribute('role','button');
+    const openGuideDialog = ()=>{
+      const image = figure.querySelector('.opening-gallery__image');
+      const title = figure.querySelector('strong');
+      const description = figure.querySelector('.opening-gallery__caption span');
+      if (!image || !title || !description) return;
+      guideDialogGallery.replaceChildren();
+      guideDialogEntries.replaceChildren();
+      if (figure.classList.contains('city-raid-single-card')) {
+        guideDialogImage.hidden = true;
+        guideDialogGallery.hidden = true;
+        guideDialogEntries.hidden = false;
+        const cityEntries = {
+          th:[
+            ['222.jpg','ภาพรวมพื้นที่เมือง','ดูขอบเขตเมืองและพื้นที่โดยรอบก่อนเลือกเส้นทางเข้าตี รวมถึงวางจุดรวมกำลังของพันธมิตร'],
+            ['444.jpg','ตรวจพื้นที่ก่อนเข้าตี','ตรวจเส้นเขตพื้นที่และตำแหน่งศัตรูให้ชัด วางเส้นทางเดินทัพให้สั้นเพื่อลดเวลาและพลังงานที่เสียไป'],
+            ['555.jpg','วันที่สอง: เมืองระดับ 2','เริ่มจัดเวลาเข้าร่วมการรบด้วยตัวเอง ใช้ทัพโล่รับแรงปะทะและทัพธนูทำดาเมจจากด้านหลัง'],
+            ['666.jpg','เมืองระดับ 4','ศัตรูเริ่มแข็งขึ้น ควรควบคุมมือ เคลียร์ทหารย่อยก่อน แล้วค่อยโฟกัสป้อมหรือกำแพง'],
+            ['777.jpg','การเข้าตีเมืองระดับสูง','ตรวจเป้าหมายและกำลังทัพหลายจุดก่อนเริ่ม หากมีหลายกองทัพให้แบ่งหน้าที่และรักษาระยะการสนับสนุน'],
+            ['888.jpg','เมืองระดับ 5','ช่วงวันที่หกต้องใช้กำลังรบรวมสูงขึ้น และทัพที่สามควรเริ่มเข้าร่วมเพื่อเพิ่มความต่อเนื่องในการบุก'],
+            ['999.jpg','รางวัลหลังจบศึก','หลังชนะอย่าลืมตรวจและรับรางวัลกิจกรรมหรือรางวัลจัดอันดับที่ระบบส่งให้ตามผลงานของพันธมิตร'],
+            ['1010.jpg','เส้นทางเขตทรัพยากร','การตีด่านเปิดทางไปยังทรัพยากรระดับสูง วางแผนเมืองถัดไปและเส้นทางส่งกำลังตั้งแต่ก่อนเริ่มศึก'],
+            ['1111.jpg','ประสานงานพันธมิตร','เมืองระดับสูงและด่านสำคัญควรนัดเวลา แบ่งหน้าที่ และสื่อสารเมื่อมีศัตรูบุกหรือมีหลายเป้าหมายพร้อมกัน'],
+            ['1212.jpg','หลังยึดเมือง','ใช้พื้นที่ใหม่เก็บทรัพยากร ฟื้นทหาร วางเส้นทางไปเมืองถัดไป และเผื่อพลังงานสำหรับศึกครั้งต่อไป']
+          ],
+          en:[
+            ['222.jpg','City area overview','Check the city boundary and surrounding area before choosing the assault route and alliance rally point.'],
+            ['444.jpg','Inspect the area first','Read the territory borders and enemy positions, then choose a short route to save time and stamina.'],
+            ['555.jpg','Day 2: Level 2 city','Begin joining battles manually on schedule. Use Shields to absorb pressure and Archers for backline damage.'],
+            ['666.jpg','Level 4 city','Enemies become stronger. Control manually, clear smaller defenders, then focus the tower or wall.'],
+            ['777.jpg','Higher-level assault','Check several targets and their strength before starting. Split roles when multiple armies are active and keep support range.'],
+            ['888.jpg','Level 5 city','By day 6, total power must be higher and a third army should begin joining for sustained pressure.'],
+            ['999.jpg','Rewards after the battle','After winning, check and claim event or ranking rewards based on the alliance performance.'],
+            ['1010.jpg','Route to the resource state','A pass opens access to higher-level resources. Plan the next city and reinforcement route before the battle.'],
+            ['1111.jpg','Alliance coordination','For high-level cities and key passes, set a time, assign roles, and communicate about attacks or multiple objectives.'],
+            ['1212.jpg','After capture','Use the new area for resources, recover troops, plan the next city, and save stamina for the next battle.']
+          ],
+          zh:[
+            ['222.jpg','城池区域概览','先查看城池边界和周边区域，再选择进攻路线与联盟集结点。'],
+            ['444.jpg','进攻前查看区域','确认领地边界和敌军位置，选择较短路线以节省时间和体力。'],
+            ['555.jpg','第2天：2级城','开始按时间手动参战，使用盾兵承受压力，弓兵负责后排输出。'],
+            ['666.jpg','4级城','敌军变强后应手动操作，先清理小兵，再集中攻击箭塔或城墙。'],
+            ['777.jpg','高级城池进攻','开始前查看多个目标和守军实力，多支部队同时行动时要分配职责并保持支援距离。'],
+            ['888.jpg','5级城','第6天需要更高总战力，并逐步让第三队加入以维持进攻压力。'],
+            ['999.jpg','战后奖励','胜利后查看并领取根据联盟表现发放的活动或排名奖励。'],
+            ['1010.jpg','前往资源州的路线','关口会打开高级资源区域，战前规划下一座城和补给路线。'],
+            ['1111.jpg','联盟协作','高级城池和重要关口应提前约定时间、分配职责，并及时沟通敌袭或多目标行动。'],
+            ['1212.jpg','占领城池后','利用新区域采集资源，恢复兵力，规划下一座城，并为下一场战斗保留体力。']
+          ]
+        }[currentLanguage];
+        cityEntries.forEach(([file,entryTitle,entryText])=>{
+          const entry = document.createElement('article');
+          entry.className = 'guide-dialog__entry';
+          entry.innerHTML = `<img src="GamePicture/${file}" alt="${entryTitle}"><h3>${entryTitle}</h3><p>${entryText}</p>`;
+          guideDialogEntries.appendChild(entry);
+        });
+      } else {
+        guideDialogImage.hidden = false;
+        guideDialogGallery.hidden = false;
+        guideDialogEntries.hidden = true;
+        guideDialogImage.src = image.src;
+        guideDialogImage.alt = image.alt;
+      }
+      guideDialogTitle.textContent = title.textContent;
+      const cityRaidDetails = {
+        th:'ก่อนตีเมือง: เข้าพันธมิตรและนัดเวลาให้พร้อม ใช้ทัพโล่เป็นแนวรับและทัพธนูเป็นดาเมจระยะไกล ตรวจจำนวนกองทัพรักษาการณ์และเผื่อพลังงานสำหรับการเดินทาง\n\nลำดับจากบันทึกการรบ: วันแรกตีเมืองระดับ 1, วันที่สองตีเมืองระดับ 2, วันที่สามตีเมืองระดับ 3, วันที่สี่ตีเมืองระดับ 4, วันที่ห้าเปิดทางผ่านด่านเข้าสู่เขตทรัพยากร และวันที่หกตีเมืองระดับ 5 โดยช่วงหลังต้องใช้ทัพที่สามและกำลังรบรวมสูงขึ้น\n\nระหว่างตี: เมืองระดับต้นอาจใช้ระบบอัตโนมัติได้ แต่เมืองและด่านระดับสูงควรควบคุมมือ เคลียร์ทหารย่อยก่อนโฟกัสป้อมหรือกำแพง และหลบสกิลในกิจกรรมบอส\n\nหลังยึดเมือง: ใช้พื้นที่ใหม่เก็บทรัพยากรระดับสูง ฟื้นทหาร วางเส้นทางไปเมืองถัดไป และประสานพันธมิตรก่อนศึกครั้งต่อไป โดยคำนึงถึงระยะทางและพลังงาน',
+        en:'Before the assault: join the alliance and confirm the rally time. Use Shield troops for the frontline and Archers for ranged damage, inspect the garrison, and save stamina for travel.\n\nProgression from the war log: day 1 reached a level 1 city, day 2 a level 2 city, day 3 a level 3 city, day 4 a level 4 city, day 5 opened the pass into the resource state, and day 6 reached a level 5 city. Later stages require a stronger third army and higher total power.\n\nDuring the assault: auto-assault is suitable for early cities, but higher-level cities and passes should be controlled manually. Clear smaller defenders before focusing the tower or wall, and dodge skills during boss events.\n\nAfter capture: use the new area for higher-level resources, recover troops, plan the route to the next city, and coordinate the alliance before the next battle while accounting for travel time and stamina.',
+        zh:'进攻前：加入联盟并确认集结时间。使用盾兵承受伤害、弓兵远程输出，先查看守军，并为行军保留体力。\n\n战事记录进程：第1天攻下1级城，第2天攻下2级城，第3天攻下3级城，第4天攻下4级城，第5天打通进入资源州的关口，第6天挑战5级城。后期需要更强的第三队和更高总战力。\n\n进攻中：初级城池可使用自动攻城，但高级城池和关口应手动操作。先清理小兵，再集中攻击箭塔或城墙；首领活动中要躲避技能。\n\n占领后：利用新区域采集高级资源，恢复兵力，规划前往下一座城的路线，并在下一场战斗前协调联盟，同时考虑行军时间和体力。'
+      };
+      guideDialogText.textContent = figure.classList.contains('city-raid-single-card') ? cityRaidDetails[currentLanguage] : description.textContent;
+      guideDialog.showModal();
+    };
+    figure.addEventListener('click',openGuideDialog);
+    figure.addEventListener('keydown',event=>{
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openGuideDialog();
+      }
+    });
+  });
+  guideDialogClose.addEventListener('click',()=>guideDialog.close());
+  guideDialog.addEventListener('click',event=>{
+    if (event.target === guideDialog) guideDialog.close();
+  });
 
   function addTopupPriceReferences(){
     const usdToCny = 7.2;
@@ -1649,11 +1956,19 @@
   }
   const openingPage = document.getElementById('tab-opening');
   const openingFirstGallery = openingPage && openingPage.querySelector('.opening-gallery');
-  const openingFirstGroup = openingPage && openingPage.querySelector('.opening-group');
+  const openingFirstGroup = openingPage && Array.from(openingPage.children).find(element=>element.classList.contains('opening-group'));
   const systemMapGuide = document.querySelector('#tab-systems > .map-guide');
   const systemReferenceImages = Array.from(document.querySelectorAll('#systemGrid .community-guide__item'));
   if (openingPage && openingFirstGallery) {
     if (systemMapGuide && openingFirstGroup) openingPage.insertBefore(systemMapGuide, openingFirstGroup);
+    const cityRaidGuide = openingPage.querySelector('.city-raid-guide');
+    const mapCombatHeading = Array.from(openingPage.children).find(element=>element.classList.contains('opening-group') && element.dataset.th === 'แผนที่และการต่อสู้');
+    const mapCombatGallery = mapCombatHeading && mapCombatHeading.nextElementSibling;
+    const cityRaidCard = cityRaidGuide && cityRaidGuide.querySelector('.city-raid-single-card');
+    if (cityRaidCard && mapCombatGallery && mapCombatGallery.classList.contains('opening-gallery')) {
+      mapCombatGallery.insertBefore(cityRaidCard, mapCombatGallery.firstElementChild);
+      cityRaidGuide.remove();
+    }
   }
   const systemCards = Array.from(document.querySelectorAll('.system-card'));
   const systemExtraBlocks = [
